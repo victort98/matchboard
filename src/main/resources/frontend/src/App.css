@@ -37,18 +37,51 @@
   }
 }
 
+.controlContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .clock {
-  width: 100px;
-  height: 100px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   font-size: 25px;
   color: #fff;
-  line-height: 100px;
+  line-height: 180px;
   text-align: center;
   background: #000;
   display: inline-block;
 }
 
-.Control_container {
-  text-align: center;
+.clockButtons {
+  background-color: indianred;
+  overflow: hidden;
+  height: 1%;
+  flex-direction: column;
+}
+
+.middleInformation {
+  background-color: khaki;
+  width: 100%;
+}
+
+.team1 {
+  background-color: indigo;
+  width: 100%;
+}
+
+.team2 {
+  background-color: hotpink;
+  width: 100%;
+}
+
+.teamName {
+  border-radius: 10px;
+  border: 1.5px;
+  border-style: solid;
+  border-color: gray;
+  font-size: 30px;
+  width: 50%;
+  outline: none;
 }

@@ -42,37 +42,68 @@
   flex-direction: row;
 }
 
+.overtime {
+  flex-direction: row;
+}
+
 .clock {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  font-size: 25px;
+  font-size: 60px;
+  border: 10px;
+  border-style: solid;
+  border-color: gray;
   color: #fff;
-  line-height: 180px;
+  line-height: 130px;
   text-align: center;
   background: #000;
   display: inline-block;
 }
 
 .clockButtons {
-  background-color: indianred;
-  overflow: hidden;
-  height: 1%;
+  
   flex-direction: column;
+  padding-bottom: 10px;
+  margin-top: 20px;
 }
 
+.btnStyle {
+  border-radius: 15px;
+  font-size: 30px;
+  border: none;
+  padding: 10px;
+  width: 16%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  outline: none;
+  cursor: pointer;
+}
+
+.start {
+  color: #00c742;
+}
+
+.stop {
+  color: #ff4343;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.reset {
+  color: #2ebfed;
+}
 .middleInformation {
-  background-color: khaki;
-  width: 100%;
+  
+  
 }
 
 .team1 {
-  background-color: indigo;
+  
   width: 100%;
 }
 
 .team2 {
-  background-color: hotpink;
+  
   width: 100%;
 }
 
@@ -84,4 +115,25 @@
   font-size: 30px;
   width: 50%;
   outline: none;
+  padding: 5px;
+}
+
+.inputStyling {
+  border-radius: 10px;
+  border: 1.5px;
+  border-style: solid;
+  border-color: gray;
+  width: 15%;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.middleInputStyling {
+  border-radius: 10px;
+  border: 1.5px;
+  border-style: solid;
+  border-color: gray;
+  width: 29.5%;
+  font-size: 20px;
+  padding: 5px;
 }

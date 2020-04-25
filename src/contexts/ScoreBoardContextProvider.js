@@ -5,7 +5,7 @@ export const ScoreBoardContext = createContext()
 
 const ScoreBoardContextProvider = (props) => {
   const [scoreData, setScoreData] = useState([])
-  let socket = openSocket('/')
+  let socket = openSocket('localhost:3200')
   const sendData = () => {
     let info = {
       name: 'Score Board',

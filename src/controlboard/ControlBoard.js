@@ -1,7 +1,7 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState} from 'react'
 import Clock from './Clock'
-import openSocket from 'socket.io-client'
 import {ClockContext} from '../contexts/ClockContextProvider'
+import {socket} from '../socket/socket';
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
@@ -9,8 +9,6 @@ const ControlBoard = (props) => {
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
-
-  let socket = openSocket('/')
 
    const sendData = () => {
     let info = {

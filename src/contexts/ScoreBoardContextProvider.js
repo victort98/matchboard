@@ -7,7 +7,7 @@ const ScoreBoardContextProvider = (props) => {
   const [scoreData, setScoreData] = useState([])
   
   useEffect(()=>{
-    let socket = openSocket('localhost:3200')
+    let socket = openSocket('/')
     socket.on('message', (data)=>{
       setScoreData(data)
       console.log(data);  

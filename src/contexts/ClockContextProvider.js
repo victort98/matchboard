@@ -38,18 +38,21 @@ const ClockContextProvider = (props) => {
     }
   }
 
-  // let stopClock = () => {
-  //   if (!timeStarted) { return; }
-  //   timePaused = Date.now();
-  // }
+  let stopClock = () => {
+    if (!timeStarted) { return; }
+    timePaused = Date.now();
+  }
 
   let sleep = (ms) => {
     return new Promise(res => setTimeout(res, ms));
   }
 
   const values={
+    timeStarted,
+    timeLeft,
     timeFormatted,
     startClock,
+    stopClock,
     sleep
   }
   return (

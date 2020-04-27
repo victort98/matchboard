@@ -1,13 +1,10 @@
 import React from 'react'
 
-const Clock = (props) => {
+const Clock = () => {
 
   return (
     <div>
-      <h1 className="clock" style={{fontVariantNumaric: 'tabular-nums' }}>90:00</h1>
-
-      {/* <button onClick={()=> {setInterval(showClock, 100)}}>Start</button> */}
-      
+      <h1 className="clock">90:00</h1>      
     </div>
   )
 }

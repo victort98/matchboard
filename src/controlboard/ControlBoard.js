@@ -1,23 +1,23 @@
 import React, {useContext, useState, useEffect} from 'react'
 import Clock from './Clock'
 import openSocket from 'socket.io-client'
-import {ControlBoardContext} from '../contexts/ControlBoardContextProvider'
 import {ClockContext} from '../contexts/ClockContextProvider'
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
-  const {startClock, sleep, timeFormatted} = useContext(ClockContext)
+  const {timeLeft, startClock, stopClock, sleep, timeFormatted} = useContext(ClockContext)
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
 
-  let socket = openSocket('localhost:3200')
+  let socket = openSocket('/')
 
    const sendData = () => {
     let info = {
       teamOne: teamOneScore,
-      teamTwo: teamTwoScore
-    }
+      teamTwo: teamTwoScore,
+      timeLeft: timeLeft()
+    }  
     socket.emit('info', info)
   }
 
@@ -27,13 +27,23 @@ const ControlBoard = (props) => {
     sleep(500);
   }
 
+  let startTime = () => {
+    setInterval(showClock, 100)
+  }
+
+  let stopTime = () =>{
+    stopClock()
+    clearInterval(startTime)
+  }
+
   return (
     <div className="container">
     <h1 className="text-center my-2">Control Board</h1>
     <hr/>
      <div className="text-center">
-      <Clock className="clock" style={{fontVariantNumaric: 'tabular-nums' }}/>
-      <button onClick={()=>setInterval(showClock, 100)}>Start Clock</button>
+      <Clock className="clock"/>
+      <button onClick={()=> startTime()}>Start Clock</button>
+      {/* <button onClick={()=>stopTime()}>Stop Clock</button> */}
      </div>
       <div className="row mr-auto">      
         <div className="col-5">

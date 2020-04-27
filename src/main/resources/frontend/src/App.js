@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Control from './Remote_control/Control';
+import ControlBoard from './controlboard/ControlBoard';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/control" component={Control}></Route>
+          <Route exact path="/ControlBoard" component={ControlBoard}></Route>
         </Switch>
       </Router>
     </div>

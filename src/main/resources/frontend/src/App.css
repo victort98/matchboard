@@ -39,11 +39,6 @@
 
 .controlContainer {
   display: flex;
-  flex-direction: row;
-}
-
-.overtime {
-  flex-direction: row;
 }
 
 .clock {
@@ -53,11 +48,11 @@
   font-size: 60px;
   border: 10px;
   border-style: solid;
-  border-color: gray;
+  border-color: #a3aaa5;
   color: #fff;
   line-height: 130px;
   text-align: center;
-  background: #000;
+  background: #454648;
   display: inline-block;
 }
 
@@ -92,19 +87,20 @@
 .reset {
   color: #2ebfed;
 }
-.middleInformation {
-  
+.middleInformation { 
   
 }
 
 .team1 {
-  
   width: 100%;
 }
 
-.team2 {
-  
+.team2 { 
   width: 100%;
+}
+
+.specialWidth {
+  width: 20% !important;
 }
 
 .teamName {
@@ -123,7 +119,7 @@
   border: 1.5px;
   border-style: solid;
   border-color: gray;
-  width: 15%;
+  width: 60%;
   font-size: 20px;
   padding: 5px;
 }
@@ -136,4 +132,68 @@
   width: 29.5%;
   font-size: 20px;
   padding: 5px;
+}
+
+.teamInformation {
+  display: flex;
+}
+
+.left {
+  
+}
+
+.right {
+  text-align: left;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 40px;
+}
+
+.shotOnTarget {
+  border-radius: 10px;
+  border: 1.5px;
+  border-style: solid;
+  border-color: gray;
+  width: 30%;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.broadcast {
+  border-radius: 15px;
+  font-size: 30px;
+  border: solid;
+  border-width: 1px;
+  border-color: white;
+  background-color: #03A10D;
+  color: white;
+  padding: 10px 30px 10px 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.scoreboard {
+  border-radius: 15px;
+  font-size: 15px;
+  border: solid;
+  border-width: 1px;
+  border-color: white;
+  padding: 14px 30px 14px 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.extraTime {
+  border-radius: 15px;
+  font-size: 20px;
+  border: none;
+  border-width: 1px;
+  border-color: white;
+  color: #FFA217;
+  padding: 14px 20px 14px 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
 }

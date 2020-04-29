@@ -1,10 +1,11 @@
-import React, {useContext,} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Clock from '../controlboard/Clock'
 import {ScoreBoardContext} from '../contexts/ScoreBoardContextProvider'
 import {ClockContext} from '../contexts/ClockContextProvider'
+import Canvas from './Canvas'
 
 const ScoreBoard = () => {
-   const $ = x => document.querySelector(x);
+  const $ = x => document.querySelector(x);
   // const {timeLeft, startClock, sleep, timeFormatted} = useContext(ClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
 
@@ -48,16 +49,29 @@ const ScoreBoard = () => {
   }
 
   return (
-    <div className="container text-center"> 
+    <div className="container-fluid text-center"> 
       <h1>Score Board</h1>
       <hr/>
-      <Clock className="clock"/>
-      <h1 className="text-secondary">Team One 
-        <span className="text-info pl-3">{scoreData.teamOne}</span>
-      </h1>
-      <h1 className="text-secondary">Team Two 
-        <span className="text-info pl-3">{scoreData.teamTwo}</span>
-      </h1>
+      <Canvas scoreData={scoreData}/>
+      
+      <div className="row">
+        <div className="col-2">         
+        </div>
+        <div className="col-3 mt-2">
+           <h2 className="text-secondary text-center">Malmö</h2>
+           <h1 className="text-info pl-3 text-right display-1">{scoreData.teamOne}</h1>
+        </div>
+        <div className="col-3">
+          <Clock className="clock"/>
+        </div>
+        <div className="col-3 mt-2">
+          <h2 className="text-secondary text-center">Örebro</h2>
+          <h1 className="text-info pl-3 text-left display-1">{scoreData.teamTwo}</h1>
+        </div>
+        <div className="col-2">          
+        </div>      
+      </div>
+    
     </div>
   )
 }

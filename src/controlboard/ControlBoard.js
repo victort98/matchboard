@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import Clock from './Clock'
 import {ClockContext} from '../contexts/ClockContextProvider'
 import {socket} from '../socket/socket';
@@ -9,14 +9,15 @@ const ControlBoard = (props) => {
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
+  const [clockStatus, setClockStatus] = useState(false)
 
-   const sendData = () => {
+  const sendData = () => {
     let info = {
       teamOne: teamOneScore,
       teamTwo: teamTwoScore,
       timeLeft: timeLeft()
     }  
-    socket.emit('info', info)
+    socket.emit('scoreInfo', info)
   }
 
   let showClock = () => {
@@ -26,22 +27,33 @@ const ControlBoard = (props) => {
   }
 
   let startTime = () => {
-    setInterval(showClock, 100)
+    if (clockStatus) {
+      setInterval(showClock, 100)
+      setClockStatus(true)
+    }else{
+      clearInterval(showClock)
+      stopClock()
+    }
+    
   }
 
   let stopTime = () =>{
+    setClockStatus(true)
     stopClock()
-    clearInterval(startTime)
   }
+
+  useEffect(() => {
+    stopTime()
+  }, [])
 
   return (
     <div className="container">
     <h1 className="text-center my-2">Control Board</h1>
     <hr/>
      <div className="text-center">
-      <Clock className="clock"/>
+      <Clock/>
       <button onClick={()=> startTime()}>Start Clock</button>
-      {/* <button onClick={()=>stopTime()}>Stop Clock</button> */}
+      <button onClick={()=>stopTime()}>Stop Clock</button>
      </div>
       <div className="row mr-auto">      
         <div className="col-5">

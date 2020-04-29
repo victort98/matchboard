@@ -11,3 +11,136 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  text-align: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline;
+}
+
+.screenInfo {
+  display: flex;
+}
+
+.stats {
+  display: flex;
+}
+
+.team1 {
+  flex: 1;
+}
+
+.time {
+  flex: 1;
+}
+
+.team2 {
+  flex: 1;
+}
+
+.leftcol2 {
+  flex: 1;
+  width: 100%;
+}
+
+.midcol2 {
+  width: 30%;
+}
+
+.rightcol2 {
+  flex: 1;
+  width: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+.list {
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+
+.list2 {
+  float: right;
+  padding: 0;
+  margin: 0;
+}
+
+.clock {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  font-size: 60px;
+  border: 10px;
+  border-style: solid;
+  border-color: gray;
+  color: #fff;
+  line-height: 130px;
+  text-align: center;
+  background: #000;
+  display: inline-block;
+}
+
+.btnStyle {
+  border-radius: 15px;
+  font-size: 30px;
+  border: none;
+  padding: 10px;
+  width: 16%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  outline: none;
+  cursor: pointer;
+}
+
+.start {
+  color: #00c742;
+}
+
+.stop {
+  color: #ff4343;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.reset {
+  color: #2ebfed;
+}
+
+.teamName {
+  border-radius: 10px;
+  border: 1.5px;
+  border-style: solid;
+  border-color: gray;
+  font-size: 30px;
+  width: 50%;
+  outline: none;
+  padding: 5px;
+}
+
+.inputStyling {
+  border-radius: 10px;
+  border: 1.5px;
+  border-style: solid;
+  border-color: gray;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.middleInputStyling {
+  border-radius: 10px;
+  border: 1.5px;
+  border-style: solid;
+  border-color: gray;
+  width: 29.5%;
+  font-size: 20px;
+  padding: 5px;
+}
+
+@media screen and (max-width: 1300px) {
+  .list2 {
+    float: left;
+  } 
+}

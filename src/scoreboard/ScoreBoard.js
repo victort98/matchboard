@@ -1,72 +1,70 @@
-import React, {useContext, useEffect} from 'react'
-import Clock from '../controlboard/Clock'
+import React, {useContext, useState, useEffect} from 'react'
+import Clock from './ScoreBoardClock'
 import {ScoreBoardContext} from '../contexts/ScoreBoardContextProvider'
-import {ClockContext} from '../contexts/ClockContextProvider'
+import {ScoreBoardClockContext} from '../contexts/ScoreBoardClockContextProvider'
 import Canvas from './Canvas'
 
 const ScoreBoard = () => {
   const $ = x => document.querySelector(x);
-  // const {timeLeft, startClock, sleep, timeFormatted} = useContext(ClockContext)
+  const {showClock, stopClock, timeInfo, stopInfo} = useContext(ScoreBoardClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
+  const [teamOneScore, setTeamOneScore] = useState(0)
+  const [teamTwoScore, setTeamTwoScore] = useState(0)
+  const [timeStarted, setTimeStarted] = useState(null)
+  // const [timeStarted, setTimeStarted] = useState(null)
 
-  let timePaused = 0;
-  let timeStarted = 0;
-  let timePausedSum = 0;
-
-  let timeFormatted = () => {
-    let tl = scoreData.timeLeft;
-    let minutes = Math.floor(tl / 60 / 1000);
-    let seconds = Math.floor(tl / 1000) - minutes * 60;
-    return (minutes + '').padStart(2, '0') + ':'
-      + (seconds + '').padStart(2, 0);
-  }
-
-  let startClock = () => {
-    if (!timeStarted) {
-      timeStarted = Date.now();
+  useEffect(()=>{
+    console.log(stopInfo.timeStarted);
+    
+      let startClock
+   
+    console.log(timeStarted);
+    
+    if (scoreData.teamOne !== undefined) {
+      setTeamOneScore(scoreData.teamOne)
     }
-    else if (!timePaused) {
-      return;
+    if (scoreData.teamTwo !== undefined) {
+      setTeamTwoScore(scoreData.teamTwo)
     }
-    else {
-      timePausedSum += Date.now() - timePaused;
-      timePaused = 0;
+    if (timeInfo.timeStarted !== undefined) {
+      setTimeStarted(timeInfo.timeStarted)
     }
-  }
-
-  let sleep = (ms) => {
-    return new Promise(res => setTimeout(res, ms));
-  }
-
-  let showClock = () => {
-    startClock()
-    $('.clock').innerHTML = timeFormatted();
-    sleep(500);
-  }
-
-  if (scoreData.timeLeft) {
-    showClock()
-  }
+    if(timeStarted === 0){
+      startClock = setInterval(showClock, 100)
+    }else if(timeStarted === 1){
+      stopClock()  
+      clearInterval(startClock)  
+      setTimeStarted(0)    
+    }
+    if (stopInfo.timeStarted === null) {
+      setTimeStarted(1) 
+      stopClock()
+      clearInterval(startClock)    
+    }
+    
+  }, [scoreData, timeInfo, stopInfo, stopClock, showClock, timeStarted])
 
   return (
     <div className="container-fluid text-center"> 
       <h1>Score Board</h1>
       <hr/>
-      <Canvas scoreData={scoreData}/>
+      {/* <Canvas scoreData={scoreData}/> */}
       
       <div className="row">
-        <div className="col-2">         
+        <div className="col-1">         
         </div>
         <div className="col-3 mt-2">
            <h2 className="text-secondary text-center">Malmö</h2>
-           <h1 className="text-info pl-3 text-right display-1">{scoreData.teamOne}</h1>
+           <hr/>
+           <h1 className="text-info pl-3 text-center display-1">{teamOneScore}</h1>
         </div>
-        <div className="col-3">
-          <Clock className="clock"/>
+        <div className="col-4">
+          <Clock/>
         </div>
         <div className="col-3 mt-2">
           <h2 className="text-secondary text-center">Örebro</h2>
-          <h1 className="text-info pl-3 text-left display-1">{scoreData.teamTwo}</h1>
+          <hr/>
+          <h1 className="text-info pl-3 text-center display-1">{teamTwoScore}</h1>
         </div>
         <div className="col-2">          
         </div>      

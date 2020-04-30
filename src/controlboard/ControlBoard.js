@@ -4,47 +4,18 @@ import {ClockContext} from '../contexts/ClockContextProvider'
 import {socket} from '../socket/socket';
 
 const ControlBoard = (props) => {
-  const $ = x => document.querySelector(x);
-  const {timeLeft, startClock, stopClock, sleep, timeFormatted} = useContext(ClockContext)
+  const {startTime, stopTime} = useContext(ClockContext)
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
-  const [clockStatus, setClockStatus] = useState(false)
 
   const sendData = () => {
     let info = {
-      teamOne: teamOneScore,
-      teamTwo: teamTwoScore,
-      timeLeft: timeLeft()
+      teamOne: +teamOneScore,
+      teamTwo: +teamTwoScore,
     }  
     socket.emit('scoreInfo', info)
   }
-
-  let showClock = () => {
-    startClock()
-    $('.clock').innerHTML = timeFormatted();
-    sleep(500);
-  }
-
-  let startTime = () => {
-    if (clockStatus) {
-      setInterval(showClock, 100)
-      setClockStatus(true)
-    }else{
-      clearInterval(showClock)
-      stopClock()
-    }
-    
-  }
-
-  let stopTime = () =>{
-    setClockStatus(true)
-    stopClock()
-  }
-
-  useEffect(() => {
-    stopTime()
-  }, [])
 
   return (
     <div className="container">
@@ -52,30 +23,34 @@ const ControlBoard = (props) => {
     <hr/>
      <div className="text-center">
       <Clock/>
-      <button onClick={()=> startTime()}>Start Clock</button>
-      <button onClick={()=>stopTime()}>Stop Clock</button>
+      <button className="btn btn-outline-success mr-2" onClick={()=> startTime()}>Start Clock</button>
+      <button className="btn btn-outline-danger ml-2" onClick={()=>stopTime()}>Stop Clock</button>
      </div>
-      <div className="row mr-auto">      
-        <div className="col-5">
-          <form>
-            <div className="form-group">
-              <label>TEAM 1</label>
-              <input type="number" className="form-control" id="team-1"
+      <div className="row mr-auto mt-5">    
+        <div className="col-3"></div>  
+        <div className="col-3 mr-0 pr-0">          
+          <div className="form-group">
+            <label>TEAM 1</label>
+              <input type="number" className="form-control text-info" id="team-1"
+                style={{fontSize:'28px'}}
                 min={teamOneScore}
                 placeholder={teamOneScore}
                 onChange={e=>setTeamOneScore(e.target.value)}/>
             </div>
-            <div className="form-group">
+          </div> 
+           <div className="col-3 ml-0 pr-0">
+            <div className="form-group text-right">
               <label>TEAM 2</label>
-              <input type="number" className="form-control" id="team-2"
+              <input type="number" className="form-control text-info" id="team-2"
+                style={{fontSize:'28px'}}
                 min={teamTwoScore}
                 placeholder={teamTwoScore}
                 onChange={e=>setTeamTwoScore(e.target.value)}/>
             </div>
-            <button type="button" className="btn btn-success"
+          </div> 
+          <div className="col-3"></div>
+            <button type="button" className="btn btn-success mx-auto px-5 mt-3"
              onClick={()=> sendData()}>SEND</button>
-          </form> 
-        </div> 
       </div>
     </div>
   )

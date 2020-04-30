@@ -19,39 +19,155 @@ const ControlBoard = (props) => {
 
   return (
     <div className="container">
-    <h1 className="text-center my-2">Control Board</h1>
-    <hr/>
-     <div className="text-center">
-      <Clock/>
-      <button className="btn btn-outline-success mr-2" onClick={()=> startTime()}>Start Clock</button>
-      <button className="btn btn-outline-danger ml-2" onClick={()=>stopTime()}>Stop Clock</button>
-     </div>
-      <div className="row mr-auto mt-5">    
-        <div className="col-3"></div>  
-        <div className="col-3 mr-0 pr-0">          
-          <div className="form-group">
-            <label>TEAM 1</label>
-              <input type="number" className="form-control text-info" id="team-1"
-                style={{fontSize:'28px'}}
-                min={teamOneScore}
-                placeholder={teamOneScore}
-                onChange={e=>setTeamOneScore(e.target.value)}/>
-            </div>
-          </div> 
-           <div className="col-3 ml-0 pr-0">
-            <div className="form-group text-right">
-              <label>TEAM 2</label>
-              <input type="number" className="form-control text-info" id="team-2"
-                style={{fontSize:'28px'}}
-                min={teamTwoScore}
-                placeholder={teamTwoScore}
-                onChange={e=>setTeamTwoScore(e.target.value)}/>
-            </div>
-          </div> 
-          <div className="col-3"></div>
-            <button type="button" className="btn btn-success mx-auto px-5 mt-3"
-             onClick={()=> sendData()}>SEND</button>
+      <div className="buttons">
+        <button className="btnStyle start" onClick={()=> startTime()}>START CLOCK</button>
+        <button className="btnStyle stop" onClick={()=> stopTime()}>STOP CLOCK</button>
+        <button className="btnStyle reset">RESET</button>
       </div>
+
+      <div className="screenInfo">
+        <div className="team1">
+        <label>SET TEAM 1</label>
+                <br />
+                <input className="teamName" placeholder="Name of team 1" type="text"></input>
+                <br />
+                <br />
+                <label>SET SCORE</label>
+                <br/>
+                <input className="inputStyling" type="number" min="0" 
+                placeholder="0"
+                onChange={e=>setTeamOneScore(e.target.value)}>
+                </input>
+        </div>
+
+        <div className="time">
+        <Clock />
+                <br />
+                <div className="overtime">
+                <input className="middleInputStyling" type="number" min="0" placeholder="0"></input>
+                <input className="middleInputStyling" type="number" min="0" placeholder="0"></input>
+                </div>
+        </div>
+
+        <div className="team2">
+        <label>SET TEAM 2</label>
+                <br />
+                <input className="teamName" placeholder="Name of team 2" type="text"></input>
+                <br />
+                <br />
+                <label>SET SCORE</label>
+                <br/>
+                <input className="inputStyling" type="number" min="0"
+                placeholder="0"
+                onChange={e=>setTeamTwoScore(e.target.value)}>
+                </input>
+        </div>
+
+      </div>
+
+      <div className="stats">
+        <div className="team1Stats">
+        <ul className="yellowCornerShots">
+                        <li>
+                        <label>YELLOW CARD</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                        <li>
+                        <label>CORNERS</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                        <li>
+                        <label>SHOTS</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                    </ul>
+                    <ul className="redOffsideFouls">
+                        <li>
+                        <label>RED CARD</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                        <li>
+                        <label>OFFSIDES</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                        <li>
+                        <label>FOULS</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                    </ul>
+                    <br />
+                    <div className="onTarget">
+                <label>SHOTS ON TARGET</label>
+                <br />
+                <input className="specialWidth inputStyling" type="number" min="0" placeholder="0"></input>
+                </div>
+        </div>
+
+        <div className="middleInfo">
+                <button className="extraTime">SET EXTRA TIME</button>
+                <br />
+                <br />
+                <label>SELECT SREEN TO CAST</label>
+                <br />
+                <input className="scoreboard inputStyling" placeholder="SCOREBOARD" type="text"></input>
+                <br />
+                <br />
+                <button className="broadcast" onClick={()=> sendData()}>BROADCAST</button>
+                <br />
+                <br />
+        </div>
+
+        <div className="team2Stats">
+        <ul className="yellowCornerShots">
+                        <li>
+                        <label>YELLOW CARD</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                        <li>
+                        <label>CORNERS</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                        <li>
+                        <label>SHOTS</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                    </ul>
+                    <ul className="redOffsideFouls">
+                        <li>
+                        <label>RED CARD</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                        <li>
+                        <label>OFFSIDES</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                        <li>
+                        <label>FOULS</label>
+                        <br />
+                        <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                        </li>
+                    </ul>
+                    <br />
+                    <div className="onTarget">
+                <label>SHOTS ON TARGET</label>
+                <br />
+                <input className="specialWidth inputStyling" type="number" min="0" placeholder="0"></input>
+                </div>
+        </div>
+
+      </div>
+
     </div>
   )
 }

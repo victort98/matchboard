@@ -16,7 +16,7 @@ const ScoreBoard = () => {
   useEffect(()=>{
     console.log(stopInfo.timeStarted);
     
-      let startClock
+    let startClock
    
     console.log(timeStarted);
     

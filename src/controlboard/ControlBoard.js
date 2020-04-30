@@ -4,15 +4,20 @@ import {ClockContext} from '../contexts/ClockContextProvider'
 import {socket} from '../socket/socket';
 
 const ControlBoard = (props) => {
-  const {startTime, stopTime} = useContext(ClockContext)
+
+  //const {timeLeft, startClock, stopClock, sleep, timeFormatted} = useContext(ClockContext)
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
+  //const [clockStatus, setClockStatus] = useState(false)
+  const [timerActive, setTimerActive] = useState(false)
 
   const sendData = () => {
     let info = {
-      teamOne: +teamOneScore,
-      teamTwo: +teamTwoScore,
+      teamOne: teamOneScore,
+      teamTwo: teamTwoScore,
+      //timeLeft: timeLeft(),
+      timerActive: timerActive
     }  
     socket.emit('scoreInfo', info)
   }
@@ -20,8 +25,8 @@ const ControlBoard = (props) => {
   return (
     <div className="container">
       <div className="buttons">
-        <button className="btnStyle start" onClick={()=> startTime()}>START CLOCK</button>
-        <button className="btnStyle stop" onClick={()=> stopTime()}>STOP CLOCK</button>
+        <button className="btnStyle start" onClick={()=> setTimerActive(true)}>START CLOCK</button>
+        <button className="btnStyle stop" onClick={()=> setTimerActive(false)}>STOP CLOCK</button>
         <button className="btnStyle reset">RESET</button>
       </div>
 

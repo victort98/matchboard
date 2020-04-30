@@ -89,8 +89,8 @@ const ControlBoard = (props) => {
       </div>
 
       <div className="stats">
-        <div className="leftcol2">
-        <ul className="list">
+        <div className="team1Stats">
+        <ul className="yellowCornerShots">
                         <li>
                         <label>YELLOW CARD</label>
                         <br />
@@ -107,7 +107,7 @@ const ControlBoard = (props) => {
                         <input className="inputStyling" type="number" min="0" placeholder="0"></input>
                         </li>
                     </ul>
-                    <ul className="list2">
+                    <ul className="redOffsideFouls">
                         <li>
                         <label>RED CARD</label>
                         <br />
@@ -125,22 +125,27 @@ const ControlBoard = (props) => {
                         </li>
                     </ul>
                     <br />
+                    <div className="onTarget">
                 <label>SHOTS ON TARGET</label>
                 <br />
                 <input className="specialWidth inputStyling" type="number" min="0" placeholder="0"></input>
+                </div>
         </div>
 
-        <div className="midcol2">
+        <div className="middleInfo">
                 <button className="extraTime">SET EXTRA TIME</button>
-                <p>SELECT SREEN TO CAST</p>
-                <input className="scoreboard" placeholder="SCOREBOARD" type="text"></input>
+                <br />
+                <br />
+                <label>SELECT SREEN TO CAST</label>
+                <br />
+                <input className="scoreboard inputStyling" placeholder="SCOREBOARD" type="text"></input>
                 <br />
                 <br />
                 <button className="broadcast">BROADCAST</button>
         </div>
 
-        <div className="rightcol2">
-        <ul className="list">
+        <div className="team2Stats">
+        <ul className="yellowCornerShots">
                         <li>
                         <label>YELLOW CARD</label>
                         <br />
@@ -157,7 +162,7 @@ const ControlBoard = (props) => {
                         <input className="inputStyling" type="number" min="0" placeholder="0"></input>
                         </li>
                     </ul>
-                    <ul className="list2">
+                    <ul className="redOffsideFouls">
                         <li>
                         <label>RED CARD</label>
                         <br />
@@ -175,9 +180,11 @@ const ControlBoard = (props) => {
                         </li>
                     </ul>
                     <br />
+                    <div className="onTarget">
                 <label>SHOTS ON TARGET</label>
                 <br />
                 <input className="specialWidth inputStyling" type="number" min="0" placeholder="0"></input>
+                </div>
         </div>
 
       </div>

@@ -1,9 +1,12 @@
-import React, {createContext} from 'react'
+import React, {createContext, useState, useEffect} from 'react'
 import {socket} from '../socket/socket';
 
-export const ClockContext = createContext()
+export const ScoreBoardClockContext = createContext()
 
-const ClockContextProvider = (props) => {
+const ScoreBoardClockContextProvider = (props) => {
+  const [timeInfo, setTimeInfo] = useState([])
+  const [stopInfo, setStopInfo] = useState([])
+
   const $ = x => document.querySelector(x);
   let timePaused = 0;
   let timeStarted = 0;
@@ -51,44 +54,40 @@ const ClockContextProvider = (props) => {
 
   let showClock = () => {
     startClock()
-    $('.clock').innerHTML = timeFormatted();
+    $('.score-clock').innerHTML = timeFormatted();
     sleep(500);
   }
 
-  let clockStarted;
-  let startTime = () => {  
-    clockStarted = setInterval(showClock, 100)
-    let timeInfo = {
-      timeStarted: timeStarted,
-      timeLeft: timeLeft()
-    }
-    socket.emit('timeInfo', timeInfo)
-  }
+  // let clockStarted;
+  // let startTime = () => {  
+  //   clockStarted = setInterval(showClock, 100)
+  // }
 
-  let stopTime = () =>{
-    stopClock()
-    clearInterval(clockStarted)
-    let stopInfo = {
-      timeStarted: null
-    }
-    socket.emit('stopInfo', stopInfo)
-  }
+  // let stopTime = () =>{
+  //   stopClock()
+  //   clearInterval(clockStarted)
+  // }
+
+  useEffect(()=>{
+    socket.on('timeInfo', (data)=>{
+      setTimeInfo(data)
+    })
+    socket.on('stopInfo', (data)=>{
+      setStopInfo(data)
+    })
+  })
 
   const values={
-    timeStarted,
-    timeLeft,
-    timeFormatted,
-    startClock,
+    showClock,
     stopClock,
-    sleep,
-    startTime,
-    stopTime
+    timeInfo,
+    stopInfo
   }
   return (
-    <ClockContext.Provider value={values}>
+    <ScoreBoardClockContext.Provider value={values}>
       {props.children}
-    </ClockContext.Provider>
+    </ScoreBoardClockContext.Provider>
   )
 }
 
-export default ClockContextProvider
+export default ScoreBoardClockContextProvider

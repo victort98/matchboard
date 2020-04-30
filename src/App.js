@@ -4,6 +4,7 @@ import ScoreBoard from './scoreboard/ScoreBoard.js'
 import ControlBoard from './controlboard/ControlBoard.js'
 import ControlBoardContextProvider from './contexts/ControlBoardContextProvider'
 import ScoreBoardContextProvider from './contexts/ScoreBoardContextProvider'
+import ScoreBoardClockContextProvider from './contexts/ScoreBoardClockContextProvider'
 import ClockContextProvider from './contexts/ClockContextProvider'
 
 const App = () => {
@@ -11,12 +12,14 @@ const App = () => {
     <div className="App">
       <ControlBoardContextProvider>
         <ScoreBoardContextProvider> 
-          <ClockContextProvider>
-          <Router>
-            <Route exact path='/controlboard' component={ControlBoard}/>        
-            <Route exact path='/scoreboard' component={ScoreBoard}/>        
-          </Router>
-          </ClockContextProvider>
+          <ScoreBoardClockContextProvider> 
+            <ClockContextProvider>
+              <Router>
+                <Route exact path='/controlboard' component={ControlBoard}/>        
+                <Route exact path='/scoreboard' component={ScoreBoard}/>        
+              </Router>
+            </ClockContextProvider>
+          </ScoreBoardClockContextProvider> 
         </ScoreBoardContextProvider>
       </ControlBoardContextProvider>
     </div>

@@ -10,8 +10,17 @@ const server = app.listen(PORT, ()=>
 const io = socket(server);
 io.on('connection', (socket)=> {
   console.log('Connected...', socket.id);
-
+ 
   socket.on('scoreInfo', (data)=>{
     io.emit('message', data)
   })
+
+  socket.on('timeInfo', (data)=>{
+    io.emit('timeInfo', data)
+  })
+
+  socket.on('stopInfo', (data)=>{
+    io.emit('stopInfo', data)
+  })
+
 })

@@ -19,7 +19,7 @@ const ScoreBoardContextProvider = (props) => {
     socket.on('message', (data)=>{
       setScoreData(data)
       console.log(data);  
-    })
+    })   
   },[])
 
   const values = {

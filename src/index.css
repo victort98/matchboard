@@ -79,11 +79,11 @@ li {
   font-size: 60px;
   border: 10px;
   border-style: solid;
-  border-color: gray;
+  border-color: #A3AAA5;
   color: #fff;
   line-height: 130px;
   text-align: center;
-  background: #000;
+  background: #454648;
   display: inline-block;
 }
 
@@ -153,6 +153,18 @@ li {
 }
 
 .broadcast {
+  border-radius: 15px;
+  font-size: 30px;
+  border: solid 1px grey;
+  color: white;
+  background-color: #03A10D;
+  padding: 10px 30px 10px 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  outline: none;
+  cursor: pointer;
+}
+
+.send {
   border-radius: 15px;
   font-size: 30px;
   border: solid 1px grey;

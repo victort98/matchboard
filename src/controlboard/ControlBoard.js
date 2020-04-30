@@ -49,8 +49,8 @@ const ControlBoard = (props) => {
   return (
     <div className="container">
       <div className="buttons">
-        <button className="btnStyle start">START CLOCK</button>
-        <button className="btnStyle stop">STOP CLOCK</button>
+        <button className="btnStyle start" onClick={()=> startTime()}>START CLOCK</button>
+        <button className="btnStyle stop" onClick={()=> stopTime()}>STOP CLOCK</button>
         <button className="btnStyle reset">RESET</button>
       </div>
 
@@ -63,7 +63,10 @@ const ControlBoard = (props) => {
                 <br />
                 <label>SET SCORE</label>
                 <br/>
-                <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                <input className="inputStyling" type="number" min="0" 
+                placeholder="0"
+                onChange={e=>setTeamOneScore(e.target.value)}>
+                </input>
         </div>
 
         <div className="time">
@@ -83,7 +86,10 @@ const ControlBoard = (props) => {
                 <br />
                 <label>SET SCORE</label>
                 <br/>
-                <input className="inputStyling" type="number" min="0" placeholder="0"></input>
+                <input className="inputStyling" type="number" min="0"
+                placeholder="0"
+                onChange={e=>setTeamTwoScore(e.target.value)}>
+                </input>
         </div>
 
       </div>
@@ -142,6 +148,9 @@ const ControlBoard = (props) => {
                 <br />
                 <br />
                 <button className="broadcast">BROADCAST</button>
+                <br />
+                <br />
+                <button className="send" onClick={()=> sendData()}>SEND</button>
         </div>
 
         <div className="team2Stats">

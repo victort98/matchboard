@@ -4,7 +4,16 @@ import {socket} from '../socket/socket';
 export const ScoreBoardContext = createContext()
 
 const ScoreBoardContextProvider = (props) => {
-  const [scoreData, setScoreData] = useState([])
+  const [scoreData, setScoreData] = useState({teamOne: 0, teamTwo: 0, timerActive: false})
+
+  /*
+
+        teamOne: teamOneScore,
+      teamTwo: teamTwoScore,
+      //timeLeft: timeLeft(),
+      timerActive: timerActive
+
+  */
   
   useEffect(()=>{
     socket.on('message', (data)=>{

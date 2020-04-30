@@ -17,11 +17,14 @@ const ControlBoard = (props) => {
       teamOne: teamOneScore,
       teamTwo: teamTwoScore,
       //timeLeft: timeLeft(),
-      timerState: timerActive
+      timerActive: timerActive
     }  
     socket.emit('scoreInfo', info)
   }
 
+  const startTimer = () => {
+    
+  }
 
 
   return (

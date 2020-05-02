@@ -68,21 +68,20 @@ const ClockContextProvider = (props) => {
   let stopTime = () =>{
     stopClock()
     clearInterval(clockStarted)
-    let stopInfo = {
-      timeStarted: null
-    }
-    socket.emit('stopInfo', stopInfo)
+  }
+
+  const resetTime = () => {
+    timeStarted = 0;
+    timePaused = 0;
+    timePausedSum = 0;
+    stopTime()
+    $('.clock').innerHTML = '90:00';
   }
 
   const values={
-    timeStarted,
-    timeLeft,
-    timeFormatted,
-    startClock,
-    stopClock,
-    sleep,
     startTime,
-    stopTime
+    stopTime,
+    resetTime
   }
   return (
     <ClockContext.Provider value={values}>

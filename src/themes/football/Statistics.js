@@ -93,9 +93,16 @@ const Statistics = () => {
           <Text x={790} y={140} fontSize={30} wrap="char"
             text="DJURGÅRDEN" 
           />
+
+          <Rect x={225} y={200} width={850} height={500}
+          shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'       
+            fill="#fff" align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}
+          />
+          <Text x={500} y={250} fontSize={50} wrap="char"
+            text="STATISTICS"
+          />
         </Layer>
       </Stage>
-
     </div>
   )
 }

@@ -9,12 +9,47 @@ const ControlBoard = (props) => {
   const [screen, setScreen] = useState()
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
+
+  /* STATISTICS */
+  const [team1Yellow, setTeam1Yellow] = useState(0)
+  const [team1Red, setTeam1Red] = useState(0)
+  const [team1Corners, setTeam1Corners] = useState(0)
+  const [team1Offsides, setTeam1Offsides] = useState(0)
+  const [team1Shots, setTeam1Shots] = useState(0)
+  const [team1Fouls, setTeam1Fouls] = useState(0)
+  const [team1OnTarget, setTeam1OnTarget] = useState(0)
+  
+  const [team2Yellow, setTeam2Yellow] = useState(0)
+  const [team2Red, setTeam2Red] = useState(0)
+  const [team2Corners, setTeam2Corners] = useState(0)
+  const [team2Offsides, setTeam2Offsides] = useState(0)
+  const [team2Shots, setTeam2Shots] = useState(0)
+  const [team2Fouls, setTeam2Fouls] = useState(0)
+  const [team2OnTarget, setTeam2OnTarget] = useState(0)
+  /* STATISTICS */
+
   const [timerActive, setTimerActive] = useState(false)
 
   const sendData = () => {
     let info = {
       teamOne: teamOneScore,
       teamTwo: teamTwoScore,
+      //TEAM 1
+      team1Yellow: team1Yellow,
+      team1Red: team1Red,
+      team1Corners: team1Corners,
+      team1Offsides: team1Offsides,
+      team1Shots: team1Shots,
+      team1Fouls: team1Fouls,
+      team1OnTarget: team1OnTarget,
+      //TEAM 2
+      team2Yellow: team2Yellow,
+      team2Red: team2Red,
+      team2Corners: team2Corners,
+      team2Offsides: team2Offsides,
+      team2Shots: team2Shots,
+      team2Fouls: team2Fouls,
+      team2OnTarget: team2OnTarget,
       //timeLeft: timeLeft(),
       timerActive: timerActive
     }  
@@ -106,41 +141,48 @@ const ControlBoard = (props) => {
                 <li>
                   <label>YELLOW CARD</label>
                   <br />
-                  <input className="inputStyling" type="number" min="0" placeholder="0"/>
+                  <input className="inputStyling" type="number" min="0" placeholder="0"
+                  onChange={e=>setTeam1Yellow(e.target.value)}/>
                   </li>
                   <li>
                   <label>CORNERS</label>
                   <br />
-                  <input className="inputStyling" type="number" min="0" placeholder="0"/>
+                  <input className="inputStyling" type="number" min="0" placeholder="0"
+                  onChange={e=>setTeam1Corners(e.target.value)}/>
                   </li>
                   <li>
                   <label>SHOTS</label>
                   <br />
-                  <input className="inputStyling" type="number" min="0" placeholder="0"/>
+                  <input className="inputStyling" type="number" min="0" placeholder="0"
+                  onChange={e=>setTeam1Shots(e.target.value)}/>
                 </li>
             </ul>
             <ul className="redOffsideFouls">
                 <li>
                   <label>RED CARD</label>
                   <br />
-                  <input className="inputStyling" type="number" min="0" placeholder="0"/>
+                  <input className="inputStyling" type="number" min="0" placeholder="0"
+                  onChange={e=>setTeam1Red(e.target.value)}/>
                   </li>
                   <li>
                   <label>OFFSIDES</label>
                   <br />
-                  <input className="inputStyling" type="number" min="0" placeholder="0"/>
+                  <input className="inputStyling" type="number" min="0" placeholder="0"
+                  onChange={e=>setTeam1Offsides(e.target.value)}/>
                   </li>
                   <li>
                   <label>FOULS</label>
                   <br />
-                  <input className="inputStyling" type="number" min="0" placeholder="0"/>
+                  <input className="inputStyling" type="number" min="0" placeholder="0"
+                  onChange={e=>setTeam1Fouls(e.target.value)}/>
                 </li>
             </ul>
           </div>
           <div className="onTarget1">
             <label>SHOTS ON TARGET</label>
             <br />
-            <input className="specialWidth inputStyling" type="number" min="0" placeholder="0"/>
+            <input className="specialWidth inputStyling" type="number" min="0" placeholder="0"
+            onChange={e=>setTeam1OnTarget(e.target.value)}/>
           </div>
           
         </div>
@@ -172,41 +214,48 @@ const ControlBoard = (props) => {
           <li>
             <label>YELLOW CARD</label>
             <br />
-            <input className="inputStyling" type="number" min="0" placeholder="0"/>
+            <input className="inputStyling" type="number" min="0" placeholder="0"
+            onChange={e=>setTeam2Yellow(e.target.value)}/>
           </li>
           <li>
             <label>CORNERS</label>
             <br />
-            <input className="inputStyling" type="number" min="0" placeholder="0"/>
+            <input className="inputStyling" type="number" min="0" placeholder="0"
+            onChange={e=>setTeam2Corners(e.target.value)}/>
           </li>
           <li>
             <label>SHOTS</label>
             <br />
-            <input className="inputStyling" type="number" min="0" placeholder="0"/>
+            <input className="inputStyling" type="number" min="0" placeholder="0"
+            onChange={e=>setTeam2Shots(e.target.value)}/>
           </li>
         </ul>
         <ul className="redOffsideFouls">
           <li>
             <label>RED CARD</label>
             <br />
-            <input className="inputStyling" type="number" min="0" placeholder="0"/>
+            <input className="inputStyling" type="number" min="0" placeholder="0"
+            onChange={e=>setTeam2Red(e.target.value)}/>
           </li>
           <li>
             <label>OFFSIDES</label>
             <br />
-            <input className="inputStyling" type="number" min="0" placeholder="0"/>
+            <input className="inputStyling" type="number" min="0" placeholder="0"
+            onChange={e=>setTeam2Offsides(e.target.value)}/>
           </li>
           <li>
             <label>FOULS</label>
             <br />
-            <input className="inputStyling" type="number" min="0" placeholder="0"/>
+            <input className="inputStyling" type="number" min="0" placeholder="0"
+            onChange={e=>setTeam2Fouls(e.target.value)}/>
           </li>
         </ul>
         </div>
         <div className="onTarget2">
           <label>SHOTS ON TARGET</label>
           <br />
-          <input className="specialWidth inputStyling" type="number" min="0" placeholder="0"/>
+          <input className="specialWidth inputStyling" type="number" min="0" placeholder="0"
+          onChange={e=>setTeam2OnTarget(e.target.value)}/>
         </div>
       </div>
       </div>

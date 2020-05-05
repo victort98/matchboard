@@ -10,6 +10,24 @@ const Statistics = () => {
 
   const [time, setTime] = useState(timeFormatted())
 
+   /* STATISTICS */
+   const [team1Yellow, setTeam1Yellow] = useState(0)
+   const [team1Red, setTeam1Red] = useState(0)
+   const [team1Corners, setTeam1Corners] = useState(0)
+   const [team1Offsides, setTeam1Offsides] = useState(0)
+   const [team1Shots, setTeam1Shots] = useState(0)
+   const [team1Fouls, setTeam1Fouls] = useState(0)
+   const [team1OnTarget, setTeam1OnTarget] = useState(0)
+   
+   const [team2Yellow, setTeam2Yellow] = useState(0)
+   const [team2Red, setTeam2Red] = useState(0)
+   const [team2Corners, setTeam2Corners] = useState(0)
+   const [team2Offsides, setTeam2Offsides] = useState(0)
+   const [team2Shots, setTeam2Shots] = useState(0)
+   const [team2Fouls, setTeam2Fouls] = useState(0)
+   const [team2OnTarget, setTeam2OnTarget] = useState(0)
+   /* STATISTICS */
+
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [timerActive, setTimerActive] = useState()
@@ -17,6 +35,20 @@ const Statistics = () => {
   useEffect(()=>{
     setTeamOneScore(scoreData.teamOne)
     setTeamTwoScore(scoreData.teamTwo)
+    setTeam1Yellow(scoreData.team1Yellow)
+    setTeam1Red(scoreData.team1Red)
+    setTeam1Corners(scoreData.team1Corners)
+    setTeam1Offsides(scoreData.team1Offsides)
+    setTeam1Shots(scoreData.team1Shots)
+    setTeam1Fouls(scoreData.team1Fouls)
+    setTeam1OnTarget(scoreData.team1OnTarget)
+    setTeam2Yellow(scoreData.team2Yellow)
+    setTeam2Red(scoreData.team2Red)
+    setTeam2Corners(scoreData.team2Corners)
+    setTeam2Offsides(scoreData.team2Offsides)
+    setTeam2Shots(scoreData.team2Shots)
+    setTeam2Fouls(scoreData.team2Fouls)
+    setTeam2OnTarget(scoreData.team2OnTarget)
   }, [scoreData])
 
   useEffect(()=>{

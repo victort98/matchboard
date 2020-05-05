@@ -1,13 +1,9 @@
 import React, {createContext, useState, useEffect} from 'react'
 import {socket} from '../socket/socket';
 
-export const ScoreBoardClockContext = createContext()
+export const ScoreClockContext = createContext()
 
-const ScoreBoardClockContextProvider = (props) => {
-  const [timeInfo, setTimeInfo] = useState([])
-  const [stopInfo, setStopInfo] = useState([])
-
-  const $ = x => document.querySelector(x);
+const ScoreClockContextProvider = (props) => {
   let timePaused = 0;
   let timeStarted = 0;
   let timePausedSum = 0;
@@ -54,40 +50,40 @@ const ScoreBoardClockContextProvider = (props) => {
 
   let showClock = () => {
     startClock()
-    $('.score-clock').innerHTML = timeFormatted();
+    timeFormatted();
     sleep(500);
   }
 
-  // let clockStarted;
-  // let startTime = () => {  
-  //   clockStarted = setInterval(showClock, 100)
-  // }
+  let clockStarted;
+  let startTime = () => {  
+    clockStarted = setInterval(showClock, 1000)
+  }
 
-  // let stopTime = () =>{
-  //   stopClock()
-  //   clearInterval(clockStarted)
-  // }
+  let stopTime = () =>{
+    stopClock()
+    clearInterval(clockStarted)
+  }
 
-  useEffect(()=>{
-    socket.on('timeInfo', (data)=>{
-      setTimeInfo(data)
-    })
-    socket.on('stopInfo', (data)=>{
-      setStopInfo(data)
-    })
-  })
+  const resetTime = () => {
+    timeStarted = 0;
+    timePaused = 0;
+    timePausedSum = 0;
+    stopTime()
+  }
+
 
   const values={
-    showClock,
-    stopClock,
-    timeInfo,
-    stopInfo
+    timeFormatted,
+    startTime,
+    stopTime,
+    resetTime
   }
+
   return (
-    <ScoreBoardClockContext.Provider value={values}>
+    <ScoreClockContext.Provider value={values}>
       {props.children}
-    </ScoreBoardClockContext.Provider>
+    </ScoreClockContext.Provider>
   )
 }
 
-export default ScoreBoardClockContextProvider
+export default ScoreClockContextProvider

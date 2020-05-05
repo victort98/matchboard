@@ -25,10 +25,14 @@ html {
 }
 
 .container-fluid {
-  display: flex;
   text-align: center;
-  align-items: center;
+  display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.container-inputs{
+  margin-top: 0.5%;
 }
 
 .background{
@@ -36,18 +40,22 @@ html {
   z-index: -2;
   opacity: 0.7;
   width: 100vw;
-  height: 99vh;
-  top: 0px;
+  height: 655px;
+  top: 0;
   left: 0;
 }
 
 .football_field {
-	position: absolute;
+  margin: 0 auto;
+	/* position: relative; */
 	overflow: visible;
 	width: 90vw;
-	height: 57vh;
-	left: 9.9%;
-  top: 4.5%;
+  /* height: 57vh; */
+  max-height: 400px;
+  /* left: 9.9%; */
+  /* left: 670px; */
+  /* top: 4.5%; */
+  /* top: 300px; */
   z-index: -2;
   opacity: 0.5;
 }

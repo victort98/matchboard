@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import Clock from './Clock'
 import {ClockContext} from '../contexts/ClockContextProvider'
-import {socket} from '../socket/socket';
+import {socket, statistics} from '../socket/socket';
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
@@ -22,6 +22,7 @@ const ControlBoard = (props) => {
   }
 
   const startClock = () => {
+    socket.emit('timeInfo', timerActive)
     startTime()
     setTimerActive(true)
     $('.start').classList.add('start-active')
@@ -41,14 +42,23 @@ const ControlBoard = (props) => {
     $('.stop').classList.remove('stop-active')
   }
 
+  useEffect(()=>{
+    if (screen === 'statistics') {
+      socket.emit('board', 'statistics')
+    } else if(screen === 'scoreboard'){
+      socket.emit('board', 'scoreboard')
+    }
+    console.log(screen);
+  }, [screen])
+
 
   return (
     <div className="container-fluid">
-      <div className="container">
+      <div className="container-inputs">
       <div className="buttons">
-        <button className="btnStyle start" onClick={()=> startClock()}>START CLOCK</button>
-        <button className="btnStyle stop" onClick={()=> stopClock()}>STOP CLOCK</button>
-        <button className="btnStyle reset" onClick={()=>resetClock()}>RESET CLOCK</button>
+        <button className="btnStyle start" onClick={()=> startClock()}>START</button>
+        <button className="btnStyle stop" onClick={()=> stopClock()}>STOP</button>
+        <button className="btnStyle reset" onClick={()=>resetClock()}>RESET</button>
       </div>
 
       <div className="screenInfo">
@@ -143,8 +153,8 @@ const ControlBoard = (props) => {
             <label>SELECT SREEN TO CAST</label>
           <br />
             <select className="screen inputStyling" onChange={e=>setScreen(e.target.value)}>
-              <option selected value="scoreboard">SCORE BOARD</option>
-              <option value="statistic">STATISTIC</option>
+              <option value="scoreboard">SCORE BOARD</option>
+              <option value="statistics">STATISTICS</option>
               <option value="pointtable">POINT TABLE</option>
               <option value="leaguetable">LEAGUE TABLE</option>
             </select>
@@ -200,28 +210,33 @@ const ControlBoard = (props) => {
         </div>
       </div>
       </div>
+       </div>
 
-      <svg class="background" viewBox="0 0 1874 1080.446">
-        <path fill="rgba(68,149,255,0.651)" stroke="rgba(0,0,0,0.329)" stroke-width="100px" 
-          stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" 
-          id="Path_4" 
-          d="M 416.2294006347656 -2.817545237121521e-07 L 1457.770751953125 -2.817545237121521e-07 C 
-            1687.64794921875 -2.817545237121521e-07 1874.000122070313 192.5970764160156 1874.000122070313 
-            430.1777038574219 L 1874.000122070313 650.2685546875 C 1874.000122070313 887.84912109375 
-            1687.64794921875 1080.4462890625 1457.770751953125 1080.4462890625 L 416.2294006347656 
-            1080.4462890625 C 186.3522338867188 1080.4462890625 7.400896606668539e-07 887.84912109375 
-            7.400896606668539e-07 650.2685546875 L 7.400896606668539e-07 430.1777038574219 C 
-            7.400896606668539e-07 192.5970764160156 186.3522338867188 -2.817545237121521e-07 
-            416.2294006347656 -2.817545237121521e-07 Z">
-        </path>
-      </svg>
-      <svg class="football_field">
-        <rect fill="rgba(243,243,243,1)" stroke="rgba(254,254,254,1)" stroke-width="10px" stroke-linejoin="miter" 
-          stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="football_field" rx="260.25" ry="250.25" 
-          x="5%" y="1.5%" width="79%" height="88vh">
-        </rect>
-      </svg>
-    </div>
+       <div className="container">
+        <svg class="background" viewBox="0 0 1874 1080.446">
+          <path fill="rgba(68,149,255,0.651)" stroke="rgba(0,0,0,0.329)" stroke-width="100px" 
+            stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" 
+            id="Path_4" 
+            d="M 416.2294006347656 -2.817545237121521e-07 L 1457.770751953125 -2.817545237121521e-07 C 
+              1687.64794921875 -2.817545237121521e-07 1874.000122070313 192.5970764160156 1874.000122070313 
+              430.1777038574219 L 1874.000122070313 650.2685546875 C 1874.000122070313 887.84912109375 
+              1687.64794921875 1080.4462890625 1457.770751953125 1080.4462890625 L 416.2294006347656 
+              1080.4462890625 C 186.3522338867188 1080.4462890625 7.400896606668539e-07 887.84912109375 
+              7.400896606668539e-07 650.2685546875 L 7.400896606668539e-07 430.1777038574219 C 
+              7.400896606668539e-07 192.5970764160156 186.3522338867188 -2.817545237121521e-07 
+              416.2294006347656 -2.817545237121521e-07 Z">
+          </path>
+
+          <svg class="football_field">
+          <rect fill="rgba(243,243,243,1)" stroke="rgba(254,254,254,1)" stroke-width="10px" stroke-linejoin="miter" 
+            stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="football_field" rx="390.25" ry="390.25" 
+            x="11%" y="5.5%" width="1460px" height="960px">
+            {/* width="79%" height="88vh" */}
+          </rect>
+        </svg>
+        </svg>
+      </div>
+
     </div>
   )
 }

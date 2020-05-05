@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext }  from 'react';
 //import Konva from 'konva';
 import { Stage, Layer, Text } from 'react-konva';
 
-import {ScoreBoardContext} from '../contexts/ScoreBoardContextProvider'
+import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
 
 function KonvaCanvas(props) {
 

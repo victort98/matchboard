@@ -1,11 +1,10 @@
 const express = require('express');
 const app = express();
-
 const socket = require('socket.io');
 
 const PORT = 3200
 const server = app.listen(PORT, ()=> 
-      console.log(`Server is listening on port ${PORT}`))
+  console.log(`Server is listening on port ${PORT}`))
 
 const io = socket(server);
 io.on('connection', (socket)=> {
@@ -19,8 +18,7 @@ io.on('connection', (socket)=> {
     io.emit('timeInfo', data)
   })
 
-  socket.on('stopInfo', (data)=>{
-    io.emit('stopInfo', data)
+  socket.on('board', (data)=>{
+    io.emit('board', data)
   })
-
 })

@@ -1,4 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
+import '../themes/football/football.css'
 import Clock from './Clock'
 import {ClockContext} from '../contexts/ClockContextProvider'
 import {socket, statistics} from '../socket/socket';

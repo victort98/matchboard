@@ -1,13 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {ScoreBoardContext} from '../contexts/ScoreBoardContextProvider'
+import React, {useEffect, useState} from 'react'
 import Scoreboard from '../themes/football/Scoreboard'
 import Statistics from '../themes/football/Statistics'
-
+import Playerslist from '../themes/football/Playerslist'
 import {socket} from '../socket/socket'
 
-const ScoreBoard = () => {
-  const {scoreData} = useContext(ScoreBoardContext)
-
+const MatchBoard = () => {
   const [screen, setScreen] = useState()
 
   useEffect(()=>{
@@ -18,6 +15,7 @@ const ScoreBoard = () => {
   },[screen])
 
   return (
+<<<<<<< HEAD
     <div className="container-fluid text-center"> 
              
         {(screen==='statistics')?(
@@ -28,7 +26,19 @@ const ScoreBoard = () => {
       
 
     </div>
+=======
+    <>        
+      {(screen==='statistics')?
+        (<Statistics/>):
+       (screen==='scoreboard')?
+        (<Scoreboard/>):
+       (screen==='playerslist')?
+        (<Playerslist/>):
+        (<Scoreboard/>)
+      }
+    </>
+>>>>>>> ecbf5548812198ac99126b603daa1651e8db74a9
   )
 }
 
-export default ScoreBoard
+export default MatchBoard

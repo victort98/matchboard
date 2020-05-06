@@ -7,6 +7,7 @@ import ScoreBoardContextProvider from './contexts/ScoreBoardContextProvider'
 import ScoreClockContextProvider from './contexts/ScoreClockContextProvider'
 import ClockContextProvider from './contexts/ClockContextProvider'
 import Playerslist from './themes/football/Playerslist'
+import KonvaImageDemo from './demo/KonvaImageDemo'
 
 const App = () => {
   return (
@@ -18,7 +19,8 @@ const App = () => {
               <Router>
                 <Route exact path='/controlboard' component={ControlBoard}/>        
                 <Route exact path='/matchboard' component={MatchBoard}/>            
-                <Route exact path='/playerslist' component={Playerslist}/>            
+                <Route exact path='/playerslist' component={Playerslist}/>
+                <Route exact path='/imagedemo' component={KonvaImageDemo}/>       
               </Router>
             </ClockContextProvider>
           </ScoreClockContextProvider> 

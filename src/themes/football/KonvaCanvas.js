@@ -1,8 +1,31 @@
 import React, { useState, useEffect, useContext }  from 'react';
 //import Konva from 'konva';
-import { Stage, Layer, Text } from 'react-konva';
+import { Stage, Layer, Text, Image } from 'react-konva';
+//import useImage from 'use-image';
 
 import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
+
+/*
+const LionImage = () => {
+  //https://konvajs.org/assets/lion.png
+  //const [image] = useImage("localhost:3000/images/lion.png");
+  const [image] = useImage("https://konvajs.org/assets/lion.png");
+  return <Image image={image} />;
+}
+*/
+
+
+const imageConvertor = (imageSource) => {
+
+  //Konva requires a window.image object, this function converts an image to such an object
+  var imageObj = new window.Image();
+
+  imageObj.src = imageSource
+
+  return imageObj
+}
+
+const lion = require("../../images/lion.png");
 
 function KonvaCanvas(props) {
 
@@ -13,8 +36,8 @@ function KonvaCanvas(props) {
     const [homeScore, setHomeScore] = useState(0)
     const [awayScore, setAwayScore] = useState(0)
 
-    //console.log(props)
-  
+    const yoda = require('../../images/yoda.jpg')
+
     function toggle() {
       setIsActive(!isActive);
     }
@@ -59,35 +82,23 @@ function KonvaCanvas(props) {
         <div>
         <Stage width={700} height={700}>
         <Layer>
-            <Text
-               fontSize={60}
-               text={"Home: "+ homeScore} //homeScore
-               wrap="char"
-               align="center"
-               verticalAlign="top"
-               width={700}
-               height={350}
-            />
-            <Text
-               fontSize={60}
-               text={"Away: "+ awayScore} //awayScore
-               wrap="char"
-               align="center"
-               verticalAlign="middle"
-               width={700}
-               height={350}
-            />
-            <Text
-               fontSize={60}
-               text={"Time elapsed: "+ seconds}
-               wrap="char"
-               align="center"
-               verticalAlign="bottom"
-               width={700}
-               height={350}
-            />
+          
+          <Image
+            x={300}
+            y={300}
+            image={imageConvertor(require('../../images/yoda.jpg'))}
+          />
+
+          <Image
+            x={300}
+            y={0}
+            image={imageConvertor(yoda)}
+          />
+          
+
         </Layer>
         </Stage>
+
         </div>
     );
 }

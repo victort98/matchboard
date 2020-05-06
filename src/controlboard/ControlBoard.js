@@ -77,6 +77,7 @@ const ControlBoard = (props) => {
     $('.stop').classList.remove('stop-active')
   }
 
+
   useEffect(()=>{
     if (screen === 'statistics') {
       socket.emit('board', 'statistics')
@@ -85,7 +86,6 @@ const ControlBoard = (props) => {
     }
     console.log(screen);
   }, [screen])
-
 
   return (
     <div className="container-fluid">

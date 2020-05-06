@@ -22,7 +22,7 @@ const ScoreBoard = () => {
       <h1>Score Board</h1>         
         {(screen==='statistics')?(
             <Statistics/>
-         ):(<Scoreboard/>)
+         ):(<Statistics/>)
         }
        
       

@@ -94,12 +94,37 @@ const Statistics = () => {
             text="DJURGÅRDEN" 
           />
 
-          <Rect x={225} y={200} width={850} height={500}
+          <Rect x={225} y={200} width={850} height={465}
           shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'       
-            fill="#fff" align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}
+            fill="#e4e9f2" align="center" shadowBlur={10} cornerRadius = {[40, 40, 40, 40]}
           />
-          <Text x={500} y={250} fontSize={50} wrap="char"
+          <Rect x={225} y={220} width={850} height={65} fill="#137852" cornerRadius = {(10, 10, 10, 10)}/>
+          <Text x={500} y={230} fontSize={50} wrap="char" fill="white"
             text="STATISTICS"
+          />
+          <Text x={575} y={295} fontSize={40} wrap="char" fill="FFF"
+            text="SHOTS"
+          />
+          <Rect x={225} y={335} width={850} height={55} fill="#ced9eb" />
+          <Text x={450} y={345} fontSize={40} wrap="char" fill="FFF"
+            text="SHOTS ON TARGET"
+          />
+          <Text x={545} y={400} fontSize={40} wrap="char" fill="FFF"
+            text="CORNERS"
+          />
+          <Rect x={225} y={440} width={850} height={55} fill="#ced9eb" />
+          <Text x={575} y={450} fontSize={40} wrap="char" fill="FFF"
+            text="FOULS"
+          />
+          <Text x={540} y={505} fontSize={40} wrap="char" fill="FFF"
+            text="OFFSIDES"
+          />
+          <Rect x={225} y={550} width={850} height={55} fill="#ced9eb" />
+          <Text x={490} y={560} fontSize={40} wrap="char" fill="FFF"
+            text="YELLOW CARD"
+          />
+          <Text x={540} y={615} fontSize={40} wrap="char" fill="FFF"
+            text="RED CARD"
           />
         </Layer>
       </Stage>

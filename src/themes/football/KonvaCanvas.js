@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext }  from 'react';
-//import Konva from 'konva';
 import { Stage, Layer, Text, Ellipse, Rect, Wedge, Circle } from 'react-konva';
 import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
 
@@ -14,7 +13,7 @@ function KonvaCanvas(props) {
     const [homeScore, setHomeScore] = useState(0)
     const [awayScore, setAwayScore] = useState(0)
 
-    //console.log(props)
+    console.log(seconds)
 
     function toggle() {
       setIsActive(!isActive);
@@ -128,7 +127,7 @@ function KonvaCanvas(props) {
               x = {950}
               y = {790/3}
               radius = {200}
-              fill = '#006600'
+              fill = '#fff2cc'
               stroke = '#cc9900'
               strokeWidth = {20}
               shadowColor = 'black'
@@ -211,6 +210,20 @@ function KonvaCanvas(props) {
                
             />
             
+            <Text
+               x={800}
+               Y={220}
+               fontFamily = 'Algerian'
+               fontSize={120}
+               fill = 'red'
+               text= {'00:00'}
+                //homeScore
+               
+               shadowColor = 'black'
+              shadowBlur = {6}
+              shadowOffset = {{ x:-5, y:5 }}
+              shadowOpacity = {.8}
+            />
         </Layer>
         </Stage>
         </div>

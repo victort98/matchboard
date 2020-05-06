@@ -6,8 +6,7 @@ const Scoreboard = () => {
   const {scoreData} = useContext(ScoreBoardContext)
 
   return (
-    <div> 
-      <h1>Score Board</h1>         
+    <div>        
         <KonvaCanvas 
           timerActive={scoreData.timerActive} 
           home={scoreData.teamOne} 

@@ -102,29 +102,71 @@ const Statistics = () => {
           <Text x={500} y={230} fontSize={50} wrap="char" fill="white"
             text="STATISTICS"
           />
-          <Text x={575} y={295} fontSize={40} wrap="char" fill="FFF"
+          <Text x={575} y={295} fontSize={35} wrap="char"
             text="SHOTS"
           />
+          <Text x={250} y={295} fontSize={35} wrap="char"
+            text={team1Shots}
+          />
+          <Text x={1025} y={295} fontSize={35} wrap="char"
+            text={team2Shots}
+          />
           <Rect x={225} y={335} width={850} height={55} fill="#ced9eb" />
-          <Text x={450} y={345} fontSize={40} wrap="char" fill="FFF"
+          <Text x={470} y={348} fontSize={35} wrap="char"
             text="SHOTS ON TARGET"
           />
-          <Text x={545} y={400} fontSize={40} wrap="char" fill="FFF"
+          <Text x={250} y={350} fontSize={35} wrap="char"
+            text={team1OnTarget}
+          />
+          <Text x={1025} y={350} fontSize={35} wrap="char"
+            text={team2OnTarget}
+          />
+          <Text x={545} y={400} fontSize={35} wrap="char"
             text="CORNERS"
           />
+          <Text x={250} y={400} fontSize={35} wrap="char"
+            text={team1Corners}
+          />
+          <Text x={1025} y={400} fontSize={35} wrap="char"
+            text={team2Corners}
+          />
           <Rect x={225} y={440} width={850} height={55} fill="#ced9eb" />
-          <Text x={575} y={450} fontSize={40} wrap="char" fill="FFF"
+          <Text x={575} y={453} fontSize={35} wrap="char"
             text="FOULS"
           />
-          <Text x={540} y={505} fontSize={40} wrap="char" fill="FFF"
+          <Text x={250} y={452} fontSize={35} wrap="char"
+            text={team1Fouls}
+          />
+          <Text x={1025} y={452} fontSize={35} wrap="char"
+            text={team2Fouls}
+          />
+          <Text x={545} y={505} fontSize={35} wrap="char"
             text="OFFSIDES"
           />
+          <Text x={250} y={505} fontSize={35} wrap="char"
+            text={team1Offsides}
+          />
+          <Text x={1025} y={505} fontSize={35} wrap="char"
+            text={team2Offsides}
+          />
           <Rect x={225} y={550} width={850} height={55} fill="#ced9eb" />
-          <Text x={490} y={560} fontSize={40} wrap="char" fill="FFF"
+          <Text x={505} y={562} fontSize={35} wrap="char"
             text="YELLOW CARD"
           />
-          <Text x={540} y={615} fontSize={40} wrap="char" fill="FFF"
+          <Text x={250} y={560} fontSize={35} wrap="char"
+            text={team1Yellow}
+          />
+          <Text x={1025} y={560} fontSize={35} wrap="char"
+            text={team2Yellow}
+          />
+          <Text x={540} y={618} fontSize={35} wrap="char"
             text="RED CARD"
+          />
+          <Text x={250} y={615} fontSize={35} wrap="char"
+            text={team1Red}
+          />
+          <Text x={1025} y={615} fontSize={35} wrap="char"
+            text={team2Red}
           />
         </Layer>
       </Stage>

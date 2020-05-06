@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext} from 'react'
 import { Stage, Layer, Rect, Text, Circle} from 'react-konva';
 import {ScoreClockContext} from '../../contexts/ScoreClockContextProvider'
 import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
+import { useSpring, animated } from 'react-spring';
 import {socket} from '../../socket/socket';
 
 const Statistics = () => {
@@ -34,8 +35,14 @@ const Statistics = () => {
     }
   }, [timerActive, startTime, timeFormatted])
 
+  const fadeTransition = useSpring({
+    from: {opacity:0, marginLeft:-100, marginRight: 100},
+    to: {opacity: 1, marginLeft: 0, marginRight: 0}
+  })
+
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
+     <animated.div style={fadeTransition}>
       <Stage width={1280} height={720}>
         <Layer fill="#ddd">
           <Rect x={170} y={60} width={940} height={130}
@@ -63,7 +70,7 @@ const Statistics = () => {
           />
         </Layer>
       </Stage>
-
+      </animated.div>
     </div>
   )
 }

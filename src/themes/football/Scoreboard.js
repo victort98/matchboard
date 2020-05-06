@@ -7,7 +7,8 @@ const Scoreboard = () => {
 
   return (
     <div> 
-      <h1>Score Board</h1>         
+      <h1>Score Board</h1> 
+      <br></br>       
         <KonvaCanvas 
           timerActive={scoreData.timerActive} 
           home={scoreData.teamOne} 

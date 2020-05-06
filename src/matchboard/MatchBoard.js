@@ -19,7 +19,7 @@ const ScoreBoard = () => {
 
   return (
     <div className="container-fluid text-center"> 
-      <h1>Score Board</h1>         
+             
         {(screen==='statistics')?(
             <Statistics/>
          ):(<Scoreboard/>)

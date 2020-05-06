@@ -210,24 +210,7 @@ function KonvaCanvas(props) {
               shadowOpacity = {.8}
                
             />
-            {/* <Text
-               fontSize={60}
-               text={"Away: "+ awayScore} //awayScore
-               wrap="char"
-               align="center"
-               verticalAlign="middle"
-               width={700}
-               height={350}
-            />
-            <Text
-               fontSize={60}
-               text={"Time elapsed: "+ seconds}
-               wrap="char"
-               align="center"
-               verticalAlign="bottom"
-               width={700}
-               height={350}
-            /> */}
+            
         </Layer>
         </Stage>
         </div>

@@ -76,7 +76,7 @@ function KonvaCanvas(props) {
               y={790/1.5}
               radiusX={650}
               radiusY={550}
-              stroke='white'
+              stroke='#cc9900'
               strokeWidth={30}
               shadowColor = 'black'
               shadowBlur = {5}
@@ -129,24 +129,88 @@ function KonvaCanvas(props) {
               y = {790/3}
               radius = {200}
               fill = '#006600'
-              stroke = '#00cc00'
+              stroke = '#cc9900'
               strokeWidth = {20}
               shadowColor = 'black'
               shadowBlur = {5}
               shadowOffset = {{ x:-20, y:20 }}
               shadowOpacity = {.8}
             />
-            
-            {/* <Text
-               fontSize={60}
-               text={"Home: "+ homeScore} //homeScore
+      {/* team1 name       */}
+            <Text
+               x={400}
+               Y={130}
+               fontFamily = 'Algerian'
+               fontSize={80}
+               fill = 'red'
+               text={"Sweden"}
+                //homeScore
                wrap="char"
                align="center"
                verticalAlign="top"
-               width={700}
-               height={350}
+               shadowColor = 'black'
+              shadowBlur = {6}
+              shadowOffset = {{ x:-5, y:5 }}
+              shadowOpacity = {.8}
+               
             />
+
+      {/* Team 1 Score */}
             <Text
+               x={500}
+               Y={220}
+               fontFamily = 'Algerian'
+               fontSize={130}
+               fill = 'red'
+               text={homeScore}
+                //homeScore
+               wrap="char"
+               align="center"
+               verticalAlign="top"
+               shadowColor = 'black'
+              shadowBlur = {6}
+              shadowOffset = {{ x:-5, y:5 }}
+              shadowOpacity = {.8}
+               
+            />
+      {/* team2 name */}
+            <Text
+               x={1160}
+               Y={130}
+               fontFamily = 'Algerian'
+               fontSize={80}
+               fill = 'red'
+               text={"Denmark"}
+                //homeScore
+               wrap="char"
+               align="center"
+               verticalAlign="top"
+               shadowColor = 'black'
+              shadowBlur = {6}
+              shadowOffset = {{ x:-5, y:5 }}
+              shadowOpacity = {.8}
+               
+            />
+
+            {/* team2 score */}
+            <Text
+               x={1300}
+               Y={220}
+               fontFamily = 'Algerian'
+               fontSize={130}
+               fill = 'red'
+               text= {awayScore}
+                //homeScore
+               wrap="char"
+               align="center"
+               verticalAlign="top"
+               shadowColor = 'black'
+              shadowBlur = {6}
+              shadowOffset = {{ x:-5, y:5 }}
+              shadowOpacity = {.8}
+               
+            />
+            {/* <Text
                fontSize={60}
                text={"Away: "+ awayScore} //awayScore
                wrap="char"

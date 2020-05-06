@@ -15,18 +15,6 @@ const MatchBoard = () => {
   },[screen])
 
   return (
-<<<<<<< HEAD
-    <div className="container-fluid text-center"> 
-             
-        {(screen==='statistics')?(
-            <Statistics/>
-         ):(<Scoreboard/>)
-        }
-       
-      
-
-    </div>
-=======
     <>        
       {(screen==='statistics')?
         (<Statistics/>):
@@ -37,7 +25,6 @@ const MatchBoard = () => {
         (<Scoreboard/>)
       }
     </>
->>>>>>> ecbf5548812198ac99126b603daa1651e8db74a9
   )
 }
 

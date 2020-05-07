@@ -125,8 +125,8 @@ const Statistics = () => {
           />
 
           <Rect x={225} y={200} width={850} height={465}
-          shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'       
-            fill="#e4e9f2" align="center" shadowBlur={10} cornerRadius = {[40, 40, 40, 40]}
+          shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'
+            fill="#e4e9f2d9" align="center" shadowBlur={10} cornerRadius = {[30, 30, 30, 30]}
           />
           <Rect x={225} y={220} width={850} height={65} fill="#137852" cornerRadius = {(10, 10, 10, 10)}/>
           <Text x={500} y={230} fontSize={50} wrap="char" fill="white"
@@ -141,7 +141,7 @@ const Statistics = () => {
           <Text x={1025} y={295} fontSize={35} wrap="char"
             text={team2Shots}
           />
-          <Rect x={225} y={335} width={850} height={55} fill="#ced9eb" />
+          <Rect x={225} y={335} width={850} height={55} fill="#ced9ebe0" />
           <Text x={470} y={348} fontSize={35} wrap="char"
             text="SHOTS ON TARGET"
           />
@@ -160,7 +160,7 @@ const Statistics = () => {
           <Text x={1025} y={400} fontSize={35} wrap="char"
             text={team2Corners}
           />
-          <Rect x={225} y={440} width={850} height={55} fill="#ced9eb" />
+          <Rect x={225} y={440} width={850} height={55} fill="#ced9ebe0" />
           <Text x={575} y={453} fontSize={35} wrap="char"
             text="FOULS"
           />
@@ -179,7 +179,7 @@ const Statistics = () => {
           <Text x={1025} y={505} fontSize={35} wrap="char"
             text={team2Offsides}
           />
-          <Rect x={225} y={550} width={850} height={55} fill="#ced9eb" />
+          <Rect x={225} y={550} width={850} height={55} fill="#ced9ebe0" />
           <Text x={505} y={562} fontSize={35} wrap="char"
             text="YELLOW CARD"
           />

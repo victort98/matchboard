@@ -79,17 +79,28 @@ const Statistics = () => {
             className='statistics-clock'
             text={time}
           />
-          <Text x={210} y={85} fontSize={100} wrap="char"
+          <Text x={500} y={300} fontSize={150} wrap="char"
             text={teamOneScore}
           />
-          <Text x={290} y={140} fontSize={30} wrap="char"
+          <Text x={290} y={100}  fontSize={60} wrap="char"
             text="Sweden"
+            shadowColor = 'black'
+            shadowBlur = {6}
+            shadowOffset = {{ x:-5, y:5 }}
+            shadowOpacity = {.8}
           />
-          <Text x={1020} y={85} fontSize={100} wrap="char"
+          <Text x={630} y={285} fontSize={150} wrap="char"
+            text={':'}
+          />
+          <Text x={700} y={300} fontSize={150} wrap="char"
             text={teamTwoScore}
           />
-          <Text x={790} y={140} fontSize={30} wrap="char"
+          <Text x={790} y={100} fontSize={60} wrap="char"
             text="Germany" 
+            shadowColor = 'black'
+            shadowBlur = {6}
+            shadowOffset = {{ x:-5, y:5 }}
+            shadowOpacity = {.8}
           />
         </Layer>
       </Stage>

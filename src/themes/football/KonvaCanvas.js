@@ -1,233 +1,101 @@
-import React, { useState, useEffect, useContext }  from 'react';
-import { Stage, Layer, Text, Ellipse, Rect, Wedge, Circle } from 'react-konva';
+import React, {useEffect, useState, useContext} from 'react'
+import { Stage, Layer, Rect, Text, Circle, Image} from 'react-konva';
+import {ScoreClockContext} from '../../contexts/ScoreClockContextProvider'
 import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
+import { useSpring, animated } from 'react-spring';
+import {socket} from '../../socket/socket';
+import useImage from 'use-image';
+import FieldImage from '../../images/football.png'
 
+const Statistics = () => {
+  const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
+  const {scoreData} = useContext(ScoreBoardContext)
 
+  const [time, setTime] = useState(timeFormatted())
 
-function KonvaCanvas(props) {
+  const [teamOneScore, setTeamOneScore] = useState(0)
+  const [teamTwoScore, setTeamTwoScore] = useState(0)
+  const [timerActive, setTimerActive] = useState()
 
-    const {scoreData} = useContext(ScoreBoardContext)
+  useEffect(()=>{
+    setTeamOneScore(scoreData.teamOne)
+    setTeamTwoScore(scoreData.teamTwo)
+  }, [scoreData])
 
-    const [seconds, setSeconds] = useState(0);
-    const [isActive, setIsActive] = useState(false);
-    const [homeScore, setHomeScore] = useState(0)
-    const [awayScore, setAwayScore] = useState(0)
+  useEffect(()=>{
+    socket.on('timeInfo', (data)=>{
+      setTimerActive(data)
+    })   
+  },[])
 
-    console.log(seconds)
-
-    function toggle() {
-      setIsActive(!isActive);
+  useEffect(()=>{
+    if (timerActive === true) {
+      startTime()
+      setInterval(() => {
+        setTime(timeFormatted())
+      }, 1000);   
     }
+  }, [timerActive, startTime, timeFormatted])
 
-    function reset() {
-      setSeconds(0);
-      setIsActive(false);
-    }
+  const FrontGroundImage = () => {
+    const [image] = useImage(FieldImage);   
+    return (<Image image={image} x={235} y={33} width={825} height={555} opacity={0.6}/>);
+  };
 
-    useEffect(() => {
+  const fadeTransition = useSpring({
+    from: {opacity:0, marginLeft:-100, marginRight: 100},
+    to: {opacity: 1, marginLeft: 0, marginRight: 0}
+  })
 
-        console.log(props)
-
-        if(props.timerActive) {
-            setIsActive(true);
-        }
-
-        if(!props.timerActive) {
-            setIsActive(false);
-        }
-
-        setHomeScore(props.home)
-        setAwayScore(props.away)
-
-        console.log("props updated to: " + props.timerActive)
-
-    },[props])
-
-    useEffect(() => {
-      let interval = null;
-      if (isActive) {
-        interval = setInterval(() => {
-          setSeconds(seconds => seconds + 1);
-        }, 1000);
-      } else if (!isActive && seconds !== 0) {
-        clearInterval(interval);
-      }
-      return () => clearInterval(interval);
-    }, [isActive, seconds]);
-
-    return (
-        <div>
-        <Stage width={window.innerWidth} height={window.innerHeight}>
-        <Layer>
+  return (
+    <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1}}>
+    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:620}}>
+      <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" stroke-width="100px" stroke-linejoin="miter" stroke-linecap="butt" 
+        stroke-miterlimit="4" shape-rendering="auto" id="Path_4" 
+        d="M 418.5040283203125 -2.817545237121521e-07 
+          L 1465.7373046875 -2.817545237121521e-07 
+          C 1696.870727539063 -2.817545237121521e-07 1884.241333007813 192.5970764160156 1884.241333007813 430.1777038574219 
+          L 1884.241333007813 650.2685546875 
+          C 1884.241333007813 887.84912109375 1696.870727539063 1080.4462890625 1465.7373046875 1080.4462890625 
+          L 418.5040283203125 1080.4462890625 
+          C 187.3706207275391 1080.4462890625 7.441341836056381e-07 887.84912109375 7.441341836056381e-07 650.2685546875 
+          L 7.441341836056381e-07 430.1777038574219 
+          C 7.441341836056381e-07 192.5970764160156 187.3706207275391 -2.817545237121521e-07 418.5040283203125 -2.817545237121521e-07 
+          Z">
+      </path>
+    </svg>
+     <animated.div style={fadeTransition}>
+      <Stage width={1280} height={720}>
+        <Layer fill="#ddd">
+         <FrontGroundImage/>
+          <Rect x={170} y={60} width={940} height={130}
+          shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'
         
-         {/*outer circle */} 
-          <Ellipse 
-              x= {950}
-              y={790/1.5}
-              radiusX={900}
-              radiusY={750}
-              stroke='#003300'
-              strokeWidth={150}
-            />
-          {/*inner circle */}  
-          <Ellipse 
-              x= {1280/1.35}
-              y={790/1.5}
-              radiusX={650}
-              radiusY={550}
-              stroke='#cc9900'
-              strokeWidth={30}
-              shadowColor = 'black'
-              shadowBlur = {5}
-              shadowOffset = {{ x:-20, y:20 }}
-              shadowOpacity = {.8}
-            />
-
-            {/* Mid Rect */}
-            <Rect 
-              x={400}
-              y={790/8}
-              width={1100}
-              height={253}
-              fill='white'
-              strokeWidth={4}
-              shadowColor = 'black'
-              shadowBlur = {5}
-              shadowOffset = {{ x:-7, y:20 }}
-              shadowOpacity = {.8}
-            
-            />
-            {/*oval start */}
-            <Wedge
-            x = {400}
-            y = {790/3.51}
-            radius = {126.5}
-            angle = {180}
-            fill = 'white'
-            rotation = {90}
-            shadowColor = 'black'
-            shadowBlur = {5}
-            shadowOffset = {{ x:-5, y:20 }}
-            shadowOpacity = {.8}
-            
-            />
-
-            {/*oval end */}
-            <Wedge
-            x = {1500}
-            y = {790/3.51}
-            radius = {126}
-            angle = {180}
-            fill = 'white'
-            rotation = {-90}
-            />
-
-            {/* clock circle*/}
-            <Circle 
-              x = {950}
-              y = {790/3}
-              radius = {200}
-              fill = '#fff2cc'
-              stroke = '#cc9900'
-              strokeWidth = {20}
-              shadowColor = 'black'
-              shadowBlur = {5}
-              shadowOffset = {{ x:-20, y:20 }}
-              shadowOpacity = {.8}
-            />
-      {/* team1 name       */}
-            <Text
-               x={400}
-               Y={130}
-               fontFamily = 'Algerian'
-               fontSize={80}
-               fill = 'red'
-               text={"Sweden"}
-                //homeScore
-               wrap="char"
-               align="center"
-               verticalAlign="top"
-               shadowColor = 'black'
-              shadowBlur = {6}
-              shadowOffset = {{ x:-5, y:5 }}
-              shadowOpacity = {.8}
-               
-            />
-
-      {/* Team 1 Score */}
-            <Text
-               x={500}
-               Y={220}
-               fontFamily = 'Algerian'
-               fontSize={130}
-               fill = 'red'
-               text={homeScore}
-                //homeScore
-               wrap="char"
-               align="center"
-               verticalAlign="top"
-               shadowColor = 'black'
-              shadowBlur = {6}
-              shadowOffset = {{ x:-5, y:5 }}
-              shadowOpacity = {.8}
-               
-            />
-      {/* team2 name */}
-            <Text
-               x={1160}
-               Y={130}
-               fontFamily = 'Algerian'
-               fontSize={80}
-               fill = 'red'
-               text={"Denmark"}
-                //homeScore
-               wrap="char"
-               align="center"
-               verticalAlign="top"
-               shadowColor = 'black'
-              shadowBlur = {6}
-              shadowOffset = {{ x:-5, y:5 }}
-              shadowOpacity = {.8}
-               
-            />
-
-            {/* team2 score */}
-            <Text
-               x={1300}
-               Y={220}
-               fontFamily = 'Algerian'
-               fontSize={130}
-               fill = 'red'
-               text= {awayScore}
-                //homeScore
-               wrap="char"
-               align="center"
-               verticalAlign="top"
-               shadowColor = 'black'
-              shadowBlur = {6}
-              shadowOffset = {{ x:-5, y:5 }}
-              shadowOpacity = {.8}
-               
-            />
-            
-            <Text
-               x={800}
-               Y={220}
-               fontFamily = 'Algerian'
-               fontSize={120}
-               fill = 'red'
-               text= {'00:00'}
-                //homeScore
-               
-               shadowColor = 'black'
-              shadowBlur = {6}
-              shadowOffset = {{ x:-5, y:5 }}
-              shadowOpacity = {.8}
-            />
+            fill="#fff" align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}
+          />
+          <Circle x={640} y={125} radius={65.5} fill="#eee" shadowBlur={20} shadowOpacity= '0.9'/>
+          <Circle x={640} y={125} radius={65} fill="#454648" />
+          <Text x={590} y={110} fontSize={40} wrap="char" fill="#fff"
+            className='statistics-clock'
+            text={time}
+          />
+          <Text x={210} y={85} fontSize={100} wrap="char"
+            text={teamOneScore}
+          />
+          <Text x={290} y={140} fontSize={30} wrap="char"
+            text="Sweden"
+          />
+          <Text x={1020} y={85} fontSize={100} wrap="char"
+            text={teamTwoScore}
+          />
+          <Text x={790} y={140} fontSize={30} wrap="char"
+            text="Germany" 
+          />
         </Layer>
-        </Stage>
-        </div>
-    );
+      </Stage>
+      </animated.div>
+    </div>
+  )
 }
 
-export default KonvaCanvas;
+export default Statistics

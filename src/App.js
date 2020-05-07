@@ -6,6 +6,7 @@ import ControlBoardContextProvider from './contexts/ControlBoardContextProvider'
 import ScoreBoardContextProvider from './contexts/ScoreBoardContextProvider'
 import ScoreClockContextProvider from './contexts/ScoreClockContextProvider'
 import ClockContextProvider from './contexts/ClockContextProvider'
+import Playerslist from './themes/football/Playerslist'
 
 const App = () => {
   return (
@@ -16,7 +17,8 @@ const App = () => {
             <ClockContextProvider>
               <Router>
                 <Route exact path='/controlboard' component={ControlBoard}/>        
-                <Route exact path='/matchboard' component={MatchBoard}/>              
+                <Route exact path='/matchboard' component={MatchBoard}/>            
+                <Route exact path='/playerslist' component={Playerslist}/>            
               </Router>
             </ClockContextProvider>
           </ScoreClockContextProvider> 

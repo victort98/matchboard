@@ -1,4 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
+import '../themes/football/football.css'
 import Clock from './Clock'
 import {ClockContext} from '../contexts/ClockContextProvider'
 import {socket, statistics} from '../socket/socket';
@@ -83,8 +84,9 @@ const ControlBoard = (props) => {
       socket.emit('board', 'statistics')
     } else if(screen === 'scoreboard'){
       socket.emit('board', 'scoreboard')
+    } else if (screen === 'playerslist') {
+      socket.emit('board', 'playerslist')
     }
-    console.log(screen);
   }, [screen])
 
   return (
@@ -197,6 +199,7 @@ const ControlBoard = (props) => {
             <select className="screen inputStyling" onChange={e=>setScreen(e.target.value)}>
               <option value="scoreboard">SCORE BOARD</option>
               <option value="statistics">STATISTICS</option>
+              <option value="playerslist">PLAYERS LIST</option>
               <option value="pointtable">POINT TABLE</option>
               <option value="leaguetable">LEAGUE TABLE</option>
             </select>

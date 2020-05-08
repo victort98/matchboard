@@ -15,7 +15,16 @@ const MatchBoard = () => {
   },[screen])
 
   return (
-<Statistics></Statistics>
+    <>        
+      {(screen==='statistics')?
+        (<Statistics/>):
+       (screen==='scoreboard')?
+        (<Scoreboard/>):
+       (screen==='playerslist')?
+        (<Playerslist/>):
+        (<Scoreboard/>)
+      }
+    </>
   )
 }
 

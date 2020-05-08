@@ -3,6 +3,7 @@ import '../themes/football/football.css'
 import Clock from './Clock'
 import {ClockContext} from '../contexts/ClockContextProvider'
 import {socket, statistics} from '../socket/socket';
+import MasterClock from './MasterClock'
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
@@ -113,7 +114,8 @@ const ControlBoard = (props) => {
         </div>
 
         <div className="time">
-        <Clock />
+        {/* <MasterClock/> */}
+        <Clock/>
           <br />
           <div className="overtime">
             <input className="middleInputStyling" type="number" min="0" placeholder="0"/>

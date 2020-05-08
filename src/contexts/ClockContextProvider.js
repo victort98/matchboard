@@ -45,14 +45,9 @@ const ClockContextProvider = (props) => {
     timePaused = Date.now();
   }
 
-  let sleep = (ms) => {
-    return new Promise(res => setTimeout(res, ms));
-  }
-
   let showClock = () => {
     startClock()
     $('.clock').innerHTML = timeFormatted();
-    sleep(500);
   }
 
   let clockStarted;

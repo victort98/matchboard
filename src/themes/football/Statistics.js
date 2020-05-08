@@ -52,7 +52,7 @@ const Statistics = () => {
     setTeam2Shots(scoreData.team2Shots)
     setTeam2Fouls(scoreData.team2Fouls)
     setTeam2OnTarget(scoreData.team2OnTarget)
-  }, [scoreData])
+  }, [scoreData, team1OnTarget])
 
   useEffect(()=>{
     socket.on('timeInfo', (data)=>{
@@ -101,8 +101,7 @@ const Statistics = () => {
         <Layer fill="#ddd">
          <FrontGroundImage/>
           <Rect x={170} y={60} width={940} height={130}
-          shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'
-        
+            opacity={0.89} shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        
             fill="#fff" align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}
           />
           <Circle x={640} y={125} radius={65.5} fill="#eee" shadowBlur={20} shadowOpacity= '0.9'/>

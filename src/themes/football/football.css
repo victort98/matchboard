@@ -1,4 +1,11 @@
 
+*{ 
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 100;
+  font-size: 14px;
+  color: rgb(122, 122, 122);
+}
+
 ::-webkit-scrollbar {
     width: 7px;
 }
@@ -33,15 +40,9 @@
 
 .football_field {
   margin: 0 auto;
-	/* position: relative; */
 	overflow: visible;
 	width: 90vw;
-  /* height: 57vh; */
   max-height: 400px;
-  /* left: 9.9%; */
-  /* left: 670px; */
-  /* top: 4.5%; */
-  /* top: 300px; */
   z-index: -2;
   opacity: 0.5;
 }

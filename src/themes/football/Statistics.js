@@ -79,6 +79,62 @@ const Statistics = () => {
     to: {opacity: 1, marginLeft: 0, marginRight: 0}
   })
 
+  const ListBar= () =>{
+    let bars = [];
+    for (let i=0; i<3; i++) {
+      bars[i] = (
+        <Rect key={i} x={225} y={325+(i*75)} width={850} height={38} fill="#ced9ebe0"
+        />
+      );      
+    }   
+    return bars
+  }
+
+  const statisticsList = ['SHOTS', 'SHOTS ON TARGET', 'CORNERS', 'FOULS COMMITTED', 'OFFSIDES', 'YELLOW CARD', 'RED CARD']
+
+  const statisticsTeamOne = [team1Shots, team1OnTarget, team1Corners, team1Fouls, team1Offsides, team1Yellow, team1Red]
+
+  const statisticsTeamTwo = [team2Shots, team2OnTarget, team2Corners, team2Fouls, team2Offsides, team2Yellow, team2Red]
+
+  const matchInformation = (xCoord, yCoord, lineDist, textArray) =>{
+    let list = [];
+    for (let i=0; i<7; i++) {
+      list[i] = (
+        <Text key={i} x={xCoord} y={yCoord+(i*lineDist)} 
+          fontSize={25} wrap="char"
+          text={textArray[i]}
+        />
+      );
+    }
+    return list
+  }
+
+  const matchInformationTeamOne = (xCoord, yCoord, lineDist, textArray) =>{
+    let list = [];
+    for (let i=0; i<7; i++) {
+      list[i] = (
+        <Text key={i} x={xCoord} y={yCoord+(i*lineDist)} 
+          fontSize={25} wrap="char"
+          text={textArray[i]}
+        />
+      );
+    }
+    return list
+  }
+
+  const matchInformationTeamTwo = (xCoord, yCoord, lineDist, textArray) =>{
+    let list = [];
+    for (let i=0; i<7; i++) {
+      list[i] = (
+        <Text key={i} x={xCoord} y={yCoord+(i*lineDist)} 
+          fontSize={25} wrap="char"
+          text={textArray[i]}
+        />
+      );
+    }
+    return list
+  }
+
   return (
     <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1}}>
     <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:620}}>
@@ -122,81 +178,19 @@ const Statistics = () => {
           <Text x={790} y={140} fontSize={30} wrap="char"
             text="DJURGÅRDEN" 
           />
-
-          <Rect x={225} y={200} width={850} height={465}
+          
+          <Rect x={225} y={200} width={850} height={355}
           shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'
             fill="#e4e9f2d9" align="center" shadowBlur={10} cornerRadius = {[30, 30, 30, 30]}
           />
           <Rect x={225} y={220} width={850} height={65} fill="#137852" cornerRadius = {(10, 10, 10, 10)}/>
+          <ListBar />
           <Text x={500} y={230} fontSize={50} wrap="char" fill="white"
             text="STATISTICS"
           />
-          <Text x={575} y={295} fontSize={35} wrap="char"
-            text="SHOTS"
-          />
-          <Text x={250} y={295} fontSize={35} wrap="char"
-            text={team1Shots}
-          />
-          <Text x={1025} y={295} fontSize={35} wrap="char"
-            text={team2Shots}
-          />
-          <Rect x={225} y={335} width={850} height={55} fill="#ced9ebe0" />
-          <Text x={470} y={348} fontSize={35} wrap="char"
-            text="SHOTS ON TARGET"
-          />
-          <Text x={250} y={350} fontSize={35} wrap="char"
-            text={team1OnTarget}
-          />
-          <Text x={1025} y={350} fontSize={35} wrap="char"
-            text={team2OnTarget}
-          />
-          <Text x={545} y={400} fontSize={35} wrap="char"
-            text="CORNERS"
-          />
-          <Text x={250} y={400} fontSize={35} wrap="char"
-            text={team1Corners}
-          />
-          <Text x={1025} y={400} fontSize={35} wrap="char"
-            text={team2Corners}
-          />
-          <Rect x={225} y={440} width={850} height={55} fill="#ced9ebe0" />
-          <Text x={575} y={453} fontSize={35} wrap="char"
-            text="FOULS"
-          />
-          <Text x={250} y={452} fontSize={35} wrap="char"
-            text={team1Fouls}
-          />
-          <Text x={1025} y={452} fontSize={35} wrap="char"
-            text={team2Fouls}
-          />
-          <Text x={545} y={505} fontSize={35} wrap="char"
-            text="OFFSIDES"
-          />
-          <Text x={250} y={505} fontSize={35} wrap="char"
-            text={team1Offsides}
-          />
-          <Text x={1025} y={505} fontSize={35} wrap="char"
-            text={team2Offsides}
-          />
-          <Rect x={225} y={550} width={850} height={55} fill="#ced9ebe0" />
-          <Text x={505} y={562} fontSize={35} wrap="char"
-            text="YELLOW CARD"
-          />
-          <Text x={250} y={560} fontSize={35} wrap="char"
-            text={team1Yellow}
-          />
-          <Text x={1025} y={560} fontSize={35} wrap="char"
-            text={team2Yellow}
-          />
-          <Text x={540} y={618} fontSize={35} wrap="char"
-            text="RED CARD"
-          />
-          <Text x={250} y={615} fontSize={35} wrap="char"
-            text={team1Red}
-          />
-          <Text x={1025} y={615} fontSize={35} wrap="char"
-            text={team2Red}
-          />
+          {matchInformation(600, 295, 38, statisticsList)}
+          {matchInformationTeamOne(240, 295, 38, statisticsTeamOne)}
+          {matchInformationTeamTwo(1040, 295, 38, statisticsTeamTwo)}
         </Layer>
       </Stage>
       </animated.div>

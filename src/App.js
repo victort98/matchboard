@@ -10,7 +10,7 @@ import Playerslist from './themes/football/Playerslist'
 import Statistics from './themes/football/Statistics'
 import MasterClock from './controlboard/MasterClock'
 import Basketball from './themes/basketball/Basketball.js'
-import Hokey from './themes/hokey/Hokey.js'
+import Hockey from './themes/hockey/Hockey.js'
 
 const App = () => {
   return (
@@ -26,7 +26,7 @@ const App = () => {
                 <Route exact path='/statistics' component={Statistics}/>            
                 <Route exact path='/masterclock' component={MasterClock}/>            
                 <Route exact path='/basketball' component={Basketball}/>            
-                <Route exact path='/hokey' component={Hokey}/>            
+                <Route exact path='/hockey' component={Hockey}/>            
               </Router>
             </ClockContextProvider>
           </ScoreClockContextProvider> 

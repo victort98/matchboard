@@ -71,7 +71,7 @@ const Statistics = () => {
 
   const FrontGroundImage = () => {
     const [image] = useImage(FieldImage);   
-    return (<Image image={image} x={235} y={33} width={825} height={555} opacity={0.6}/>);
+    return (<Image image={image} x={185} y={40} width={925} height={640} opacity={0.6}/>);
   };
 
   const fadeTransition = useSpring({
@@ -124,7 +124,7 @@ const Statistics = () => {
 
   return (
     <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1}}>
-    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:620}}>
+    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:720}}>
       <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" strokeWidth="100px" strokeLinejoin="miter" strokeLinecap="butt" 
         strokeMiterlimit="4" shapeRendering="auto" id="Path_4" 
         d="M 418.5040283203125 -2.817545237121521e-07 
@@ -139,10 +139,11 @@ const Statistics = () => {
           Z">
       </path>
     </svg>
+    <img src={FieldImage} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '40px'}} width={925} height={640}/>
      <animated.div style={fadeTransition}>
-      <Stage width={1280} height={620}>
+      <Stage y={50} width={1280} height={720}>
         <Layer fill="#ddd">
-         <FrontGroundImage/>
+         {/* <FrontGroundImage/> */}
           <Rect x={170} y={60} width={940} height={130}
             opacity={0.89} shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        
             fill="#fff" align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}

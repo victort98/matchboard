@@ -11,10 +11,9 @@ const ScoreBoardContextProvider = (props) => {
   })
   
   useEffect(()=>{
-    socket.on('message', (data)=>{
+    socket.on('scoreInfo', (data)=>{
       setScoreData(data)
       setTeamStats(data)
-      console.log(data);    
     })   
   },[])
 

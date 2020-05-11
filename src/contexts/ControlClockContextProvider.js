@@ -1,14 +1,14 @@
 import React, {createContext} from 'react'
 import {socket} from '../socket/socket';
 
-export const ClockContext = createContext()
+export const ControlClockContext = createContext()
 
-const ClockContextProvider = (props) => {
+const ControlClockContextProvider = (props) => {
   const $ = x => document.querySelector(x);
   let timePaused = 0;
   let timeStarted = 0;
   let timePausedSum = 0;
-  let timeTotal = 90 * 60 * 1000;
+  let timeTotal = 0;
 
   let timeLeft = () => {
     let timeElapsed = timeStarted ?
@@ -16,7 +16,7 @@ const ClockContextProvider = (props) => {
       timeElapsed -= timePausedSum;
       timeElapsed -= timePaused ?
       Date.now() - timePaused : 0;
-    return timeTotal - timeElapsed;
+    return timeTotal + timeElapsed;
   }
 
   let timeFormatted = () => {
@@ -70,7 +70,7 @@ const ClockContextProvider = (props) => {
     timePaused = 0;
     timePausedSum = 0;
     stopTime()
-    $('.clock').innerHTML = '90:00';
+    $('.clock').innerHTML = '00:00';
   }
 
   const values={
@@ -79,10 +79,10 @@ const ClockContextProvider = (props) => {
     resetTime
   }
   return (
-    <ClockContext.Provider value={values}>
+    <ControlClockContext.Provider value={values}>
       {props.children}
-    </ClockContext.Provider>
+    </ControlClockContext.Provider>
   )
 }
 
-export default ClockContextProvider
+export default ControlClockContextProvider

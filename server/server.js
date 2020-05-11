@@ -11,7 +11,7 @@ io.on('connection', (socket)=> {
   console.log('Connected...', socket.id);
  
   socket.on('scoreInfo', (data)=>{
-    io.emit('message', data)
+    io.emit('scoreInfo', data)
   })
 
   socket.on('timeInfo', (data)=>{

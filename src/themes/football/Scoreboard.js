@@ -15,6 +15,7 @@ const Scoreboard = () => {
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
+
   const [timerActive, setTimerActive] = useState()
 
   useEffect(()=>{
@@ -29,13 +30,19 @@ const Scoreboard = () => {
   },[])
 
   useEffect(()=>{
-    if (timerActive === true) {
+    let timeStarted;
+    if (timerActive === 'start') {
       startTime()
-      setInterval(() => {
+      timeStarted = setInterval(() => {
         setTime(timeFormatted())
-      }, 1000);   
+      }, 300);   
+    } else if(timerActive === 'stop'){
+      stopTime()
+      clearInterval(timeStarted)
+    } else if(timerActive === 'reset'){
+      resetTime()
     }
-  }, [timerActive, startTime, timeFormatted])
+  }, [timerActive])
 
   const FrontGroundImage = () => {
     const [image] = useImage(FieldImage);   
@@ -49,7 +56,7 @@ const Scoreboard = () => {
 
   return (
     <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1}}>
-    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:620}}>
+    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:720}}>
       <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" stroke-width="100px" stroke-linejoin="miter" stroke-linecap="butt" 
         stroke-miterlimit="4" shape-rendering="auto" id="Path_4" 
         d="M 418.5040283203125 -2.817545237121521e-07 
@@ -62,12 +69,13 @@ const Scoreboard = () => {
           L 7.441341836056381e-07 430.1777038574219 
           C 7.441341836056381e-07 192.5970764160156 187.3706207275391 -2.817545237121521e-07 418.5040283203125 -2.817545237121521e-07 
           Z">
-      </path>
+      </path>      
     </svg>
+    <img src={FieldImage} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '40px'}} width={925} height={640}/>
      <animated.div style={fadeTransition}>
-      <Stage width={1280} height={620}>
+      <Stage y={50} width={1280} height={720}>
         <Layer fill="#ddd">
-         <FrontGroundImage/>
+         {/* <FrontGroundImage/> */}
           <Rect x={170} y={60} width={940} height={130}
             opacity={0.89} shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        
             fill="#fff" align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}

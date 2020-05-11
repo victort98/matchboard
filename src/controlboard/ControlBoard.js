@@ -1,13 +1,13 @@
 import React, {useContext, useState, useEffect} from 'react'
 import '../themes/football/football.css'
-import Clock from './Clock'
-import {ClockContext} from '../contexts/ClockContextProvider'
-import {socket, statistics} from '../socket/socket';
+import ControlClock from './ControlClock'
+import {ControlClockContext} from '../contexts/ControlClockContextProvider'
+import {socket} from '../socket/socket';
 import MasterClock from './MasterClock'
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
-  const {startTime, stopTime, resetTime} = useContext(ClockContext)
+  const {startTime, stopTime, resetTime} = useContext(ControlClockContext)
   const [screen, setScreen] = useState()
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
@@ -33,7 +33,7 @@ const ControlBoard = (props) => {
   const [timerActive, setTimerActive] = useState(false)
 
   const sendData = () => {
-    let info = {
+    let scoreInfo = {
       teamOne: teamOneScore,
       teamTwo: teamTwoScore,
       //TEAM 1
@@ -52,31 +52,31 @@ const ControlBoard = (props) => {
       team2Shots: team2Shots,
       team2Fouls: team2Fouls,
       team2OnTarget: team2OnTarget,
-      //timeLeft: timeLeft(),
-      timerActive: timerActive
     }  
-    socket.emit('scoreInfo', info)
+    socket.emit('scoreInfo', scoreInfo)
   }
 
   const startClock = () => {
-    socket.emit('timeInfo', timerActive)
-    startTime()
-    setTimerActive(true)
+    socket.emit('timeInfo', 'start')
+    // setTimerActive(true)
+    startTime()    
     $('.start').classList.add('start-active')
     $('.stop').classList.remove('stop-active')
   }
 
   const stopClock = () => {
     stopTime()
-    setTimerActive(false)
+    // setTimerActive(false)
     $('.start').classList.remove('start-active')
     $('.stop').classList.add('stop-active')
+    socket.emit('timeInfo', 'stop')
   }
 
   const resetClock = () => {
     resetTime()
     $('.start').classList.remove('start-active')
     $('.stop').classList.remove('stop-active')
+    socket.emit('timeInfo', 'reset')
   }
 
 
@@ -115,7 +115,7 @@ const ControlBoard = (props) => {
 
         <div className="time">
         {/* <MasterClock/> */}
-        <Clock/>
+        <ControlClock/>
           <br />
           <div className="overtime">
             <input className="middleInputStyling" type="number" min="0" placeholder="0"/>
@@ -267,9 +267,9 @@ const ControlBoard = (props) => {
        </div>
 
        <div className="container">
-        <svg class="background" viewBox="0 0 1874 1080.446">
-          <path fill="rgba(68,149,255,0.651)" stroke="rgba(0,0,0,0.329)" stroke-width="100px" 
-            stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" 
+        <svg className="background" viewBox="0 0 1874 1080.446">
+          <path fill="rgba(68,149,255,0.651)" stroke="rgba(0,0,0,0.329)" strokeWidth="100px" 
+            strokeLinejoin="miter" strokeLinecap="butt" strokeMiterlimit="4" shapeRendering="auto" 
             id="Path_4" 
             d="M 416.2294006347656 -2.817545237121521e-07 L 1457.770751953125 -2.817545237121521e-07 C 
               1687.64794921875 -2.817545237121521e-07 1874.000122070313 192.5970764160156 1874.000122070313 
@@ -281,9 +281,9 @@ const ControlBoard = (props) => {
               416.2294006347656 -2.817545237121521e-07 Z">
           </path>
 
-          <svg class="football_field">
-          <rect fill="rgba(243,243,243,1)" stroke="rgba(254,254,254,1)" stroke-width="10px" stroke-linejoin="miter" 
-            stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="football_field" rx="390.25" ry="390.25" 
+          <svg className="football_field">
+          <rect fill="rgba(243,243,243,1)" stroke="rgba(254,254,254,1)" strokeWidth="10px" strokeLinejoin="miter" 
+            strokeLinecap="butt" strokeMiterlimit="4" shapeRendering="auto" id="football_field" rx="390.25" ry="390.25" 
             x="11%" y="5.5%" width="1460px" height="960px">
             {/* width="79%" height="88vh" */}
           </rect>

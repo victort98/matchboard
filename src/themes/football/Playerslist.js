@@ -8,7 +8,7 @@ const Playerslist = () => {
 
   const FrontGroundImage = () => {
     const [image] = useImage(FieldImage);   
-    return (<Image image={image} x={235} y={33} width={825} height={555} opacity={0.6}/>);
+    return (<Image image={image} x={185} y={40} width={925} height={640} opacity={0.6}/>);
   };
 
   const fadeTransition = useSpring({
@@ -19,10 +19,11 @@ const Playerslist = () => {
   const ListBar= () =>{
     let bars = [];
     for (let i=0; i<11; i++) {
+      let color; i%2===0?color='#fff':color='rgba(212, 241, 255, 0.99)'
       bars[i] = (
         <Rect key={i} x={170} y={115+(i*39)} width={940} height={35}
               opacity={0.9} shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= {0.9}        
-          fill={'#fff'} align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}
+          fill={color} align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}
         />
       );      
     }   
@@ -50,9 +51,9 @@ const Playerslist = () => {
 
   return (
     <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1}}>
-    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:620}}>
-      <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" stroke-width="100px" stroke-linejoin="miter" stroke-linecap="butt" 
-        stroke-miterlimit="4" shape-rendering="auto" id="Path_4" 
+    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:720}}>
+      <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" strokeWidth="100px" strokeLinejoin="miter" strokeLinecap="butt" 
+        strokeMiterlimit="4" shapeRendering="auto" id="Path_4" 
         d="M 418.5040283203125 -2.817545237121521e-07 
           L 1465.7373046875 -2.817545237121521e-07 
           C 1696.870727539063 -2.817545237121521e-07 1884.241333007813 192.5970764160156 1884.241333007813 430.1777038574219 
@@ -65,10 +66,11 @@ const Playerslist = () => {
           Z">
       </path>
     </svg>
+    <img src={FieldImage} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '40px'}} width={925} height={640}/>
      <animated.div style={fadeTransition} >
-      <Stage width={1280} height={620} style={{zIndex:10}}>        
+      <Stage y={50} width={1280} height={720} style={{zIndex:10, alignSelf:'center'}}>        
         <Layer style={{zIndex:10}}>  
-          <FrontGroundImage/>
+          {/* <FrontGroundImage/> */}
           <Rect x={170} y={60} width={940} height={50} opacity={0.9} stoke={'white'} strokeWidth={4}  
             shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= {0.5}  
             fill="#3498DB" align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}

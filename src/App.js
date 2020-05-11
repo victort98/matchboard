@@ -5,7 +5,7 @@ import ControlBoard from './controlboard/ControlBoard.js'
 import ControlBoardContextProvider from './contexts/ControlBoardContextProvider'
 import ScoreBoardContextProvider from './contexts/ScoreBoardContextProvider'
 import ScoreClockContextProvider from './contexts/ScoreClockContextProvider'
-import ClockContextProvider from './contexts/ClockContextProvider'
+import ControlClockContextProvider from './contexts/ControlClockContextProvider'
 import Playerslist from './themes/football/Playerslist'
 import Statistics from './themes/football/Statistics'
 import MasterClock from './controlboard/MasterClock'
@@ -18,7 +18,7 @@ const App = () => {
       <ControlBoardContextProvider>
         <ScoreBoardContextProvider> 
           <ScoreClockContextProvider> 
-            <ClockContextProvider>
+            <ControlClockContextProvider>
               <Router>
                 <Route exact path='/controlboard' component={ControlBoard}/>        
                 <Route exact path='/matchboard' component={MatchBoard}/>            
@@ -28,7 +28,7 @@ const App = () => {
                 <Route exact path='/basketball' component={Basketball}/>            
                 <Route exact path='/hockey' component={Hockey}/>            
               </Router>
-            </ClockContextProvider>
+            </ControlClockContextProvider>
           </ScoreClockContextProvider> 
         </ScoreBoardContextProvider>
       </ControlBoardContextProvider>

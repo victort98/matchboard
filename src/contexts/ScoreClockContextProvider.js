@@ -7,7 +7,7 @@ const ScoreClockContextProvider = (props) => {
   let timePaused = 0;
   let timeStarted = 0;
   let timePausedSum = 0;
-  let timeTotal = 90 * 60 * 1000;
+  let timeTotal = 0;
 
   let timeLeft = () => {
     let timeElapsed = timeStarted ?
@@ -15,7 +15,7 @@ const ScoreClockContextProvider = (props) => {
       timeElapsed -= timePausedSum;
       timeElapsed -= timePaused ?
       Date.now() - timePaused : 0;
-    return timeTotal - timeElapsed;
+    return timeTotal + timeElapsed;
   }
 
   let timeFormatted = () => {
@@ -44,19 +44,19 @@ const ScoreClockContextProvider = (props) => {
     timePaused = Date.now();
   }
 
-  let sleep = (ms) => {
-    return new Promise(res => setTimeout(res, ms));
-  }
+  // let sleep = (ms) => {
+  //   return new Promise(res => setTimeout(res, ms));
+  // }
 
   let showClock = () => {
     startClock()
     timeFormatted();
-    sleep(500);
+    // sleep(500);
   }
 
   let clockStarted;
   let startTime = () => {  
-    clockStarted = setInterval(showClock, 1000)
+    clockStarted = setInterval(showClock, 100)
   }
 
   let stopTime = () =>{
@@ -70,7 +70,6 @@ const ScoreClockContextProvider = (props) => {
     timePausedSum = 0;
     stopTime()
   }
-
 
   const values={
     timeFormatted,

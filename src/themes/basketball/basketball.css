@@ -1,0 +1,83 @@
+.container{
+  
+  background-color: black;
+  width: 70%;
+  padding: 10px;
+  border: 10px solid white;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.upperBox{
+  display: flex;
+  flex-direction: row;
+  height: 250px;
+  padding: 5px;
+  border: 10px solid white;
+  justify-content: space-around;
+
+}
+.lowerBox{
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  border: 10px solid white;
+}
+.redPlaceholder{
+  color: red;
+  border: 1px white solid;
+  height: 70px;
+}
+
+.mainResultPlaceHolder{
+  color: yellow;
+  border: 1px white solid;
+  justify-content: space-around;
+  height: 10px;
+}
+.greenPlaceholder{
+  color: green;
+  border: 1px white solid;
+}
+.possPeriod{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.leftSide{
+  flex-direction: column;
+  align-items: center;
+  
+}
+.center{
+  padding-top: 5px;
+  width: 40%;
+  align-items: center;
+}
+.mainResultPlaceHolder{
+  border: 2px white solid;
+  width: 80%;
+  height: 30%;
+  
+}
+.rowOne{
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+
+}
+.rowTwo{
+   display: flex;
+  justify-content: space-between;
+  height: 100px;
+}
+h1{
+  font-size: 3em;
+}
+h2{
+  font-size: 2em;
+}
+input{
+  background-color:black;
+}

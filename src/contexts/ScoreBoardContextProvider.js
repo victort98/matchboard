@@ -9,17 +9,20 @@ const ScoreBoardContextProvider = (props) => {
     team1Yellow: 0, team1Red: 0, team1Corners: 0, team1Offsides: 0, team1Shots: 0, team1Fouls: 0, team1OnTarget: 0,
     team2Yellow: 0, team2Red: 0, team2Corners: 0, team2Offsides: 0, team2Shots: 0, team2Fouls: 0, team2OnTarget: 0,
   })
+  const [overtime, setOvertime] = useState()
   
   useEffect(()=>{
     socket.on('scoreInfo', (data)=>{
       setScoreData(data)
       setTeamStats(data)
+      setOvertime(data)
     })   
   },[])
 
   const values = {
     scoreData,
-    teamStats
+    teamStats,
+    overtime
   }
   return (
     <ScoreBoardContext.Provider value={values}>

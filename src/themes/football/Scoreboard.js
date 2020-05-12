@@ -10,6 +10,7 @@ import FieldImage from '../../images/football.png'
 const Scoreboard = () => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
+  const {overtime} = useContext(ScoreBoardContext)
 
   const [time, setTime] = useState(timeFormatted())
 
@@ -85,6 +86,9 @@ const Scoreboard = () => {
           <Text x={590} y={110} fontSize={40} wrap="char" fill="#fff"
             className='statistics-clock'
             text={time}
+          />
+          <Text x={620} y={155} fontSize={25} wrap="char" fill="#fff"
+          text={overtime}
           />
           <Text x={240} y={129}  fontSize={40} wrap="char"
             text="MALMÖ FF"

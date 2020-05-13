@@ -10,18 +10,19 @@ import FieldImage from '../../images/football.png'
 const Scoreboard = () => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
-  const {overtime} = useContext(ScoreBoardContext)
 
   const [time, setTime] = useState(timeFormatted())
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
+  const [overtime, setOvertime] = useState(0)
 
   const [timerActive, setTimerActive] = useState()
 
   useEffect(()=>{
     setTeamOneScore(scoreData.teamOne)
     setTeamTwoScore(scoreData.teamTwo)
+    setOvertime(scoreData.overtime)
   }, [scoreData])
 
   useEffect(()=>{

@@ -11,6 +11,7 @@ const ControlBoard = (props) => {
   const [screen, setScreen] = useState()
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
+  const [overtime, setOvertime] = useState(0)
 
   /* STATISTICS */
   const [team1Yellow, setTeam1Yellow] = useState(0)
@@ -31,11 +32,11 @@ const ControlBoard = (props) => {
   /* STATISTICS */
 
   const [timerActive, setTimerActive] = useState(false)
-
   const sendData = () => {
     let scoreInfo = {
       teamOne: teamOneScore,
       teamTwo: teamTwoScore,
+      overtime: overtime,
       //TEAM 1
       team1Yellow: team1Yellow,
       team1Red: team1Red,
@@ -112,15 +113,10 @@ const ControlBoard = (props) => {
               placeholder="0"
               onChange={e=>setTeamOneScore(e.target.value)}/>
         </div>
-
         <div className="time">
         {/* <MasterClock/> */}
         <ControlClock/>
           <br />
-          <div className="overtime">
-            <input className="middleInputStyling" type="number" min="0" placeholder="0"/>
-            <input className="middleInputStyling" type="number" min="0" placeholder="0"/>
-          </div>
         </div>
 
         <div className="team2">
@@ -192,7 +188,11 @@ const ControlBoard = (props) => {
         </div>
 
         <div className="middleInfo">
-          <button className="extraTime">SET EXTRA TIME</button>
+        <div className="overtime">
+            <input className="middleInputStyling" type="number" min="0" placeholder="0"
+            onChange={e=>setOvertime(e.target.value)}></input>
+          </div>
+          <button className="extraTime" onClick={()=> sendData()}>SET EXTRA TIME</button>
           <br />
           <br />
           <div className="screen-selection">

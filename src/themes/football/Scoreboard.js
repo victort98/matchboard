@@ -88,7 +88,7 @@ const Scoreboard = () => {
             className='statistics-clock'
             text={time}
           />
-          <Text x={620} y={155} fontSize={25} wrap="char" fill="#fff"
+          <Text x={634} y={155} fontSize={25} wrap="char" fill="#fff"
           text={overtime}
           />
           <Text x={240} y={129}  fontSize={40} wrap="char"

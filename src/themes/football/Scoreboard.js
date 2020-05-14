@@ -15,12 +15,14 @@ const Scoreboard = () => {
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
+  const [overtime, setOvertime] = useState(0)
 
   const [timerActive, setTimerActive] = useState()
 
   useEffect(()=>{
     setTeamOneScore(scoreData.teamOne)
     setTeamTwoScore(scoreData.teamTwo)
+    setOvertime(scoreData.overtime)
   }, [scoreData])
 
   useEffect(()=>{
@@ -85,6 +87,9 @@ const Scoreboard = () => {
           <Text x={590} y={110} fontSize={40} wrap="char" fill="#fff"
             className='statistics-clock'
             text={time}
+          />
+          <Text x={634} y={155} fontSize={25} wrap="char" fill="#fff"
+          text={overtime}
           />
           <Text x={240} y={129}  fontSize={40} wrap="char"
             text="MALMÖ FF"

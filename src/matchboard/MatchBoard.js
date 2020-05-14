@@ -10,7 +10,6 @@ const MatchBoard = () => {
   useEffect(()=>{
     socket.on('board', (data)=>{
       setScreen(data)
-      console.log(data);  
     })   
   },[screen])
 

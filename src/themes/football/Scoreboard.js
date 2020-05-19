@@ -12,6 +12,8 @@ const Scoreboard = () => {
   const {scoreData} = useContext(ScoreBoardContext)
 
   const [time, setTime] = useState(timeFormatted())
+  const [teamOneName, setTeamOneName] = useState(0)
+  const [teamTwoName, setTeamTwoName] = useState(0)
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
@@ -25,6 +27,9 @@ const Scoreboard = () => {
   const [timerActive, setTimerActive] = useState()
 
   useEffect(()=>{
+    setTeamOneName(scoreData.teamOneName)
+    setTeamTwoName(scoreData.teamTwoName)
+
     setTeamOneScore(scoreData.teamOne)
     setTeamTwoScore(scoreData.teamTwo)
     setOvertime(scoreData.overtime)
@@ -210,10 +215,10 @@ const T1RcardControlar = () =>{
           text={overtime}
           />
           <Text x={240} y={129}  fontSize={40} wrap="char"
-            text="MALMÖ FF"
+            text={teamOneName}
           />
           <Text x={790} y={129} fontSize={40} wrap="char"
-            text="DJURGÅRDEN" 
+            text={teamTwoName} 
           />
           <Text x={500} y={300} fontSize={160} wrap="char" fill="#fff"
             shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        

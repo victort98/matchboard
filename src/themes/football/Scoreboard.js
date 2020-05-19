@@ -16,6 +16,11 @@ const Scoreboard = () => {
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
+  const [team1Yellow, setTeam1Yellow] = useState(0)
+  const [team1Red, setTeam1Red] = useState(0)
+  const [team2Yellow, setTeam2Yellow] = useState(0)
+  const [team2Red, setTeam2Red] = useState(0)
+
 
   const [timerActive, setTimerActive] = useState()
 
@@ -23,6 +28,12 @@ const Scoreboard = () => {
     setTeamOneScore(scoreData.teamOne)
     setTeamTwoScore(scoreData.teamTwo)
     setOvertime(scoreData.overtime)
+
+    setTeam1Yellow(scoreData.team1Yellow)
+    setTeam1Red(scoreData.team1Red)
+    setTeam2Yellow(scoreData.team2Yellow)
+    setTeam2Red(scoreData.team2Red)
+
   }, [scoreData])
 
   useEffect(()=>{
@@ -50,6 +61,113 @@ const Scoreboard = () => {
     const [image] = useImage(FieldImage);   
     return (<Image image={image} x={235} y={33} width={825} height={555} opacity={0.6}/>);
   };
+
+
+ 
+//team 1 Yellow Card
+const T1YcardControlar = () =>{
+
+let j = team1Yellow;
+if(j !== 0){
+let T1Ycard = [];
+
+for(let i = 0; i<j; i++){
+    T1Ycard[i] = (
+        <Rect
+        key= {i}
+        x={240+(i*35)}
+        y={65}
+        width={25}
+        height={50}
+        cornerRadius = {20}
+        fill="yellow"
+        shadowBlur={10}
+  />
+  );
+    }
+return T1Ycard;
+  }
+}
+
+// Team 1 Red card
+const T1RcardControlar = () =>{
+
+  let j = team1Red;
+  if(j !== 0){
+  let T1Rcard = [];
+  
+  for(let i = 0; i<j; i++){
+      T1Rcard[i] = (
+          <Rect
+          key= {i}
+          x={400+(i*35)}
+          y={65}
+          width={25}
+          height={50}
+          cornerRadius = {20}
+          fill="red"
+          shadowBlur={10}
+    />
+    );
+      }
+  return T1Rcard;
+    }
+  }
+
+  // Team 2 Yellow
+  const T2YcardControlar = () =>{
+
+    let j = team2Yellow;
+    if(j !== 0){
+    let T2Ycard = [];
+    
+    for(let i = 0; i<j; i++){
+        T2Ycard[i] = (
+            <Rect
+            key= {i}
+            x={1020-(i*35)}
+            y={65}
+            width={25}
+            height={50}
+            cornerRadius = {20}
+            fill="yellow"
+            shadowBlur={10}
+      />
+      );
+        }
+    return T2Ycard;
+      }
+    }
+
+  //Team 2 Red card
+  const T2RcardControlar = () =>{
+
+    let j = team2Red;
+    if(j !== 0){
+    let T2Rcard = [];
+    
+    for(let i = 0; i<j; i++){
+        T2Rcard[i] = (
+            <Rect
+            key= {i}
+            x={850-(i*35)}
+            y={65}
+            width={25}
+            height={50}
+            cornerRadius = {20}
+            fill="red"
+            shadowBlur={10}
+      />
+      );
+        }
+    return T2Rcard;
+      }
+    }
+  
+    
+
+
+
 
   const fadeTransition = useSpring({
     from: {opacity:0, marginLeft:-100, marginRight: 100},
@@ -108,7 +226,11 @@ const Scoreboard = () => {
           <Text x={700} y={300} fontSize={160} wrap="char" fill="#fff"
             shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        
             shadowBlur={10} text={teamTwoScore}
-          />          
+          />
+          {T1YcardControlar()}  
+          {T1RcardControlar()}
+          {T2YcardControlar()}
+          {T2RcardControlar()}        
         </Layer>
       </Stage>
       </animated.div>

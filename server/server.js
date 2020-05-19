@@ -12,19 +12,19 @@ const { mongoose, express, app, pwencrypt } = require('mongoosy')({
 
 const User = require('./models/User')
 const createUser = async () => {
-  let user = await User.findOne({email:'admin@abc.com'})
+  let user = await User.findOne({username:'admin'})
   console.log(user);
   
   if (user) { return }
   user = new User({
-    email: 'admin@abc.com',
-    password: pwencrypt('2121'),
+    username: 'admin',
+    password: pwencrypt('super'),
     roles: ['admin']
   })
   await user.save()
 } 
 
-createUser()
+// createUser()
 
 
 

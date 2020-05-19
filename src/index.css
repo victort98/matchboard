@@ -9,3 +9,37 @@
 html {
   scroll-behavior: smooth;
 }
+
+::-webkit-input-placeholder {
+  color: rgb(207, 207, 207);
+}
+
+/* LOGIN STYLES */
+.user-login{
+  display: flex;
+  justify-content: center;
+}
+.user-login .input-form{
+  margin-top: 250px;
+}
+.user-login input{
+  display: block;
+  padding: 2.5%;
+  margin: 2.5% 0.1%;
+  padding: 5.5px;
+  font-size: 18px;
+  border: 1px solid rgb(157, 194, 230);
+  border-radius: 10px;
+  outline: none;
+}
+
+.user-login input[type='submit']{
+  color: rgb(104, 147, 190);
+  padding: 5px 15px;
+}
+
+.user-login input[type='submit']:hover{
+  color: #fff;
+  background: rgb(104, 147, 190);
+  cursor: pointer;
+}

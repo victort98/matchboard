@@ -12,15 +12,12 @@ const UserLogin = () => {
           <input type="text" placeholder='E-mail'/>
           <input type="password" placeholder='password'/>
           <input type="password" placeholder='re-password'/>
-          <input type="text" placeholder='First Name'/>
-          <input type="text" placeholder='Last Name'/>
-          <input type="date" placeholder='Date of Birth'/>
+          
 
-          <select id="gender">
+          <select id="roles">
                 <option >Please Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="trans">Not Applicable</option>
+                <option value="operator">Admin</option>
+                <option value="female">Operator</option>
           </select>
           <input type="submit" value='REGISTER'/>
         </from>

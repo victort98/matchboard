@@ -48,7 +48,7 @@
 }
 
 .buttonDesign {
-    margin-top: 3.5%;
+    margin-top: 10%;
     border-radius: 35px;
     font-size: 1.3rem;
     padding: 7px 5px;
@@ -58,6 +58,10 @@
     outline: none;
     cursor: pointer;
     z-index: 1;
+}
+
+p{
+    padding-top: 5px;
 }
 
 .addPlayers {

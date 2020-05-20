@@ -16,12 +16,16 @@ html {
 
 /* LOGIN STYLES */
 .user-login{
-  display: flex;
-  justify-content: center;
+  width: 20%;
+  margin: 240px auto;
 }
-.user-login .input-form{
-  margin-top: 250px;
+
+
+.user-login p{
+  display: block;
+  color: red;
 }
+
 .user-login input{
   display: block;
   padding: 2.5%;

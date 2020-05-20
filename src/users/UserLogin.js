@@ -1,17 +1,37 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
+import {UserContext} from '../contexts/UserContextProvider'
 import mongoosy from 'mongoosy/frontend';
-const { User, Login, Player } = mongoosy;
+const {Login} = mongoosy;
 
-window.Login = Login
-const UserLogin = () => {
+const UserLogin = (props) => {
+  const {updateUserStatus} = useContext(UserContext);
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
+
+  const submitLoginInfo = async (e) => {
+    e.preventDefault();
+    let user = await Login.login({username, password})
+    if (user.js.error) {
+      setMessage('Username or password is wrong!')
+    }else{
+      updateUserStatus({user})
+      props.history.push('/controlboard')
+    }
+  }
+  
   return (
     <div className="container">
       <div className="user-login">
-        <from className="input-form">
-          <input type="text" placeholder='username'/>
-          <input type="password" placeholder='password'/>
+        <p>{message}</p>
+        <form className="input-form" onSubmit={submitLoginInfo}>
+          <input name="username" type="text" placeholder='username' 
+            value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input name="password" type="password" placeholder='password' 
+            value={password} onChange={(e) => setPassword(e.target.value)} />
           <input type="submit" value='LOGIN'/>
-        </from>
+        </form>
       </div>
 
       <div className="background">

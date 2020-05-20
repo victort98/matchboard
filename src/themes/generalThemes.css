@@ -1,0 +1,77 @@
+.information {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.inputFields {
+    text-align: center;
+    margin-top: 60px;   
+}
+
+.teamNameInput {
+    border-radius: 15px;
+    border: 1.4px;
+    border-style: solid;
+    border-color: gray;
+    font-size: 25px;
+    outline: none;
+    padding: 5px;
+}
+
+.playerNameInput {
+    border-radius: 15px;
+    border: 1.4px;
+    border-style: solid;
+    border-color: gray;
+    font-size: 16px;
+    outline: none;
+    padding: 8px;
+}
+
+.playerInformation {
+    padding: 20px;
+    display: flex;
+    text-align: center;
+}
+
+.playerNames1 {
+    flex: 1;
+}
+
+.playerNames2 {
+    flex: 1;
+}
+
+.buttons {
+    padding: 20px;
+    flex: 1;
+}
+
+.buttonDesign {
+    margin-top: 3.5%;
+    border-radius: 35px;
+    font-size: 1.3rem;
+    padding: 7px 5px;
+    width: 80%;
+    height: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.addPlayers {
+    border: 1px solid rgba(255, 255, 255);
+    background: #127EB7;
+    color: white;
+}
+
+.showPlayers{
+    border: 1px solid rgb(100, 100, 100);
+    color: #127EB7;
+}
+
+.help {
+    border: 1px solid rgb(100, 100, 100);
+    color: #127EB7;
+}

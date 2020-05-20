@@ -1,5 +1,4 @@
-.container{
-  
+.container {
   background-color: black;
   width: 70%;
   padding: 10px;
@@ -8,76 +7,147 @@
   flex-wrap: wrap;
 }
 
-.upperBox{
+.upperBox {
   display: flex;
   flex-direction: row;
-  height: 250px;
+  height: 150px;
   padding: 5px;
   border: 10px solid white;
   justify-content: space-around;
-
 }
-.lowerBox{
+.lowerBox {
   display: flex;
   flex-direction: column;
   height: 150px;
   border: 10px solid white;
 }
-.redPlaceholder{
+.redPlaceholder {
   color: red;
   border: 1px white solid;
   height: 70px;
 }
 
-.mainResultPlaceHolder{
+.mainResultPlaceHolder {
   color: yellow;
   border: 1px white solid;
   justify-content: space-around;
   height: 10px;
 }
-.greenPlaceholder{
+.greenPlaceholder {
   color: green;
   border: 1px white solid;
 }
-.possPeriod{
+.possPeriod {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.leftSide{
+.leftSide {
   flex-direction: column;
   align-items: center;
-  
 }
-.center{
+.center {
   padding-top: 5px;
   width: 40%;
   align-items: center;
 }
-.mainResultPlaceHolder{
+.mainResultPlaceHolder {
   border: 2px white solid;
   width: 80%;
   height: 30%;
-  
+  color: yellow;
 }
-.rowOne{
+.rowOne {
   display: flex;
   justify-content: space-around;
   height: 50px;
-
 }
-.rowTwo{
-   display: flex;
+.rowTwo {
+  display: flex;
   justify-content: space-between;
   height: 100px;
 }
-h1{
+h1 {
   font-size: 3em;
 }
-h2{
+h2 {
   font-size: 2em;
 }
-input{
-  background-color:black;
+input {
+  background-color: black;
+}
+.contolboard {
+  background-color: white;
+  width: 80%;
+  height: auto;
+}
+.time {
+  background-color: white;
+  display: flex;
+  height: 40px;
+  justify-content: space-around;
+  align-items: center;
+  }
+.player {
+  justify-content: space-around;
+  background-color: yellow;
+  display: flex;
+  height: 120px;
+  
+}
+.result {
+  background-color: red;
+  display: flex;
+  justify-content: space-around;
+  height:120px;
+ align-items: center;
+}
+
+.baskettype {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  height: 75px;
+ align-items: center;
+}
+.result {
+  display: flex;
+  justify-content: space-around;
+  height: 80px;
+ align-items: center;
+  
+}
+.points {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  height: 75px;
+  
+}
+.oneTwoThree{
+  display: flex;
+  height: 100px;
+  justify-content: space-around;
+  padding: 10px;  
+align-items: center;
+  flex-direction: row;
+}
+button{
+  height: 30px;
+  justify-content: space-around;
+ 
+}
+.p{
+  border-radius: 25%;
+  text-align: center;
+  padding: 5px;
+}
+.PHG{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+button{
+  color: red;
 }

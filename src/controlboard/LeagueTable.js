@@ -1,23 +1,13 @@
 import React from 'react'
 import mongoosy from 'mongoosy/frontend';
-const { User, Register, Player } = mongoosy;
+const { User, LgTable, Player } = mongoosy;
 
-window.Register = Register
-const UserRegister = () => {
+window.LgTable = LgTable
+const LeagueTable = () => {
   return (
     <div className="container">
-      <div className="user-register">
-        <from className="reg-input-form">
-          <label>Add New User</label>  
-          <input type="text" placeholder='E-mail'/>
-          <input type="password" placeholder='password'/>
-          <select id="roles">
-                <option >Please Select</option>
-                <option value="operator">Admin</option>
-                <option value="female">Operator</option>
-          </select>
-          <input type="submit" value='REGISTER'/>
-        </from>
+      <div className="league-table">
+        
       </div>
 
       <div className="background">
@@ -47,4 +37,4 @@ const UserRegister = () => {
   )
 }
 
-export default UserRegister
+export default LeagueTable

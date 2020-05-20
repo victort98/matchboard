@@ -127,6 +127,8 @@ const basketball = () => {
             backgroundColor: "yellow",
             height: "50px ",
             alignContent: "center",
+            display: "flex",
+            textAlign: "center",
           }}
         >
           <Col>
@@ -147,28 +149,26 @@ const basketball = () => {
             backgroundColor: "green",
             height: "50px",
             alignContent: "center",
+            display: "flex",
+            textAlign: "center",
           }}
         >
           <Col>
-            {" "}
             <button type="button" class="btn btn-success">
               Set the Quarter
             </button>
           </Col>
           <Col>
-            {" "}
             <button type="button" class="btn btn-primary">
               Start
             </button>
           </Col>
           <Col>
-            {" "}
             <button type="button" class="btn btn-warning">
               Stop
             </button>
           </Col>
           <Col>
-            {" "}
             <button type="button" class="btn btn-danger">
               Restart
             </button>
@@ -177,18 +177,25 @@ const basketball = () => {
 
         <Row
           style={{
-            backgroundColor: "blue",
+            backgroundColor: "pink",
             height: "200px",
             alignContent: "center",
           }}
         >
-          <Col className="col md-5">
-            <h2 style={{ textAlign: "center" }}>HOME</h2>
+          <Col>
+           <div className="col-md-auto">
+            <h2>Home</h2>
+            </div>
+            </Col>
+          <Col className="col-md-auto">
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "around",
+                justifyContent: "space-around",
+                height: "auto",
+                width:"auto"
+              
               }}
             >
               <button type="button" class="btn btn-info">
@@ -202,10 +209,21 @@ const basketball = () => {
               </button>
             </div>
           </Col>
-
-          <Col className="col md-5">
-            <h2 style={{ textAlign: "center" }}>GUEST</h2>
-            <ul>
+          <Col>
+           <div class="col-md-auto">
+            <h2>GUEST</h2>
+            </div>
+            </Col>
+          <Col className="col-md-auto">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
+                height: "auto",
+                padding:"5px"
+              }}
+            >
               <button type="button" class="btn btn-info">
                 Enter the name of the Teams
               </button>
@@ -215,26 +233,40 @@ const basketball = () => {
               <button type="button" class="btn btn-info">
                 Enter the name of the Coach
               </button>
-            </ul>
+            </div>
           </Col>
         </Row>
         <Row
           style={{
+            display: "flex",
             backgroundColor: "yellow",
             height: "50px ",
+            textAlign: "center",
             alignContent: "center",
           }}
         >
-          <Col>Home</Col>
+          <Col>
+            <h2>Home</h2>
+          </Col>
           <Col>
             <button type="button" class="btn btn-info">
               Show the result
             </button>
           </Col>
-          <Col>Guest</Col>
+          <Col>
+            <h2>Guest</h2>
+          </Col>
         </Row>
 
-        <Row style={{ backgroundColor: "red", height: "50px " }}>
+        <Row
+          style={{
+            display: "flex",
+            textAlign: "center",
+            alignContent: "center",
+            backgroundColor: "red",
+            height: "50px ",
+          }}
+        >
           <Col>
             <button>Enter the number</button>
           </Col>

@@ -13,6 +13,7 @@ import MasterClock from './controlboard/MasterClock'
 import Basketball from './themes/basketball/Basketball.js'
 import Hockey from './themes/hockey/Hockey.js'
 import UserLogin from './users/UserLogin.js'
+import Register from './users/UserRegister'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
               <UserContextProvider>
                 <Router>
                   <Route exact path='/' component={UserLogin}/>
+                  <Route exact path='/register' component={Register}/>
                   <Route exact path='/controlboard' component={ControlBoard}/>        
                   <Route exact path='/matchboard' component={MatchBoard}/>            
                   <Route exact path='/playerslist' component={Playerslist}/>            

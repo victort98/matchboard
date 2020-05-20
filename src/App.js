@@ -6,6 +6,7 @@ import ControlBoardContextProvider from './contexts/ControlBoardContextProvider'
 import ScoreBoardContextProvider from './contexts/ScoreBoardContextProvider'
 import ScoreClockContextProvider from './contexts/ScoreClockContextProvider'
 import ControlClockContextProvider from './contexts/ControlClockContextProvider'
+import UserContextProvider from './contexts/UserContextProvider'
 import Playerslist from './themes/football/Playerslist'
 import Statistics from './themes/football/Statistics'
 import MasterClock from './controlboard/MasterClock'
@@ -20,16 +21,18 @@ const App = () => {
         <ScoreBoardContextProvider> 
           <ScoreClockContextProvider> 
             <ControlClockContextProvider>
-              <Router>
-                <Route exact path='/' component={UserLogin}/>
-                <Route exact path='/controlboard' component={ControlBoard}/>        
-                <Route exact path='/matchboard' component={MatchBoard}/>            
-                <Route exact path='/playerslist' component={Playerslist}/>            
-                <Route exact path='/statistics' component={Statistics}/>            
-                <Route exact path='/masterclock' component={MasterClock}/>            
-                <Route exact path='/basketball' component={Basketball}/>            
-                <Route exact path='/hockey' component={Hockey}/>            
-              </Router>
+              <UserContextProvider>
+                <Router>
+                  <Route exact path='/' component={UserLogin}/>
+                  <Route exact path='/controlboard' component={ControlBoard}/>        
+                  <Route exact path='/matchboard' component={MatchBoard}/>            
+                  <Route exact path='/playerslist' component={Playerslist}/>            
+                  <Route exact path='/statistics' component={Statistics}/>            
+                  <Route exact path='/masterclock' component={MasterClock}/>            
+                  <Route exact path='/basketball' component={Basketball}/>            
+                  <Route exact path='/hockey' component={Hockey}/>            
+                </Router>
+              </UserContextProvider>
             </ControlClockContextProvider>
           </ScoreClockContextProvider> 
         </ScoreBoardContextProvider>

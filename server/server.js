@@ -6,6 +6,9 @@ const { mongoose, express, app, pwencrypt } = require('mongoosy')({
   // settings for mongoosy
   connect: {
     url: 'mongodb://localhost/' + dbName
+  },
+  login:{
+    encryptionSalt: 'super-user'
   }
 });
 

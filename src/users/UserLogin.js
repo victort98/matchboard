@@ -1,16 +1,16 @@
 import React, {useContext, useState} from 'react'
-import {UserContext} from '../contexts/UserContextProvider'
+import { Link, Redirect } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContextProvider'
 import mongoosy from 'mongoosy/frontend';
 const {Login} = mongoosy;
 
 const UserLogin = (props) => {
   const {updateUserStatus} = useContext(UserContext);
-
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
 
-  const submitLoginInfo = async (e) => {
+  const submitLogin = async (e) => {
     e.preventDefault();
     let user = await Login.login({username, password})
     if (user.js.error) {
@@ -24,14 +24,17 @@ const UserLogin = (props) => {
   return (
     <div className="container">
       <div className="user-login">
-        <p>{message}</p>
-        <form className="input-form" onSubmit={submitLoginInfo}>
-          <input name="username" type="text" placeholder='username' 
+        <form className="input-form" onSubmit={submitLogin}>
+          <input name="username" type="text" placeholder='username' required
             value={username} onChange={(e) => setUsername(e.target.value)} />
-          <input name="password" type="password" placeholder='password' 
+          <input name="password" type="password" placeholder='password' required
             value={password} onChange={(e) => setPassword(e.target.value)} />
-          <input type="submit" value='LOGIN'/>
+          <div className="submit-buttons">
+            <input type="submit" value='LOGIN'/>
+          </div>
         </form>
+         <p style={{color: 'red'}}>{message}</p>
+         <p>If you're not a user... <br/> Please <Link to="/register">register</Link> first.</p>
       </div>
 
       <div className="background">

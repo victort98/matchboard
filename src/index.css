@@ -14,16 +14,10 @@ html {
   color: rgb(207, 207, 207);
 }
 
-/* LOGIN STYLES */
+/* USER LOGIN & REGISTRATION STYLES */
 .user-login{
-  width: 20%;
-  margin: 240px auto;
-}
-
-
-.user-login p{
-  display: block;
-  color: red;
+  width: 250px;
+  margin: 230px auto;
 }
 
 .user-login input{
@@ -38,6 +32,8 @@ html {
 }
 
 .user-login input[type='submit']{
+  display: block;
+  width: 100%;
   color: rgb(104, 147, 190);
   padding: 5px 15px;
 }
@@ -48,54 +44,24 @@ html {
   cursor: pointer;
 }
 
-/* REGISTER STYLES */
-.user-register{
+.user-login p{
+  display: block;
+  font-size: 13.88px;
+}
+
+.user-login select{
+  width: 247px;
+  display: block;
+  padding: 2.5%;
+  margin: 2.5% 0.1%;
+  padding: 5.5px;
+  font-size: 18px;
+  border: 1px solid rgb(157, 194, 230);
+  border-radius: 10px;
+  outline: none;
+}
+
+.submit-buttons{
   display: flex;
-  justify-content: center;
-}
-.user-register .reg-input-form{
-  margin-top: 150px;
-}
-.user-register .reg-input-form  label{
-  display: block;
-  padding: 2.5%;
-  margin: 2.5% 0.1%;
-  padding: 5.5px;
-  font-size: 28px;
-  color: rgb(104, 147, 190);
-  
-  border-radius: 10px;
-  outline: none;
-}
-.user-register input{
-  display: block;
-  padding: 2.5%;
-  margin: 2.5% 0.1%;
-  padding: 5.5px;
-  font-size: 18px;
-  border: 1px solid rgb(157, 194, 230);
-  border-radius: 10px;
-  outline: none;
-}
-
-.user-register select{
-  display: block;
-  padding: 2.5%;
-  margin: 2.5% 0.1%;
-  padding: 5.5px;
-  font-size: 18px;
-  border: 1px solid rgb(157, 194, 230);
-  border-radius: 10px;
-  outline: none;
-}
-
-.user-register input[type='submit']{
-  color: rgb(104, 147, 190);
-  padding: 5px 15px;
-}
-
-.user-register input[type='submit']:hover{
-  color: #fff;
-  background: rgb(104, 147, 190);
-  cursor: pointer;
+  justify-content: space-between;
 }

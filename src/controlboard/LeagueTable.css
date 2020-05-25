@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Roboto+Mono&display=swap');
+
+h1{
+    position: relative;
+    font-size: 30px;
+    margin-top: 100px;
+    text-align: center;
+    color: rgb(104, 147, 190);
+}
+
+.flex-container{
+   margin: auto; 
+   display: flex;  
+   padding: 3px;
+   line-height: 1.65;
+  }
+
+.left-buttons{
+    flex: .17;
+    margin-left: 500px;
+    margin-top:55px;
+    
+}
+
+.left-buttons button{
+    display: block;
+    padding: 10px;
+    margin: 20px;
+    width: 180px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    color: rgb(104, 147, 190);
+
+}
+
+.left-buttons button:hover{
+    
+        color: #fff;
+        background: rgb(104, 147, 190);
+        cursor: pointer;
+      
+}
+
+.team-name{
+    flex:.12;
+    text-align: center;
+    
+}
+.team-name input{
+    display: block;
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+    width: 150px;
+    
+}
+.played{
+    
+    flex: .06;
+}
+
+.played input{
+    display: block;
+    padding: 5px;
+    width: 70px;
+    border-radius: 10px;
+    border: none;    
+}
+.won{
+    flex: .06;
+    text-align: center;
+}
+.won input{
+   
+    display: block;
+    padding: 5px;
+    width: 70px;
+    border-radius: 10px;
+    border: none;   
+}
+.drawn{
+    flex: .06;
+    
+}
+.drawn input{
+   
+    display: block;
+    padding: 5px;
+    width: 70px;
+    border-radius: 10px;
+    border: none;    
+}
+.lost{
+    flex: .06;
+    text-align: center;
+}
+.lost input{
+    
+    display: block;
+    padding: 5px;
+    width: 70px;
+    border-radius: 10px;
+    border: none;   
+}
+.point{
+    flex: .06;
+    
+}
+.point input{
+    
+    display: block;
+    padding: 5px;
+    width: 70px;
+    border-radius: 10px;
+    border: none;    
+}
+
+.submit input[type='submit']{
+    display: block;
+    padding: 15px;
+    margin: 20px;
+    width: 250px;
+    border: none;
+    border-radius: 20px;
+    margin-top: 3%;
+    margin-left: 44%;
+    font-size: 25px;
+    color: green;
+}
+
+.submit input[type='submit']:hover{
+    
+    color: #fff;
+    background: green;
+    cursor: pointer;
+  
+}

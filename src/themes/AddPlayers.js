@@ -2,8 +2,6 @@ import React from 'react'
 import "../themes/generalThemes.css"
 
 const AddPlayers = () => {
-
-
     return(
         <div>
             <div className="information">
@@ -64,6 +62,9 @@ const AddPlayers = () => {
                     <p>PLAYER 14</p>
                     <input className="playerNameInput"></input>
                     </div>
+                </div>
+                <div className="submitButton">
+                <button className="submit">Submit</button>
                 </div>
             </div>
             <div className="container">

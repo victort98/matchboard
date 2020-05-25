@@ -1,11 +1,12 @@
 .information {
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
 }
 
 .inputFields {
     text-align: center;
-    margin-top: 60px;   
+    margin-top: 60px;
+    margin-left: 290px;
 }
 
 .teamNameInput {
@@ -29,7 +30,6 @@
 }
 
 .playerInformation {
-    padding: 20px;
     display: flex;
     text-align: center;
 }
@@ -58,6 +58,25 @@
     outline: none;
     cursor: pointer;
     z-index: 1;
+}
+
+.submit {
+    border: none;
+    border-radius: 35px;
+    font-size: 1.3rem;
+    padding: 7px 5px;
+    width: 35%;
+    height: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    outline: none;
+    cursor: pointer;
+    color: #00c742;
+}
+
+.submitButton {
+    text-align: center;
+    padding: 10px;
+    margin-left: 290px;
 }
 
 p{

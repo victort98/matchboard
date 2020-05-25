@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Scoreboard from '../themes/football/Scoreboard'
 import Statistics from '../themes/football/Statistics'
-import Playerslist from '../themes/football/Playerslist'
+import Playerslist from '../themes/football/Playerslist2'
 import {socket} from '../socket/socket'
 
 const MatchBoard = () => {

@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion"
 import mongoosy from 'mongoosy/frontend';
 const { User } = mongoosy;
+
 
 
 const UserRegister = (props) => {
@@ -34,6 +36,13 @@ const UserRegister = (props) => {
 
   return (
     <div className="container">
+      <motion.div initial={{ scale: 0 }}
+        animate={{ rotate: 360, scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 30
+        }}>
       <div className="user-login">
         <form className="input-form" onSubmit={submitRegistraion}>
           <input name="username" type="text" placeholder='username' required
@@ -52,6 +61,7 @@ const UserRegister = (props) => {
         <p style={{color}}>{message}</p>
         <p>If you're alreay a user... Please <Link to="/">login</Link> with username.</p>
       </div>
+      </motion.div>
 
       <div className="background">
         <svg className="background" viewBox="0 0 1874 1080.446">

@@ -14,7 +14,11 @@ import Basketball from './themes/basketball/Basketball.js'
 import Hockey from './themes/hockey/Hockey.js'
 import UserLogin from './users/UserLogin.js'
 import Register from './users/UserRegister'
+<<<<<<< HEAD
 import ProtectedRoutes from './routes/ProtectedRoutes'
+=======
+import LeagueTable from './controlboard/LeagueTable'
+>>>>>>> 86e31da508270934e82f35150ca0d7bdc12924bd
 
 const App = () => {
   return (
@@ -31,7 +35,8 @@ const App = () => {
                   <Route exact path='/matchboard' component={MatchBoard}/>            
                   <Route exact path='/playerslist' component={Playerslist}/>            
                   <Route exact path='/statistics' component={Statistics}/>            
-                  <Route exact path='/masterclock' component={MasterClock}/>            
+                  <Route exact path='/masterclock' component={MasterClock}/> 
+                  <Route exact path='/leaguetable' component={LeagueTable}/>          
                   <Route exact path='/basketball' component={Basketball}/>            
                   <Route exact path='/hockey' component={Hockey}/>            
                 </Router>

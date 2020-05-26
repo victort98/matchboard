@@ -9,6 +9,8 @@ const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
   const {startTime, stopTime, resetTime} = useContext(ControlClockContext)
   const [screen, setScreen] = useState()
+  const [teamOneName, setTeamOneName] = useState(0)
+  const [teamTwoName, setTeamTwoName] = useState(0)
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
@@ -34,6 +36,8 @@ const ControlBoard = (props) => {
   const [timerActive, setTimerActive] = useState(false)
   const sendData = () => {
     let scoreInfo = {
+      teamOneName: teamOneName, 
+      teamTwoName: teamTwoName, 
       teamOne: teamOneScore,
       teamTwo: teamTwoScore,
       overtime: overtime,
@@ -104,7 +108,7 @@ const ControlBoard = (props) => {
         <div className="team1">
           <label>SET TEAM 1</label>
             <br />
-            <input className="teamName" placeholder="Name of team 1" type="text"/>
+            <input className="teamName" placeholder="Name of team 1" type="text"  onChange={e=>setTeamOneName(e.target.value)}/>
             <br />
             <br />
             <label>SET SCORE</label>
@@ -122,7 +126,7 @@ const ControlBoard = (props) => {
         <div className="team2">
         <label>SET TEAM 2</label>
           <br />
-          <input className="teamName" placeholder="Name of team 2" type="text"/>
+          <input className="teamName" placeholder="Name of team 2" type="text"  onChange={e=>setTeamTwoName(e.target.value)}/>
           <br />
           <br />
           <label>SET SCORE</label>

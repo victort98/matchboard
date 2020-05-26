@@ -2,30 +2,14 @@ const socket = require('socket.io');
 const dbName = 'matchboard';
 const PORT = 3200
 
-const { mongoose, express, app, pwencrypt } = require('mongoosy')({
-  // settings for mongoosy
+const { app } = require('mongoosy')({
   connect: {
     url: 'mongodb://localhost/' + dbName
+  },
+  login:{
+    encryptionSalt: 'super-user'
   }
 });
-
-
-const User = require('./models/User')
-const createUser = async () => {
-  let user = await User.findOne({email:'admin@abc.com'})
-  console.log(user);
-  
-  if (user) { return }
-  user = new User({
-    email: 'admin@abc.com',
-    password: pwencrypt('2121'),
-    roles: ['admin']
-  })
-  await user.save()
-} 
-
-createUser()
-
 
 
 const server = app.listen(PORT, ()=> 

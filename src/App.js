@@ -36,7 +36,8 @@ const App = () => {
                   <Route exact path='/masterclock' component={MasterClock}/> 
                   <Route exact path='/leaguetable' component={LeagueTable}/>          
                   <Route exact path='/basketball' component={Basketball}/>            
-                  <Route exact path='/hockey' component={Hockey}/>            
+                  <Route exact path='/hockey' component={Hockey}/>
+                  <Route exact path="/addplayers" component={AddPlayers}/>         
                 </Router>
               </UserContextProvider>
             </ControlClockContextProvider>

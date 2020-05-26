@@ -1,7 +1,37 @@
-import React from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import "../themes/generalThemes.css"
+import ReactDOM from "react-dom";
 
 const AddPlayers = () => {
+
+    const [inputValue, setInputValue] = useState("");
+
+    const createInputsRow1 = (num) => {
+        const playerList = []
+        let player = 1;
+        let index = 0;
+        for(let i = 1; i <= num; i++){
+            playerList.push(<p>player {player++}</p>)
+            playerList.push(<input key={index++} className="playerNameInput" onChange={(e) => setInputValue(e.target.value)}></input>)
+          }
+          return (
+              playerList
+          );
+        }
+
+        const createInputsRow2 = (num) => {
+            const playerList = []
+            let player = 8;
+            let index = 7;
+            for(let i = 1; i <= num; i++){
+                playerList.push(<p>player {player++}</p>)
+                playerList.push(<input key={index++} className="playerNameInput"></input>)
+              }
+              return (
+                  playerList
+              );
+            }
+
     return(
         <div>
             <div className="information">
@@ -19,48 +49,10 @@ const AddPlayers = () => {
                     <button className="help buttonDesign">HELP</button>
                     </div>
                     <div className="playerNames1">
-                    <p>PLAYER 1</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 2</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 3</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 4</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 5</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 6</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 7</p>
-                    <input className="playerNameInput"></input>
+                    {createInputsRow1(7)}
                     </div>
                     <div className="playerNames2">
-                    <p>PLAYER 8</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 9</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 10</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 11</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 12</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 13</p>
-                    <input className="playerNameInput"></input>
-                    <br />
-                    <p>PLAYER 14</p>
-                    <input className="playerNameInput"></input>
+                    {createInputsRow2(7)}
                     </div>
                 </div>
                 <div className="submitButton">

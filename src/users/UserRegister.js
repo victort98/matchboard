@@ -4,8 +4,6 @@ import { motion } from "framer-motion"
 import mongoosy from 'mongoosy/frontend';
 const { User } = mongoosy;
 
-
-
 const UserRegister = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -37,12 +35,8 @@ const UserRegister = (props) => {
   return (
     <div className="container">
       <motion.div initial={{ scale: 0 }}
-        animate={{ rotate: 360, scale: 1 }}
-        transition={{
-          type: "spring",
-          stiffness: 100,
-          damping: 30
-        }}>
+        animate={{ scale: 1 }}
+        transition={{ ease: "easeOut", delay: 0.1, duration: 0.5 }}>
       <div className="user-login">
         <form className="input-form" onSubmit={submitRegistraion}>
           <input name="username" type="text" placeholder='username' required
@@ -59,7 +53,7 @@ const UserRegister = (props) => {
           </div>         
         </form>
         <p style={{color}}>{message}</p>
-        <p>If you're alreay a user... Please <Link to="/">login</Link> with username.</p>
+        <p>If you're alreay a user... Please <Link to="/">login</Link> with your username.</p>
       </div>
       </motion.div>
 

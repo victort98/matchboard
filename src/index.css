@@ -19,9 +19,11 @@ html {
 .user-login{
   width: 250px;
   margin: 230px auto;
+  color: rgb(122, 122, 122);
 }
 
 .user-login input{
+  width: 247px;
   display: block;
   padding: 2.5%;
   margin: 2.5% 0.1%;

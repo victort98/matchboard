@@ -42,7 +42,7 @@ const Fixtures = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 30, delay: 0.2, duration: 2 }}
-          style={{width:'940px', height:'65px', margin:'0 20px',  padding:'10px 0', background: "#fff", opacity: '0.97',
+          style={{width:'940px', height:'64px', margin:'0 20px',  padding:'10px 0', background: "#fff", opacity: '0.97',
             borderRadius:'45px', boxShadow: '2px 5px 5px rgba(0, 0, 0, 0.7)', overflow: 'hidden'}}>          
           <motion.li 
             initial={{ scale: 0 }}
@@ -55,10 +55,10 @@ const Fixtures = () => {
             <span>{matchFixtures[i].teamTwo}</span>
           </motion.li>
         </motion.div>
-        <div style={{width:'190px', height:'55px', backgroundColor: '#fff', opacity: '0.97', borderBottomLeftRadius: 25,
-           borderBottomRightRadius: 25, padding:'6px 0', position:'relative', bottom: '42px', margin: '0 auto', textAlign: 'center'}}>
-          <span style={{color:'#3498DB', paddingTop: '0px'}}>{moment(matchFixtures[i].date).format('ll')}</span>
-          <span style={{color:'#3498DB', paddingTop: '5px', display: 'block'}}>{moment(matchFixtures[i].date).format('LT')}</span>
+        <div style={{width:'190px', height:'62px', backgroundColor: '#fff', opacity: '0.97', borderBottomLeftRadius: 45, boxShadow: '0 3px 0 rgba(0, 0, 0, 0.7)',
+           borderBottomRightRadius: 45, padding:'6px 0', position:'relative', bottom: '45px', margin: '0 auto', textAlign: 'center'}}>
+          <span style={{color:'rgba(204,132,0, 0.99)', fontSize: '17.1px'}}>{moment(matchFixtures[i].date).format('ll')}</span>
+          <span style={{color:'#222', padding: '5px 0', display: 'block'}}>{moment(matchFixtures[i].date).format('LT')}</span>
         </div> 
         </>
       );      
@@ -74,7 +74,7 @@ const Fixtures = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 30, delay: 0.2, duration: 2 }}
-          style={{width:'940px', height:'55px', margin:'39px 20px 15px 20px', background: '#3498DB', opacity: '0.97',
+          style={{width:'940px', height:'55px', margin:'56px 20px 15px 20px', background: '#3498DB', opacity: '0.97',
             borderRadius:'45px', boxShadow: '5px 10px 10px rgba(0, 0, 0, 0.5)', overflow: 'hidden',
             transform: 'rotateX(95deg)'}}>
           <motion.li 

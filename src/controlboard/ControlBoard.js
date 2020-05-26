@@ -92,6 +92,8 @@ const ControlBoard = (props) => {
       socket.emit('board', 'scoreboard')
     } else if (screen === 'playerslist') {
       socket.emit('board', 'playerslist')
+    } else if (screen === 'fixtures') {
+      socket.emit('board', 'fixtures')
     }
   }, [screen])
 
@@ -206,7 +208,7 @@ const ControlBoard = (props) => {
               <option value="scoreboard">SCORE BOARD</option>
               <option value="statistics">STATISTICS</option>
               <option value="playerslist">PLAYERS LIST</option>
-              <option value="pointtable">POINT TABLE</option>
+              <option value="fixtures">MATCH FISTURES</option>
               <option value="leaguetable">LEAGUE TABLE</option>
             </select>
           </div>

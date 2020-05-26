@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Scoreboard from '../themes/football/Scoreboard'
 import Statistics from '../themes/football/Statistics'
 import Playerslist from '../themes/football/Playerslist2'
+import Fixtures from '../themes/football/Fixtures'
 import {socket} from '../socket/socket'
 
 const MatchBoard = () => {
@@ -21,6 +22,8 @@ const MatchBoard = () => {
         (<Scoreboard/>):
        (screen==='playerslist')?
         (<Playerslist/>):
+        (screen==='fixtures')?
+        (<Fixtures/>):
         (<Scoreboard/>)
       }
     </>

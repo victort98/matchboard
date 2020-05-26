@@ -123,8 +123,8 @@ const Statistics = () => {
   }
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1}}>
-    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:720}}>
+    <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1, height:'100vh'}}>
+    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:'100vh'}}>
       <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" strokeWidth="100px" strokeLinejoin="miter" strokeLinecap="butt" 
         strokeMiterlimit="4" shapeRendering="auto" id="Path_4" 
         d="M 418.5040283203125 -2.817545237121521e-07 
@@ -139,7 +139,7 @@ const Statistics = () => {
           Z">
       </path>
     </svg>
-    <img src={FieldImage} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '40px'}} width={925} height={640}/>
+    <img src={FieldImage} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '5%', height: '90%'}}/>
      <animated.div style={fadeTransition}>
       <Stage y={50} width={1280} height={720}>
         <Layer fill="#ddd">

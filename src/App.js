@@ -14,11 +14,9 @@ import Basketball from './themes/basketball/Basketball.js'
 import Hockey from './themes/hockey/Hockey.js'
 import UserLogin from './users/UserLogin.js'
 import Register from './users/UserRegister'
-<<<<<<< HEAD
 import ProtectedRoutes from './routes/ProtectedRoutes'
-=======
 import LeagueTable from './controlboard/LeagueTable'
->>>>>>> 86e31da508270934e82f35150ca0d7bdc12924bd
+
 
 const App = () => {
   return (

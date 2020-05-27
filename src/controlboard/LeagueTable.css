@@ -16,8 +16,8 @@ h1{
   }
 
 .left-buttons{
-    flex: .17;
-    margin-left: 500px;
+    
+    margin-left:28%;
     margin-top:55px;
     
 }
@@ -43,7 +43,7 @@ h1{
 }
 
 .team-name{
-    flex:.12;
+    margin-left: 1%;
     text-align: center;
     
 }
@@ -57,7 +57,7 @@ h1{
 }
 .played{
     
-    flex: .06;
+    margin-left: 1%;
 }
 
 .played input{
@@ -68,7 +68,7 @@ h1{
     border: none;    
 }
 .won{
-    flex: .06;
+    margin-left: 1%;
     text-align: center;
 }
 .won input{
@@ -80,7 +80,7 @@ h1{
     border: none;   
 }
 .drawn{
-    flex: .06;
+    margin-left: 1%;
     
 }
 .drawn input{
@@ -92,7 +92,7 @@ h1{
     border: none;    
 }
 .lost{
-    flex: .06;
+    margin-left: 1%;
     text-align: center;
 }
 .lost input{
@@ -104,7 +104,7 @@ h1{
     border: none;   
 }
 .point{
-    flex: .06;
+    margin-left: 1%;
     
 }
 .point input{

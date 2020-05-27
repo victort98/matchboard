@@ -3,7 +3,9 @@ import Scoreboard from '../themes/football/Scoreboard'
 import Statistics from '../themes/football/Statistics'
 import Playerslist from '../themes/football/Playerslist2'
 import Fixtures from '../themes/football/Fixtures'
+import PointTable from '../themes/football/PointTable'
 import {socket} from '../socket/socket'
+import {AnimatePresence, motion} from "framer-motion"
 
 const MatchBoard = () => {
   const [screen, setScreen] = useState()
@@ -15,17 +17,21 @@ const MatchBoard = () => {
   },[screen])
 
   return (
-    <>        
+    <>   
+    
       {(screen==='statistics')?
-        (<Statistics/>):
-       (screen==='scoreboard')?
-        (<Scoreboard/>):
-       (screen==='playerslist')?
-        (<Playerslist/>):
-        (screen==='fixtures')?
-        (<Fixtures/>):
-        (<Scoreboard/>)
+      (<Statistics/>):
+      (screen==='scoreboard')?
+      (<motion.div><Scoreboard/></motion.div>):
+      (screen==='playerslist')?
+      (<Playerslist/>):
+      (screen==='fixtures')?
+      (<Fixtures/>):
+      (screen==='pointtable')?
+      (<PointTable/>):
+      (<Scoreboard/>)
       }
+
     </>
   )
 }

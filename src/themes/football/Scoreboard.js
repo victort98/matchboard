@@ -6,6 +6,7 @@ import { useSpring, animated } from 'react-spring';
 import {socket} from '../../socket/socket';
 import useImage from 'use-image';
 import FieldImage from '../../images/football.png'
+import {AnimatePresence, motion} from 'framer-motion'
 
 const Scoreboard = () => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
@@ -169,10 +170,34 @@ const T1RcardControlar = () =>{
       }
     }
   
-    
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: '-100%',
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: '100%',
+      scale: 0.8
+    }
+  }
 
-
-
+  const pageTransition = {
+    // duration: 2
+    // transition: 'linear'
+    // type: 'spring',
+    // stiffness: 50
+    type: 'tween',
+    // ease: 'easeInOut',
+    ease: 'anticipate',
+    duration: 2
+  }
 
   const fadeTransition = useSpring({
     from: {opacity:0, marginLeft:-100, marginRight: 100},
@@ -197,7 +222,9 @@ const T1RcardControlar = () =>{
       </path>      
     </svg>
     <img src={FieldImage} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '5%', height: '90%'}} />
-     <animated.div style={fadeTransition}>
+     {/* <animated.div style={fadeTransition}> */}
+     <AnimatePresence>  
+     <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
       <Stage y={50} width={1280} height={720}>
         <Layer fill="#ddd">
          {/* <FrontGroundImage/> */}
@@ -238,7 +265,9 @@ const T1RcardControlar = () =>{
           {T2RcardControlar()}        
         </Layer>
       </Stage>
-      </animated.div>
+      </motion.div>
+      </AnimatePresence>   
+      {/* </animated.div> */}
     </div>
   )
 }

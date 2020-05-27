@@ -17,6 +17,7 @@ import Register from './users/UserRegister'
 import ProtectedRoutes from './routes/ProtectedRoutes'
 import LeagueTable from './controlboard/LeagueTable'
 import FootballFixtures from './themes/football/Fixtures'
+import PointTable from './themes/football/PointTable'
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
                   <Route exact path='/basketball' component={Basketball}/>            
                   <Route exact path='/hockey' component={Hockey}/>            
                   <Route exact path='/footballfixtures' component={FootballFixtures}/>            
+                  <Route exact path='/pointtable' component={PointTable}/>            
                 </Router>
               </UserContextProvider>
             </ControlClockContextProvider>

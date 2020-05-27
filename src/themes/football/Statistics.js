@@ -6,6 +6,7 @@ import { useSpring, animated } from 'react-spring';
 import {socket} from '../../socket/socket';
 import useImage from 'use-image';
 import FieldImage from '../../images/football.png'
+import {AnimatePresence, motion} from 'framer-motion'
 
 const Statistics = () => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
@@ -122,6 +123,35 @@ const Statistics = () => {
     return list
   }
 
+   const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: '-100%',
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: '100%',
+      scale: 1.2
+    }
+  }
+
+  const pageTransition = {
+    // duration: 2
+    // transition: 'linear'
+    // type: 'spring',
+    // stiffness: 50
+    type: 'tween',
+    // ease: 'easeInOut',
+    ease: 'anticipate',
+    duration: 1
+  }
+
   return (
     <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1, height:'100vh'}}>
     <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:'100vh'}}>
@@ -140,7 +170,9 @@ const Statistics = () => {
       </path>
     </svg>
     <img src={FieldImage} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '5%', height: '90%'}}/>
-     <animated.div style={fadeTransition}>
+     {/* <animated.div style={fadeTransition}> */}
+    <AnimatePresence>  
+     <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
       <Stage y={50} width={1280} height={720}>
         <Layer fill="#ddd">
          {/* <FrontGroundImage/> */}
@@ -181,7 +213,9 @@ const Statistics = () => {
           {matchInformationStat(1040, 280, 38, statisticsTeamTwo)}
         </Layer>
       </Stage>
-      </animated.div>
+      </motion.div>
+      </AnimatePresence>
+      {/* </animated.div> */}
     </div>
   )
 }

@@ -48,6 +48,18 @@ io.on('connection', (socket)=> {
     io.emit('board', data)
   })
 
+  socket.on('getTime', (data)=>{
+    console.log(data + " called")
+    console.log("getting time called")
+    socket.broadcast.emit("getTime", data)
+
+  })
+
+  socket.on('fetchTime', (data) => {
+    console.log("fetching")
+    socket.broadcast.emit("fetchTime", data)
+  })
+
   socket.on('confirmation', (data)=>{
     console.log(data)
     //io.emit('board', data)

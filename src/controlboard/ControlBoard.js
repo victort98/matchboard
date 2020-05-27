@@ -4,6 +4,7 @@ import ControlClock from './ControlClock'
 import {ControlClockContext} from '../contexts/ControlClockContextProvider'
 import {socket} from '../socket/socket';
 import MasterClock from './MasterClock'
+import ClockTimer from '../demo/ClockTimer.js'
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
@@ -12,6 +13,13 @@ const ControlBoard = (props) => {
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
+  
+  /* CLOCK */
+  const [startDate, setStartDate] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [seconds, setSeconds] = useState("00:00");
+  /* CLOCK */
 
   /* STATISTICS */
   const [team1Yellow, setTeam1Yellow] = useState(0)
@@ -57,6 +65,51 @@ const ControlBoard = (props) => {
     socket.emit('scoreInfo', scoreInfo)
   }
 
+  useEffect(()=>{
+    socket.on('getTime', (data)=>{ 
+      console.log("recieved getTime request")
+      socket.emit('fetchTime', [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
+  {action: "SET_TIME_ELAPSED", payload: timeElapsed }])
+    })
+    return function cleanup() {
+      socket.off('getTime')};
+  },)
+
+  function sendTime(){
+    console.log("sending time")
+    console.log("startdate: " + startDate)
+    console.log("is active: " + isActive)
+    console.log("time elapsed: " + timeElapsed)
+    socket.emit('timeInfo', [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
+    {action: "SET_TIME_ELAPSED", payload: timeElapsed }])
+  }
+
+  function startClock() {
+    setStartDate(Date.now())
+    socket.emit('timeInfo', [{action: "SET_START_DATE", payload: Date.now()}])
+    setIsActive(!isActive)
+    socket.emit('timeInfo', [{action: "SET_IS_ACTIVE", payload: true}])
+  }
+
+  function pauseClock() {
+    let elapsed = Date.now() - startDate
+    setIsActive(!isActive)
+    socket.emit('timeInfo', [{action: "SET_IS_ACTIVE", payload: false}])
+    setTimeElapsed(timeElapsed + elapsed)
+    socket.emit('timeInfo', [{action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}])
+  }
+
+  function resetClock() {
+    let elapsed = Date.now() - startDate
+    setIsActive(false);
+    socket.emit('timeInfo', [{action: "SET_IS_ACTIVE", payload: false}])
+    setTimeElapsed(0);
+    socket.emit('timeInfo', [{action: "SET_TIME_ELAPSED", payload: 0}])
+    setSeconds("00:00");
+    socket.emit('timeInfo', [{action: "SET_SECONDS", payload: "00:00"}])
+   //setIsActive(false);
+  }
+  /*
   const startClock = () => {
     socket.emit('timeInfo', 'start')
     // setTimerActive(true)
@@ -79,6 +132,9 @@ const ControlBoard = (props) => {
     $('.stop').classList.remove('stop-active')
     socket.emit('timeInfo', 'reset')
   }
+  */
+
+
 
 
   useEffect(()=>{
@@ -96,7 +152,7 @@ const ControlBoard = (props) => {
       <div className="container-inputs">
       <div className="buttons">
         <button className="btnStyle start" onClick={()=> startClock()}>START</button>
-        <button className="btnStyle stop" onClick={()=> stopClock()}>STOP</button>
+        <button className="btnStyle stop" onClick={()=> pauseClock()}>STOP</button>
         <button className="btnStyle reset" onClick={()=>resetClock()}>RESET</button>
       </div>
 
@@ -115,10 +171,19 @@ const ControlBoard = (props) => {
         </div>
         <div className="time">
         {/* <MasterClock/> */}
-        <ControlClock/>
-          <br />
+        <div className="clockComponent">
+          <h1 className="clock"
+            style={{fontVariantNumeric:'tabular-nums'}}>
+              <ClockTimer
+              startDate={startDate} setStartDate={setStartDate}
+              timeElapsed={timeElapsed} setTimeElapsed={setTimeElapsed}
+              isActive={isActive} setIsActive={setIsActive}
+              seconds={seconds} setSeconds={setSeconds}
+              />
+          </h1>
         </div>
-
+        <br />
+        </div>
         <div className="team2">
         <label>SET TEAM 2</label>
           <br />

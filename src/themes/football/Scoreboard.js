@@ -1,17 +1,25 @@
 import React, {useEffect, useState, useContext} from 'react'
-import { Stage, Layer, Rect, Text, Circle, Image} from 'react-konva';
+import { Stage, Layer, Rect, Text, Circle, Image, Portal} from 'react-konva';
 import {ScoreClockContext} from '../../contexts/ScoreClockContextProvider'
 import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
 import { useSpring, animated } from 'react-spring';
 import {socket} from '../../socket/socket';
 import useImage from 'use-image';
 import FieldImage from '../../images/football.png'
+import ClockTimer from '../../demo/ClockTimer.js'
 
 const Scoreboard = () => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
 
   const [time, setTime] = useState(timeFormatted())
+
+  /* CLOCK */
+  const [startDate, setStartDate] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [seconds, setSeconds] = useState("00:00");
+  /* CLOCK */
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
@@ -22,7 +30,7 @@ const Scoreboard = () => {
   const [team2Red, setTeam2Red] = useState(0)
 
 
-  const [timerActive, setTimerActive] = useState()
+  const [timerActive, setTimerActive] = useState(false)
 
   useEffect(()=>{
     setTeamOneScore(scoreData.teamOne)
@@ -35,12 +43,141 @@ const Scoreboard = () => {
     setTeam2Red(scoreData.team2Red)
 
   }, [scoreData])
+  
+  useEffect(() => {
+    console.log("before run")
+    socket.emit('getTime', "scoreboard");
+    console.log("running useEffect")
+    socket.on('fetchTime', (data) => {
+      setStates(data)
+      /*
+      for (let item in data) {
+      
+        switch(data[item].action) {
+          case "SET_START_DATE":
+            setStartDate(data[item].payload)
+            break;
+          case "SET_IS_ACTIVE":
+            setIsActive(data[item].payload)
+            break;
+          case "SET_TIME_ELAPSED":
+            setTimeElapsed(data[item].payload)
+            break;
+          case "SET_SECONDS":
+            setSeconds(data[item].payload)
+            break;
+          default:
+            console.log("Error, check the payload action")
+            console.log(data[item])
+            console.log(data)
+        }
+      }
+      */
+
+    })   
+    return () => {
+      socket.off('fetchTime')
+  }
+  }, [])
+
+  function setStates(data){
+
+    for (let item in data) {
+      
+      switch(data[item].action) {
+        case "SET_START_DATE":
+          setStartDate(data[item].payload)
+          break;
+        case "SET_IS_ACTIVE":
+          setIsActive(data[item].payload)
+          break;
+        case "SET_TIME_ELAPSED":
+          setTimeElapsed(data[item].payload)
+          break;
+        case "SET_SECONDS":
+          setSeconds(data[item].payload)
+          break;
+        default:
+          console.log("Error, check the payload action")
+          console.log(data[item])
+          console.log(data)
+      }
+    }
+
+  }
 
   useEffect(()=>{
     socket.on('timeInfo', (data)=>{
-      setTimerActive(data)
-    })   
-  },[])
+
+      for (let item in data) {
+      
+        switch(data[item].action) {
+          case "SET_START_DATE":
+            setStartDate(data[item].payload)
+            break;
+          case "SET_IS_ACTIVE":
+            setIsActive(data[item].payload)
+            break;
+          case "SET_TIME_ELAPSED":
+            setTimeElapsed(data[item].payload)
+            break;
+          case "SET_SECONDS":
+            setSeconds(data[item].payload)
+            break;
+          default:
+            console.log("Error, check the payload action")
+            console.log(data[item])
+            console.log(data)
+        }
+      }})
+    return () => {
+      socket.off('timeInfo', (data)=>{
+
+        for (let item in data) {
+        
+          switch(data[item].action) {
+            case "SET_START_DATE":
+              setStartDate(data[item].payload)
+              break;
+            case "SET_IS_ACTIVE":
+              setIsActive(data[item].payload)
+              break;
+            case "SET_TIME_ELAPSED":
+              setTimeElapsed(data[item].payload)
+              break;
+            case "SET_SECONDS":
+              setSeconds(data[item].payload)
+              break;
+            default:
+              console.log("Error, check the payload action")
+              console.log(data[item])
+              console.log(data)
+          }
+        }})
+    }
+  },)
+
+  useEffect(() => {
+    let interval = null;
+
+    if (isActive) {
+
+      interval = setInterval(() => {
+        
+        let delta = Date.now() - startDate + timeElapsed;
+
+        let minutes = Math.floor(delta / 60 / 1000);
+        let seconds = Math.floor(delta / 1000) - minutes * 60;
+        let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
+        setSeconds(counter);
+
+      }, 500);
+    } else if (isActive && seconds !== "00:00") {
+
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
 
   useEffect(()=>{
     let timeStarted;
@@ -202,9 +339,12 @@ const T1RcardControlar = () =>{
           />
           <Circle x={640} y={125} radius={79.5} fill="green" shadowBlur={20} opacity={0.3} shadowOpacity= '0.9'/>
           <Circle x={640} y={125} radius={65} fill="#454648" />
+
+
+          {/*/////*/}
           <Text x={590} y={110} fontSize={40} wrap="char" fill="#fff"
             className='statistics-clock'
-            text={time}
+            text={seconds}
           />
           <Text x={634} y={155} fontSize={25} wrap="char" fill="#fff"
           text={overtime}

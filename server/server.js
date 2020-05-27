@@ -66,7 +66,6 @@ io.on('connection', (socket)=> {
   })
 
   socket.on('timesync', (data)=>{
-    //console.log(socket.id)
 
     setTimeout(() => {
 
@@ -74,19 +73,13 @@ io.on('connection', (socket)=> {
       console.log("timesync called from socket ID: " + socket.id)
       console.log("client timestamp: " +data)
   
-      let timestamp = Date.now()
-      //console.log(Date.now())
-      /*
-      setTimeout(() => {
-        timestamp = Date.now()
-      }, 25)
-      */
+      let timestamp = Date.now() + 3000
   
       console.log("server timestamp " + timestamp)
   
       //let timestamp = Date.now()
       //socket.emit('timesync', 'do you think so?', Date.now() (answer) {});
-      io.to(socket.id).emit('timesync', 'timestamp', timestamp);
+      io.to(socket.id).emit('timesync', timestamp);
       //io.to(socket.id).emit('timesync', 'I just met you')
       //  io.to(socketId).emit('hey', 'I just met you');
     }, 500)

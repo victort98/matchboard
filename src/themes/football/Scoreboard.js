@@ -45,35 +45,10 @@ const Scoreboard = () => {
   }, [scoreData])
   
   useEffect(() => {
-    console.log("before run")
     socket.emit('getTime', "scoreboard");
-    console.log("running useEffect")
     socket.on('fetchTime', (data) => {
-      setStates(data)
-      /*
-      for (let item in data) {
-      
-        switch(data[item].action) {
-          case "SET_START_DATE":
-            setStartDate(data[item].payload)
-            break;
-          case "SET_IS_ACTIVE":
-            setIsActive(data[item].payload)
-            break;
-          case "SET_TIME_ELAPSED":
-            setTimeElapsed(data[item].payload)
-            break;
-          case "SET_SECONDS":
-            setSeconds(data[item].payload)
-            break;
-          default:
-            console.log("Error, check the payload action")
-            console.log(data[item])
-            console.log(data)
-        }
-      }
-      */
-
+      console.log(data)
+      //setStates(data)
     })   
     return () => {
       socket.off('fetchTime')
@@ -109,60 +84,11 @@ const Scoreboard = () => {
     socket.on('timeInfo', (data)=>{
 
       setStates(data)
-      /*
-      for (let item in data) {
-        switch(data[item].action) {
-          case "SET_START_DATE":
-            setStartDate(data[item].payload)
-            break;
-          case "SET_IS_ACTIVE":
-            setIsActive(data[item].payload)
-            break;
-          case "SET_TIME_ELAPSED":
-            setTimeElapsed(data[item].payload)
-            break;
-          case "SET_SECONDS":
-            setSeconds(data[item].payload)
-            break;
-          default:
-            console.log("Error, check the payload action")
-            console.log(data[item])
-            console.log(data)
-        }}
-        */
-      })
+    })
     return () => {
-      socket.off('timeInfo') /*, (data)=>{
-
-        setStates(data)
-        
-        for (let item in data) {
-        
-          switch(data[item].action) {
-            case "SET_START_DATE":
-              setStartDate(data[item].payload)
-              break;
-            case "SET_IS_ACTIVE":
-              setIsActive(data[item].payload)
-              break;
-            case "SET_TIME_ELAPSED":
-              setTimeElapsed(data[item].payload)
-              break;
-            case "SET_SECONDS":
-              setSeconds(data[item].payload)
-              break;
-            default:
-              console.log("Error, check the payload action")
-              console.log(data[item])
-              console.log(data)
-          }
-        }
-      }
-      */
-      //)
-        
+      socket.off('timeInfo') 
     }
-  }, )
+  },)
 
   useEffect(() => {
     let interval = null;

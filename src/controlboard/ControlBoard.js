@@ -15,6 +15,7 @@ const ControlBoard = (props) => {
   const [overtime, setOvertime] = useState(0)
   
   /* CLOCK */
+  const [timeDifference, setTimeDifference] = useState(0);
   const [startDate, setStartDate] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -66,14 +67,40 @@ const ControlBoard = (props) => {
   }
 
   useEffect(()=>{
+    let localTimeAtRequest = Date.now()
+    socket.emit('timesync', localTimeAtRequest)
+    socket.on('timesync', (serverTimeStamp)=>{
+        let localTimeAtResponse = Date.now()
+        let lat = localTimeAtResponse - localTimeAtRequest;
+        let serverTimeAtRequest = serverTimeStamp - lat;
+        let diff = localTimeAtRequest - serverTimeAtRequest;
+        setTimeDifference(diff)
+        console.log("Time since request: " + lat + 'ms at reponse')
+        console.log("Timestamp from server: " + serverTimeStamp)
+        console.log("Server time at request: " + serverTimeAtRequest)
+        console.log("Server time is: " + diff + "ms compared to local")
+        console.log("local time is: " + new Date)
+        console.log("server time is: " + new Date(timeGet()))
+        
+      })
+    //socket.emit('confirmation', "confirmation recieved")
+    //console.log("timeDifference: "+timeDifference)
+
+  },[])
+
+  useEffect(()=>{
     socket.on('getTime', (data)=>{ 
-      console.log("recieved getTime request")
-      socket.emit('fetchTime', [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
-  {action: "SET_TIME_ELAPSED", payload: timeElapsed }])
+      //console.log("recieved getTime request")
+      socket.emit('fetchTime', {timestamp : Date.now(), actions: [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
+  {action: "SET_TIME_ELAPSED", payload: timeElapsed }]})
     })
     return function cleanup() {
       socket.off('getTime')};
   },)
+
+  function timeGet(){
+    return Date.now() + timeDifference;
+  }
 
   function sendTime(){
     console.log("sending time")
@@ -85,6 +112,8 @@ const ControlBoard = (props) => {
   }
 
   function startClock() {
+    console.log("Sending at: " + new Date(timeGet()) + " server time")
+    console.log("Sending at: " + new Date + " local time")
     setStartDate(Date.now())
     socket.emit('timeInfo', [{action: "SET_START_DATE", payload: Date.now()}])
     setIsActive(!isActive)
@@ -107,7 +136,6 @@ const ControlBoard = (props) => {
     socket.emit('timeInfo', [{action: "SET_TIME_ELAPSED", payload: 0}])
     setSeconds("00:00");
     socket.emit('timeInfo', [{action: "SET_SECONDS", payload: "00:00"}])
-   //setIsActive(false);
   }
   /*
   const startClock = () => {

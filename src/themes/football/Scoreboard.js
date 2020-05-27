@@ -103,14 +103,14 @@ const Scoreboard = () => {
           console.log(data)
       }
     }
-
   }
 
   useEffect(()=>{
     socket.on('timeInfo', (data)=>{
 
+      setStates(data)
+      /*
       for (let item in data) {
-      
         switch(data[item].action) {
           case "SET_START_DATE":
             setStartDate(data[item].payload)
@@ -128,11 +128,14 @@ const Scoreboard = () => {
             console.log("Error, check the payload action")
             console.log(data[item])
             console.log(data)
-        }
-      }})
+        }}
+        */
+      })
     return () => {
-      socket.off('timeInfo', (data)=>{
+      socket.off('timeInfo') /*, (data)=>{
 
+        setStates(data)
+        
         for (let item in data) {
         
           switch(data[item].action) {
@@ -153,9 +156,13 @@ const Scoreboard = () => {
               console.log(data[item])
               console.log(data)
           }
-        }})
+        }
+      }
+      */
+      //)
+        
     }
-  },)
+  }, )
 
   useEffect(() => {
     let interval = null;

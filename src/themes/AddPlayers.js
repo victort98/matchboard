@@ -4,33 +4,42 @@ import ReactDOM from "react-dom";
 
 const AddPlayers = () => {
 
-    const [inputValue, setInputValue] = useState("");
+    const [teamName, setTeamName] = useState("");
+    const [player1, setPlayer1] = useState("");
+    const [player2, setPlayer2] = useState("");
+    const [player3, setPlayer3] = useState("");
+    const [player4, setPlayer4] = useState("");
+    const [player5, setPlayer5] = useState("");
+    const [player6, setPlayer6] = useState("");
+    const [player7, setPlayer7] = useState("");
+    const [player8, setPlayer8] = useState("");
+    const [player9, setPlayer9] = useState("");
+    const [player10, setPlayer10] = useState("");
+    const [player11, setPlayer11] = useState("");
+    const [player12, setPlayer12] = useState("");
+    const [player13, setPlayer13] = useState("");
+    const [player14, setPlayer14] = useState("");
 
-    const createInputsRow1 = (num) => {
-        const playerList = []
-        let player = 1;
-        let index = 0;
-        for(let i = 1; i <= num; i++){
-            playerList.push(<p>player {player++}</p>)
-            playerList.push(<input key={index++} className="playerNameInput" onChange={(e) => setInputValue(e.target.value)}></input>)
-          }
-          return (
-              playerList
-          );
+        const submitPlayers = () => {
+            let playerList = []
+            playerList.push(player1)
+            playerList.push(player2)
+            playerList.push(player3)
+            playerList.push(player4)
+            playerList.push(player5)
+            playerList.push(player6)
+            playerList.push(player7)
+            playerList.push(player8)
+            playerList.push(player9)
+            playerList.push(player10)
+            playerList.push(player11)
+            playerList.push(player12)
+            playerList.push(player13)
+            playerList.push(player14)
+            console.log(teamName)
+            console.log(playerList)
         }
 
-        const createInputsRow2 = (num) => {
-            const playerList = []
-            let player = 8;
-            let index = 7;
-            for(let i = 1; i <= num; i++){
-                playerList.push(<p>player {player++}</p>)
-                playerList.push(<input key={index++} className="playerNameInput"></input>)
-              }
-              return (
-                  playerList
-              );
-            }
 
     return(
         <div>
@@ -38,7 +47,7 @@ const AddPlayers = () => {
                 <div className="inputFields">
                     <label>TEAM NAME</label>
                     <br />
-                    <input className="teamNameInput"></input>
+                    <input className="teamNameInput" onChange={(e) => setTeamName(e.target.value)}></input>
                 </div>
                 <div className="playerInformation">
                     <div className="buttons">
@@ -49,14 +58,53 @@ const AddPlayers = () => {
                     <button className="help buttonDesign">HELP</button>
                     </div>
                     <div className="playerNames1">
-                    {createInputsRow1(7)}
+                    <p>Player 1</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer1(e.target.value)}></input>
+                    <br />
+                    <p>Player 2</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer2(e.target.value)}></input>
+                    <br />
+                    <p>Player 3</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer3(e.target.value)}></input>
+                    <br />
+                    <p>Player 4</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer4(e.target.value)}></input>
+                    <br />
+                    <p>Player 5</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer5(e.target.value)}></input>
+                    <br />
+                    <p>Player 6</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer6(e.target.value)}></input>
+                    <br />
+                    <p>Player 7</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer7(e.target.value)}></input>
                     </div>
                     <div className="playerNames2">
-                    {createInputsRow2(7)}
+                    <p>Player 8</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer8(e.target.value)}></input>
+                    <br />
+                    <p>Player 9</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer9(e.target.value)}></input>
+                    <br />
+                    <p>Player 10</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer10(e.target.value)}></input>
+                    <br />
+                    <p>Player 11</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer11(e.target.value)}></input>
+                    <br />
+                    <p>Player 12</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer12(e.target.value)}></input>
+                    <br />
+                    <p>Player 13</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer13(e.target.value)}></input>
+                    <br />
+                    <p>Player 14</p>
+                    <input className="playerNameInput" onChange={(e) => setPlayer14(e.target.value)}></input>
+
                     </div>
                 </div>
                 <div className="submitButton">
-                <button className="submit">Submit</button>
+                <button className="submit" onClick={submitPlayers}>Submit</button>
                 </div>
             </div>
             <div className="container">

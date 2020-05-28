@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useContext} from 'react'
-import { Stage, Layer, Rect, Text, Circle, Image} from 'react-konva';
+import { Stage, Layer, Rect, Text, Circle, Image, Portal} from 'react-konva';
 import {ScoreClockContext} from '../../contexts/ScoreClockContextProvider'
 import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
 import { useSpring, animated } from 'react-spring';
 import {socket} from '../../socket/socket';
 import useImage from 'use-image';
 import FieldImage from '../../images/football.png'
+//import ClockTimer from '../../demo/ClockTimer.js'
 
 const Scoreboard = () => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
@@ -14,6 +15,14 @@ const Scoreboard = () => {
   const [time, setTime] = useState(timeFormatted())
   const [teamOneName, setTeamOneName] = useState(0)
   const [teamTwoName, setTeamTwoName] = useState(0)
+
+  /* CLOCK */
+  const [timeDifference, setTimeDifference] = useState(0);
+  const [startDate, setStartDate] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [seconds, setSeconds] = useState("00:00");
+  /* CLOCK */
 
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
@@ -24,7 +33,7 @@ const Scoreboard = () => {
   const [team2Red, setTeam2Red] = useState(0)
 
 
-  const [timerActive, setTimerActive] = useState()
+  const [timerActive, setTimerActive] = useState(false)
 
   useEffect(()=>{
     setTeamOneName(scoreData.teamOneName)
@@ -42,33 +51,105 @@ const Scoreboard = () => {
   }, [scoreData])
 
   useEffect(()=>{
-    socket.on('timeInfo', (data)=>{
-      setTimerActive(data)
-    })   
+    let localTimeAtRequest = Date.now()
+    socket.emit('timesync', localTimeAtRequest)
+    socket.on('timesync', (serverTimeStamp)=>{
+        let localTimeAtResponse = Date.now()
+        let lat = localTimeAtResponse - localTimeAtRequest;
+        let serverTimeAtRequest = serverTimeStamp - lat;
+        let diff = localTimeAtRequest - serverTimeAtRequest;
+        setTimeDifference(diff)
+        console.log("Time since request: " + lat + 'ms at reponse')
+        console.log("Timestamp from server: " + serverTimeStamp)
+        console.log("Server time at request: " + serverTimeAtRequest)
+        console.log("Server time is: " + diff + "ms compared to local")
+        console.log("local time is: " + new Date)
+        console.log("server time is: " + new Date(Date.now() + diff))
+      })
   },[])
+  
+  useEffect(() => {
+    setTimeout(() => {
+      let localTimeAtRequest = timeNow();
+      socket.emit('getTime', "scoreboard", localTimeAtRequest);
+      socket.on('fetchTime', (data) => {
+      let localTimeAtResponse = timeNow();
+      let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
+      console.log("Time from request until response: " + timeSinceRequest +"ms")
+      setStates(data.actions)
+    })   
+
+    }, 200)
+    
+    return () => {
+      socket.off('fetchTime')
+  }
+  }, [])
+
+  function timeNow(){
+    return Date.now() + timeDifference;
+  }
+
+  function setStates(data){
+
+    for (let item in data) {
+      
+      switch(data[item].action) {
+        case "SET_START_DATE":
+          setStartDate(data[item].payload)
+          break;
+        case "SET_IS_ACTIVE":
+          setIsActive(data[item].payload)
+          break;
+        case "SET_TIME_ELAPSED":
+          setTimeElapsed(data[item].payload)
+          break;
+        case "SET_SECONDS":
+          setSeconds(data[item].payload)
+          break;
+        default:
+          console.log("Error, check the payload action")
+          console.log(data[item])
+          console.log(data)
+      }
+    }
+  }
 
   useEffect(()=>{
-    let timeStarted;
-    if (timerActive === 'start') {
-      startTime()
-      timeStarted = setInterval(() => {
-        setTime(timeFormatted())
-      }, 300);   
-    } else if(timerActive === 'stop'){
-      stopTime()
-      clearInterval(timeStarted)
-    } else if(timerActive === 'reset'){
-      resetTime()
+    socket.on('timeInfo', (data)=>{
+      setStates(data.actions)
+    })
+    return () => {
+      socket.off('timeInfo') 
     }
-  }, [timerActive])
+  },)
+
+  useEffect(() => {
+    let interval = null;
+
+    if (isActive) {
+
+      interval = setInterval(() => {
+        let delta = timeNow() - startDate + timeElapsed;
+
+        let minutes = Math.floor(delta / 60 / 1000);
+        let seconds = Math.floor(delta / 1000) - minutes * 60;
+        let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
+        setSeconds(counter);
+
+      }, 500);
+    } else if (isActive && seconds !== "00:00") {
+
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
 
   const FrontGroundImage = () => {
     const [image] = useImage(FieldImage);   
     return (<Image image={image} x={235} y={33} width={825} height={555} opacity={0.6}/>);
   };
 
-
- 
 //team 1 Yellow Card
 const T1YcardControlar = () =>{
 
@@ -207,9 +288,12 @@ const T1RcardControlar = () =>{
           />
           <Circle x={640} y={125} radius={79.5} fill="green" shadowBlur={20} opacity={0.3} shadowOpacity= '0.9'/>
           <Circle x={640} y={125} radius={65} fill="#454648" />
+
+
+          {/*/////*/}
           <Text x={590} y={110} fontSize={40} wrap="char" fill="#fff"
             className='statistics-clock'
-            text={time}
+            text={seconds}
           />
           <Text x={634} y={155} fontSize={25} wrap="char" fill="#fff"
           text={overtime}

@@ -1,9 +1,10 @@
 import React, {useContext, useState, useEffect} from 'react'
 import '../themes/football/football.css'
-import ControlClock from './ControlClock'
+//import ControlClock from './ControlClock'
 import {ControlClockContext} from '../contexts/ControlClockContextProvider'
 import {socket} from '../socket/socket';
-import MasterClock from './MasterClock'
+//import MasterClock from './MasterClock'
+//import ClockTimer from '../demo/ClockTimer.js'
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
@@ -14,6 +15,14 @@ const ControlBoard = (props) => {
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
+  
+  /* CLOCK */
+  const [timeDifference, setTimeDifference] = useState(0);
+  const [startDate, setStartDate] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [seconds, setSeconds] = useState("00:00");
+  /* CLOCK */
 
   /* STATISTICS */
   const [team1Yellow, setTeam1Yellow] = useState(0)
@@ -61,29 +70,68 @@ const ControlBoard = (props) => {
     socket.emit('scoreInfo', scoreInfo)
   }
 
-  const startClock = () => {
-    socket.emit('timeInfo', 'start')
-    // setTimerActive(true)
-    startTime()    
-    $('.start').classList.add('start-active')
-    $('.stop').classList.remove('stop-active')
+  useEffect(()=>{
+    //syncing time with server
+    let localTimeAtRequest = Date.now()
+    socket.emit('timesync', localTimeAtRequest)
+    socket.on('timesync', (serverTimeStamp)=>{
+        let localTimeAtResponse = Date.now()
+        let lat = localTimeAtResponse - localTimeAtRequest;
+        let serverTimeAtRequest = serverTimeStamp - lat;
+        let diff = localTimeAtRequest - serverTimeAtRequest;
+        setTimeDifference(diff)
+        console.log("Time since request: " + lat + 'ms at reponse')
+        console.log("Timestamp from server: " + serverTimeStamp)
+        console.log("Server time at request: " + serverTimeAtRequest)
+        console.log("Server time is: " + diff + "ms compared to local")
+        console.log("local time is: " + new Date)
+        console.log("server time is: " + new Date(Date.now() + diff))
+      })
+  },[])
+
+  useEffect(()=>{
+    socket.on('getTime', (data, clientTimestamp, serverTimestamp)=>{
+      console.log("request from: " + data)
+      console.log("request made at: " + new Date(clientTimestamp) + " local time")
+      console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
+      console.log("received at: " + new Date() + " local time")
+      //TODO use timeGet() instead of Date.now()
+      socket.emit('fetchTime', {timestamp : timeNow(), actions: [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
+      {action: "SET_TIME_ELAPSED", payload: timeElapsed }]})
+      //socket.emit('scoreInfo', scoreInfo)
+    })
+    return function cleanup() {
+      socket.off('getTime')};
+  },)
+
+  function timeNow(){
+    return Date.now() + timeDifference;
   }
 
-  const stopClock = () => {
-    stopTime()
-    // setTimerActive(false)
-    $('.start').classList.remove('start-active')
-    $('.stop').classList.add('stop-active')
-    socket.emit('timeInfo', 'stop')
+  function startClock() {
+    setStartDate(timeNow())
+    setIsActive(!isActive)
+    socket.emit('timeInfo',{timestamp: timeNow(), 
+      actions: [{action: "SET_START_DATE", payload: timeNow()}, {action: "SET_IS_ACTIVE", payload: true}]})
+
   }
 
-  const resetClock = () => {
-    resetTime()
-    $('.start').classList.remove('start-active')
-    $('.stop').classList.remove('stop-active')
-    socket.emit('timeInfo', 'reset')
+  function pauseClock() {
+    let elapsed = timeNow() - startDate
+    setIsActive(!isActive)
+    setTimeElapsed(timeElapsed + elapsed)
+    socket.emit('timeInfo', {timestamp: timeNow(),
+    actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}]})
   }
 
+  function resetClock() {
+    setIsActive(false);
+    setTimeElapsed(0);
+    setSeconds("00:00");
+    socket.emit('timeInfo', {timestamp: timeNow(),
+    actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: 0},
+    {action: "SET_SECONDS", payload: "00:00"}]})
+  }
 
   useEffect(()=>{
     if (screen === 'statistics') {
@@ -99,12 +147,33 @@ const ControlBoard = (props) => {
     }
   }, [screen])
 
+  useEffect(() => {
+    let interval = null;
+
+    if (isActive) {
+
+      interval = setInterval(() => {
+        let delta = timeNow() - startDate + timeElapsed;
+
+        let minutes = Math.floor(delta / 60 / 1000);
+        let seconds = Math.floor(delta / 1000) - minutes * 60;
+        let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
+        setSeconds(counter);
+
+      }, 500);
+    } else if (isActive && seconds !== "00:00") {
+
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
+
   return (
     <div className="container-fluid">
       <div className="container-inputs">
       <div className="buttons">
         <button className="btnStyle start" onClick={()=> startClock()}>START</button>
-        <button className="btnStyle stop" onClick={()=> stopClock()}>STOP</button>
+        <button className="btnStyle stop" onClick={()=> pauseClock()}>STOP</button>
         <button className="btnStyle reset" onClick={()=>resetClock()}>RESET</button>
       </div>
 
@@ -123,10 +192,21 @@ const ControlBoard = (props) => {
         </div>
         <div className="time">
         {/* <MasterClock/> */}
-        <ControlClock/>
-          <br />
+        <div className="clockComponent">
+          <h1 className="clock"
+            style={{fontVariantNumeric:'tabular-nums'}}>
+              {seconds}
+       {/*       <ClockTimer
+              startDate={startDate} setStartDate={setStartDate}
+              timeElapsed={timeElapsed} setTimeElapsed={setTimeElapsed}
+              isActive={isActive} setIsActive={setIsActive}
+              seconds={seconds} setSeconds={setSeconds}
+              offSet={timeDifference}
+       />*/}
+          </h1>
         </div>
-
+        <br />
+        </div>
         <div className="team2">
         <label>SET TEAM 2</label>
           <br />

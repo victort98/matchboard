@@ -1,28 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Roboto+Mono&display=swap');
 
-h1{
+.lt-heading{
     position: relative;
     font-size: 30px;
+    font-weight: bold;
     margin-top: 100px;
     text-align: center;
     color: rgb(104, 147, 190);
 }
 
-.flex-container{
+.lt-flex-container{
    margin: auto; 
    display: flex;  
    padding: 3px;
    line-height: 1.65;
   }
 
-.left-buttons{
-    flex: .17;
-    margin-left: 500px;
+.lt-left-buttons{
+    position: absolute;
+    margin-left:28%;
     margin-top:55px;
     
 }
 
-.left-buttons button{
+.lt-left-buttons button{
     display: block;
     padding: 10px;
     margin: 20px;
@@ -34,7 +35,7 @@ h1{
 
 }
 
-.left-buttons button:hover{
+.lt-left-buttons button:hover{
     
         color: #fff;
         background: rgb(104, 147, 190);
@@ -43,7 +44,8 @@ h1{
 }
 
 .team-name{
-    flex:.12;
+    position: absolute;
+    margin-left: 40%;
     text-align: center;
     
 }
@@ -56,8 +58,9 @@ h1{
     
 }
 .played{
-    
-    flex: .06;
+    position: absolute;
+    margin-left: 49%;
+    text-align: center;   
 }
 
 .played input{
@@ -68,7 +71,8 @@ h1{
     border: none;    
 }
 .won{
-    flex: .06;
+    position: absolute;
+    margin-left: 53%;
     text-align: center;
 }
 .won input{
@@ -80,7 +84,9 @@ h1{
     border: none;   
 }
 .drawn{
-    flex: .06;
+    position: absolute;
+    margin-left: 57%;
+    text-align: center;
     
 }
 .drawn input{
@@ -92,7 +98,8 @@ h1{
     border: none;    
 }
 .lost{
-    flex: .06;
+    position: absolute;
+    margin-left: 61%;
     text-align: center;
 }
 .lost input{
@@ -104,7 +111,9 @@ h1{
     border: none;   
 }
 .point{
-    flex: .06;
+    position: absolute;
+    margin-left: 65%;
+    text-align: center;
     
 }
 .point input{
@@ -116,20 +125,21 @@ h1{
     border: none;    
 }
 
-.submit input[type='submit']{
+.lt-submit input[type='submit']{
+    position: absolute;;
     display: block;
     padding: 15px;
     margin: 20px;
     width: 250px;
     border: none;
     border-radius: 20px;
-    margin-top: 3%;
+    margin-top: 18%;
     margin-left: 44%;
     font-size: 25px;
     color: green;
 }
 
-.submit input[type='submit']:hover{
+.lt-submit input[type='submit']:hover{
     
     color: #fff;
     background: green;

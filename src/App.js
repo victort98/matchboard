@@ -18,6 +18,9 @@ import ProtectedRoutes from './routes/ProtectedRoutes'
 import LeagueTable from './controlboard/LeagueTable'
 import FootballFixtures from './themes/football/Fixtures'
 import PointTable from './themes/football/PointTable'
+import MatchFixture from './controlboard/MatchFixtures'
+
+
 
 const App = () => {
   return (
@@ -35,7 +38,8 @@ const App = () => {
                   <Route exact path='/playerslist' component={Playerslist}/>            
                   <Route exact path='/statistics' component={Statistics}/>            
                   <Route exact path='/masterclock' component={MasterClock}/> 
-                  <Route exact path='/leaguetable' component={LeagueTable}/>          
+                  <Route exact path='/leaguetable' component={LeagueTable}/> 
+                  <Route exact path='/matchfixture' component={MatchFixture}/>
                   <Route exact path='/basketball' component={Basketball}/>            
                   <Route exact path='/hockey' component={Hockey}/>            
                   <Route exact path='/footballfixtures' component={FootballFixtures}/>            

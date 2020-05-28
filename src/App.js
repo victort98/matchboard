@@ -12,7 +12,7 @@ import MasterClock from './controlboard/MasterClock'
 import Basketball from './themes/basketball/Basketball.js'
 import Hockey from './themes/hockey/Hockey.js'
 import UserLogin from './users/UserLogin.js'
-import Clockdemo from './demo/Clockdemo.js'
+//import Clockdemo from './demo/Clockdemo.js'
 
 
 const App = () => {
@@ -31,7 +31,7 @@ const App = () => {
                 <Route exact path='/masterclock' component={MasterClock}/>            
                 <Route exact path='/basketball' component={Basketball}/>            
                 <Route exact path='/hockey' component={Hockey}/>
-                <Route exact path='/clockdemo' component={Clockdemo}/>     
+                    
                 
               </Router>
             </ControlClockContextProvider>

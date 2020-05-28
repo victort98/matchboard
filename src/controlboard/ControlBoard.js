@@ -4,7 +4,7 @@ import '../themes/football/football.css'
 import {ControlClockContext} from '../contexts/ControlClockContextProvider'
 import {socket} from '../socket/socket';
 //import MasterClock from './MasterClock'
-import ClockTimer from '../demo/ClockTimer.js'
+//import ClockTimer from '../demo/ClockTimer.js'
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
@@ -139,6 +139,27 @@ const ControlBoard = (props) => {
     }
   }, [screen])
 
+  useEffect(() => {
+    let interval = null;
+
+    if (isActive) {
+
+      interval = setInterval(() => {
+        let delta = timeNow() - startDate + timeElapsed;
+
+        let minutes = Math.floor(delta / 60 / 1000);
+        let seconds = Math.floor(delta / 1000) - minutes * 60;
+        let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
+        setSeconds(counter);
+
+      }, 500);
+    } else if (isActive && seconds !== "00:00") {
+
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
+
   return (
     <div className="container-fluid">
       <div className="container-inputs">
@@ -166,13 +187,14 @@ const ControlBoard = (props) => {
         <div className="clockComponent">
           <h1 className="clock"
             style={{fontVariantNumeric:'tabular-nums'}}>
-              <ClockTimer
+              {seconds}
+       {/*       <ClockTimer
               startDate={startDate} setStartDate={setStartDate}
               timeElapsed={timeElapsed} setTimeElapsed={setTimeElapsed}
               isActive={isActive} setIsActive={setIsActive}
               seconds={seconds} setSeconds={setSeconds}
               offSet={timeDifference}
-              />
+       />*/}
           </h1>
         </div>
         <br />

@@ -6,7 +6,7 @@ import { useSpring, animated } from 'react-spring';
 import {socket} from '../../socket/socket';
 import useImage from 'use-image';
 import FieldImage from '../../images/football.png'
-import ClockTimer from '../../demo/ClockTimer.js'
+//import ClockTimer from '../../demo/ClockTimer.js'
 
 const Scoreboard = () => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)

@@ -39,8 +39,9 @@
 
 
 .mf-input-wrapper {
-    margin-top: 2em;
-    margin-left: 2%;
+    margin-top: 10px;
+    margin-left: 42%;
+    position: absolute;
 }
 .mf-input-wrapper div> input[type='text']{
     padding:10px 25px;

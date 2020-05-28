@@ -21,20 +21,15 @@ const LeagueTable = () => {
             <div className = "team-name">
                  <label>TEAM</label>
                  <input type="text"/>  
-
                  <label>TEAM</label>
                  <input type="text"/>
-
                  <label>TEAM</label>
                  <input type="text"/>
-
                  <label>TEAM</label>
                  <input type="text"/>
-
                  <label>TEAM</label>
                  <input type="text"/>
-
-                 <label>TEAM</label>
+                <label>TEAM</label>
                  <input type="text"/> 
             </div>
 

@@ -1,10 +1,8 @@
 import React from 'react'
-import {motion} from "framer-motion"
+import {motion, AnimatePresence} from "framer-motion"
 import moment from 'moment'
-import image from '../../images/football.png'
 
 const Fixtures = () => {
-
   const teamNames = ['ALLSVENSKAN, HERR 2020']
 
   const matchFixtures = [
@@ -29,19 +27,20 @@ const Fixtures = () => {
   ]
 
   const ListBar= () =>{
-    let bars = [];
+    let bars = [];    
     for (let i=0; i<3; i++) {
       let color; i%2===0?color='#fff':color='rgba(212, 241, 255, 0.99)'
       bars[i] = ( 
-        <>  
+        <>        
         <div style={{width:'290px', height:'35px', backgroundColor: '#3498DB', zIndex: 1, border: '1px solid #fff',
            padding:'6px 0', position:'relative', top: '22px', margin: '0 auto', borderRadius:'15px', textAlign: 'center'}}>
           <span style={{color:'#fff', paddingTop: '10px'}}>GROUP {matchFixtures[i].group}</span>
-        </div> 
+        </div>         
         <motion.div key={i} 
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 30, delay: 0.2, duration: 2 }}
+          exit={{scale: 0, transition: {duration: 1}}}
+          transition={{ type: "spring", stiffness: 260, damping: 30, delay: 1, duration: 3 }}
           style={{width:'940px', height:'64px', margin:'0 20px',  padding:'10px 0', background: "#fff", opacity: '0.97',
             borderRadius:'45px', boxShadow: '2px 5px 5px rgba(0, 0, 0, 0.7)', overflow: 'hidden'}}>          
           <motion.li 
@@ -54,61 +53,66 @@ const Fixtures = () => {
             <span>{matchFixtures[i].teamOne}</span>
             <span>{matchFixtures[i].teamTwo}</span>
           </motion.li>
-        </motion.div>
+        </motion.div>       
         <div style={{width:'190px', height:'62px', backgroundColor: '#fff', opacity: '0.97', borderBottomLeftRadius: 45, boxShadow: '0 3px 0 rgba(0, 0, 0, 0.7)',
            borderBottomRightRadius: 45, padding:'6px 0', position:'relative', bottom: '45px', margin: '0 auto', textAlign: 'center'}}>
           <span style={{color:'rgba(204,132,0, 0.99)', fontSize: '17.1px'}}>{moment(matchFixtures[i].date).format('ll')}</span>
           <span style={{color:'#222', padding: '5px 0', display: 'block'}}>{moment(matchFixtures[i].date).format('LT')}</span>
-        </div> 
+        </div>          
         </>
       );      
-    }   
+    }      
     return bars
   }  
 
   const HeadBar= () =>{
     let bars = [];
+     
     for (let i=0; i<1; i++) {
       bars[i] = (    
+        <AnimatePresence exitBeforeEnter>
         <motion.div key={i} 
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 30, delay: 0.2, duration: 2 }}
+          exit={{ scale: 0, transition: {duration: 1} }}
+          transition={{ type: "spring", stiffness: 260, damping: 30, delay: 0.5, duration: 2 }}
           style={{width:'940px', height:'55px', margin:'56px 20px 15px 20px', background: '#3498DB', opacity: '0.97',
             borderRadius:'45px', boxShadow: '5px 10px 10px rgba(0, 0, 0, 0.5)', overflow: 'hidden',
-            transform: 'rotateX(95deg)'}}>
+            transform: 'rotateX(95deg)', border: '1px solid #fff'}}>
           <motion.li 
             initial={{ scale: 0 }}
             animate={{ scale: 1}}
+            exit={{ scale: 0}}
             transition={{ type: "spring", stiffness: 260, damping: 10, delay: 0.5, duration: 2}}
               style={{display:'flex', justifyContent:'center', fontSize:'32px', 
               color: '#fff', margin:'9px', }}>
             <span>{teamNames[0]}</span>
           </motion.li>
         </motion.div>
+        </AnimatePresence>
       );      
     }   
     return bars
   }  
 
-  return (
-    <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1, width: '100vw', height:'100vh'}}>
-      <div style={{zIndex:10, margin: '0 auto', alignSelf: 'center'}}>        
-        <HeadBar/>
-        <ListBar/>
-      </div>
+  const pageVariants = {
+    initial : { opacity: 0, y: '-100vh', scale: 0.8 },
+    in: { opacity: 1, y: 0, scale: 1 },
+    out: { opacity: 0, y: '100vh', scale: 1.2 }
+  }
 
-      <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:'100vh'}}>
-        <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" strokeWidth="100px" strokeLinejoin="miter" strokeLinecap="butt" 
-          strokeMiterlimit="4" shapeRendering="auto" id="Path_4" d="M 418.5040283203125 -2.817545237121521e-07 L 1465.7373046875 -2.817545237121521e-07 
-            C 1696.870727539063 -2.817545237121521e-07 1884.241333007813 192.5970764160156 1884.241333007813 430.1777038574219 
-            L 1884.241333007813 650.2685546875 C 1884.241333007813 887.84912109375 1696.870727539063 1080.4462890625 1465.7373046875 1080.4462890625 
-            L 418.5040283203125 1080.4462890625 C 187.3706207275391 1080.4462890625 7.441341836056381e-07 887.84912109375 7.441341836056381e-07 650.2685546875 
-            L 7.441341836056381e-07 430.1777038574219 C 7.441341836056381e-07 192.5970764160156 187.3706207275391 -2.817545237121521e-07 418.5040283203125 -2.817545237121521e-07 Z">
-        </path>
-      </svg>
-      <img src={image} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '5%', height: '90%'}} />
-    </div>
+  const pageTransition = {
+    type: 'tween',
+    ease: 'easeInOut',
+    duration: 1
+  }
+
+  return (
+    <motion.div style={{zIndex:1, width: '970px', height: '569px', margin: '-55px auto 0 auto', overflowY: 'hidden'}}
+      initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}> 
+      <HeadBar/>
+      <ListBar/>
+    </motion.div>
   )
 }
 

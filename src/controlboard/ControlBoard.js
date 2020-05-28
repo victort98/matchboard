@@ -9,8 +9,8 @@ const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
   const {startTime, stopTime, resetTime} = useContext(ControlClockContext)
   const [screen, setScreen] = useState()
-  const [teamOneName, setTeamOneName] = useState(0)
-  const [teamTwoName, setTeamTwoName] = useState(0)
+  const [teamOneName, setTeamOneName] = useState('')
+  const [teamTwoName, setTeamTwoName] = useState('')
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)

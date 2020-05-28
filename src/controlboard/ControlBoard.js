@@ -1,9 +1,9 @@
 import React, {useContext, useState, useEffect} from 'react'
 import '../themes/football/football.css'
-import ControlClock from './ControlClock'
+//import ControlClock from './ControlClock'
 import {ControlClockContext} from '../contexts/ControlClockContextProvider'
 import {socket} from '../socket/socket';
-import MasterClock from './MasterClock'
+//import MasterClock from './MasterClock'
 import ClockTimer from '../demo/ClockTimer.js'
 
 const ControlBoard = (props) => {
@@ -67,6 +67,7 @@ const ControlBoard = (props) => {
   }
 
   useEffect(()=>{
+    //syncing time with server
     let localTimeAtRequest = Date.now()
     socket.emit('timesync', localTimeAtRequest)
     socket.on('timesync', (serverTimeStamp)=>{
@@ -80,90 +81,53 @@ const ControlBoard = (props) => {
         console.log("Server time at request: " + serverTimeAtRequest)
         console.log("Server time is: " + diff + "ms compared to local")
         console.log("local time is: " + new Date)
-        console.log("server time is: " + new Date(timeGet()))
-        
+        console.log("server time is: " + new Date(Date.now() + diff))
       })
-    //socket.emit('confirmation', "confirmation recieved")
-    //console.log("timeDifference: "+timeDifference)
-
   },[])
 
   useEffect(()=>{
-    socket.on('getTime', (data)=>{ 
-      //console.log("recieved getTime request")
-      socket.emit('fetchTime', {timestamp : Date.now(), actions: [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
-  {action: "SET_TIME_ELAPSED", payload: timeElapsed }]})
+    socket.on('getTime', (data, clientTimestamp, serverTimestamp)=>{
+      console.log("request from: " + data)
+      console.log("request made at: " + new Date(clientTimestamp) + " local time")
+      console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
+      console.log("received at: " + new Date() + " local time")
+      //TODO use timeGet() instead of Date.now()
+      socket.emit('fetchTime', {timestamp : timeNow(), actions: [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
+      {action: "SET_TIME_ELAPSED", payload: timeElapsed }]})
+      //socket.emit('scoreInfo', scoreInfo)
     })
     return function cleanup() {
       socket.off('getTime')};
   },)
 
-  function timeGet(){
+  function timeNow(){
     return Date.now() + timeDifference;
   }
 
-  function sendTime(){
-    console.log("sending time")
-    console.log("startdate: " + startDate)
-    console.log("is active: " + isActive)
-    console.log("time elapsed: " + timeElapsed)
-    socket.emit('timeInfo', [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
-    {action: "SET_TIME_ELAPSED", payload: timeElapsed }])
-  }
-
   function startClock() {
-    console.log("Sending at: " + new Date(timeGet()) + " server time")
-    console.log("Sending at: " + new Date + " local time")
-    setStartDate(Date.now())
-    socket.emit('timeInfo', [{action: "SET_START_DATE", payload: Date.now()}])
+    setStartDate(timeNow())
     setIsActive(!isActive)
-    socket.emit('timeInfo', [{action: "SET_IS_ACTIVE", payload: true}])
+    socket.emit('timeInfo',{timestamp: timeNow(), 
+      actions: [{action: "SET_START_DATE", payload: timeNow()}, {action: "SET_IS_ACTIVE", payload: true}]})
+
   }
 
   function pauseClock() {
-    let elapsed = Date.now() - startDate
+    let elapsed = timeNow() - startDate
     setIsActive(!isActive)
-    socket.emit('timeInfo', [{action: "SET_IS_ACTIVE", payload: false}])
     setTimeElapsed(timeElapsed + elapsed)
-    socket.emit('timeInfo', [{action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}])
+    socket.emit('timeInfo', {timestamp: timeNow(),
+    actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}]})
   }
 
   function resetClock() {
-    let elapsed = Date.now() - startDate
     setIsActive(false);
-    socket.emit('timeInfo', [{action: "SET_IS_ACTIVE", payload: false}])
     setTimeElapsed(0);
-    socket.emit('timeInfo', [{action: "SET_TIME_ELAPSED", payload: 0}])
     setSeconds("00:00");
-    socket.emit('timeInfo', [{action: "SET_SECONDS", payload: "00:00"}])
+    socket.emit('timeInfo', {timestamp: timeNow(),
+    actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: 0},
+    {action: "SET_SECONDS", payload: "00:00"}]})
   }
-  /*
-  const startClock = () => {
-    socket.emit('timeInfo', 'start')
-    // setTimerActive(true)
-    startTime()    
-    $('.start').classList.add('start-active')
-    $('.stop').classList.remove('stop-active')
-  }
-
-  const stopClock = () => {
-    stopTime()
-    // setTimerActive(false)
-    $('.start').classList.remove('start-active')
-    $('.stop').classList.add('stop-active')
-    socket.emit('timeInfo', 'stop')
-  }
-
-  const resetClock = () => {
-    resetTime()
-    $('.start').classList.remove('start-active')
-    $('.stop').classList.remove('stop-active')
-    socket.emit('timeInfo', 'reset')
-  }
-  */
-
-
-
 
   useEffect(()=>{
     if (screen === 'statistics') {
@@ -207,6 +171,7 @@ const ControlBoard = (props) => {
               timeElapsed={timeElapsed} setTimeElapsed={setTimeElapsed}
               isActive={isActive} setIsActive={setIsActive}
               seconds={seconds} setSeconds={setSeconds}
+              offSet={timeDifference}
               />
           </h1>
         </div>

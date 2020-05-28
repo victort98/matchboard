@@ -15,6 +15,7 @@ const Scoreboard = () => {
   const [time, setTime] = useState(timeFormatted())
 
   /* CLOCK */
+  const [timeDifference, setTimeDifference] = useState(0);
   const [startDate, setStartDate] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -43,17 +44,46 @@ const Scoreboard = () => {
     setTeam2Red(scoreData.team2Red)
 
   }, [scoreData])
+
+  useEffect(()=>{
+    let localTimeAtRequest = Date.now()
+    socket.emit('timesync', localTimeAtRequest)
+    socket.on('timesync', (serverTimeStamp)=>{
+        let localTimeAtResponse = Date.now()
+        let lat = localTimeAtResponse - localTimeAtRequest;
+        let serverTimeAtRequest = serverTimeStamp - lat;
+        let diff = localTimeAtRequest - serverTimeAtRequest;
+        setTimeDifference(diff)
+        console.log("Time since request: " + lat + 'ms at reponse')
+        console.log("Timestamp from server: " + serverTimeStamp)
+        console.log("Server time at request: " + serverTimeAtRequest)
+        console.log("Server time is: " + diff + "ms compared to local")
+        console.log("local time is: " + new Date)
+        console.log("server time is: " + new Date(Date.now() + diff))
+      })
+  },[])
   
   useEffect(() => {
-    socket.emit('getTime', "scoreboard");
-    socket.on('fetchTime', (data) => {
-      console.log(data)
-      //setStates(data)
+    setTimeout(() => {
+      let localTimeAtRequest = timeNow();
+      socket.emit('getTime', "scoreboard", localTimeAtRequest);
+      socket.on('fetchTime', (data) => {
+      let localTimeAtResponse = timeNow();
+      let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
+      console.log("Time from request until response: " + timeSinceRequest +"ms")
+      setStates(data.actions)
     })   
+
+    }, 200)
+    
     return () => {
       socket.off('fetchTime')
   }
   }, [])
+
+  function timeNow(){
+    return Date.now() + timeDifference;
+  }
 
   function setStates(data){
 
@@ -82,8 +112,7 @@ const Scoreboard = () => {
 
   useEffect(()=>{
     socket.on('timeInfo', (data)=>{
-
-      setStates(data)
+      setStates(data.actions)
     })
     return () => {
       socket.off('timeInfo') 
@@ -96,8 +125,7 @@ const Scoreboard = () => {
     if (isActive) {
 
       interval = setInterval(() => {
-        
-        let delta = Date.now() - startDate + timeElapsed;
+        let delta = timeNow() - startDate + timeElapsed;
 
         let minutes = Math.floor(delta / 60 / 1000);
         let seconds = Math.floor(delta / 1000) - minutes * 60;
@@ -112,28 +140,11 @@ const Scoreboard = () => {
     return () => clearInterval(interval);
   }, [isActive, seconds]);
 
-  useEffect(()=>{
-    let timeStarted;
-    if (timerActive === 'start') {
-      startTime()
-      timeStarted = setInterval(() => {
-        setTime(timeFormatted())
-      }, 300);   
-    } else if(timerActive === 'stop'){
-      stopTime()
-      clearInterval(timeStarted)
-    } else if(timerActive === 'reset'){
-      resetTime()
-    }
-  }, [timerActive])
-
   const FrontGroundImage = () => {
     const [image] = useImage(FieldImage);   
     return (<Image image={image} x={235} y={33} width={825} height={555} opacity={0.6}/>);
   };
 
-
- 
 //team 1 Yellow Card
 const T1YcardControlar = () =>{
 

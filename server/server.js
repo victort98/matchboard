@@ -48,10 +48,16 @@ io.on('connection', (socket)=> {
     io.emit('board', data)
   })
 
-  socket.on('getTime', (data)=>{
-    console.log(data + " called")
-    console.log("getting time called")
-    socket.broadcast.emit("getTime", data)
+  socket.on('getTime', (data, clientTimestamp)=>{
+    console.log(data + " called getTime at:")
+    console.log("" + new Date(clientTimestamp))
+    console.log("current server time:")
+    console.log("" + new Date()) //TODO use Date.now() + 3000 ?
+    let timedifference = Date.now() - clientTimestamp //TODO use Date.now() + 3000 ?
+    console.log("Time since request: " + timedifference + "ms") //under the assumption that clocks are in sync
+    console.log("assuming synchronized clocks")
+    //console.log("getting time called")
+    socket.broadcast.emit("getTime", data, clientTimestamp, Date.now())
 
   })
 
@@ -69,48 +75,16 @@ io.on('connection', (socket)=> {
 
     setTimeout(() => {
 
-      //console.log("timesync called from " )
       console.log("timesync called from socket ID: " + socket.id)
-      console.log("client timestamp: " +data)
+      console.log("client timestamp: " + data);
+      //server clock is pretending to be 3 seconds ahead
+      let timestamp = Date.now() + 3000;
+      console.log("server timestamp " + timestamp);
   
-      let timestamp = Date.now() + 3000
-  
-      console.log("server timestamp " + timestamp)
-  
-      //let timestamp = Date.now()
-      //socket.emit('timesync', 'do you think so?', Date.now() (answer) {});
       io.to(socket.id).emit('timesync', timestamp);
-      //io.to(socket.id).emit('timesync', 'I just met you')
-      //  io.to(socketId).emit('hey', 'I just met you');
-    }, 500)
-    
-    /*
-    console.log("timesync called from " )
-    console.log(socket.id)
-    console.log(data)
 
-    let timestamp;
-    console.log("server timestamp: " + Date.now())
-    /*
-    setTimeout(() => {
-      timestamp = Date.now()
-    }, 25)
-    */
-
-    //console.log(timestamp)
-
-    //let timestamp = Date.now()
-    //socket.emit('timesync', 'do you think so?', Date.now() (answer) {});
-    //io.to(socket.id).emit('timesync', 'do you think so?', timestamp);
-    //io.to(socket.id).emit('timesync', 'I just met you')
-    //  io.to(socketId).emit('hey', 'I just met you');
-    
-  })
+    }, 100)    
+  });
   
-  socket.on('synchronize', (name, word, fn) => {
-    fn(name + ' says ' + word);
-    console.log("syncing")
-  }
-  
-  );
+
 })

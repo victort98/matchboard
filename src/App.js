@@ -16,6 +16,8 @@ import UserLogin from './users/UserLogin.js'
 import Register from './users/UserRegister'
 import ProtectedRoutes from './routes/ProtectedRoutes'
 import LeagueTable from './controlboard/LeagueTable'
+import MatchFixture from './controlboard/MatchFixtures'
+
 
 
 const App = () => {
@@ -34,7 +36,8 @@ const App = () => {
                   <Route exact path='/playerslist' component={Playerslist}/>            
                   <Route exact path='/statistics' component={Statistics}/>            
                   <Route exact path='/masterclock' component={MasterClock}/> 
-                  <Route exact path='/leaguetable' component={LeagueTable}/>          
+                  <Route exact path='/leaguetable' component={LeagueTable}/> 
+                  <Route exact path='/matchfixture' component={MatchFixture}/>
                   <Route exact path='/basketball' component={Basketball}/>            
                   <Route exact path='/hockey' component={Hockey}/>            
                 </Router>

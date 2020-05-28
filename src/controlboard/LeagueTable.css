@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Roboto+Mono&display=swap');
 
-h1{
+.lt-heading{
     position: relative;
     font-size: 30px;
     margin-top: 100px;
@@ -8,21 +8,22 @@ h1{
     color: rgb(104, 147, 190);
 }
 
-.flex-container{
+.lt-flex-container{
    margin: auto; 
    display: flex;  
    padding: 3px;
    line-height: 1.65;
+   position: relative;
   }
 
-.left-buttons{
+.lt-left-buttons{
     
     margin-left:28%;
     margin-top:55px;
     
 }
 
-.left-buttons button{
+.lt-left-buttons button{
     display: block;
     padding: 10px;
     margin: 20px;
@@ -34,7 +35,7 @@ h1{
 
 }
 
-.left-buttons button:hover{
+.lt-left-buttons button:hover{
     
         color: #fff;
         background: rgb(104, 147, 190);
@@ -116,7 +117,7 @@ h1{
     border: none;    
 }
 
-.submit input[type='submit']{
+.lt-submit input[type='submit']{
     display: block;
     padding: 15px;
     margin: 20px;
@@ -129,7 +130,7 @@ h1{
     color: green;
 }
 
-.submit input[type='submit']:hover{
+.lt-submit input[type='submit']:hover{
     
     color: #fff;
     background: green;

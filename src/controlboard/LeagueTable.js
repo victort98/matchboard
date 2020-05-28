@@ -9,10 +9,10 @@ const LeagueTable = () => {
     <div className="container">
       <div className="league-table">
 
-      <h1>LEAGUE TABLE</h1>
+      <h1 className="lt-heading">LEAGUE TABLE</h1>
           <br></br>
-        <form className="flex-container">
-            <div className="left-buttons">
+        <form className="lt-flex-container">
+            <div className="lt-left-buttons">
                 <button >ADD TABLE</button>
                 <button >SHOW TABLE</button>
                 <button >HELP</button>
@@ -115,7 +115,7 @@ const LeagueTable = () => {
                 <input type="text"/>
                 </div>
         </form>
-        <div className="submit">
+        <div className="lt-submit">
         <input type="submit" value="SUBMIT" />
         </div>
         

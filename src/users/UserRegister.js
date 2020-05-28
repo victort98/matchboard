@@ -1,40 +1,57 @@
-import React, {useContext, useState} from 'react'
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState, useContext} from 'react'
+import { Link } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContextProvider'
 import mongoosy from 'mongoosy/frontend';
-const {Login} = mongoosy;
+const { User } = mongoosy;
 
-const UserLogin = (props) => {
-  const {updateUserStatus} = useContext(UserContext);
+
+const UserRegister = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [roles, setRoles] = useState('')
   const [message, setMessage] = useState('')
+  const [color, setColor] = useState('Your Role')
 
-  const submitLogin = async (e) => {
+  const submitRegistraion = async (e) => {
     e.preventDefault();
-    let user = await Login.login({username, password})
-    if (user.js.error) {
-      setMessage('Username or password is wrong!')
+    let newUser = new User({
+      username,
+      password,
+      roles: roles
+    });
+    await newUser.save();
+
+    if (newUser.js.error) {
+      setColor('red')
+      setMessage("Username is used! Try with different username!")      
     }else{
-      updateUserStatus({user})
-      props.history.push('/controlboard')
+      setColor('green')
+      setMessage("You're now registered! Please login...");
     }
+    setUsername('');
+    setPassword('');
+    setRoles('');
   }
-  
+
   return (
     <div className="container">
       <div className="user-login">
-        <form className="input-form" onSubmit={submitLogin}>
+        <form className="input-form" onSubmit={submitRegistraion}>
           <input name="username" type="text" placeholder='username' required
             value={username} onChange={(e) => setUsername(e.target.value)} />
           <input name="password" type="password" placeholder='password' required
-            value={password} onChange={(e) => setPassword(e.target.value)} />
-          <div className="submit-buttons">
-            <input type="submit" value='LOGIN'/>
-          </div>
+            value={password} onChange={(e) => setPassword(e.target.value)} />  
+          <select id="roles" onChange={e=>setRoles(e.target.value)} required>
+            <option value=''>Your Role</option>
+            <option value="admin">Admin</option>
+            <option value="operator">Operator</option>
+          </select>
+          <div className="submit-buttons">          
+            <input type="submit" value='REGISTER'/>
+          </div>         
         </form>
-         <p style={{color: 'red'}}>{message}</p>
-         <p>If you're not a user... <br/> Please <Link to="/register">register</Link> first.</p>
+        <p style={{color}}>{message}</p>
+        <p>If you're alreay a user... Please <Link to="/">login</Link> with username.</p>
       </div>
 
       <div className="background">
@@ -64,4 +81,4 @@ const UserLogin = (props) => {
   )
 }
 
-export default UserLogin
+export default UserRegister

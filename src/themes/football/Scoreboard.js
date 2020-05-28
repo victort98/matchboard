@@ -13,6 +13,8 @@ const Scoreboard = () => {
   const {scoreData} = useContext(ScoreBoardContext)
 
   const [time, setTime] = useState(timeFormatted())
+  const [teamOneName, setTeamOneName] = useState(0)
+  const [teamTwoName, setTeamTwoName] = useState(0)
 
   /* CLOCK */
   const [timeDifference, setTimeDifference] = useState(0);
@@ -34,6 +36,9 @@ const Scoreboard = () => {
   const [timerActive, setTimerActive] = useState(false)
 
   useEffect(()=>{
+    setTeamOneName(scoreData.teamOneName)
+    setTeamTwoName(scoreData.teamTwoName)
+
     setTeamOneScore(scoreData.teamOne)
     setTeamTwoScore(scoreData.teamTwo)
     setOvertime(scoreData.overtime)
@@ -158,8 +163,8 @@ for(let i = 0; i<j; i++){
         key= {i}
         x={240+(i*35)}
         y={65}
-        width={25}
-        height={50}
+        width={20}
+        height={40}
         cornerRadius = {20}
         fill="yellow"
         shadowBlur={10}
@@ -183,8 +188,8 @@ const T1RcardControlar = () =>{
           key= {i}
           x={400+(i*35)}
           y={65}
-          width={25}
-          height={50}
+          width={20}
+          height={40}
           cornerRadius = {20}
           fill="red"
           shadowBlur={10}
@@ -208,8 +213,8 @@ const T1RcardControlar = () =>{
             key= {i}
             x={1020-(i*35)}
             y={65}
-            width={25}
-            height={50}
+            width={20}
+            height={40}
             cornerRadius = {20}
             fill="yellow"
             shadowBlur={10}
@@ -233,8 +238,8 @@ const T1RcardControlar = () =>{
             key= {i}
             x={850-(i*35)}
             y={65}
-            width={25}
-            height={50}
+            width={20}
+            height={40}
             cornerRadius = {20}
             fill="red"
             shadowBlur={10}
@@ -294,10 +299,10 @@ const T1RcardControlar = () =>{
           text={overtime}
           />
           <Text x={240} y={129}  fontSize={40} wrap="char"
-            text="MALMÖ FF"
+            text={teamOneName}
           />
           <Text x={790} y={129} fontSize={40} wrap="char"
-            text="DJURGÅRDEN" 
+            text={teamTwoName} 
           />
           <Text x={500} y={300} fontSize={160} wrap="char" fill="#fff"
             shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        

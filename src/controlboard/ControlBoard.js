@@ -1,14 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react'
 import '../themes/football/football.css'
-//import ControlClock from './ControlClock'
 import {ControlClockContext} from '../contexts/ControlClockContextProvider'
 import {socket} from '../socket/socket';
-//import MasterClock from './MasterClock'
-//import ClockTimer from '../demo/ClockTimer.js'
+
 
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
-  const {startTime, stopTime, resetTime} = useContext(ControlClockContext)
   const [screen, setScreen] = useState()
   const [teamOneName, setTeamOneName] = useState(0)
   const [teamTwoName, setTeamTwoName] = useState(0)
@@ -42,7 +39,6 @@ const ControlBoard = (props) => {
   const [team2OnTarget, setTeam2OnTarget] = useState(0)
   /* STATISTICS */
 
-  const [timerActive, setTimerActive] = useState(false)
   const sendData = () => {
     let scoreInfo = {
       teamOneName: teamOneName, 
@@ -97,7 +93,7 @@ const ControlBoard = (props) => {
       console.log("received at: " + new Date() + " local time")
       //TODO use timeGet() instead of Date.now()
       socket.emit('fetchTime', {timestamp : timeNow(), actions: [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
-      {action: "SET_TIME_ELAPSED", payload: timeElapsed }]})
+      {action: "SET_TIME_ELAPSED", payload: timeElapsed }, {action: "SET_SECONDS", payload: seconds}]})
       //socket.emit('scoreInfo', scoreInfo)
     })
     return function cleanup() {
@@ -109,19 +105,23 @@ const ControlBoard = (props) => {
   }
 
   function startClock() {
-    setStartDate(timeNow())
-    setIsActive(!isActive)
-    socket.emit('timeInfo',{timestamp: timeNow(), 
-      actions: [{action: "SET_START_DATE", payload: timeNow()}, {action: "SET_IS_ACTIVE", payload: true}]})
-
+    if(!isActive){
+      console.log("isActive == false")
+      setStartDate(timeNow())
+      setIsActive(!isActive)
+      socket.emit('timeInfo',{timestamp: timeNow(), 
+        actions: [{action: "SET_START_DATE", payload: timeNow()}, {action: "SET_IS_ACTIVE", payload: true}]})
+    }
   }
 
   function pauseClock() {
-    let elapsed = timeNow() - startDate
-    setIsActive(!isActive)
-    setTimeElapsed(timeElapsed + elapsed)
-    socket.emit('timeInfo', {timestamp: timeNow(),
-    actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}]})
+    if(isActive){
+      let elapsed = timeNow() - startDate
+      setIsActive(!isActive)
+      setTimeElapsed(timeElapsed + elapsed)
+      socket.emit('timeInfo', {timestamp: timeNow(),
+      actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}]})
+    }
   }
 
   function resetClock() {
@@ -187,18 +187,10 @@ const ControlBoard = (props) => {
               onChange={e=>setTeamOneScore(e.target.value)}/>
         </div>
         <div className="time">
-        {/* <MasterClock/> */}
         <div className="clockComponent">
           <h1 className="clock"
             style={{fontVariantNumeric:'tabular-nums'}}>
               {seconds}
-       {/*       <ClockTimer
-              startDate={startDate} setStartDate={setStartDate}
-              timeElapsed={timeElapsed} setTimeElapsed={setTimeElapsed}
-              isActive={isActive} setIsActive={setIsActive}
-              seconds={seconds} setSeconds={setSeconds}
-              offSet={timeDifference}
-       />*/}
           </h1>
         </div>
         <br />

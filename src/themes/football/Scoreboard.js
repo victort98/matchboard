@@ -6,13 +6,10 @@ import { useSpring, animated } from 'react-spring';
 import {socket} from '../../socket/socket';
 import useImage from 'use-image';
 import FieldImage from '../../images/football.png'
-//import ClockTimer from '../../demo/ClockTimer.js'
 
 const Scoreboard = () => {
-  const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
 
-  const [time, setTime] = useState(timeFormatted())
   const [teamOneName, setTeamOneName] = useState(0)
   const [teamTwoName, setTeamTwoName] = useState(0)
 
@@ -32,8 +29,6 @@ const Scoreboard = () => {
   const [team2Yellow, setTeam2Yellow] = useState(0)
   const [team2Red, setTeam2Red] = useState(0)
 
-
-  const [timerActive, setTimerActive] = useState(false)
 
   useEffect(()=>{
     setTeamOneName(scoreData.teamOneName)
@@ -250,11 +245,6 @@ const T1RcardControlar = () =>{
       }
     }
   
-    
-
-
-
-
   const fadeTransition = useSpring({
     from: {opacity:0, marginLeft:-100, marginRight: 100},
     to: {opacity: 1, marginLeft: 0, marginRight: 0}

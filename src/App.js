@@ -7,7 +7,7 @@ import ScoreClockContextProvider from './contexts/ScoreClockContextProvider'
 import ControlClockContextProvider from './contexts/ControlClockContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 
-import Playerslist from './themes/football/Playerslist'
+import Playerslist from './themes/football/Playerslist2'
 import Statistics from './themes/football/Statistics'
 import MasterClock from './controlboard/MasterClock'
 import Basketball from './themes/basketball/Basketball.js'
@@ -16,6 +16,10 @@ import UserLogin from './users/UserLogin.js'
 import Register from './users/UserRegister'
 import ProtectedRoutes from './routes/ProtectedRoutes'
 import LeagueTable from './controlboard/LeagueTable'
+import FootballFixtures from './themes/football/Fixtures'
+import PointTable from './themes/football/PointTable'
+import MatchFixture from './controlboard/MatchFixtures'
+
 
 
 const App = () => {
@@ -34,9 +38,12 @@ const App = () => {
                   <Route exact path='/playerslist' component={Playerslist}/>            
                   <Route exact path='/statistics' component={Statistics}/>            
                   <Route exact path='/masterclock' component={MasterClock}/> 
-                  <Route exact path='/leaguetable' component={LeagueTable}/>          
+                  <Route exact path='/leaguetable' component={LeagueTable}/> 
+                  <Route exact path='/matchfixture' component={MatchFixture}/>
                   <Route exact path='/basketball' component={Basketball}/>            
                   <Route exact path='/hockey' component={Hockey}/>            
+                  <Route exact path='/footballfixtures' component={FootballFixtures}/>            
+                  <Route exact path='/pointtable' component={PointTable}/>            
                 </Router>
               </UserContextProvider>
             </ControlClockContextProvider>

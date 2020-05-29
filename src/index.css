@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Cute+Font&family=Roboto&display=swap');
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+  font-family: 'Roboto', monospace;
 }
 
 html {
@@ -18,9 +19,11 @@ html {
 .user-login{
   width: 250px;
   margin: 230px auto;
+  color: rgb(122, 122, 122);
 }
 
 .user-login input{
+  width: 247px;
   display: block;
   padding: 2.5%;
   margin: 2.5% 0.1%;

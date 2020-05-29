@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react'
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { motion } from "framer-motion"
 import { UserContext } from '../contexts/UserContextProvider'
 import mongoosy from 'mongoosy/frontend';
 const {Login} = mongoosy;
@@ -23,6 +24,9 @@ const UserLogin = (props) => {
   
   return (
     <div className="container">
+      <motion.div initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ ease: "easeOut", delay: 0.1, duration: 0.5 }}>
       <div className="user-login">
         <form className="input-form" onSubmit={submitLogin}>
           <input name="username" type="text" placeholder='username' required
@@ -34,8 +38,9 @@ const UserLogin = (props) => {
           </div>
         </form>
          <p style={{color: 'red'}}>{message}</p>
-         <p>If you're not a user... <br/> Please <Link to="/register">register</Link> first.</p>
+         <p>If you're not a user... Please <Link to="/register">register</Link> first.</p>
       </div>
+      </motion.div>
 
       <div className="background">
         <svg className="background" viewBox="0 0 1874 1080.446">

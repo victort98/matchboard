@@ -7,8 +7,8 @@ import {socket} from '../socket/socket';
 const ControlBoard = (props) => {
   const $ = x => document.querySelector(x);
   const [screen, setScreen] = useState()
-  const [teamOneName, setTeamOneName] = useState(0)
-  const [teamTwoName, setTeamTwoName] = useState(0)
+  const [teamOneName, setTeamOneName] = useState('')
+  const [teamTwoName, setTeamTwoName] = useState('')
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
@@ -140,6 +140,10 @@ const ControlBoard = (props) => {
       socket.emit('board', 'scoreboard')
     } else if (screen === 'playerslist') {
       socket.emit('board', 'playerslist')
+    } else if (screen === 'fixtures') {
+      socket.emit('board', 'fixtures')
+    }else if (screen === 'pointtable') {
+      socket.emit('board', 'pointtable')
     }
   }, [screen])
 
@@ -278,8 +282,8 @@ const ControlBoard = (props) => {
               <option value="scoreboard">SCORE BOARD</option>
               <option value="statistics">STATISTICS</option>
               <option value="playerslist">PLAYERS LIST</option>
+              <option value="fixtures">MATCH FISTURES</option>
               <option value="pointtable">POINT TABLE</option>
-              <option value="leaguetable">LEAGUE TABLE</option>
             </select>
           </div>
           <br />

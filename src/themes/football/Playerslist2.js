@@ -22,7 +22,7 @@ const Playerslist2 = () => {
           transition={{ type: "spring", stiffness: 260, damping: 10, delay: 0.9, duration: 2 }}
           style={{width:'940px', height:'35px', margin:'5px 20px', paddingBottom:'15px', background: color, opacity: '0.97',
             borderRadius:'25px', boxShadow: '2px 5px 5px rgba(0, 0, 0, 0.7)', overflow: 'hidden'}}>
-          <motion.li 
+          <motion.li key={i}
             initial={{ scale: 0 }}
             animate={{ scale: 1}}
             transition={{ type: "spring", stiffness: 260, damping: 10, delay: 0.9, duration: 2
@@ -42,8 +42,8 @@ const Playerslist2 = () => {
     let bars = [];
     for (let i=0; i<1; i++) {
       bars[i] = (   
-        <AnimatePresence exitBeforeEnter> 
-        <motion.div key={i} 
+        <AnimatePresence exitBeforeEnter key={i}> 
+        <motion.div key={i+teamNames[i]} 
           initial={{ transform: 'rotateX(95deg)' }}
           animate={{ transform: 'rotateX(0deg)' }}
           exit={{ transform: 'rotateX(90deg)', transition: {duration: 1} }}
@@ -51,7 +51,7 @@ const Playerslist2 = () => {
           style={{width:'940px', height:'55px', margin:'5px 20px', background: '#3498DB', opacity: '0.97',
             borderRadius:'25px', boxShadow: '5px 10px 10px rgba(0, 0, 0, 0.5)', overflow: 'hidden',
             transform: 'rotateX(95deg)', border: '1px solid #fff'}}>
-          <motion.li 
+          <motion.li
             initial={{ scale: 0 }}
             animate={{ scale: 1}}
             transition={{ type: "spring", stiffness: 260, damping: 10, delay: 0.9, duration: 2

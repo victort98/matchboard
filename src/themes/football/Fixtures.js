@@ -31,7 +31,7 @@ const Fixtures = () => {
     for (let i=0; i<3; i++) {
       let color; i%2===0?color='#fff':color='rgba(212, 241, 255, 0.99)'
       bars[i] = ( 
-        <>        
+        <div key={i}>        
         <div style={{width:'290px', height:'35px', backgroundColor: '#3498DB', zIndex: 1, border: '1px solid #fff',
            padding:'6px 0', position:'relative', top: '22px', margin: '0 auto', borderRadius:'15px', textAlign: 'center'}}>
           <span style={{color:'#fff', paddingTop: '10px'}}>GROUP {matchFixtures[i].group}</span>
@@ -59,7 +59,7 @@ const Fixtures = () => {
           <span style={{color:'rgba(204,132,0, 0.99)', fontSize: '17.1px'}}>{moment(matchFixtures[i].date).format('ll')}</span>
           <span style={{color:'#222', padding: '5px 0', display: 'block'}}>{moment(matchFixtures[i].date).format('LT')}</span>
         </div>          
-        </>
+        </div>
       );      
     }      
     return bars
@@ -70,7 +70,7 @@ const Fixtures = () => {
      
     for (let i=0; i<1; i++) {
       bars[i] = (    
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence exitBeforeEnter key={i}>
         <motion.div key={i} 
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}

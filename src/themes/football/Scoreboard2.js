@@ -45,7 +45,7 @@ const Scoreboard2 = ({ isVisible }) => {
     } else if(timerActive === 'reset'){
       resetTime()
     }
-  }, [timerActive])
+  }, [timerActive, timeFormatted, startTime, stopTime, resetTime])
 
   const pageVariants = {
     initial : { opacity: 0, y: '-100vw', scale: 0.7 },

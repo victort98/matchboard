@@ -75,30 +75,31 @@ const Statistics2 = () => {
 
   const ListBar= () =>{
     let bars = [];
-    for (let i=0; i<8; i++) {
+    for (let i=0; i<statisticsList.length; i++) {
       let color; i%2===0?color='#ddd':color='#fff'
       let fontColor; i%2===0?fontColor='#000':fontColor='#454648'
       let skew; i%2===0?skew='-10deg':skew='10deg'
-      bars[i] = (    
-        <motion.div key={i} 
-          initial={{ height: 0, scale: 1, skewX: '90deg' }}
-          animate={{ height: '44px', scale: 1, skewX: 0 }}
-          exit={{ height: 0, scale: 0, skewX: '90deg', transition: {duration: 1} }}
-          transition={{ type: "spring", stiffness: 260, damping: 200, delay: 1.5, duration: 2 }}
-          style={{width:'820px', height:'44px', margin:'0px 20px', paddingBottom:'0px', background: color, opacity: '0.97',
-            skew: skew, boxShadow: '2px 5px 5px rgba(0, 0, 0, 0.7)', overflow: 'hidden'}}>
-          <motion.li 
-            initial={{ scale: 0 }}
-            animate={{ scale: 1}}
-            transition={{ type: "spring", stiffness: 260, damping: 50, delay: 1.5, duration: 2
-            }}
-              style={{display:'flex', justifyContent:'space-between', 
-              paddingLeft: '90px', margin:'5px', }}>
-            <span style={{fontSize:'32px'}}>{statisticsTeamOne[i]}</span>
-            <span style={{fontSize:(i===0)?'28px':'20px', paddingTop: '5px', color: (i===0)?'#FF00BF':fontColor}}>{statisticsList[i]}</span>
-            <span style={{width: 90 +'px', fontSize:'32px'}}>{statisticsTeamTwo[i]}</span>
-          </motion.li>
-        </motion.div>
+      bars[i] = (   
+          <motion.div key={i} 
+            initial={{ height: 0, scale: 1}}
+            animate={{ height: '44px', scale: 1}}
+            exit={{ height: 0, scale: 0, opacity: 0, transition: {duration: 1.5} }}
+            transition={{ type: "spring", stiffness: 260, damping: 200, delay: 1.2, duration: 2 }}
+            style={{width:'820px', height:'44px', margin:'0px 20px', paddingBottom:'0px', background: color, opacity: '0.97',
+              skew: skew, boxShadow: '2px 5px 5px rgba(0, 0, 0, 0.7)', overflow: 'hidden'}}>
+            <motion.li 
+              initial={{ scale: 0 }}
+              animate={{ scale: 1}}
+              exit={{scale: 0}}
+              transition={{ type: "spring", stiffness: 260, damping: 50, delay: 1.2, duration: 2
+              }}
+                style={{display:'flex', justifyContent:'space-between', 
+                paddingLeft: '90px', margin:'5px', }}>
+              <span style={{fontSize:'28px'}}>{statisticsTeamOne[i]}</span>
+              <span style={{fontSize:(i===0)?'28px':'20px', paddingTop: '5px', color: (i===0)?'#FF00BF':fontColor}}>{statisticsList[i]}</span>
+              <span style={{width: 90 +'px', fontSize:'28px'}}>{statisticsTeamTwo[i]}</span>
+            </motion.li>
+          </motion.div>
       );      
     }   
     return bars
@@ -122,7 +123,7 @@ const Statistics2 = () => {
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        exit={{ scale: 0, transition: {duration: 2} }}
+        exit={{ scale: 0, transition: {duration: 1.5} }}
         transition={{ type: "spring", stiffness: 260, damping: 30, delay: 1, duration: 2.5 }}
         style={{width:'940px', height:'130px', margin:'45px 20px 0 20px', background: '#fff', opacity: '0.97',
           borderRadius:'90px', boxShadow: '5px 10px 10px rgba(0, 0, 0, 0.5)', overflow: 'hidden'}}>

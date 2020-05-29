@@ -22,8 +22,7 @@ const PointTable = () => {
     for (let i=0; i<pointTable.length; i++) {
       let color; i%2===0?color='#fff':color='rgba(253, 224, 255, 0.97)'
       bars[i] = (    
-        <>
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence exitBeforeEnter key={i}>
         <motion.div key={i} 
           initial={{ transform: 'rotateX(95deg)' }}
           animate={{ transform: 'rotateX(0deg)' }}
@@ -49,7 +48,6 @@ const PointTable = () => {
           </motion.li>
         </motion.div>
         </AnimatePresence>
-        </>
       );      
     }   
     return bars
@@ -59,7 +57,7 @@ const PointTable = () => {
     let bars = [];
     for (let i=0; i<1; i++) {
       bars[i] = (   
-        <> 
+        <div key={i}> 
         <motion.div key={i} 
           initial={{ transform: 'rotateX(95deg)' }}
           animate={{ transform: 'rotateX(0deg)' }}
@@ -89,7 +87,7 @@ const PointTable = () => {
             <span style={{width: 100 +'px'}}>POINTS</span>
           </div>
         </div>
-        </>
+        </div>
       );      
     }   
     return bars

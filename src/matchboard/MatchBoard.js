@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Scoreboard from '../themes/football/Scoreboard2'
-import Statistics from '../themes/football/Statistics'
+import Statistics from '../themes/football/Statistics2'
 import Playerslist from '../themes/football/Playerslist2'
 import Fixtures from '../themes/football/Fixtures'
 import PointTable from '../themes/football/PointTable'

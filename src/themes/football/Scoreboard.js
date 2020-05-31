@@ -8,7 +8,7 @@ import useImage from 'use-image';
 import FieldImage from '../../images/football.png'
 import {AnimatePresence, motion} from 'framer-motion'
 
-const Scoreboard = () => {
+const Scoreboard = (props) => {
   const {scoreData} = useContext(ScoreBoardContext)
 
   const [teamOneName, setTeamOneName] = useState(0)
@@ -16,10 +16,10 @@ const Scoreboard = () => {
 
   /* CLOCK */
   const [timeDifference, setTimeDifference] = useState(0);
-  const [startDate, setStartDate] = useState(0);
-  const [timeElapsed, setTimeElapsed] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const [seconds, setSeconds] = useState("00:00");
+  //const [startDate, setStartDate] = useState(0);
+  //const [timeElapsed, setTimeElapsed] = useState(0);
+  //const [isActive, setIsActive] = useState(false);
+  //const [seconds, setSeconds] = useState("00:00");
   /* CLOCK */
 
   const [teamOneScore, setTeamOneScore] = useState(0)
@@ -46,6 +46,7 @@ const Scoreboard = () => {
 
   }, [scoreData])
 
+  /*
   useEffect(()=>{
     let localTimeAtRequest = Date.now()
     socket.emit('timesync', localTimeAtRequest)
@@ -63,7 +64,9 @@ const Scoreboard = () => {
         console.log("server time is: " + new Date(Date.now() + diff))
       })
   },[])
+  */
   
+  /*
   useEffect(() => {
     setTimeout(() => {
       let localTimeAtRequest = timeNow();
@@ -81,11 +84,15 @@ const Scoreboard = () => {
       socket.off('fetchTime')
   }
   }, [])
+  */
+
+  //console.log(props)
+  //console.log(props.dude)
 
   function timeNow(){
     return Date.now() + timeDifference;
   }
-
+  /*
   function setStates(data){
 
     for (let item in data) {
@@ -110,7 +117,8 @@ const Scoreboard = () => {
       }
     }
   }
-
+  */
+  /*
   useEffect(()=>{
     socket.on('timeInfo', (data)=>{
       setStates(data.actions)
@@ -119,7 +127,9 @@ const Scoreboard = () => {
       socket.off('timeInfo') 
     }
   },)
+  */
 
+  /*
   useEffect(() => {
     let interval = null;
 
@@ -140,6 +150,7 @@ const Scoreboard = () => {
     }
     return () => clearInterval(interval);
   }, [isActive, seconds]);
+  */
 
   const FrontGroundImage = () => {
     const [image] = useImage(FieldImage);   
@@ -293,7 +304,7 @@ const T1RcardControlar = () =>{
           {/*/////*/}
           <Text x={590} y={110} fontSize={40} wrap="char" fill="#fff"
             className='statistics-clock'
-            text={seconds}
+            text={props.seconds}
           />
           <Text x={634} y={155} fontSize={25} wrap="char" fill="#fff"
           text={overtime}
@@ -306,7 +317,7 @@ const T1RcardControlar = () =>{
           />
           <Text x={500} y={300} fontSize={160} wrap="char" fill="#fff"
             shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        
-            shadowBlur={10} text={teamOneScore}
+            shadowBlur={10} text={teamTwoScore}
           />          
           <Text x={620} y={285} fontSize={160} wrap="char" fill="#fff"
             shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        

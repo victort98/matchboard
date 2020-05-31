@@ -33,6 +33,9 @@ io.on('connection', (socket)=> {
   })
 
   socket.on('getTime', (data, clientTimestamp)=>{
+
+    //consider what happens if there are multiple remote controllers
+
     console.log(data + " called getTime at:")
     console.log("" + new Date(clientTimestamp))
     console.log("current server time:")
@@ -46,7 +49,8 @@ io.on('connection', (socket)=> {
   })
 
   socket.on('fetchTime', (data) => {
-    console.log("fetching")
+    console.log("fetchTime called from: " + socket.id)
+    console.log(data)
     socket.broadcast.emit("fetchTime", data)
   })
 

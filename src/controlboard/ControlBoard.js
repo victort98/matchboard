@@ -65,6 +65,17 @@ const ControlBoard = (props) => {
     }  
     socket.emit('scoreInfo', scoreInfo)
   }
+  /*
+  useEffect(()=>{
+    console.log("seconds updated")
+    console.log("seconds at: " + seconds)
+  }, [seconds])
+  */
+
+  useEffect(()=>{
+    console.log("startDate updated")
+    console.log("startDate at: " + startDate)
+  }, [startDate])
 
   useEffect(()=>{
     //syncing time with server
@@ -91,9 +102,25 @@ const ControlBoard = (props) => {
       console.log("request made at: " + new Date(clientTimestamp) + " local time")
       console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
       console.log("received at: " + new Date() + " local time")
+      console.log("start date at: " + + new Date(startDate))
       //TODO use timeGet() instead of Date.now()
-      socket.emit('fetchTime', {timestamp : timeNow(), actions: [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
-      {action: "SET_TIME_ELAPSED", payload: timeElapsed }, {action: "SET_SECONDS", payload: seconds}]})
+      
+      let timevariables = {timestamp : timeNow(), 
+        actions: [{action: "SET_START_DATE", payload: startDate}, 
+        {action: "SET_TIME_ELAPSED", payload: timeElapsed }, {action: "SET_SECONDS", payload: seconds},
+        {action: "SET_IS_ACTIVE", payload: isActive},],
+        origin: "getTime from useffect"}
+      console.log(timevariables)
+      socket.emit('fetchTime', timevariables)
+      console.log(timevariables)
+      /*
+      socket.emit('fetchTime', {timestamp : timeNow(), 
+      actions: [{action: "SET_START_DATE", payload: startDate}, 
+      {action: "SET_TIME_ELAPSED", payload: timeElapsed }, {action: "SET_SECONDS", payload: seconds},
+      {action: "SET_IS_ACTIVE", payload: isActive},
+      ]})
+      */
+
       //socket.emit('scoreInfo', scoreInfo)
     })
     return function cleanup() {
@@ -105,6 +132,7 @@ const ControlBoard = (props) => {
   }
 
   function startClock() {
+    console.log("starting clock")
     if(!isActive){
       console.log("isActive == false")
       setStartDate(timeNow())
@@ -115,6 +143,7 @@ const ControlBoard = (props) => {
   }
 
   function pauseClock() {
+    console.log("pausing clock")
     if(isActive){
       let elapsed = timeNow() - startDate
       setIsActive(!isActive)

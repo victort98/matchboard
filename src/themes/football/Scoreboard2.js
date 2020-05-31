@@ -5,6 +5,7 @@ import {socket} from '../../socket/socket';
 import {AnimatePresence, motion} from 'framer-motion'
 
 const Scoreboard2 = ({ isVisible }) => {
+  // Scoreboard2 = ({ isVisible }) =>
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
 
@@ -46,6 +47,8 @@ const Scoreboard2 = ({ isVisible }) => {
       resetTime()
     }
   }, [timerActive])
+
+  console.log("dude" + isVisible)
 
   const pageVariants = {
     initial : { opacity: 0, y: '-100vw', scale: 0.7 },

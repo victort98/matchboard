@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import Scoreboard from '../themes/football/Scoreboard'
-import Statistics from '../themes/football/Statistics'
+import Scoreboard from '../themes/football/Scoreboard2'
+import Statistics from '../themes/football/Statistics2'
 import Playerslist from '../themes/football/Playerslist2'
 import Fixtures from '../themes/football/Fixtures'
 import PointTable from '../themes/football/PointTable'
@@ -148,8 +148,8 @@ const MatchBoard = () => {
   return (
     <div style={{position: 'relative', background:'green', zIndex:-1, height:'100vh', display: 'flex', justifyContent: 'center'}}>
       <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:'100vh'}}>
-        <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" stroke-width="100px" stroke-linejoin="miter" stroke-linecap="butt" 
-          stroke-miterlimit="4" shape-rendering="auto" id="Path_4" 
+        <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" strokeWidth="100px" strokeLinejoin="miter" strokeLinecap="butt" 
+          strokeMiterlimit="4" shapeRendering="auto" id="Path_4" 
           d="M 418.5040283203125 -2.817545237121521e-07 L 1465.7373046875 -2.817545237121521e-07 C 1696.870727539063 
             -2.817545237121521e-07 1884.241333007813 192.5970764160156 1884.241333007813 430.1777038574219 
             L 1884.241333007813 650.2685546875 C 1884.241333007813 887.84912109375 1696.870727539063 1080.4462890625 

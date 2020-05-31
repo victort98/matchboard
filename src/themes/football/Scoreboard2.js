@@ -46,7 +46,7 @@ const Scoreboard2 = ({ isVisible }) => {
     } else if(timerActive === 'reset'){
       resetTime()
     }
-  }, [timerActive])
+  }, [timerActive, timeFormatted, startTime, stopTime, resetTime])
 
   console.log("dude" + isVisible)
 

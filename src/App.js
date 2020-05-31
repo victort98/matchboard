@@ -8,7 +8,7 @@ import ControlClockContextProvider from './contexts/ControlClockContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 
 import Playerslist from './themes/football/Playerslist2'
-import Statistics from './themes/football/Statistics'
+import Statistics from './themes/football/Statistics2'
 import MasterClock from './controlboard/MasterClock'
 import Basketball from './themes/basketball/Basketball.js'
 import Hockey from './themes/hockey/Hockey.js'

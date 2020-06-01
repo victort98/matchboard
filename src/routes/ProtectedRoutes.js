@@ -1,33 +1,28 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import ControlBoard from '../controlboard/ControlBoard'
+import AdminPanel from '../users/AdminPanel'
+import OperatorPanel from '../users/OperatorPanel'
 import { UserContext } from '../contexts/UserContextProvider'
 import {Route, Redirect} from 'react-router-dom'
 
-import mongoosy from 'mongoosy/frontend';
-const { Login } = mongoosy;
-
 const ProtectedRoutes = (props) => {
-  const {userStatus, updateUserStatus} = useContext(UserContext);
-
-  const logout = async() => {
-    await Login.logout();
-    updateUserStatus({ user: false });
-  }
+  const {userStatus} = useContext(UserContext);
 
   let user = userStatus.user
   user = user || { roles: [] }
   let admin = user.roles.includes('admin');
-
-  // useEffect(()=>{
-  //    setTimeout(() => {
-  //     logout()
-  //   }, 2000);
-  // }, [admin])
+  let operator = user.roles.includes('operator');
 
   return (
     <>
+      <Route path='/admin'
+        render={()=>(admin?(<AdminPanel/>):(<Redirect to="/"/>))}
+      />
+      <Route path='/operator'
+        render={()=>(operator?(<OperatorPanel/>):(<Redirect to="/"/>))}
+      />
       <Route path='/controlboard'
-        render={()=>(admin?(<ControlBoard/>):(<Redirect to="/"/>))}
+        render={()=>(admin || operator?(<ControlBoard/>):(<Redirect to="/"/>))}
       />
     </>
   )

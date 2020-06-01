@@ -53,7 +53,7 @@ const Scoreboard2 = (props) => {
     }
   }, [timerActive, timeFormatted, startTime, stopTime, resetTime])
 
-  console.log(props)
+  //console.log(props)
 
   const pageVariants = {
     initial : { opacity: 0, y: '-100vw', scale: 0.7 },
@@ -94,9 +94,9 @@ const Scoreboard2 = (props) => {
       </div> 
       <div style={{width: '500px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', fontSize: '14rem', 
           color: '#fff', textShadow: '5px 10px 10px rgba(0, 0, 0, 0.5)', zIndex: 10, padding: 0}}>
-        <motion.span  initial={{ scale: 0, x: '-100%', opacity: 0 }} animate={{ scale: 1, x: 0, opacity: 1 }} transition={{delay: 1, duration: 1}}>{teamOneScore}</motion.span>        
+        <motion.span  initial={{ scale: 0, x: '-100%', opacity: 0 }} animate={{ scale: 1, x: 0, opacity: 1 }} transition={{delay: 1, duration: 1}}>{props.teamOneScore}</motion.span>        
         <span>:</span>
-        <motion.span initial={{ scale: 0, x: '100%', opacity: 0 }} animate={{ scale: 1, x: 0, opacity: 1 }} transition={{delay: 1, duration: 1}}>{teamTwoScore}</motion.span>
+        <motion.span initial={{ scale: 0, x: '100%', opacity: 0 }} animate={{ scale: 1, x: 0, opacity: 1 }} transition={{delay: 1, duration: 1}}>{props.teamTwoScore}</motion.span>
       </div>    
     </motion.div>
   )

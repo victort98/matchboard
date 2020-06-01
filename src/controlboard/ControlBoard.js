@@ -42,6 +42,42 @@ const ControlBoard = () => {
   const [team2OnTarget, setTeam2OnTarget] = useState(0)
   /* STATISTICS */
 
+  const broadcastData = () => {
+    
+    let gamedata = {timestamp : timeNow(), 
+      actions:[{action: "SET_TEAM_ONE_NAME", payload: teamOneName},
+      {action: "SET_TEAM_TWO_NAME", payload: teamTwoName},
+      {action: "SET_TEAM_ONE_SCORE", payload: teamOneScore},
+      {action: "SET_TEAM_TWO_SCORE", payload: teamTwoScore},
+      {action: "SET_OVERTIME", payload: overtime},],
+      origin: "broadcastData from controlboard"};
+
+    socket.emit('timeInfo', gamedata)
+
+    let gamestatsdata = {timestamp : timeNow(), 
+      actions:[
+        //Team1 stats
+      {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
+      {action: "SET_TEAM_ONE_RED", payload: team1Red},
+      {action: "SET_TEAM_ONE_CORNERS", payload: team1Corners},
+      {action: "SET_TEAM_ONE_OFFSIDES", payload: team1Offsides},
+      {action: "SET_TEAM_ONE_SHOTS", payload: team1Shots},
+      {action: "SET_TEAM_ONE_FOULS", payload: team1Fouls},
+      {action: "SET_TEAM_ONE_TARGET", payload: team1OnTarget},
+        //Team2 stats
+      {action: "SET_TEAM_TWO_YELLOW", payload: team2Yellow},
+      {action: "SET_TEAM_TWO_RED", payload: team2Red},
+      {action: "SET_TEAM_TWO_CORNERS", payload: team2Corners},
+      {action: "SET_TEAM_TWO_OFFSIDES", payload: team2Offsides},
+      {action: "SET_TEAM_TWO_SHOTS", payload: team2Shots},
+      {action: "SET_TEAM_TWO_FOULS", payload: team2Fouls},
+      {action: "SET_TEAM_TWO_TARGET", payload: team2OnTarget},],
+      origin: "broadcastData from controlboard"};
+
+      socket.emit('timeInfo', gamestatsdata)
+
+  }
+
   const sendData = () => {
     let scoreInfo = {
       teamOneName: teamOneName, 
@@ -102,9 +138,7 @@ const ControlBoard = () => {
         {action: "SET_TIME_ELAPSED", payload: timeElapsed }, {action: "SET_SECONDS", payload: seconds},
         {action: "SET_IS_ACTIVE", payload: isActive},],
         origin: "getTime from useffect"}
-      //console.log(timevariables)
       socket.emit('fetchTime', timevariables)
-      //console.log(timevariables)
     })
     return function cleanup() {
       socket.off('getTime')};
@@ -161,23 +195,6 @@ const ControlBoard = () => {
         {action: "SET_TEAM_TWO_FOULS", payload: team2Fouls},
         {action: "SET_TEAM_TWO_TARGET", payload: team2OnTarget},],
         origin: "getGameStats from useffect"};
-        /* 
-          const [team1Yellow, setTeam1Yellow] = useState(0)
-          const [team1Red, setTeam1Red] = useState(0)
-          const [team1Corners, setTeam1Corners] = useState(0)
-          const [team1Offsides, setTeam1Offsides] = useState(0)
-          const [team1Shots, setTeam1Shots] = useState(0)
-          const [team1Fouls, setTeam1Fouls] = useState(0)
-          const [team1OnTarget, setTeam1OnTarget] = useState(0)
-          
-          const [team2Yellow, setTeam2Yellow] = useState(0)
-          const [team2Red, setTeam2Red] = useState(0)
-          const [team2Corners, setTeam2Corners] = useState(0)
-          const [team2Offsides, setTeam2Offsides] = useState(0)
-          const [team2Shots, setTeam2Shots] = useState(0)
-          const [team2Fouls, setTeam2Fouls] = useState(0)
-          const [team2OnTarget, setTeam2OnTarget] = useState(0)
-        */
       socket.emit('fetchGameStats', gamestatsdata)
     })
     return function cleanup() {
@@ -189,7 +206,6 @@ const ControlBoard = () => {
   }
 
   function startClock() {
-    console.log("starting clock")
     if(!isActive){
       console.log("isActive == false")
       setStartDate(timeNow())
@@ -200,7 +216,6 @@ const ControlBoard = () => {
   }
 
   function pauseClock() {
-    console.log("pausing clock")
     if(isActive){
       let elapsed = timeNow() - startDate
       setIsActive(!isActive)
@@ -375,7 +390,7 @@ const ControlBoard = () => {
           </div>
           <br />
           <br />
-          <button className="broadcast" onClick={()=> sendData()}>BROADCAST</button>
+          <button className="broadcast" onClick={()=> broadcastData()}>BROADCAST</button>
           <br />
           <br />
         </div>

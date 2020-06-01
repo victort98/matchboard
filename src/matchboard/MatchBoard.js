@@ -134,15 +134,6 @@ const MatchBoard = () => {
     return;
   },[screen])
 
-  useEffect(()=>{
-    console.log("seconds updated")
-    console.log("seconds at: " + seconds)
-  }, [seconds])
-
-  useEffect(()=>{
-    console.log("startDate updated")
-    console.log("startDate at: " + startDate)
-  }, [startDate])
 
   useEffect(() => {
     let interval = null;
@@ -156,7 +147,7 @@ const MatchBoard = () => {
         let seconds = Math.floor(delta / 1000) - minutes * 60;
         let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
         setSeconds(counter);
-        console.log("seconds updated in useEffect loop")
+        //console.log("seconds updated in useEffect loop")
 
       }, 100);
     } else if (isActive && seconds !== "00:00") {
@@ -173,143 +164,76 @@ const MatchBoard = () => {
   function setStates(data){
 
     for (let item in data) {
-      
       switch(data[item].action) {
         case "SET_START_DATE":
-          console.log("setting start date")
-          console.log(data[item].payload)
           setStartDate(data[item].payload)
           break;
         case "SET_IS_ACTIVE":
-          console.log("setting active")
-          console.log(data[item].payload)
           setIsActive(data[item].payload)
           break;
         case "SET_TIME_ELAPSED":
-          console.log("setting time elapsed")
-          console.log(data[item].payload)
           setTimeElapsed(data[item].payload)
           break;
         case "SET_SECONDS":
-          console.log("setting seconds")
-          console.log(data[item].payload)
           setSeconds(data[item].payload)
           break;
         case "SET_TEAM_ONE_NAME":
-          console.log("setting team-one name")
-          console.log(data[item].payload)
           setTeamOneName(data[item].payload)
           break;
         case "SET_TEAM_TWO_NAME":
-          console.log("setting team-two name")
-          console.log(data[item].payload)
           setTeamTwoName(data[item].payload)
           break;
         case "SET_TEAM_ONE_SCORE":
-          console.log("setting team-one score")
-          console.log(data[item].payload)
           setTeamOneScore(data[item].payload)
           break;
         case "SET_TEAM_TWO_SCORE":
-          console.log("setting team-one score")
-          console.log(data[item].payload)
           setTeamTwoScore(data[item].payload)
           break;
         case "SET_OVERTIME":
-          console.log("setting overtime")
-          console.log(data[item].payload)
           setOvertime(data[item].payload)
           break;
-         //Team one
         case "SET_TEAM_ONE_YELLOW":
-          console.log("setting team one yellow")
-          console.log(data[item].payload)
           setTeam1Yellow(data[item].payload)
           break;
         case "SET_TEAM_ONE_RED":
-          console.log("setting team one red")
-          console.log(data[item].payload)
           setTeam1Red(data[item].payload)
           break;
         case "SET_TEAM_ONE_CORNERS":
-          console.log("setting team one corners")
-          console.log(data[item].payload)
           setTeam1Corners(data[item].payload)
           break;
         case "SET_TEAM_ONE_OFFSIDES":
-          console.log("setting team one offsides")
-          console.log(data[item].payload)
           setTeam1Offsides(data[item].payload)
           break;
         case "SET_TEAM_ONE_SHOTS":
-          console.log("setting team one shots")
-          console.log(data[item].payload)
           setTeam1Shots(data[item].payload)
           break;
         case "SET_TEAM_ONE_FOULS":
-          console.log("setting team one fouls")
-          console.log(data[item].payload)
           setTeam1Fouls(data[item].payload)
           break;
         case "SET_TEAM_ONE_TARGET":
-          console.log("setting team one target")
-          console.log(data[item].payload)
           setTeam1OnTarget(data[item].payload)
           break;
-        //Team two
         case "SET_TEAM_TWO_YELLOW":
-          console.log("setting team two yellow")
-          console.log(data[item].payload)
           setTeam2Yellow(data[item].payload)
           break;
         case "SET_TEAM_TWO_RED":
-          console.log("setting team two red")
-          console.log(data[item].payload)
           setTeam2Red(data[item].payload)
           break;
         case "SET_TEAM_TWO_CORNERS":
-          console.log("setting team two corners")
-          console.log(data[item].payload)
           setTeam2Corners(data[item].payload)
           break;
         case "SET_TEAM_TWO_OFFSIDES":
-          console.log("setting team two offsides")
-          console.log(data[item].payload)
           setTeam2Offsides(data[item].payload)
           break;
         case "SET_TEAM_TWO_SHOTS":
-          console.log("setting team two shots")
-          console.log(data[item].payload)
           setTeam2Shots(data[item].payload)
           break;
         case "SET_TEAM_TWO_FOULS":
-          console.log("setting team two fouls")
-          console.log(data[item].payload)
           setTeam2Fouls(data[item].payload)
           break;
         case "SET_TEAM_TWO_TARGET":
-          console.log("setting team two on target")
-          console.log(data[item].payload)
           setTeam2OnTarget(data[item].payload)
           break;
-        
-        /*
-        {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
-        {action: "SET_TEAM_ONE_RED", payload: team1Red},
-        {action: "SET_TEAM_ONE_CORNERS", payload: team1Corners},
-        {action: "SET_TEAM_ONE_OFFSIDES", payload: team1Offsides},
-        {action: "SET_TEAM_ONE_SHOTS", payload: team1Shots},
-        {action: "SET_TEAM_ONE_FOULS", payload: team1Fouls},
-        {action: "SET_TEAM_ONE_TARGET", payload: team1OnTarget},
-          //Team2 stats
-        {action: "SET_TEAM_TWO_YELLOW", payload: team2Yellow},
-        {action: "SET_TEAM_TWO_RED", payload: team2Red},
-        {action: "SET_TEAM_TWO_CORNERS", payload: team2Corners},
-        {action: "SET_TEAM_TWO_OFFSIDES", payload: team2Offsides},
-        {action: "SET_TEAM_TWO_SHOTS", payload: team2Shots},
-        {action: "SET_TEAM_TWO_FOULS", payload: team2Fouls},
-        {action: "SET_TEAM_TWO_TARGET", payload: team2OnTarget},],
-         */
         default:
           console.log("Error, check the payload action")
           console.log(data[item])
@@ -350,6 +274,8 @@ const MatchBoard = () => {
         (<Scoreboard
           timeDifference={timeDifference}
           seconds={seconds}
+          teamOneScore={teamOneScore}
+          teamTwoScore={teamTwoScore}
           />)
         }
       </div>

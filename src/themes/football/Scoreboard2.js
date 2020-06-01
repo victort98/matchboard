@@ -17,12 +17,12 @@ const Scoreboard2 = (props) => {
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
 
-  const [timerActive, setTimerActive] = useState()
+  //const [timerActive, setTimerActive] = useState()
 
   //Game data
 
 
-
+  /*
   useEffect(()=>{
     setTeamOneName(scoreData.teamOneName)
     setTeamTwoName(scoreData.teamTwoName)
@@ -30,30 +30,7 @@ const Scoreboard2 = (props) => {
     setTeamTwoScore(scoreData.teamTwo)
     setOvertime(scoreData.overtime)
   }, [scoreData])
-
-  /*
-  useEffect(()=>{
-    socket.on('timeInfo', (data)=>{
-      setTimerActive(data)
-    })   
-  },[])
   */
-  useEffect(()=>{
-    let timeStarted;
-    if (timerActive === 'start') {
-      startTime()
-      timeStarted = setInterval(() => {
-        setTime(timeFormatted())
-      }, 100);   
-    } else if(timerActive === 'stop'){
-      stopTime()
-      clearInterval(timeStarted)
-    } else if(timerActive === 'reset'){
-      resetTime()
-    }
-  }, [timerActive, timeFormatted, startTime, stopTime, resetTime])
-
-  //console.log(props)
 
   const pageVariants = {
     initial : { opacity: 0, y: '-100vw', scale: 0.7 },

@@ -5,7 +5,7 @@ import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
 import {socket} from '../../socket/socket';
 import {AnimatePresence, motion} from 'framer-motion'
 
-const Statistics2 = () => {
+const Statistics2 = (props) => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
 
@@ -66,6 +66,8 @@ const Statistics2 = () => {
       }, 1000);   
     }
   }, [timerActive, startTime, timeFormatted])
+
+  console.log(props)
 
   const statisticsList = ['STATISTICS', 'SHOTS', 'SHOTS ON TARGET', 'CORNERS', 'FOULS COMMITTED', 'OFFSIDES', 'YELLOW CARD', 'RED CARD']
 
@@ -146,7 +148,7 @@ const Statistics2 = () => {
       </motion.div>
       <div style={{width:'170px', height:'132px', backgroundColor: '#454648', zIndex: 1, border: '5px solid rgba(200, 200, 200, 0.5)',
           padding:'30px 0', position:'relative', top: '-130px', margin: '0 auto', borderRadius:'100px', textAlign: 'center', fontSize: '52px'}}>
-        <span style={{color:'#fff'}}>{time}</span>
+        <span style={{color:'#fff'}}>{props.seconds}</span>
       </div> 
       <div style={{position:'relative', top: '-132px', left: '60px', paddingBottom: '4px'}}>
         <ListBar/>

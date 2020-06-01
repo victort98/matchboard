@@ -262,9 +262,16 @@ const MatchBoard = () => {
       <AnimatePresence>
       <div key={screen} style={{overflowY: 'hidden', position: 'absolute', top: '14vh'}}>
         {(screen==='statistics')?
-        (<Statistics key="statistics"/>):
+        (<Statistics key="statistics"
+          seconds={seconds}
+          
+          />):
         (screen==='scoreboard')?
-        (<Scoreboard key="scoreboard"/>):
+        (<Scoreboard key="scoreboard"
+          timeDifference={timeDifference}
+          seconds={seconds}
+          teamOneScore={teamOneScore}
+          teamTwoScore={teamTwoScore}/>):
         (screen==='playerslist')?
         (<Playerslist key="playerslist"/>):
         (screen==='fixtures')?

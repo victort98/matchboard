@@ -18,6 +18,7 @@ const ControlBoard = () => {
   
   /* CLOCK */
   const [timeDifference, setTimeDifference] = useState(0);
+  
   const [startDate, setStartDate] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);

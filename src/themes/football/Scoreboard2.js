@@ -26,11 +26,11 @@ const Scoreboard2 = ({ isVisible }) => {
     setOvertime(scoreData.overtime)
   }, [scoreData])
 
-  useEffect(()=>{
-    socket.on('timeInfo', (data)=>{
+  useEffect(() => {
+    socket.on('timeInfo', (data) => {
       setTimerActive(data)
-    })   
-  },[])
+    }) 
+  } , [  ])
 
   useEffect(()=>{
     let timeStarted;

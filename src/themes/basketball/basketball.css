@@ -1,83 +1,20 @@
-.container {
-  background-color: black;
-  width: 70%;
-  padding: 10px;
-  border: 10px solid white;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
 
-.upperBox {
-  display: flex;
-  flex-direction: row;
-  height: 150px;
-  padding: 5px;
-  border: 10px solid white;
-  justify-content: space-around;
-}
-.lowerBox {
-  display: flex;
-  flex-direction: column;
-  height: 150px;
-  border: 10px solid white;
-}
-.redPlaceholder {
-  color: red;
-  border: 1px white solid;
-  height: 70px;
-}
 
-.mainResultPlaceHolder {
-  color: yellow;
-  border: 1px white solid;
-  justify-content: space-around;
-  height: 10px;
-}
-.greenPlaceholder {
-  color: green;
-  border: 1px white solid;
-}
-.possPeriod {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
 
-.leftSide {
-  flex-direction: column;
-  align-items: center;
-}
-.center {
-  padding-top: 5px;
-  width: 40%;
-  align-items: center;
-}
-.mainResultPlaceHolder {
-  border: 2px white solid;
-  width: 80%;
-  height: 30%;
-  color: yellow;
-}
-.rowOne {
-  display: flex;
-  justify-content: space-around;
-  height: 50px;
-}
-.rowTwo {
-  display: flex;
-  justify-content: space-between;
-  height: 100px;
-}
+
+
+
+
+
+
 h1 {
   font-size: 3em;
 }
 h2 {
   font-size: 2em;
 }
-input {
-  background-color: black;
-}
-.contolboard {
+
+.bcontolboard {
   background-color: white;
   width: 80%;
   height: auto;
@@ -88,66 +25,72 @@ input {
   height: 40px;
   justify-content: space-around;
   align-items: center;
-  }
-.player {
-  justify-content: space-around;
-  background-color: yellow;
-  display: flex;
-  height: 120px;
-  
-}
-.result {
-  background-color: red;
-  display: flex;
-  justify-content: space-around;
-  height:120px;
- align-items: center;
 }
 
-.baskettype {
-  background-color: white;
-  display: flex;
-  justify-content: space-around;
-  height: 75px;
- align-items: center;
-}
+ 
 .result {
   display: flex;
   justify-content: space-around;
   height: 80px;
- align-items: center;
-  
+  align-items: center;
 }
 .points {
   display: flex;
   justify-content: center;
   justify-content: space-around;
   height: 75px;
-  
 }
-.oneTwoThree{
+.oneTwoThree {
   display: flex;
   height: 100px;
   justify-content: space-around;
-  padding: 10px;  
-align-items: center;
+  padding: 10px;
+  align-items: center;
   flex-direction: row;
 }
-button{
-  height: 30px;
-  justify-content: space-around;
- 
-}
-.p{
+
+.p {
   border-radius: 25%;
   text-align: center;
   padding: 5px;
 }
-.PHG{
+.PHG {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-button{
+container {
+  margin: 20px 20px;
+  border: red 10px solid;
+  padding: 25px;
+  display: flex;
+  background-color:yellow;
+}
+input {
+  border: solid 4px red;
+}
+.bcontrolboard{
+  border: 15px black solid;
+  margin: 25px;
+  padding: 10px;
+}
+.p{
+  background-color: yellow;
   color: red;
+  size: 20px;
+  border: 2px white solid;
+  padding: 5px;
+  background-color: black;
+  height: 2.2em;
+
+}
+
+.p1{
+  font-size: 2em;
+  height: 2em;
+  width: 10em;
+  background-color: black;
+  text-align: center;
+  vertical-align: middle;
+  padding: 2px;
 }

@@ -11,8 +11,8 @@ import Statistics from "./themes/football/Statistics";
 import MasterClock from "./controlboard/MasterClock";
 import Basketball from "./themes/basketball/Basketball.js";
 import Hokey from "./themes/hokey/Hokey.js";
-import basketStrap from "./themes/basketball/basketStrap.js";
 
+import BasketScoreBoard from "./themes/basketball/BasketScoreBoard"
 const App = () => {
   return (
     <div className="App">
@@ -27,7 +27,8 @@ const App = () => {
                 <Route exact path="/statistics" component={Statistics} />
                 <Route exact path="/masterclock" component={MasterClock} />
                 <Route exact path="/basketball" component={Basketball} />
-                <Route exact path="/basketstrap" component={basketStrap} />
+                <Route exact path="/basketscoreboard" component={BasketScoreBoard} />
+                
                 <Route exact path="/hokey" component={Hokey} />
               </Router>
             </ClockContextProvider>

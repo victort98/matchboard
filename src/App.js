@@ -6,16 +6,17 @@ import ScoreBoardContextProvider from './contexts/ScoreBoardContextProvider'
 import ScoreClockContextProvider from './contexts/ScoreClockContextProvider'
 import ControlClockContextProvider from './contexts/ControlClockContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
-
+import ClockContextProviderH from './contexts/ClockContextProviderH'
 import Playerslist from './themes/football/Playerslist'
 import Statistics from './themes/football/Statistics'
 import MasterClock from './controlboard/MasterClock'
 import Basketball from './themes/basketball/Basketball.js'
-import Hockey from './themes/hockey/Hockey.js'
+import Hokey from './themes/hokey/Hokey.js'
 import UserLogin from './users/UserLogin.js'
 import Register from './users/UserRegister'
 import ProtectedRoutes from './routes/ProtectedRoutes'
 import LeagueTable from './controlboard/LeagueTable'
+import ScoreBoardH from './themes/hokey/ScoreBoardH.js'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <ScoreBoardContextProvider> 
           <ScoreClockContextProvider> 
             <ControlClockContextProvider>
+              <ClockContextProviderH>
               <UserContextProvider>
                 <Router>
                   <ProtectedRoutes/> 
@@ -35,9 +37,11 @@ const App = () => {
                   <Route exact path='/masterclock' component={MasterClock}/> 
                   <Route exact path='/leaguetable' component={LeagueTable}/>          
                   <Route exact path='/basketball' component={Basketball}/>            
-                  <Route exact path='/hockey' component={Hockey}/>            
+                  <Route exact path='/hokey' component={Hokey}/> 
+                  <Route exact path='/scoreBoardH' component={ScoreBoardH}/>          
                 </Router>
               </UserContextProvider>
+              </ClockContextProviderH>
             </ControlClockContextProvider>
           </ScoreClockContextProvider> 
         </ScoreBoardContextProvider>

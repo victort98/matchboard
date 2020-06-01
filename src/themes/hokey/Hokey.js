@@ -83,7 +83,7 @@ const Hokey = (props) => {
         </div>
          
        <div>
-          <Label className="textStyle own"for="exampleSelect">The game runs</Label><br/>
+          <Label className="textStyle own"for="exampleSelect">PERIOD</Label><br/>
           <Input className="btnStyle1 game" type="select" name="select" id="exampleSelect">
             <option>1 ST</option>
             <option>2 ND</option>
@@ -126,10 +126,10 @@ const Hokey = (props) => {
           <input  className="Statistic col6" type="numbere" name="0"
                   placeholder="0"onChange={e=>setTeam2Fouls(e.target.value)}/><br/><br/>
 
-          <Label className="textStyle t7"for="exampleSelect">STOP A PLAYER</Label>
+          <Label className="textStyle t7"for="exampleSelect">PENALTY</Label>
           <Label className="textStyle t8"for="exampleSelect"> PLAYER</Label>
           <Label className="textStyle t9"for="exampleSelect">SELECT SREEN TO CAST</Label>
-          <Label className="textStyle t13"for="exampleSelect">STOP A PLAYER</Label>
+          <Label className="textStyle t13"for="exampleSelect">PENALTY</Label>
           <Label className="textStyle t14"for="exampleSelect"> PLAYER</Label>
           <br/>
           <Input className="Statistic col01" type="select" name="select" id="exampleSelect">
@@ -145,7 +145,7 @@ const Hokey = (props) => {
               <option value="leaguetable">GUE TA</option>
           </Input>
           <Input className="Statistic col03" type="select" name="select"  onChange={e=>setScreen(e.target.value)}>>
-              <option value="scoreboard">SCORE BOARD</option>
+              <option value="scoreboardH">SCORE BOARD</option>
               <option value="statistics">STATISTICS</option>
               <option value="playerslist">PLAYERS LIST</option>
               <option value="pointtable">POINT TABLE</option>

@@ -34,8 +34,8 @@ const App = () => {
                   <ProtectedRoutes/> 
                   <Route exact path='/' component={UserLogin}/>
                   <Route exact path='/register' component={Register}/>   
-                  <Route exact path='/admin' component={AdminPanel}/>   
-                  <Route exact path='/operator' component={OperatorPanel}/>   
+                  {/* <Route exact path='/admin' component={AdminPanel}/>    */}
+                  {/* <Route exact path='/operator' component={OperatorPanel}/>    */}
                   <Route exact path='/matchboard' component={MatchBoard}/>            
                   <Route exact path='/playerslist' component={Playerslist}/>            
                   <Route exact path='/statistics' component={Statistics}/>            

@@ -137,10 +137,8 @@ const MatchBoard = () => {
     let interval = null;
 
     if (isActive) {
-
       interval = setInterval(() => {
         let delta = timeNow() - startDate + timeElapsed;
-
         let minutes = Math.floor(delta / 60 / 1000);
         let seconds = Math.floor(delta / 1000) - minutes * 60;
         let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
@@ -304,15 +302,6 @@ const MatchBoard = () => {
         }
       </div>
       </AnimatePresence>
-
-              {/*startDate={startDate}
-          timeElapsed={timeElapsed}
-        isActive={isActive} */}
-      {/* const [timeDifference, setTimeDifference] = useState(0);
-          const [startDate, setStartDate] = useState(0);
-          const [timeElapsed, setTimeElapsed] = useState(0);
-          const [isActive, setIsActive] = useState(false);
-          const [seconds, setSeconds] = useState("00:00");*/}
     </div>
   )
 }

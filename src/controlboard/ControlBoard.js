@@ -1,6 +1,5 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import '../themes/football/football.css'
-import {ControlClockContext} from '../contexts/ControlClockContextProvider'
 import {socket} from '../socket/socket';
 
 

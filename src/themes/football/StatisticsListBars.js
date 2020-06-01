@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useContext} from 'react'
-import {AnimatePresence, motion} from 'framer-motion'
+import React from 'react'
+import { motion} from 'framer-motion'
 
 export default function StatisticsListBars(props) {
 

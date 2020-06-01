@@ -17,21 +17,6 @@ const Scoreboard2 = (props) => {
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
 
-  //const [timerActive, setTimerActive] = useState()
-
-  //Game data
-
-
-  /*
-  useEffect(()=>{
-    setTeamOneName(scoreData.teamOneName)
-    setTeamTwoName(scoreData.teamTwoName)
-    setTeamOneScore(scoreData.teamOne)
-    setTeamTwoScore(scoreData.teamTwo)
-    setOvertime(scoreData.overtime)
-  }, [scoreData])
-  */
-
   const pageVariants = {
     initial : { opacity: 0, y: '-100vw', scale: 0.7 },
     in: { opacity: 1, y: 0, scale: 1 },

@@ -1,0 +1,367 @@
+form{
+    
+    background-size: 30%;
+background-color: rgba(134, 115, 156, 0.479);
+
+}
+
+.screenInfos{
+background-size: 10%;
+}
+.start{
+    margin-left: 30vw;
+}
+
+
+.textStyle{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.5vw;
+    outline: none;
+  cursor: pointer;
+  z-index: 1;
+
+}
+.own{
+    color: brown; 
+    margin-left: 47vw;
+    font-size: large;
+}
+.tow{
+   color: rgb(233, 17, 17); 
+   margin-left: 31vw;
+   
+}
+.tow1{
+    color: rgb(233, 17, 17); 
+    margin-left: 23vw;
+ }
+.btnStyle1  {
+    border: 1px solid rgb(0, 159, 187);
+    font-size: 1.3rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .game{
+color: rgb(245, 240, 247);
+background-color: rgb(136, 25, 240);
+font-style: oblique;
+width: 5.8%;
+margin-left: 46.5vw;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  }
+.teamName1{
+    margin-left: 29vw;
+    border-radius: 15px;
+    border: 1.4px;
+    border-style: solid;
+    border-color: gray;
+    font-size: 20px;
+    width: 15%;
+    border-bottom-left-radius: 6vw;
+    border-top-right-radius: 6vw;
+    position: absolute;
+    outline: none;
+    padding: 5px; 
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.teamName2{
+    margin-left: 55vw;
+    border-radius: 15px;
+    border: 1.4px;
+    border-style: solid;
+    border-color: gray;
+    font-size: 20px;
+    width: 15%;
+    border-bottom-right-radius: 6vw;
+    border-top-left-radius: 6vw;
+    position: absolute;
+    outline: none;
+    padding: 5px; 
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+}
+.clock1{
+    margin-left: 43vw;
+    margin-top: 70px;
+    content: initial;
+     width: 180px;
+  height: 80px;
+  border-radius: 10%;
+  font-size: 3.9em;
+  border: 8px;
+  border-style: solid;
+  border-color: #A3AAA5;
+  color: #fff;
+  line-height: 50px;
+  text-align: center;
+  background: #16387a;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  font-family: 'Cute Font', cursive;
+  font-weight: 100;
+}.clokS{
+    margin-left: 43vw;
+
+}
+.resalt{
+    margin-left: 44vw;
+    border-radius: 1px;
+    border: 1.4px;
+    border-style: solid;
+    border-color: gray;
+    font-size: 25px;
+    width: 5%;
+    border-bottom-right-radius: 3vw;
+    border-bottom-left-radius: 3vw;
+    border-top-right-radius: 3vw;
+    border-top-left-radius: 3vw;
+    position: absolute;
+    outline: none;
+    padding: 5px;   
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.resalt1{
+    margin-left: 50vw;
+    border-radius: 1px;
+    border: 1.4px;
+    border-style: solid;
+    border-color: gray;
+    font-size: 25px;
+    width: 5%;
+    border-bottom-right-radius: 3vw;
+    border-bottom-left-radius: 3vw;
+    border-top-right-radius: 3vw;
+    border-top-left-radius: 3vw;
+    position: absolute;
+    outline: none;
+    padding: 5px; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+}
+.sll{
+    background: url(./hockey2.jpg) center   no-repeat;
+    background-size: cover;
+    padding: 305px 0px;
+    
+}
+.score {
+    margin-left: 10vw;
+    border-radius: 1px;
+    border: 3px;
+    border-style: solid;
+    font-size: 40px;
+    background: rgb(8, 8, 8);
+
+    position:sinter;
+    box-sizing: content-box;
+    border-bottom-right-radius: 3vw;
+    border-bottom-left-radius: 3vw;
+    border-top-right-radius: 3vw;
+    border-top-left-radius: 3vw;
+    position: absolute;
+    outline: none;
+    padding: 1px; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+.bol{
+    margin-left: 5vw;
+    width: 90%;
+    border-color: rgb(86, 5, 110);
+
+}
+.bol1{
+    margin-bottom: 2vw;
+    margin-left: 10vw;
+    width: 30%;
+    font-size: 55px;
+    color: lavender;
+    border-color: rgb(11, 14, 216);
+    border-bottom-right-radius: 0vw;
+    border-top-right-radius: 0vw;
+}  
+.bol2{
+    margin-left: 38vw;
+    width: 5%;
+    font-size: 55px;
+    border-color: rgb(11, 14, 216);
+
+}
+.bol4{
+    margin-left: 56vw;   
+    width: 5%;
+    border-color: rgb(184, 5, 5);
+    font-size: 55px;
+
+}
+.bol3{
+    margin-left: 60vw;   
+    width: 30%;
+    border-color: rgb(184, 5, 5);
+    border-top-left-radius: 0vw;  
+    border-bottom-left-radius: 0vw;
+    font-size: 55px;
+
+}
+.bol5{
+    margin-top: 5vw;
+    margin-left: 43vw;   
+    width: 14%;
+    font-size: 40px;
+    border-top-right-radius: 0vw;
+    border-top-left-radius: 0vw;
+    border-color: rgb(94, 2, 78);
+border-top: rgba(0, 0, 0, 0.0);
+}
+.bol6{
+    margin-top: 10vw;
+    margin-left: 20vw;   
+    width: 12%;
+    font-size: 40px;
+    
+    border-color: rgb(94, 2, 78);
+}
+.bol7{
+    margin-top: 10vw;margin-left: 13vw;    width: 5%; font-size: 40px; border-color: rgb(94, 2, 78);
+}
+.bol8{
+    margin-top: 15vw;margin-left: 13vw;    width: 5%; font-size: 40px; border-color: rgb(94, 2, 78);
+}
+.bol9{
+    margin-top: 15vw;margin-left: 20vw;    width: 12%; font-size: 40px; border-color: rgb(94, 2, 78);
+}
+.tem2{
+    margin-left: 55vw;
+}
+.Statistic{
+    font-size: 25px;
+    width: 7%;
+    border-bottom-right-radius: 3vw;
+    border-bottom-left-radius: 3vw;
+    border-top-right-radius: 3vw;
+    border-top-left-radius: 3vw;
+  border: 4px;
+  border-style: solid;
+  border-color: rgb(114, 133, 8);
+  font-size: 20px;
+  padding: 5px;
+  outline: none;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.col1{
+    margin-left: 5vw;
+}
+.col2{
+    margin-left: 3vw;
+
+}
+.col3{
+    margin-left:4vw;
+
+}
+.col01{
+    margin-left: 5vw;
+    font-size: 20px;
+    width: 10%;
+    outline: none;
+
+}
+.col02{
+    margin-left: 3vw;
+    font-size: 20px;
+    width: 15%;
+}
+.col03{
+    margin-left: 7vw;
+    font-size: 20px;
+    width: 15%;
+border-color: orange;
+}
+.col04{
+    margin-left: 10vw;
+    font-size: 20px;
+    width: 10%;
+}
+.col05{
+    margin-left: 4vw;
+    font-size: 20px;
+    width: 15%;
+}
+.col4{
+    margin-left: 32vw;
+    outline: none;
+    cursor: pointer;
+    padding: 5px;
+}
+.col5{
+    margin-left: 4vw;
+
+}
+.col6{
+    margin-left: 3vw;
+
+}
+.t4{
+    color: maroon;
+    margin-left: 2vw;
+    
+}
+.t5{
+    color: maroon;
+    margin-left: 2vw; 
+}
+.t6{
+    color: maroon;
+    margin-left: 2vw; 
+}
+.t7{
+    color: maroon;
+    margin-left: 7vw; 
+}
+.t8{
+    color: maroon;
+    margin-left: 9vw; 
+    
+}
+.t9{
+    color: maroon;
+    margin-left: 12vw; 
+    
+}
+.t10{
+    color: maroon;
+    margin-left: 26vw; 
+    
+}
+.t11{
+    color: maroon;
+    margin-left: 3vw; 
+    
+}
+.t12{
+    color: maroon;
+    margin-left: 3vw; 
+    
+}
+.t13{
+    color: maroon;
+    margin-left: 12vw; 
+   
+}
+.t14{
+    color: maroon;
+    margin-left: 9vw;   
+}
+.broadcast1 {
+    margin-top: 4.1%;
+    margin-left: 34vw;
+    border-radius: 35px;
+    font-size: 1.5rem;
+    border: solid 1px rgb(255, 255, 255);
+    color: white;
+    background-color: rgb(233, 70, 70);
+    padding: 1% 10%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    outline: none;
+    cursor: pointer;
+  }

@@ -21,6 +21,9 @@ import LeagueTable from './controlboard/LeagueTable'
 import FootballFixtures from './themes/football/Fixtures'
 import PointTable from './themes/football/PointTable'
 import MatchFixture from './controlboard/MatchFixtures'
+import Hokey from './themes/hokey/Hokey'
+import ScoreBoardH from './themes/hokey/ScoreBoardH'
+import ClockContextProviderH from './contexts/ClockContextProviderH' 
 
 const App = () => {
   return (
@@ -45,7 +48,10 @@ const App = () => {
                   <Route exact path='/basketball' component={Basketball}/>            
                   <Route exact path='/hockey' component={Hockey}/>            
                   <Route exact path='/footballfixtures' component={FootballFixtures}/>            
-                  <Route exact path='/pointtable' component={PointTable}/>            
+                  <Route exact path='/pointtable' component={PointTable}/>
+                  <Route exact path='/hokey' component={Hokey}/>
+                  <Route exact path='/scoreboardh' component={ScoreBoardH}/> 
+
                 </Router>
               </UserContextProvider>
             </ControlClockContextProvider>

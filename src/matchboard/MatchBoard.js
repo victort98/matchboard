@@ -19,8 +19,33 @@ const MatchBoard = () => {
     const [seconds, setSeconds] = useState("00:00");
     /* CLOCK */
 
-  //let dude = 1
+    /* GAME DATA */
+    const [teamOneName, setTeamOneName] = useState('')
+    const [teamTwoName, setTeamTwoName] = useState('')
+    const [teamOneScore, setTeamOneScore] = useState(0)
+    const [teamTwoScore, setTeamTwoScore] = useState(0)
+    const [overtime, setOvertime] = useState(0)
+    /* GAME DATA */
 
+    /* STATISTICS */
+    const [team1Yellow, setTeam1Yellow] = useState(0)
+    const [team1Red, setTeam1Red] = useState(0)
+    const [team1Corners, setTeam1Corners] = useState(0)
+    const [team1Offsides, setTeam1Offsides] = useState(0)
+    const [team1Shots, setTeam1Shots] = useState(0)
+    const [team1Fouls, setTeam1Fouls] = useState(0)
+    const [team1OnTarget, setTeam1OnTarget] = useState(0)
+    
+    const [team2Yellow, setTeam2Yellow] = useState(0)
+    const [team2Red, setTeam2Red] = useState(0)
+    const [team2Corners, setTeam2Corners] = useState(0)
+    const [team2Offsides, setTeam2Offsides] = useState(0)
+    const [team2Shots, setTeam2Shots] = useState(0)
+    const [team2Fouls, setTeam2Fouls] = useState(0)
+    const [team2OnTarget, setTeam2OnTarget] = useState(0)
+    /* STATISTICS */
+    
+  //timesync
   useEffect(()=>{
     let localTimeAtRequest = Date.now()
     socket.emit('timesync', localTimeAtRequest)
@@ -38,25 +63,60 @@ const MatchBoard = () => {
         console.log("server time is: " + new Date(Date.now() + diff))
       })
   },[])
-
+  //getting time
   useEffect(() => {
     setTimeout(() => {
       let localTimeAtRequest = timeNow();
-      socket.emit('getTime', "scoreboard", localTimeAtRequest);
+      socket.emit('getData', "scoreboard", "time", localTimeAtRequest);
       socket.on('fetchTime', (data) => {
-      let localTimeAtResponse = timeNow();
-      let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
-      console.log("Time from request until response: " + timeSinceRequest +"ms")
-      console.log(data.actions)
-      setStates(data.actions)
-    })   
-
-    }, 200)
-    
+        let localTimeAtResponse = timeNow();
+        let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
+        console.log("Time from request until response: " + timeSinceRequest +"ms")
+        console.log(data.actions)
+        setStates(data.actions)
+      })   
+    }, 100)
     return () => {
       socket.off('fetchTime')
   }
   }, [])
+  //getting game data
+  useEffect(() => {
+    setTimeout(() => {
+      let localTimeAtRequest = timeNow();
+      //socket.on('getData', (origin, datatype, clientTimestamp)
+      socket.emit('getData', "scoreboard", "gamedata", localTimeAtRequest);
+      //socket.emit('getTime', "scoreboard", localTimeAtRequest);
+      socket.on('fetchGameData', (data) => {
+        let localTimeAtResponse = timeNow();
+        let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
+        console.log("Time from request until response: " + timeSinceRequest +"ms")
+        console.log(data.actions)
+        setStates(data.actions)
+      })   
+    }, 100)
+    return () => {
+      socket.off('fetchGameData')
+  }
+  }, [])
+
+    //getting game stats
+    useEffect(() => {
+      setTimeout(() => {
+        let localTimeAtRequest = timeNow();
+        socket.emit('getData', "scoreboard", "gamestats", localTimeAtRequest);
+        socket.on('fetchGameStats', (data) => {
+          let localTimeAtResponse = timeNow();
+          let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
+          console.log("Time from request until response: " + timeSinceRequest +"ms")
+          console.log(data.actions)
+          setStates(data.actions)
+        })   
+      }, 100)
+      return () => {
+        socket.off('fetchGameStats')
+    }
+    }, [])
 
   useEffect(()=>{
     socket.on('timeInfo', (data)=>{
@@ -98,7 +158,7 @@ const MatchBoard = () => {
         setSeconds(counter);
         console.log("seconds updated in useEffect loop")
 
-      }, 500);
+      }, 100);
     } else if (isActive && seconds !== "00:00") {
 
       clearInterval(interval);
@@ -135,6 +195,121 @@ const MatchBoard = () => {
           console.log(data[item].payload)
           setSeconds(data[item].payload)
           break;
+        case "SET_TEAM_ONE_NAME":
+          console.log("setting team-one name")
+          console.log(data[item].payload)
+          setTeamOneName(data[item].payload)
+          break;
+        case "SET_TEAM_TWO_NAME":
+          console.log("setting team-two name")
+          console.log(data[item].payload)
+          setTeamTwoName(data[item].payload)
+          break;
+        case "SET_TEAM_ONE_SCORE":
+          console.log("setting team-one score")
+          console.log(data[item].payload)
+          setTeamOneScore(data[item].payload)
+          break;
+        case "SET_TEAM_TWO_SCORE":
+          console.log("setting team-one score")
+          console.log(data[item].payload)
+          setTeamTwoScore(data[item].payload)
+          break;
+        case "SET_OVERTIME":
+          console.log("setting overtime")
+          console.log(data[item].payload)
+          setOvertime(data[item].payload)
+          break;
+         //Team one
+        case "SET_TEAM_ONE_YELLOW":
+          console.log("setting team one yellow")
+          console.log(data[item].payload)
+          setTeam1Yellow(data[item].payload)
+          break;
+        case "SET_TEAM_ONE_RED":
+          console.log("setting team one red")
+          console.log(data[item].payload)
+          setTeam1Red(data[item].payload)
+          break;
+        case "SET_TEAM_ONE_CORNERS":
+          console.log("setting team one corners")
+          console.log(data[item].payload)
+          setTeam1Corners(data[item].payload)
+          break;
+        case "SET_TEAM_ONE_OFFSIDES":
+          console.log("setting team one offsides")
+          console.log(data[item].payload)
+          setTeam1Offsides(data[item].payload)
+          break;
+        case "SET_TEAM_ONE_SHOTS":
+          console.log("setting team one shots")
+          console.log(data[item].payload)
+          setTeam1Shots(data[item].payload)
+          break;
+        case "SET_TEAM_ONE_FOULS":
+          console.log("setting team one fouls")
+          console.log(data[item].payload)
+          setTeam1Fouls(data[item].payload)
+          break;
+        case "SET_TEAM_ONE_TARGET":
+          console.log("setting team one target")
+          console.log(data[item].payload)
+          setTeam1OnTarget(data[item].payload)
+          break;
+        //Team two
+        case "SET_TEAM_TWO_YELLOW":
+          console.log("setting team two yellow")
+          console.log(data[item].payload)
+          setTeam2Yellow(data[item].payload)
+          break;
+        case "SET_TEAM_TWO_RED":
+          console.log("setting team two red")
+          console.log(data[item].payload)
+          setTeam2Red(data[item].payload)
+          break;
+        case "SET_TEAM_TWO_CORNERS":
+          console.log("setting team two corners")
+          console.log(data[item].payload)
+          setTeam2Corners(data[item].payload)
+          break;
+        case "SET_TEAM_TWO_OFFSIDES":
+          console.log("setting team two offsides")
+          console.log(data[item].payload)
+          setTeam2Offsides(data[item].payload)
+          break;
+        case "SET_TEAM_TWO_SHOTS":
+          console.log("setting team two shots")
+          console.log(data[item].payload)
+          setTeam2Shots(data[item].payload)
+          break;
+        case "SET_TEAM_TWO_FOULS":
+          console.log("setting team two fouls")
+          console.log(data[item].payload)
+          setTeam2Fouls(data[item].payload)
+          break;
+        case "SET_TEAM_TWO_TARGET":
+          console.log("setting team two on target")
+          console.log(data[item].payload)
+          setTeam2OnTarget(data[item].payload)
+          break;
+        
+        /*
+        {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
+        {action: "SET_TEAM_ONE_RED", payload: team1Red},
+        {action: "SET_TEAM_ONE_CORNERS", payload: team1Corners},
+        {action: "SET_TEAM_ONE_OFFSIDES", payload: team1Offsides},
+        {action: "SET_TEAM_ONE_SHOTS", payload: team1Shots},
+        {action: "SET_TEAM_ONE_FOULS", payload: team1Fouls},
+        {action: "SET_TEAM_ONE_TARGET", payload: team1OnTarget},
+          //Team2 stats
+        {action: "SET_TEAM_TWO_YELLOW", payload: team2Yellow},
+        {action: "SET_TEAM_TWO_RED", payload: team2Red},
+        {action: "SET_TEAM_TWO_CORNERS", payload: team2Corners},
+        {action: "SET_TEAM_TWO_OFFSIDES", payload: team2Offsides},
+        {action: "SET_TEAM_TWO_SHOTS", payload: team2Shots},
+        {action: "SET_TEAM_TWO_FOULS", payload: team2Fouls},
+        {action: "SET_TEAM_TWO_TARGET", payload: team2OnTarget},],
+         */
         default:
           console.log("Error, check the payload action")
           console.log(data[item])

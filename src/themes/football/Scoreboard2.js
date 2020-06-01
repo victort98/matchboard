@@ -4,7 +4,7 @@ import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
 import {socket} from '../../socket/socket';
 import {AnimatePresence, motion} from 'framer-motion'
 
-const Scoreboard2 = ({ isVisible }) => {
+const Scoreboard2 = (props) => {
   // Scoreboard2 = ({ isVisible }) =>
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
   const {scoreData} = useContext(ScoreBoardContext)
@@ -19,6 +19,10 @@ const Scoreboard2 = ({ isVisible }) => {
 
   const [timerActive, setTimerActive] = useState()
 
+  //Game data
+
+
+
   useEffect(()=>{
     setTeamOneName(scoreData.teamOneName)
     setTeamTwoName(scoreData.teamTwoName)
@@ -27,12 +31,13 @@ const Scoreboard2 = ({ isVisible }) => {
     setOvertime(scoreData.overtime)
   }, [scoreData])
 
+  /*
   useEffect(()=>{
     socket.on('timeInfo', (data)=>{
       setTimerActive(data)
     })   
   },[])
-
+  */
   useEffect(()=>{
     let timeStarted;
     if (timerActive === 'start') {
@@ -48,7 +53,7 @@ const Scoreboard2 = ({ isVisible }) => {
     }
   }, [timerActive, timeFormatted, startTime, stopTime, resetTime])
 
-  console.log("dude" + isVisible)
+  console.log(props)
 
   const pageVariants = {
     initial : { opacity: 0, y: '-100vw', scale: 0.7 },
@@ -85,7 +90,7 @@ const Scoreboard2 = ({ isVisible }) => {
       </motion.div>
       <div style={{width:'170px', height:'132px', backgroundColor: '#454648', zIndex: 1, border: '5px solid rgba(200, 200, 200, 0.5)',
           padding:'30px 0', position:'relative', top: '-130px', margin: '0 auto', borderRadius:'100px', textAlign: 'center', fontSize: '52px'}}>
-        <span style={{color:'#fff'}}>{time}</span>
+        <span style={{color:'#fff'}}>{props.seconds}</span>
       </div> 
       <div style={{width: '500px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', fontSize: '14rem', 
           color: '#fff', textShadow: '5px 10px 10px rgba(0, 0, 0, 0.5)', zIndex: 10, padding: 0}}>

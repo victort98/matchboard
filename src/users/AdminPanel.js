@@ -1,51 +1,50 @@
 import React, {useContext, useState} from 'react'
-import { Link } from 'react-router-dom';
-import { motion } from "framer-motion"
+import { Link } from 'react-router-dom'
+import UserSettings from '../settings/UserSettings'
+import GameSettings from '../settings/GameSettings'
+
 import { UserContext } from '../contexts/UserContextProvider'
 import mongoosy from 'mongoosy/frontend';
-const {Login} = mongoosy;
+const { Login } = mongoosy;
 
-const UserLogin = (props) => {
+const AdminPanel = () => {
   const {updateUserStatus} = useContext(UserContext);
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('')
+  const [showElement, setShowElement] = useState(true)
 
-  const submitLogin = async (e) => {
-    e.preventDefault();
-    let user = await Login.login({username, password})
-     user = user || { roles: [] }
-     let admin = user.roles.includes('admin');
-    if (user.js.error) {
-      setMessage('Username or password is wrong!')
-    }else{
-      updateUserStatus({user})
-      admin?
-      props.history.push('/admin'):
-      props.history.push('/operator')      
-    }
+  const logout = async() => {
+    await Login.logout();
+    updateUserStatus({ user: false });
   }
-  
+
+  const setGame = () => {
+    setShowElement(true)
+  }
+
+  const setUser = () => {
+    setShowElement(false)
+  }
+
   return (
     <div className="container">
-      <motion.div initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ ease: "easeOut", delay: 0.1, duration: 0.5 }}>
-      <div className="user-login">
-        <form className="input-form" onSubmit={submitLogin}>
-          <input name="username" type="text" placeholder='username' required
-            value={username} onChange={(e) => setUsername(e.target.value)} />
-          <input name="password" type="password" placeholder='password' required
-            value={password} onChange={(e) => setPassword(e.target.value)} />
-          <div className="submit-buttons">
-            <input type="submit" value='LOGIN'/>
-          </div>
-        </form>
-         <p style={{color: 'red'}}>{message}</p>
-         <p>If you're not a user... Please <Link to="/register">register</Link> first.</p>
-      </div>
-      </motion.div>
+      <div className='admin-panel'>
+        <div className='left-col'>
+          <input type='text' value='ADMIN' disabled/>
+          <input type='button' value='LOG OUT' onClick={()=>logout()}/>  
+          <input type='button' value='GAME SETTINGS' onClick={()=>setGame()}/> 
+          <input type='button' value='USER SETTINGS' onClick={()=>setUser()}/>   
+          <Link to='/controlboard' style={{ textDecoration: 'none' }}>
+            <input type='button' value='FOOTBALL'/> 
+          </Link>    
+          <input type='button' value='BASKETBALL'/> 
+          <input type='button' value='HOCKEY'/>     
+        </div> 
 
+        <div className="right-col">
+          {showElement?
+          (<GameSettings/>):
+          (<UserSettings/>)}
+        </div>       
+      </div>
       <div className="background">
         <svg className="background" viewBox="0 0 1874 1080.446">
           <path fill="rgba(68,149,255,0.651)" stroke="rgba(0,0,0,0.329)" strokeWidth="100px" 
@@ -69,8 +68,10 @@ const UserLogin = (props) => {
           </svg>
         </svg>
       </div>
+
+      
     </div>
   )
 }
 
-export default UserLogin
+export default AdminPanel

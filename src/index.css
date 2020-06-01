@@ -68,3 +68,62 @@ html {
   display: flex;
   justify-content: space-between;
 }
+
+/* ADMIN PANEL STYLE */
+.admin-panel{
+  width: 1200px;
+  margin: 0 auto;
+  overflow-y: hidden;
+}
+
+.admin-panel .left-col{
+  position: absolute;
+  width: 200px; 
+  margin: 135px auto auto 170px;
+}
+
+.admin-panel input{
+  display: block;
+  width: 180px;
+  margin: 15px;
+  padding: 6px 20px;
+  font-size: 18px;
+  border: 1px solid rgb(116, 186, 255);
+  border-radius: 10px;
+  outline: none;
+}
+
+.admin-panel input[type='text']{
+  text-align: center;
+  color: rgb(7, 110, 206);
+  font-size: 24px;
+}
+
+.admin-panel input[type='button']:hover{
+  color: #fff;
+  background: rgb(7, 110, 206);
+  cursor: pointer;
+}
+
+.admin-panel .right-col{
+  position: absolute;
+  top: 150px;
+  bottom: 0;
+  left: 145px;
+  right: 0;
+  width: 590px;
+  height: 350px;
+  margin: 0 auto;
+  border: 2px solid #fff;
+  border-radius: 10px;
+}
+
+.admin-panel .right-col .settings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-panel .right-col .settings input{
+  width: 99%;
+  margin: 5px auto;
+}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useMemo} from 'react'
 import Scoreboard from '../themes/football/Scoreboard2'
 import Statistics from '../themes/football/Statistics2'
 import Playerslist from '../themes/football/Playerslist2'
@@ -84,9 +84,7 @@ const MatchBoard = () => {
   useEffect(() => {
     setTimeout(() => {
       let localTimeAtRequest = timeNow();
-      //socket.on('getData', (origin, datatype, clientTimestamp)
       socket.emit('getData', "scoreboard", "gamedata", localTimeAtRequest);
-      //socket.emit('getTime', "scoreboard", localTimeAtRequest);
       socket.on('fetchGameData', (data) => {
         let localTimeAtResponse = timeNow();
         let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
@@ -147,8 +145,6 @@ const MatchBoard = () => {
         let seconds = Math.floor(delta / 1000) - minutes * 60;
         let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
         setSeconds(counter);
-        //console.log("seconds updated in useEffect loop")
-
       }, 100);
     } else if (isActive && seconds !== "00:00") {
 
@@ -242,7 +238,9 @@ const MatchBoard = () => {
     }
   }
 
-  
+  const memoPlayerslist = useMemo(() => {
+    return <Playerslist/>// key="playerslist"/>
+  }, [screen])
 
   return (
     <div style={{position: 'relative', background:'green', zIndex:-1, height:'100vh', display: 'flex', justifyContent: 'center'}}>
@@ -264,6 +262,25 @@ const MatchBoard = () => {
         {(screen==='statistics')?
         (<Statistics key="statistics"
           seconds={seconds}
+
+          teamOneScore={teamOneScore}
+          teamTwoScore={teamTwoScore}
+
+          team1Yellow={team1Yellow}
+          team1Red={team1Red}
+          team1Corners={team1Corners}
+          team1Offsides={team1Offsides}
+          team1Shots={team1Shots}
+          team1Fouls={team1Fouls}
+          team1OnTarget={team1OnTarget}
+
+          team2Yellow={team2Yellow}
+          team2Red={team2Red}
+          team2Corners={team2Corners}
+          team2Offsides={team2Offsides}
+          team2Shots={team2Shots}
+          team2Fouls={team2Fouls}
+          team2OnTarget={team2OnTarget}
           
           />):
         (screen==='scoreboard')?

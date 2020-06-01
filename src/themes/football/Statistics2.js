@@ -1,9 +1,10 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, {useEffect, useState, useContext, useMemo} from 'react'
 import { Stage, Layer, Rect, Text, Circle, Image} from 'react-konva';
 import {ScoreClockContext} from '../../contexts/ScoreClockContextProvider'
 import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
 import {socket} from '../../socket/socket';
 import {AnimatePresence, motion} from 'framer-motion'
+import StatisticsListBars from './StatisticsListBars'
 
 const Statistics2 = (props) => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
@@ -33,51 +34,40 @@ const Statistics2 = (props) => {
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [timerActive, setTimerActive] = useState()
 
-  useEffect(()=>{
-    setTeamOneScore(scoreData.teamOne)
-    setTeamTwoScore(scoreData.teamTwo)
-    setTeam1Yellow(scoreData.team1Yellow)
-    setTeam1Red(scoreData.team1Red)
-    setTeam1Corners(scoreData.team1Corners)
-    setTeam1Offsides(scoreData.team1Offsides)
-    setTeam1Shots(scoreData.team1Shots)
-    setTeam1Fouls(scoreData.team1Fouls)
-    setTeam1OnTarget(scoreData.team1OnTarget)
-    setTeam2Yellow(scoreData.team2Yellow)
-    setTeam2Red(scoreData.team2Red)
-    setTeam2Corners(scoreData.team2Corners)
-    setTeam2Offsides(scoreData.team2Offsides)
-    setTeam2Shots(scoreData.team2Shots)
-    setTeam2Fouls(scoreData.team2Fouls)
-    setTeam2OnTarget(scoreData.team2OnTarget)
-  }, [scoreData, team1OnTarget])
-
-  useEffect(()=>{
-    socket.on('timeInfo', (data)=>{
-      setTimerActive(data)
-    })   
-  },[])
-
-  useEffect(()=>{
-    if (timerActive === true) {
-      startTime()
-      setInterval(() => {
-        setTime(timeFormatted())
-      }, 1000);   
-    }
-  }, [timerActive, startTime, timeFormatted])
-
   console.log(props)
 
-  const statisticsList = ['STATISTICS', 'SHOTS', 'SHOTS ON TARGET', 'CORNERS', 'FOULS COMMITTED', 'OFFSIDES', 'YELLOW CARD', 'RED CARD']
+  //const statisticsList = ['STATISTICS', 'SHOTS', 'SHOTS ON TARGET', 'CORNERS', 'FOULS COMMITTED', 'OFFSIDES', 'YELLOW CARD', 'RED CARD']
 
-  const statisticsTeamOne = ['', team1Shots, team1OnTarget, team1Corners, team1Fouls, team1Offsides, team1Yellow, team1Red]
+  //const statisticsTeamOne = ['', props.team1Shots, props.team1OnTarget, props.team1Corners, props.team1Fouls, props.team1Offsides, props.team1Yellow, props.team1Red]
 
-  const statisticsTeamTwo = ['', team2Shots, team2OnTarget, team2Corners, team2Fouls, team2Offsides, team2Yellow, team2Red]
+  //const statisticsTeamTwo = ['', props.team2Shots, props.team2OnTarget, props.team2Corners, props.team2Fouls, props.team2Offsides, props.team2Yellow, team2Red]
 
-  const ListBar= () =>{
+  const memochild = useMemo(() =>{
+    return <StatisticsListBars 
+    team1Yellow={props.team1Yellow}
+    team1Red={props.team1Red}
+    team1Corners={props.team1Corners}
+    team1Offsides={props.team1Offsides}
+    team1Shots={props.team1Shots}
+    team1Fouls={props.team1Fouls}
+    team1OnTarget={props.team1OnTarget}
+
+    team2Yellow={props.team2Yellow}
+    team2Red={props.team2Red}
+    team2Corners={props.team2Corners}
+    team2Offsides={props.team2Offsides}
+    team2Shots={props.team2Shots}
+    team2Fouls={props.team2Fouls}
+    team2OnTarget={props.team2OnTarget}
+    />
+  },[props.team1Yellow, props.team1Red, props.team1Corners, props.team1Offsides, props.team1Shots, props.team1OnTarget, 
+    props.team2Yellow, props.team2Red, props.team2Corners, props.team2Offsides, props.team2Shots, props.team2OnTarget])
+
+  
+
+  const ListBar= (statisticsArray, teamOneStats, teamTwoStats) =>{ //statisticsList, statisticsTeamOne, statisticsTeamTwo
     let bars = [];
-    for (let i=0; i<statisticsList.length; i++) {
+    for (let i=0; i<statisticsArray.length; i++) {
       let color; i%2===0?color='#ddd':color='#fff'
       let fontColor; i%2===0?fontColor='#000':fontColor='#454648'
       let skew; i%2===0?skew='-10deg':skew='10deg'
@@ -97,15 +87,17 @@ const Statistics2 = (props) => {
               }}
                 style={{display:'flex', justifyContent:'space-between', 
                 paddingLeft: '90px', margin:'5px', }}>
-              <span style={{fontSize:'28px'}}>{statisticsTeamOne[i]}</span>
-              <span style={{fontSize:(i===0)?'28px':'20px', paddingTop: '5px', color: (i===0)?'#FF00BF':fontColor}}>{statisticsList[i]}</span>
-              <span style={{width: 90 +'px', fontSize:'28px'}}>{statisticsTeamTwo[i]}</span>
+              <span style={{fontSize:'28px'}}>{teamOneStats[i]}</span>
+              <span style={{fontSize:(i===0)?'28px':'20px', paddingTop: '5px', color: (i===0)?'#FF00BF':fontColor}}>{statisticsArray[i]}</span>
+              <span style={{width: 90 +'px', fontSize:'28px'}}>{teamTwoStats[i]}</span>
             </motion.li>
           </motion.div>
       );      
     }   
     return bars
-  } 
+  }
+  
+  //const ListBarMemo = useMemo(() => ListBar(statisticsList, statisticsTeamOne, statisticsTeamTwo), [statisticsList, statisticsTeamOne, statisticsTeamTwo]);
 
   const pageVariants = {
     initial : { opacity: 0, y: '100vh', scale: 0.8 },
@@ -137,12 +129,12 @@ const Statistics2 = (props) => {
             style={{display:'flex', justifyContent:'space-between', fontSize:'46px', 
             color: '#454648', padding: '0 30px', margin:'20px'}}>
           <div>
-            <span style={{fontSize:'77px'}}>{teamOneScore}</span>
+            <span style={{fontSize:'77px'}}>{props.teamOneScore}</span>
             <span style={{margin:'0px 0 0 20px'}}>Malmö FF</span>
           </div>
           <div>
             <span style={{margin:'0px 20px 0 0'}}>Djurgården</span>
-            <span style={{fontSize:'77px'}}>{teamTwoScore}</span>
+            <span style={{fontSize:'77px'}}>{props.teamTwoScore}</span>
           </div>          
         </motion.li>
       </motion.div>
@@ -151,7 +143,7 @@ const Statistics2 = (props) => {
         <span style={{color:'#fff'}}>{props.seconds}</span>
       </div> 
       <div style={{position:'relative', top: '-132px', left: '60px', paddingBottom: '4px'}}>
-        <ListBar/>
+        {memochild}
       </div>
    
     </motion.div>

@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {AnimatePresence, motion} from "framer-motion"
+import PlayersListBars from './PlayersListBars'
+import PlayersListHeadBar from './PlayersListHeadBar'
 
-const Playerslist2 = () => {
+const Playerslist2 = React.memo(() => {
   const teamNames = ['Malmö FF', 'Djurgården']
 
   const teamOnePlayersName = ['Marcus Astvald', 'Simon Amin', 'Per Ågren', 'Samuel Adrian', 'Mattias Adelstam', 
@@ -79,13 +81,21 @@ const Playerslist2 = () => {
     ease: 'easeInOut',
     duration: 1
   }
+
+  const memoHeadBar = useMemo(() =>{
+    return <PlayersListHeadBar />
+  })
+
+  const memoPlayersListBars = useMemo(() => {
+    return <PlayersListBars/>
+  })
   return (
     <motion.div style={{zIndex:1, width: '970px', height: '550px', margin: '0 auto'}}
       initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>       
-      <HeadBar/>
-      <ListBar/>
+      {memoHeadBar}
+      {memoPlayersListBars}
     </motion.div>
   )
-}
+})
 
 export default Playerslist2

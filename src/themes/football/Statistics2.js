@@ -1,38 +1,13 @@
-import React, {useEffect, useState, useContext, useMemo} from 'react'
-import { Stage, Layer, Rect, Text, Circle, Image} from 'react-konva';
-import {ScoreClockContext} from '../../contexts/ScoreClockContextProvider'
-import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
-import {socket} from '../../socket/socket';
-import {AnimatePresence, motion} from 'framer-motion'
+import React, { useState, useMemo} from 'react'
+import { motion} from 'framer-motion'
 import StatisticsListBars from './StatisticsListBars'
 
 const Statistics2 = (props) => {
-  const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
-  const {scoreData} = useContext(ScoreBoardContext)
+  //const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
+  //const {scoreData} = useContext(ScoreBoardContext)
 
-  const [time, setTime] = useState(timeFormatted())
+  //const [time, setTime] = useState(timeFormatted())
 
-   /* STATISTICS */
-   const [team1Yellow, setTeam1Yellow] = useState(0)
-   const [team1Red, setTeam1Red] = useState(0)
-   const [team1Corners, setTeam1Corners] = useState(0)
-   const [team1Offsides, setTeam1Offsides] = useState(0)
-   const [team1Shots, setTeam1Shots] = useState(0)
-   const [team1Fouls, setTeam1Fouls] = useState(0)
-   const [team1OnTarget, setTeam1OnTarget] = useState(0)
-   
-   const [team2Yellow, setTeam2Yellow] = useState(0)
-   const [team2Red, setTeam2Red] = useState(0)
-   const [team2Corners, setTeam2Corners] = useState(0)
-   const [team2Offsides, setTeam2Offsides] = useState(0)
-   const [team2Shots, setTeam2Shots] = useState(0)
-   const [team2Fouls, setTeam2Fouls] = useState(0)
-   const [team2OnTarget, setTeam2OnTarget] = useState(0)
-   /* STATISTICS */
-
-  const [teamOneScore, setTeamOneScore] = useState(0)
-  const [teamTwoScore, setTeamTwoScore] = useState(0)
-  const [timerActive, setTimerActive] = useState()
 
   console.log(props)
 
@@ -60,8 +35,8 @@ const Statistics2 = (props) => {
     team2Fouls={props.team2Fouls}
     team2OnTarget={props.team2OnTarget}
     />
-  },[props.team1Yellow, props.team1Red, props.team1Corners, props.team1Offsides, props.team1Shots, props.team1OnTarget, 
-    props.team2Yellow, props.team2Red, props.team2Corners, props.team2Offsides, props.team2Shots, props.team2OnTarget])
+  },[props.team1Yellow, props.team1Red, props.team1Corners, props.team1Offsides, props.team1Shots,props.team1Fouls, props.team1OnTarget, 
+    props.team2Yellow, props.team2Red, props.team2Corners, props.team2Offsides, props.team2Shots, props.team2Fouls, props.team2OnTarget])
 
   
 

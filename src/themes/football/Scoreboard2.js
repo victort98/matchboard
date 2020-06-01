@@ -1,20 +1,14 @@
-import React, {useEffect, useState, useContext} from 'react'
-import {ScoreClockContext} from '../../contexts/ScoreClockContextProvider'
-import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
-import {socket} from '../../socket/socket';
-import {AnimatePresence, motion} from 'framer-motion'
+import React, { useState} from 'react'
+import {motion} from 'framer-motion'
 
 const Scoreboard2 = (props) => {
   // Scoreboard2 = ({ isVisible }) =>
-  const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
-  const {scoreData} = useContext(ScoreBoardContext)
 
-  const [time, setTime] = useState(timeFormatted())
+
   const [teamOneName, setTeamOneName] = useState('Malmö FF')
   const [teamTwoName, setTeamTwoName] = useState('Djurgården')
 
-  const [teamOneScore, setTeamOneScore] = useState(0)
-  const [teamTwoScore, setTeamTwoScore] = useState(0)
+
   const [overtime, setOvertime] = useState(0)
 
   const pageVariants = {

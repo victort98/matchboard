@@ -1,19 +1,28 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import '../themes/football/football.css'
-import ControlClock from './ControlClock'
-import {ControlClockContext} from '../contexts/ControlClockContextProvider'
 import {socket} from '../socket/socket';
-import MasterClock from './MasterClock'
 
-const ControlBoard = (props) => {
+
+const ControlBoard = () => {
   const $ = x => document.querySelector(x);
-  const {startTime, stopTime, resetTime} = useContext(ControlClockContext)
   const [screen, setScreen] = useState()
-  const [teamOneName, setTeamOneName] = useState(0)
-  const [teamTwoName, setTeamTwoName] = useState(0)
+
+  /* GAME DATA */
+  const [teamOneName, setTeamOneName] = useState(' ')
+  const [teamTwoName, setTeamTwoName] = useState(' ')
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
+  /* GAME DATA */
+  
+  /* CLOCK */
+  const [timeDifference, setTimeDifference] = useState(0);
+  
+  const [startDate, setStartDate] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [seconds, setSeconds] = useState("00:00");
+  /* CLOCK */
 
   /* STATISTICS */
   const [team1Yellow, setTeam1Yellow] = useState(0)
@@ -33,7 +42,42 @@ const ControlBoard = (props) => {
   const [team2OnTarget, setTeam2OnTarget] = useState(0)
   /* STATISTICS */
 
-  const [timerActive, setTimerActive] = useState(false)
+  const broadcastData = () => {
+    
+    let gamedata = {timestamp : timeNow(), 
+      actions:[{action: "SET_TEAM_ONE_NAME", payload: teamOneName},
+      {action: "SET_TEAM_TWO_NAME", payload: teamTwoName},
+      {action: "SET_TEAM_ONE_SCORE", payload: teamOneScore},
+      {action: "SET_TEAM_TWO_SCORE", payload: teamTwoScore},
+      {action: "SET_OVERTIME", payload: overtime},],
+      origin: "broadcastData from controlboard"};
+
+    socket.emit('timeInfo', gamedata)
+
+    let gamestatsdata = {timestamp : timeNow(), 
+      actions:[
+        //Team1 stats
+      {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
+      {action: "SET_TEAM_ONE_RED", payload: team1Red},
+      {action: "SET_TEAM_ONE_CORNERS", payload: team1Corners},
+      {action: "SET_TEAM_ONE_OFFSIDES", payload: team1Offsides},
+      {action: "SET_TEAM_ONE_SHOTS", payload: team1Shots},
+      {action: "SET_TEAM_ONE_FOULS", payload: team1Fouls},
+      {action: "SET_TEAM_ONE_TARGET", payload: team1OnTarget},
+        //Team2 stats
+      {action: "SET_TEAM_TWO_YELLOW", payload: team2Yellow},
+      {action: "SET_TEAM_TWO_RED", payload: team2Red},
+      {action: "SET_TEAM_TWO_CORNERS", payload: team2Corners},
+      {action: "SET_TEAM_TWO_OFFSIDES", payload: team2Offsides},
+      {action: "SET_TEAM_TWO_SHOTS", payload: team2Shots},
+      {action: "SET_TEAM_TWO_FOULS", payload: team2Fouls},
+      {action: "SET_TEAM_TWO_TARGET", payload: team2OnTarget},],
+      origin: "broadcastData from controlboard"};
+
+      socket.emit('timeInfo', gamestatsdata)
+
+  }
+
   const sendData = () => {
     let scoreInfo = {
       teamOneName: teamOneName, 
@@ -61,29 +105,135 @@ const ControlBoard = (props) => {
     socket.emit('scoreInfo', scoreInfo)
   }
 
-  const startClock = () => {
-    socket.emit('timeInfo', 'start')
-    // setTimerActive(true)
-    startTime()    
-    $('.start').classList.add('start-active')
-    $('.stop').classList.remove('stop-active')
+  useEffect(()=>{
+    //syncing time with server
+    let localTimeAtRequest = Date.now()
+    socket.emit('timesync', localTimeAtRequest)
+    socket.on('timesync', (serverTimeStamp)=>{
+        let localTimeAtResponse = Date.now()
+        let lat = localTimeAtResponse - localTimeAtRequest;
+        let serverTimeAtRequest = serverTimeStamp - lat;
+        let diff = localTimeAtRequest - serverTimeAtRequest;
+        setTimeDifference(diff)
+        console.log("Time since request: " + lat + 'ms at reponse')
+        console.log("Timestamp from server: " + serverTimeStamp)
+        console.log("Server time at request: " + serverTimeAtRequest)
+        console.log("Server time is: " + diff + "ms compared to local")
+        console.log("local time is: " + new Date)
+        console.log("server time is: " + new Date(Date.now() + diff))
+      })
+  },[])
+
+  useEffect(()=>{
+    socket.on('getTime', (data, clientTimestamp, serverTimestamp)=>{
+      console.log("request from: " + data)
+      console.log("request made at: " + new Date(clientTimestamp) + " local time")
+      console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
+      console.log("received at: " + new Date() + " local time")
+      console.log("start date at: " + + new Date(startDate))
+      //TODO use timeGet() instead of Date.now()
+      
+      let timevariables = {timestamp : timeNow(), 
+        actions: [{action: "SET_START_DATE", payload: startDate}, 
+        {action: "SET_TIME_ELAPSED", payload: timeElapsed }, {action: "SET_SECONDS", payload: seconds},
+        {action: "SET_IS_ACTIVE", payload: isActive},],
+        origin: "getTime from useffect"}
+      socket.emit('fetchTime', timevariables)
+    })
+    return function cleanup() {
+      socket.off('getTime')};
+  },)
+
+  useEffect(()=>{
+    socket.on('getGameData', (data, clientTimestamp, serverTimestamp)=>{
+      console.log("request from: " + data)
+      console.log("request made at: " + new Date(clientTimestamp) + " local time")
+      console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
+      console.log("received at: " + new Date() + " local time")
+      console.log("start date at: " + + new Date(startDate))
+      //TODO use timeGet() instead of Date.now()
+      
+      let gamedata = {timestamp : timeNow(), 
+        actions:[{action: "SET_TEAM_ONE_NAME", payload: teamOneName},
+        {action: "SET_TEAM_TWO_NAME", payload: teamTwoName},
+        {action: "SET_TEAM_ONE_SCORE", payload: teamOneScore},
+        {action: "SET_TEAM_TWO_SCORE", payload: teamTwoScore},
+        {action: "SET_OVERTIME", payload: overtime},],
+        origin: "getGameData from useffect"};
+
+      socket.emit('fetchGameData', gamedata)
+    })
+    return function cleanup() {
+      socket.off('getGameData')};
+  },)
+
+  useEffect(()=>{
+    socket.on('getGameStats', (data, clientTimestamp, serverTimestamp)=>{
+      console.log("request from: " + data)
+      console.log("request made at: " + new Date(clientTimestamp) + " local time")
+      console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
+      console.log("received at: " + new Date() + " local time")
+      console.log("start date at: " + + new Date(startDate))
+      //TODO use timeGet() instead of Date.now()
+      
+      let gamestatsdata = {timestamp : timeNow(), 
+        actions:[
+          //Team1 stats
+        {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
+        {action: "SET_TEAM_ONE_RED", payload: team1Red},
+        {action: "SET_TEAM_ONE_CORNERS", payload: team1Corners},
+        {action: "SET_TEAM_ONE_OFFSIDES", payload: team1Offsides},
+        {action: "SET_TEAM_ONE_SHOTS", payload: team1Shots},
+        {action: "SET_TEAM_ONE_FOULS", payload: team1Fouls},
+        {action: "SET_TEAM_ONE_TARGET", payload: team1OnTarget},
+          //Team2 stats
+        {action: "SET_TEAM_TWO_YELLOW", payload: team2Yellow},
+        {action: "SET_TEAM_TWO_RED", payload: team2Red},
+        {action: "SET_TEAM_TWO_CORNERS", payload: team2Corners},
+        {action: "SET_TEAM_TWO_OFFSIDES", payload: team2Offsides},
+        {action: "SET_TEAM_TWO_SHOTS", payload: team2Shots},
+        {action: "SET_TEAM_TWO_FOULS", payload: team2Fouls},
+        {action: "SET_TEAM_TWO_TARGET", payload: team2OnTarget},],
+        origin: "getGameStats from useffect"};
+      socket.emit('fetchGameStats', gamestatsdata)
+    })
+    return function cleanup() {
+      socket.off('getGameStats')};
+  },)
+
+  function timeNow(){
+    return Date.now() + timeDifference;
   }
 
-  const stopClock = () => {
-    stopTime()
-    // setTimerActive(false)
-    $('.start').classList.remove('start-active')
-    $('.stop').classList.add('stop-active')
-    socket.emit('timeInfo', 'stop')
+  function startClock() {
+    if(!isActive){
+      console.log("isActive == false")
+      setStartDate(timeNow())
+      setIsActive(!isActive)
+      socket.emit('timeInfo',{timestamp: timeNow(), 
+        actions: [{action: "SET_START_DATE", payload: timeNow()}, {action: "SET_IS_ACTIVE", payload: true}]})
+    }
   }
 
-  const resetClock = () => {
-    resetTime()
-    $('.start').classList.remove('start-active')
-    $('.stop').classList.remove('stop-active')
-    socket.emit('timeInfo', 'reset')
+  function pauseClock() {
+    if(isActive){
+      let elapsed = timeNow() - startDate
+      setIsActive(!isActive)
+      setTimeElapsed(timeElapsed + elapsed)
+      socket.emit('timeInfo', {timestamp: timeNow(),
+      actions: [{action: "SET_IS_ACTIVE", payload: false},
+       {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}, {action: "SET_SECONDS", payload: seconds}]})
+    }
   }
 
+  function resetClock() {
+    setIsActive(false);
+    setTimeElapsed(0);
+    setSeconds("00:00");
+    socket.emit('timeInfo', {timestamp: timeNow(),
+    actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: 0},
+    {action: "SET_SECONDS", payload: "00:00"}]})
+  }
 
   useEffect(()=>{
     if (screen === 'statistics') {
@@ -92,15 +242,40 @@ const ControlBoard = (props) => {
       socket.emit('board', 'scoreboard')
     } else if (screen === 'playerslist') {
       socket.emit('board', 'playerslist')
+    } else if (screen === 'fixtures') {
+      socket.emit('board', 'fixtures')
+    }else if (screen === 'pointtable') {
+      socket.emit('board', 'pointtable')
     }
   }, [screen])
+
+  useEffect(() => {
+    let interval = null;
+
+    if (isActive) {
+
+      interval = setInterval(() => {
+        let delta = timeNow() - startDate + timeElapsed;
+
+        let minutes = Math.floor(delta / 60 / 1000);
+        let seconds = Math.floor(delta / 1000) - minutes * 60;
+        let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
+        setSeconds(counter);
+
+      }, 100);
+    } else if (isActive && seconds !== "00:00") {
+
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
 
   return (
     <div className="container-fluid">
       <div className="container-inputs">
       <div className="buttons">
         <button className="btnStyle start" onClick={()=> startClock()}>START</button>
-        <button className="btnStyle stop" onClick={()=> stopClock()}>STOP</button>
+        <button className="btnStyle stop" onClick={()=> pauseClock()}>STOP</button>
         <button className="btnStyle reset" onClick={()=>resetClock()}>RESET</button>
       </div>
 
@@ -118,11 +293,14 @@ const ControlBoard = (props) => {
               onChange={e=>setTeamOneScore(e.target.value)}/>
         </div>
         <div className="time">
-        {/* <MasterClock/> */}
-        <ControlClock/>
-          <br />
+        <div className="clockComponent">
+          <h1 className="clock"
+            style={{fontVariantNumeric:'tabular-nums'}}>
+              {seconds}
+          </h1>
         </div>
-
+        <br />
+        </div>
         <div className="team2">
         <label>SET TEAM 2</label>
           <br />
@@ -206,13 +384,13 @@ const ControlBoard = (props) => {
               <option value="scoreboard">SCORE BOARD</option>
               <option value="statistics">STATISTICS</option>
               <option value="playerslist">PLAYERS LIST</option>
+              <option value="fixtures">MATCH FISTURES</option>
               <option value="pointtable">POINT TABLE</option>
-              <option value="leaguetable">LEAGUE TABLE</option>
             </select>
           </div>
           <br />
           <br />
-          <button className="broadcast" onClick={()=> sendData()}>BROADCAST</button>
+          <button className="broadcast" onClick={()=> broadcastData()}>BROADCAST</button>
           <br />
           <br />
         </div>

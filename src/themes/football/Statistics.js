@@ -6,6 +6,7 @@ import { useSpring, animated } from 'react-spring';
 import {socket} from '../../socket/socket';
 import useImage from 'use-image';
 import FieldImage from '../../images/football.png'
+import {AnimatePresence, motion} from 'framer-motion'
 
 const Statistics = () => {
   const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
@@ -122,28 +123,23 @@ const Statistics = () => {
     return list
   }
 
+  const pageVariants = {
+    initial : { opacity: 0, y: '100vh', scale: 0.8 },
+    in: { opacity: 1, y: 0, scale: 1 },
+    out: { opacity: 0, y: '-100vh', scale: 1.2 }
+  }
+
+  const pageTransition = {
+    type: 'tween',
+    ease: 'anticipate',
+    duration: 1
+  }
+
   return (
-    <div style={{display: 'flex', justifyContent: 'center', background:'green', zIndex:-1}}>
-    <svg className="background" viewBox="0 0 1884.241 1080.446" style={{zIndex:0, height:720}}>
-      <path fill="rgba(0, 179, 0, 0.99)" stroke="rgba(0, 61, 0, 1)" strokeWidth="100px" strokeLinejoin="miter" strokeLinecap="butt" 
-        strokeMiterlimit="4" shapeRendering="auto" id="Path_4" 
-        d="M 418.5040283203125 -2.817545237121521e-07 
-          L 1465.7373046875 -2.817545237121521e-07 
-          C 1696.870727539063 -2.817545237121521e-07 1884.241333007813 192.5970764160156 1884.241333007813 430.1777038574219 
-          L 1884.241333007813 650.2685546875 
-          C 1884.241333007813 887.84912109375 1696.870727539063 1080.4462890625 1465.7373046875 1080.4462890625 
-          L 418.5040283203125 1080.4462890625 
-          C 187.3706207275391 1080.4462890625 7.441341836056381e-07 887.84912109375 7.441341836056381e-07 650.2685546875 
-          L 7.441341836056381e-07 430.1777038574219 
-          C 7.441341836056381e-07 192.5970764160156 187.3706207275391 -2.817545237121521e-07 418.5040283203125 -2.817545237121521e-07 
-          Z">
-      </path>
-    </svg>
-    <img src={FieldImage} alt="fieldimage" style={{ position: 'absolute', opacity:'0.6', top: '40px'}} width={925} height={640}/>
-     <animated.div style={fadeTransition}>
-      <Stage y={50} width={1280} height={720}>
+    <motion.div style={{zIndex:1, position: 'relative', left: '0', top: '-82px', overflowY: 'hidden', height: '590px', marginBottom: '-80px'}}
+      initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
+      <Stage x={39} y={20} width={window.innerWidth} height={590}>
         <Layer fill="#ddd">
-         {/* <FrontGroundImage/> */}
           <Rect x={170} y={60} width={940} height={130}
             opacity={0.89} shadowOffset= {{ x: 1, y: 10 }} shadowOpacity= '0.5'        
             fill="#fff" align="center" shadowBlur={10} cornerRadius = {[70, 70, 70, 70]}
@@ -181,8 +177,7 @@ const Statistics = () => {
           {matchInformationStat(1040, 280, 38, statisticsTeamTwo)}
         </Layer>
       </Stage>
-      </animated.div>
-    </div>
+    </motion.div>
   )
 }
 

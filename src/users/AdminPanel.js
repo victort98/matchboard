@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import UserSettings from '../settings/UserSettings'
 import GameSettings from '../settings/GameSettings'
@@ -8,6 +8,7 @@ import mongoosy from 'mongoosy/frontend';
 const { Login } = mongoosy;
 
 const AdminPanel = () => {
+  const $ = x => document.querySelector(x);
   const {updateUserStatus} = useContext(UserContext);
   const [showElement, setShowElement] = useState(true)
 
@@ -24,19 +25,32 @@ const AdminPanel = () => {
     setShowElement(false)
   }
 
+  useEffect(()=>{
+    if (showElement === true) {
+       $('#set-games').classList.add('active-button')
+      $('#set-users').classList.remove('active-button')
+    }else{
+       $('#set-users').classList.add('active-button')
+       $('#set-games').classList.remove('active-button')
+    }
+  }, [showElement])
+
   return (
     <div className="container">
       <div className='admin-panel'>
         <div className='left-col'>
           <input type='text' value='ADMIN' disabled/>
           <input type='button' value='LOG OUT' onClick={()=>logout()}/>  
-          <input type='button' value='GAME SETTINGS' onClick={()=>setGame()}/> 
-          <input type='button' value='USER SETTINGS' onClick={()=>setUser()}/>   
-          <Link to='/controlboard' style={{ textDecoration: 'none' }}>
-            <input type='button' value='FOOTBALL'/> 
-          </Link>    
-          <input type='button' value='BASKETBALL'/> 
-          <input type='button' value='HOCKEY'/>     
+          <input id='set-games' type='button' value='GAME SETTINGS' onClick={()=>setGame()}/> 
+          <input id='set-users' type='button' value='USER SETTINGS' onClick={()=>setUser()}/>   
+          <div className='ctrl-link'>
+            <p>CONTROLBOARD LINK</p>
+            <Link to='/controlboard' style={{ textDecoration: 'none' }}>
+              <input type='button' value='FOOTBALL'/> 
+            </Link>    
+            <input type='button' value='BASKETBALL'/> 
+            <input type='button' value='HOCKEY'/> 
+          </div>   
         </div> 
 
         <div className="right-col">
@@ -67,9 +81,7 @@ const AdminPanel = () => {
             </rect>
           </svg>
         </svg>
-      </div>
-
-      
+      </div>      
     </div>
   )
 }

@@ -1,39 +1,64 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import UserSettings from '../settings/UserSettings'
+import GameSettings from '../settings/GameSettings'
+
 import { UserContext } from '../contexts/UserContextProvider'
 import mongoosy from 'mongoosy/frontend';
 const { Login } = mongoosy;
 
 const AdminPanel = () => {
+  const $ = x => document.querySelector(x);
   const {updateUserStatus} = useContext(UserContext);
+  const [showElement, setShowElement] = useState(true)
 
   const logout = async() => {
     await Login.logout();
     updateUserStatus({ user: false });
   }
 
+  const setGame = () => {
+    setShowElement(true)
+  }
+
+  const setUser = () => {
+    setShowElement(false)
+  }
+
+  useEffect(()=>{
+    if (showElement === true) {
+       $('#set-games').classList.add('active-button')
+      $('#set-users').classList.remove('active-button')
+    }else{
+       $('#set-users').classList.add('active-button')
+       $('#set-games').classList.remove('active-button')
+    }
+  }, [showElement])
+
   return (
     <div className="container">
-
       <div className='admin-panel'>
         <div className='left-col'>
           <input type='text' value='ADMIN' disabled/>
           <input type='button' value='LOG OUT' onClick={()=>logout()}/>  
-          <Link to='/controlboard' style={{ textDecoration: 'none' }}>
-            <input type='button' value='FOOTBALL'/> 
-          </Link>    
-          <input type='button' value='BASKETBALL'/> 
-          <input type='button' value='HOCKEY'/>   
+          <input id='set-games' type='button' value='GAME SETTINGS' onClick={()=>setGame()}/> 
+          <input id='set-users' type='button' value='USER SETTINGS' onClick={()=>setUser()}/>   
+          <div className='ctrl-link'>
+            <p>CONTROLBOARD LINK</p>
+            <Link to='/controlboard' style={{ textDecoration: 'none' }}>
+              <input type='button' value='FOOTBALL'/> 
+            </Link>    
+            <input type='button' value='BASKETBALL'/> 
+            <input type='button' value='HOCKEY'/> 
+          </div>   
         </div> 
-        <div className="right-col">
-          <div className='settings'>
-            <input type='button' value='GAME SETTINGS'/> 
-            <input type='button' value='USER SETTINGS'/> 
-          </div>
-          <hr/>          
-        </div>  
-      </div>       
 
+        <div className="right-col">
+          {showElement?
+          (<GameSettings/>):
+          (<UserSettings/>)}
+        </div>       
+      </div>
       <div className="background">
         <svg className="background" viewBox="0 0 1874 1080.446">
           <path fill="rgba(68,149,255,0.651)" stroke="rgba(0,0,0,0.329)" strokeWidth="100px" 
@@ -56,7 +81,7 @@ const AdminPanel = () => {
             </rect>
           </svg>
         </svg>
-      </div>
+      </div>      
     </div>
   )
 }

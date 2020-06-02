@@ -71,21 +71,15 @@ html {
 
 /* ADMIN PANEL STYLE */
 .admin-panel{
-  width: 900px;
+  width: 1200px;
   margin: 0 auto;
   overflow-y: hidden;
-  display: flex;
-  justify-content: center;
 }
 
 .admin-panel .left-col{
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 900px;
-  margin: 185px auto;
+  width: 200px; 
+  margin: 135px auto auto 170px;
 }
 
 .admin-panel input{
@@ -93,32 +87,39 @@ html {
   width: 180px;
   margin: 15px;
   padding: 6px 20px;
-  font-size: 18px;
-  border: 1px solid rgb(116, 186, 255);
+  font-size: 14px;
+  border: 1px solid rgb(100, 180, 255);
   border-radius: 10px;
   outline: none;
 }
 
+.ctrl-link p{
+  font-size: 12px;
+  color: rgb(0, 142, 207);
+  margin: 3px 0 0 19px;
+}
+
 .admin-panel input[type='text']{
   text-align: center;
-  color: rgb(7, 110, 206);
+  color: rgb(100, 180, 255);
   font-size: 24px;
 }
 
 .admin-panel input[type='button']:hover{
   color: #fff;
-  background: rgb(7, 110, 206);
+  background: rgb(100, 180, 255);
   cursor: pointer;
+  border: 1px solid #fff;
 }
 
 .admin-panel .right-col{
   position: absolute;
-  top: 100px;
+  top: 150px;
   bottom: 0;
   left: 145px;
   right: 0;
   width: 590px;
-  height: 450px;
+  height: 350px;
   margin: 0 auto;
   border: 2px solid #fff;
   border-radius: 10px;
@@ -133,3 +134,11 @@ html {
   width: 99%;
   margin: 5px auto;
 }
+
+.active-button{
+  color: #fff;
+  background: rgb(100, 180, 255);
+  box-shadow: 1px 1px 2px rgba(26, 26, 26, 0.1);
+}
+
+/* USER SETTINGS */

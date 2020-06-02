@@ -1,23 +1,15 @@
-import React, {useEffect, useState, useContext} from 'react'
-import {ScoreClockContext} from '../../contexts/ScoreClockContextProvider'
-import {ScoreBoardContext} from '../../contexts/ScoreBoardContextProvider'
-import {socket} from '../../socket/socket';
-import {AnimatePresence, motion} from 'framer-motion'
+import React, { useState} from 'react'
+import {motion} from 'framer-motion'
 
-const Scoreboard2 = ({ isVisible }) => {
-  const {timeFormatted, startTime, stopTime, resetTime} = useContext(ScoreClockContext)
-  const {scoreData} = useContext(ScoreBoardContext)
+const Scoreboard2 = (props) => {
+  // Scoreboard2 = ({ isVisible }) =>
 
-  const [time, setTime] = useState(timeFormatted())
+
   const [teamOneName, setTeamOneName] = useState('Malmö FF')
   const [teamTwoName, setTeamTwoName] = useState('Djurgården')
 
-  const [teamOneScore, setTeamOneScore] = useState(0)
-  const [teamTwoScore, setTeamTwoScore] = useState(0)
-  const [overtime, setOvertime] = useState(0)
 
-  const [timerActive, setTimerActive] = useState()
-
+<<<<<<< HEAD
   useEffect(()=>{
     setTeamOneName(scoreData.teamOneName)
     setTeamTwoName(scoreData.teamTwoName)
@@ -46,6 +38,9 @@ const Scoreboard2 = ({ isVisible }) => {
       resetTime()
     }
   }, [timerActive, timeFormatted, startTime, stopTime, resetTime])
+=======
+  const [overtime, setOvertime] = useState(0)
+>>>>>>> e9627cdcb68d5573f4c8dcb0e53fb5af9deee80b
 
   const pageVariants = {
     initial : { opacity: 0, y: '-100vw', scale: 0.7 },
@@ -82,13 +77,13 @@ const Scoreboard2 = ({ isVisible }) => {
       </motion.div>
       <div style={{width:'170px', height:'132px', backgroundColor: '#454648', zIndex: 1, border: '5px solid rgba(200, 200, 200, 0.5)',
           padding:'30px 0', position:'relative', top: '-130px', margin: '0 auto', borderRadius:'100px', textAlign: 'center', fontSize: '52px'}}>
-        <span style={{color:'#fff'}}>{time}</span>
+        <span style={{color:'#fff'}}>{props.seconds}</span>
       </div> 
       <div style={{width: '500px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', fontSize: '14rem', 
           color: '#fff', textShadow: '5px 10px 10px rgba(0, 0, 0, 0.5)', zIndex: 10, padding: 0}}>
-        <motion.span  initial={{ scale: 0, x: '-100%', opacity: 0 }} animate={{ scale: 1, x: 0, opacity: 1 }} transition={{delay: 1, duration: 1}}>{teamOneScore}</motion.span>        
+        <motion.span  initial={{ scale: 0, x: '-100%', opacity: 0 }} animate={{ scale: 1, x: 0, opacity: 1 }} transition={{delay: 1, duration: 1}}>{props.teamOneScore}</motion.span>        
         <span>:</span>
-        <motion.span initial={{ scale: 0, x: '100%', opacity: 0 }} animate={{ scale: 1, x: 0, opacity: 1 }} transition={{delay: 1, duration: 1}}>{teamTwoScore}</motion.span>
+        <motion.span initial={{ scale: 0, x: '100%', opacity: 0 }} animate={{ scale: 1, x: 0, opacity: 1 }} transition={{delay: 1, duration: 1}}>{props.teamTwoScore}</motion.span>
       </div>    
     </motion.div>
   )

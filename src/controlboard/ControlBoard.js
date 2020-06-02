@@ -1,20 +1,23 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import '../themes/football/football.css'
-import {ControlClockContext} from '../contexts/ControlClockContextProvider'
 import {socket} from '../socket/socket';
 
 
-const ControlBoard = (props) => {
+const ControlBoard = () => {
   const $ = x => document.querySelector(x);
   const [screen, setScreen] = useState()
-  const [teamOneName, setTeamOneName] = useState('')
-  const [teamTwoName, setTeamTwoName] = useState('')
+
+  /* GAME DATA */
+  const [teamOneName, setTeamOneName] = useState(' ')
+  const [teamTwoName, setTeamTwoName] = useState(' ')
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
+  /* GAME DATA */
   
   /* CLOCK */
   const [timeDifference, setTimeDifference] = useState(0);
+  
   const [startDate, setStartDate] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -38,6 +41,42 @@ const ControlBoard = (props) => {
   const [team2Fouls, setTeam2Fouls] = useState(0)
   const [team2OnTarget, setTeam2OnTarget] = useState(0)
   /* STATISTICS */
+
+  const broadcastData = () => {
+    
+    let gamedata = {timestamp : timeNow(), 
+      actions:[{action: "SET_TEAM_ONE_NAME", payload: teamOneName},
+      {action: "SET_TEAM_TWO_NAME", payload: teamTwoName},
+      {action: "SET_TEAM_ONE_SCORE", payload: teamOneScore},
+      {action: "SET_TEAM_TWO_SCORE", payload: teamTwoScore},
+      {action: "SET_OVERTIME", payload: overtime},],
+      origin: "broadcastData from controlboard"};
+
+    socket.emit('timeInfo', gamedata)
+
+    let gamestatsdata = {timestamp : timeNow(), 
+      actions:[
+        //Team1 stats
+      {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
+      {action: "SET_TEAM_ONE_RED", payload: team1Red},
+      {action: "SET_TEAM_ONE_CORNERS", payload: team1Corners},
+      {action: "SET_TEAM_ONE_OFFSIDES", payload: team1Offsides},
+      {action: "SET_TEAM_ONE_SHOTS", payload: team1Shots},
+      {action: "SET_TEAM_ONE_FOULS", payload: team1Fouls},
+      {action: "SET_TEAM_ONE_TARGET", payload: team1OnTarget},
+        //Team2 stats
+      {action: "SET_TEAM_TWO_YELLOW", payload: team2Yellow},
+      {action: "SET_TEAM_TWO_RED", payload: team2Red},
+      {action: "SET_TEAM_TWO_CORNERS", payload: team2Corners},
+      {action: "SET_TEAM_TWO_OFFSIDES", payload: team2Offsides},
+      {action: "SET_TEAM_TWO_SHOTS", payload: team2Shots},
+      {action: "SET_TEAM_TWO_FOULS", payload: team2Fouls},
+      {action: "SET_TEAM_TWO_TARGET", payload: team2OnTarget},],
+      origin: "broadcastData from controlboard"};
+
+      socket.emit('timeInfo', gamestatsdata)
+
+  }
 
   const sendData = () => {
     let scoreInfo = {
@@ -91,13 +130,75 @@ const ControlBoard = (props) => {
       console.log("request made at: " + new Date(clientTimestamp) + " local time")
       console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
       console.log("received at: " + new Date() + " local time")
+      console.log("start date at: " + + new Date(startDate))
       //TODO use timeGet() instead of Date.now()
-      socket.emit('fetchTime', {timestamp : timeNow(), actions: [{action: "SET_START_DATE", payload: startDate}, {action: "SET_IS_ACTIVE", payload: isActive},
-      {action: "SET_TIME_ELAPSED", payload: timeElapsed }, {action: "SET_SECONDS", payload: seconds}]})
-      //socket.emit('scoreInfo', scoreInfo)
+      
+      let timevariables = {timestamp : timeNow(), 
+        actions: [{action: "SET_START_DATE", payload: startDate}, 
+        {action: "SET_TIME_ELAPSED", payload: timeElapsed }, {action: "SET_SECONDS", payload: seconds},
+        {action: "SET_IS_ACTIVE", payload: isActive},],
+        origin: "getTime from useffect"}
+      socket.emit('fetchTime', timevariables)
     })
     return function cleanup() {
       socket.off('getTime')};
+  },)
+
+  useEffect(()=>{
+    socket.on('getGameData', (data, clientTimestamp, serverTimestamp)=>{
+      console.log("request from: " + data)
+      console.log("request made at: " + new Date(clientTimestamp) + " local time")
+      console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
+      console.log("received at: " + new Date() + " local time")
+      console.log("start date at: " + + new Date(startDate))
+      //TODO use timeGet() instead of Date.now()
+      
+      let gamedata = {timestamp : timeNow(), 
+        actions:[{action: "SET_TEAM_ONE_NAME", payload: teamOneName},
+        {action: "SET_TEAM_TWO_NAME", payload: teamTwoName},
+        {action: "SET_TEAM_ONE_SCORE", payload: teamOneScore},
+        {action: "SET_TEAM_TWO_SCORE", payload: teamTwoScore},
+        {action: "SET_OVERTIME", payload: overtime},],
+        origin: "getGameData from useffect"};
+
+      socket.emit('fetchGameData', gamedata)
+    })
+    return function cleanup() {
+      socket.off('getGameData')};
+  },)
+
+  useEffect(()=>{
+    socket.on('getGameStats', (data, clientTimestamp, serverTimestamp)=>{
+      console.log("request from: " + data)
+      console.log("request made at: " + new Date(clientTimestamp) + " local time")
+      console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
+      console.log("received at: " + new Date() + " local time")
+      console.log("start date at: " + + new Date(startDate))
+      //TODO use timeGet() instead of Date.now()
+      
+      let gamestatsdata = {timestamp : timeNow(), 
+        actions:[
+          //Team1 stats
+        {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
+        {action: "SET_TEAM_ONE_RED", payload: team1Red},
+        {action: "SET_TEAM_ONE_CORNERS", payload: team1Corners},
+        {action: "SET_TEAM_ONE_OFFSIDES", payload: team1Offsides},
+        {action: "SET_TEAM_ONE_SHOTS", payload: team1Shots},
+        {action: "SET_TEAM_ONE_FOULS", payload: team1Fouls},
+        {action: "SET_TEAM_ONE_TARGET", payload: team1OnTarget},
+          //Team2 stats
+        {action: "SET_TEAM_TWO_YELLOW", payload: team2Yellow},
+        {action: "SET_TEAM_TWO_RED", payload: team2Red},
+        {action: "SET_TEAM_TWO_CORNERS", payload: team2Corners},
+        {action: "SET_TEAM_TWO_OFFSIDES", payload: team2Offsides},
+        {action: "SET_TEAM_TWO_SHOTS", payload: team2Shots},
+        {action: "SET_TEAM_TWO_FOULS", payload: team2Fouls},
+        {action: "SET_TEAM_TWO_TARGET", payload: team2OnTarget},],
+        origin: "getGameStats from useffect"};
+      socket.emit('fetchGameStats', gamestatsdata)
+    })
+    return function cleanup() {
+      socket.off('getGameStats')};
   },)
 
   function timeNow(){
@@ -120,7 +221,8 @@ const ControlBoard = (props) => {
       setIsActive(!isActive)
       setTimeElapsed(timeElapsed + elapsed)
       socket.emit('timeInfo', {timestamp: timeNow(),
-      actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}]})
+      actions: [{action: "SET_IS_ACTIVE", payload: false},
+       {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}, {action: "SET_SECONDS", payload: seconds}]})
     }
   }
 
@@ -160,7 +262,7 @@ const ControlBoard = (props) => {
         let counter = (minutes + '').padStart(2, '0') + ':' + (seconds + '').padStart(2, 0);
         setSeconds(counter);
 
-      }, 500);
+      }, 100);
     } else if (isActive && seconds !== "00:00") {
 
       clearInterval(interval);
@@ -288,7 +390,7 @@ const ControlBoard = (props) => {
           </div>
           <br />
           <br />
-          <button className="broadcast" onClick={()=> sendData()}>BROADCAST</button>
+          <button className="broadcast" onClick={()=> broadcastData()}>BROADCAST</button>
           <br />
           <br />
         </div>

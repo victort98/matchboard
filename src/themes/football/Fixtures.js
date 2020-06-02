@@ -2,7 +2,7 @@ import React from 'react'
 import {motion, AnimatePresence} from "framer-motion"
 import moment from 'moment'
 
-const Fixtures = () => {
+const Fixtures = React.memo(() => {
   const teamNames = ['ALLSVENSKAN, HERR 2020']
 
   const matchFixtures = [
@@ -114,6 +114,6 @@ const Fixtures = () => {
       <ListBar/>
     </motion.div>
   )
-}
+})
 
 export default Fixtures

@@ -1,7 +1,7 @@
 import React from 'react'
 import {AnimatePresence, motion} from "framer-motion"
 
-const PointTable = () => {
+const PointTable = React.memo(() => {
   const leagueName = ['POINT TABLE']
 
   const pointTable = [
@@ -112,6 +112,6 @@ const PointTable = () => {
       <ListBar/>
     </motion.div>
   )
-}
+})
 
 export default PointTable

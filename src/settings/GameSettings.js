@@ -8,10 +8,10 @@ const GameSettings = () => {
   return (
     <div>
       <div style={{margin: '5px auto'}}>
-      <h6 style={{color: '#7f7f7f', margin: '3px', textAlign: 'center'}}>SELECT A GAME</h6>
+      <h6 style={{color: 'rgb(0, 142, 207)', margin: '3px', textAlign: 'center'}}>SELECT A GAME</h6>
       <select className="select-game" 
-        style={{padding: '5px 5px', fontSize: '16px', width: '275px', borderRadius: '10px', 
-        outline: 'none', margin: '0 auto', display:'flex'}}
+        style={{padding: '5px 5px', fontSize: '16px', width: '395px', borderRadius: '10px', 
+          outline: 'none', margin: '0 auto', display:'flex'}}
         onChange={e=>setSelectedGame(e.target.value)}>
         <option value="football">FOOTBALL</option>
         <option value="basketball">BASKETBALL</option>

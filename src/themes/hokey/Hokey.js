@@ -7,7 +7,6 @@ import './hokey.css'
 import { FormGroup, Label, Input} from 'reactstrap'
 const Hokey = (props) => {
   const $ = x => document.querySelector(x);
-  const {startTime, stopTime, resetTime} = useContext(ClockContextH)
   const [screen, setScreen] = useState()
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
@@ -44,21 +43,18 @@ const Hokey = (props) => {
 
   const startClock = () => {
     socket.emit('timeInfo', timerActive)
-    startTime()
     setTimerActive(true)
     $('.start').classList.add('start-active')
     $('.stop').classList.remove('stop-active')
   }
 
   const stopClock = () => {
-    stopTime()
     setTimerActive(false)
     $('.start').classList.remove('start-active')
     $('.stop').classList.add('stop-active')
   }
 
   const resetClock = () => {
-    resetTime()
     $('.start').classList.remove('start-active')
     $('.stop').classList.remove('stop-active')
   }
@@ -84,7 +80,7 @@ const Hokey = (props) => {
          
        <div>
           <Label className="textStyle own"for="exampleSelect">PERIOD</Label><br/>
-          <Input className="btnStyle1 game" type="select" name="select" id="exampleSelect">
+          <Input className="btnStyle1 game" type="select" name="select" onChange={e=>setTeamTwoScore(e.target.value)}>
             <option>1 ST</option>
             <option>2 ND</option>
             <option>3 RD</option>

@@ -3,12 +3,12 @@ import ClockH from './ClockH'
 
 const ScoreBoardH = () => {
     return (
-  
-          <div className="sll">
+          <div className='sll'>
+             <ClockH/>
                 <input className="score bol" type="numbere" name="0"
                 placeholder=""/>
                  <input className="score bol5" type="numbere" name="0"
-                placeholder="  1SD"/>
+                placeholder="     1SD"/>
               <input className="score bol1" type="numbere" name="0"
                 placeholder="  HOME"/>
                <input className="score bol2" type="numbere" name="0"
@@ -40,7 +40,6 @@ const ScoreBoardH = () => {
                </div>
               
          </div>
-      
     )
 }
 export default  ScoreBoardH

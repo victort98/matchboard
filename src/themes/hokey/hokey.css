@@ -82,19 +82,19 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .clock1{
     margin-left: 43vw;
-    margin-top: 70px;
+    margin-top: 20px;
     content: initial;
      width: 180px;
   height: 80px;
-  border-radius: 10%;
+  border-radius: 20%;
   font-size: 3.9em;
   border: 8px;
   border-style: solid;
-  border-color: #A3AAA5;
+  border-color: rgb(70, 20, 61);
   color: #fff;
   line-height: 50px;
   text-align: center;
-  background: #16387a;
+  background: #020202;
   display: inline-block;
   font-variant-numeric: tabular-nums;
   font-family: 'Cute Font', cursive;
@@ -142,13 +142,14 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 .sll{
     background: url(./hockey2.jpg) center   no-repeat;
     background-size: cover;
-    padding: 305px 0px;
+    height: 50vw;
     
 }
+
 .score {
     margin-left: 10vw;
     border-radius: 1px;
-    border: 3px;
+    border: 2px;
     border-style: solid;
     font-size: 40px;
     background: rgb(8, 8, 8);
@@ -173,7 +174,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 2vw;
     margin-left: 10vw;
     width: 30%;
-    font-size: 55px;
+    font-size: 50px;
     color: lavender;
     border-color: rgb(11, 14, 216);
     border-bottom-right-radius: 0vw;
@@ -182,7 +183,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 .bol2{
     margin-left: 38vw;
     width: 5%;
-    font-size: 55px;
+    font-size: 50px;
     border-color: rgb(11, 14, 216);
 
 }
@@ -190,7 +191,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-left: 56vw;   
     width: 5%;
     border-color: rgb(184, 5, 5);
-    font-size: 55px;
+    font-size: 50px;
 
 }
 .bol3{
@@ -199,13 +200,13 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-color: rgb(184, 5, 5);
     border-top-left-radius: 0vw;  
     border-bottom-left-radius: 0vw;
-    font-size: 55px;
+    font-size: 50px;
 
 }
 .bol5{
-    margin-top: 5vw;
+    margin-top: 4.2vw;
     margin-left: 43vw;   
-    width: 14%;
+    width: 13vw;
     font-size: 40px;
     border-top-right-radius: 0vw;
     border-top-left-radius: 0vw;

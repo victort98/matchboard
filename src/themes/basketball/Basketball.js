@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 import Clock from "../../controlboard/Clock";
 import { Row, Col } from "reactstrap";
 
@@ -16,9 +17,18 @@ const Basketball = () => {
   const [bonus, setBonus] = useState(4);
   const [homeBonus, setHomeBonus] = useState(4);
 
+  const [number, setNumber] = useState(0);
+  const [points, setPoints] = useState(0);
+
+    
+    
+    
+
   let homeTeam = [
     { name: "Ghayssa", number: 4, points: 0 },
     { name: "Maruf", number: 15, points: 0 },
+    { name: "Thomas", number: 8, points: 0 },
+    { name: "Johan", number: 10, points: 0 },
   ];
   let guestTeam = [
     { name: "Joakim", number: 5, points: 0 },
@@ -32,12 +42,27 @@ const Basketball = () => {
   ];
 
   function plusOneHomeTeam() {
-    return;
-    for (let i = 0; i < homeTeam.length; i++)
-      if (homeTeam[i].number == document.getElementById("number").placeholder) {
-        homeTeam[i].points++;
+    
+    
+  };
+
+  function SetValueAsNumber() {
+    return
+    
+  };
+  function setPointOne() {
+
+    for (let i = 0; i < homeTeam.length; i++){
+      if (homeTeam[i].number === number) {
+        setPoints( homeTeam[i].points++)
+       
       }
+    }
   }
+   
+
+  
+
 
   console.log(homeScore);
   return (
@@ -128,7 +153,7 @@ const Basketball = () => {
               height: "auto",
               margin: "auto",
             }}
-            onClick={() => setquarter(quarter + 1)}
+            onClick={() =>  setquarter(quarter + 1)}
             className="p "
           >
             Set the Quarter
@@ -193,8 +218,8 @@ const Basketball = () => {
           <button type="button" class="btn btn-info">
             <h1>result</h1>
           </button>
-          <h2>Number:{plusOneHomeTeam()}</h2>
-          <h2>Points:{plusOneHomeTeam()}</h2>
+          <h2>Number:{number}</h2>
+          <h2>Points:{points}</h2>
         </Col>
         <Col>
           <h2>Guest:{guestScore}</h2>
@@ -351,13 +376,16 @@ const Basketball = () => {
           }}
         >
           <row>
-            <input
-              style={{ width: "60px", height: "40px",backgroundcolor:"white", color:"red", }}
-               placeholder="number"
-            ></input>
+            <select  onChange={(e)=>setNumber(e.target.value)} style={{background:"yellow",color:"red"}}>
+               <option>Number</option>
+            <option value={4} >4</option>
+            <option value={15}>15</option>
+            <option value={8}>8</option>
+            <option value={10}>10</option>
+          </select>
             <button
               style={{ width: "auto", height: "50",margin:"5px" }}
-              onClick={() => plusOneHomeTeam()}
+              onClick={() => setPointOne()}
             >
               Add points
             </button>
@@ -369,10 +397,13 @@ const Basketball = () => {
             </button>
           </row>
           <row>
-            <input
-              style={{ width: "60px", height: "40px",backgroundcolor:"white", color:"red", }}
-               placeholder="number"
-            ></input>
+            <select style={{background:"yellow",color:"red"}}>
+               <option>Number</option>
+            <option value={4}>4</option>
+            <option>15</option>
+            <option>8</option>
+            <option>10</option>
+          </select>
             <button
               style={{ width: "auto", height: "50",margin:"5px" }}
               onClick={() => plusOneHomeTeam()}
@@ -387,12 +418,15 @@ const Basketball = () => {
             </button>
           </row>
           <row>
-            <input
-              style={{ width: "60px", height: "40px",backgroundcolor:"white", color:"red", }}
-               placeholder="number"
-            ></input>
+           <select style={{background:"yellow",color:"red"}}>
+               <option>Number</option>
+            <option value={4}>4</option>
+            <option>15</option>
+            <option>8</option>
+            <option>10</option>
+          </select>
             <button
-              style={{ width: "auto", height: "50",margin:"5px" }}
+              style={{ width: "auto", height: "50", margin: "5px" }}
               onClick={() => plusOneHomeTeam()}
             >
               Add points

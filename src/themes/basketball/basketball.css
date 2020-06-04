@@ -13,7 +13,9 @@ h1 {
 h2 {
   font-size: 2em;
 }
-
+input {
+  background-color: black;
+}
 .bcontolboard {
   background-color: white;
   width: 80%;
@@ -26,6 +28,9 @@ h2 {
   justify-content: space-around;
   align-items: center;
 }
+
+
+
 
  
 .result {

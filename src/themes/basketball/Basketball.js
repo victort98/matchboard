@@ -20,16 +20,36 @@ const Basketball = () => {
   const [number, setNumber] = useState(0);
   const [points, setPoints] = useState(0);
 
-    
-    
-    
-
-  let homeTeam = [
+  const [homeTeam, setHomeTeam] = useState( [
     { name: "Ghayssa", number: 4, points: 0 },
     { name: "Maruf", number: 15, points: 0 },
     { name: "Thomas", number: 8, points: 0 },
     { name: "Johan", number: 10, points: 0 },
-  ];
+  ]);
+
+  function decrementHomeFoul() {
+    if (homeFoul != 0) {
+      setHomeFoul(homeFoul - 1)
+    } 
+      
+  }
+
+  function addPlayerScore() {
+    let tempTeam=[]
+    for (let i = 0; i < homeTeam.length; i++){
+      if (number == homeTeam[i].number) {
+        homeTeam[i].points = homeTeam[i].points + 2
+        setPoints(homeTeam[i].points)
+      }
+    }
+    tempTeam = homeTeam
+    setHomeTeam(tempTeam)
+    console.log(homeTeam)
+  }
+    
+    
+
+
   let guestTeam = [
     { name: "Joakim", number: 5, points: 0 },
     { name: "Viktor", number: 15, points: 0 },
@@ -260,7 +280,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => setHomeFoul(homeFoul - 1)}
+              onClick={() => decrementHomeFoul()}
               className="p"
             >
               Count Down
@@ -397,16 +417,14 @@ const Basketball = () => {
             </button>
           </row>
           <row>
-            <select style={{background:"yellow",color:"red"}}>
-               <option>Number</option>
-            <option value={4}>4</option>
-            <option>15</option>
-            <option>8</option>
-            <option>10</option>
+             <select  onChange={(e)=>setNumber(e.target.value)} style={{background:"yellow",color:"red"}}>
+              <option>Number</option>
+              {homeTeam.map(player => <option>{player.number} </option>)}
+           
           </select>
             <button
               style={{ width: "auto", height: "50",margin:"5px" }}
-              onClick={() => plusOneHomeTeam()}
+              onClick={() => addPlayerScore()}
             >
               Add points
             </button>
@@ -418,12 +436,12 @@ const Basketball = () => {
             </button>
           </row>
           <row>
-           <select style={{background:"yellow",color:"red"}}>
+            <select  onChange={(e)=>setNumber(e.target.value)} style={{background:"yellow",color:"red"}}>
                <option>Number</option>
-            <option value={4}>4</option>
-            <option>15</option>
-            <option>8</option>
-            <option>10</option>
+            <option value={4} >4</option>
+            <option value={15}>15</option>
+            <option value={8}>8</option>
+            <option value={10}>10</option>
           </select>
             <button
               style={{ width: "auto", height: "50", margin: "5px" }}

@@ -10,7 +10,11 @@ const ShowPlayers = () => {
                 <div className="inputFields">
                     <label>TEAM NAME</label>
                     <br />
-                    <input className="teamNameInput"></input>
+                    <select>
+                        <option value="team1">Team 1</option>
+                        <option value="team2">Team 2</option>
+                        <option value="team3">Team 3</option>
+                    </select>
                 </div>
                 <div className="playerInformation">
                     <div className="buttons">
@@ -20,9 +24,28 @@ const ShowPlayers = () => {
                     <br/>
                     <button className="help buttonDesign">HELP</button>
                     </div>
+                <div className="playerNames1">
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
                 </div>
-                <div className="submitButton">
-                <button className="submit">Submit</button>
+                <div className="playerNames2">
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                    <p>Victor Törnbom</p>
+                </div>
+                </div>
+                <div className="editDeleteButtons">
+                <button className="edit">EDIT</button>
+                <button className="delete">DELETE</button>
                 </div>
             </div>
             <div className="container">

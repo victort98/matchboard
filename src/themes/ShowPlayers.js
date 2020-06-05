@@ -6,11 +6,11 @@ const ShowPlayers = () => {
 
     return(
         <div>
-            <div className="information">
+            <div className="showPlayerInformation">
                 <div className="inputFields">
                     <label>TEAM NAME</label>
                     <br />
-                    <select>
+                    <select className="dropdownStyling">
                         <option value="team1">Team 1</option>
                         <option value="team2">Team 2</option>
                         <option value="team3">Team 3</option>
@@ -24,23 +24,23 @@ const ShowPlayers = () => {
                     <br/>
                     <button className="help buttonDesign">HELP</button>
                     </div>
-                <div className="playerNames1">
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
+                <div className="showNames1">
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
                 </div>
-                <div className="playerNames2">
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
-                    <p>Victor Törnbom</p>
+                <div className="showNames2">
+                <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
+                    <p className="nameStyling">Victor Törnbom</p>
                 </div>
                 </div>
                 <div className="editDeleteButtons">

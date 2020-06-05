@@ -3,10 +3,59 @@
     margin: 0 auto;
 }
 
+.showPlayerInformation {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
 .inputFields {
     text-align: center;
     margin-top: 60px;
     margin-left: 290px;
+}
+
+.editDeleteButtons {
+    padding: 25px;
+    padding-left: 365px;
+}
+
+.edit {
+    margin-top: 10%;
+    border-radius: 35px;
+    font-size: 1.3rem;
+    padding: 7px 5px;
+    width: 40%;
+    height: 50px;
+    border-color: white;
+    border-style: solid;
+    color: #0065b2;
+    border-width: 1px;
+    background-color: transparent;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+    margin-right: 10px;
+}
+
+.delete {
+    margin-top: 10%;
+    border-radius: 35px;
+    font-size: 1.3rem;
+    padding: 7px 5px;
+    width: 40%;
+    height: 50px;
+    border-color: white;
+    border-style: solid;
+    color: #0065b2;
+    border-width: 1px;
+    background-color: transparent;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+    margin-left: 10px;
 }
 
 .teamNameInput {
@@ -42,6 +91,21 @@
     flex: 1;
 }
 
+.showNames1 {
+    flex: 1;
+    padding-top: 20px;
+}
+
+.showNames2 {
+    flex: 1;
+    padding-top: 20px;
+}
+
+.nameStyling {
+    padding-top: 12px;
+    font-size: 1.3rem;
+}
+
 .buttons {
     padding: 20px;
     flex: 1;
@@ -59,6 +123,18 @@
     cursor: pointer;
     z-index: 1;
 }
+
+.dropdownStyling {
+    width: 60%;
+    color: #0065b2;
+    border-radius: 15px;
+    border: 1.4px;
+    border-style: solid;
+    border-color: gray;
+    font-size: 25px;
+    padding: 5px;
+    outline: none;
+  }
 
 .submit {
     border: none;

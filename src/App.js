@@ -19,6 +19,7 @@ import OperatorPanel from './users/OperatorPanel'
 import ProtectedRoutes from './routes/ProtectedRoutes'
 import LeagueTable from './controlboard/LeagueTable'
 import AddPlayers from './themes/AddPlayers'
+import ShowPlayers from './themes/ShowPlayers'
 import FootballFixtures from './themes/football/Fixtures'
 import PointTable from './themes/football/PointTable'
 import MatchFixture from './controlboard/MatchFixtures'
@@ -46,6 +47,7 @@ const App = () => {
                   <Route exact path='/basketball' component={Basketball}/>            
                   <Route exact path='/hockey' component={Hockey}/>
                   <Route exact path="/addplayers" component={AddPlayers}/>         
+                  <Route exact path="/showplayers" component={ShowPlayers}/>         
                   <Route exact path='/hockey' component={Hockey}/>            
                   <Route exact path='/footballfixtures' component={FootballFixtures}/>            
                   <Route exact path='/pointtable' component={PointTable}/>            

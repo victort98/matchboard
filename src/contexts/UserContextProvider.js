@@ -14,6 +14,7 @@ const UserContextProvider = (props) => {
 
   const checkIfLoggedIn = async () => {
     let user = await Login.check();
+    console.log(user)
     updateUserStatus({ user: user.js.username ? user : false });
   }
 

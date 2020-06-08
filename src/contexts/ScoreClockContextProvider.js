@@ -4,78 +4,36 @@ import {socket} from '../socket/socket';
 export const ScoreClockContext = createContext()
 
 const ScoreClockContextProvider = (props) => {
-  let timePaused = 0;
-  let timeStarted = 0;
-  let timePausedSum = 0;
-  let timeTotal = 0;
 
-  let timeLeft = () => {
-    let timeElapsed = timeStarted ?
-      Date.now() - timeStarted : 0;
-      timeElapsed -= timePausedSum;
-      timeElapsed -= timePaused ?
-      Date.now() - timePaused : 0;
-    return timeTotal + timeElapsed;
+  const [score, setScore] = useState({team1: 0, team2: 0});
+
+  /*
+  const updateScore = (title, author) => {
+    setBooks([...books, {title, author, id: uuid()}]);
+  };
+  */
+  const updateScore = (team, score) => {
+    setScore(state => ({
+      ...state,
+      [team]: score
+  }))
+  };
+
+  function handleClick(team, score) {
+    setScore(state => ({...state, [team]: score }))
   }
+  /*
+  const setState = (prevState => ({
+    ...prevState,
+    fName: 'your updated value here'
+  }));
+  */
 
-  let timeFormatted = () => {
-    let tl = timeLeft();
-    let minutes = Math.floor(tl / 60 / 1000);
-    let seconds = Math.floor(tl / 1000) - minutes * 60;
-    return (minutes + '').padStart(2, '0') + ':'
-      + (seconds + '').padStart(2, 0);
-  }
-
-  let startClock = () => {
-    if (!timeStarted) {
-      timeStarted = Date.now();      
-    }
-    else if (!timePaused) {
-      return;
-    }
-    else {
-      timePausedSum += Date.now() - timePaused;
-      timePaused = 0;
-    }
-  }
-
-  let stopClock = () => {
-    if (!timeStarted) { return; }
-    timePaused = Date.now();
-  }
-
-  // let sleep = (ms) => {
-  //   return new Promise(res => setTimeout(res, ms));
-  // }
-
-  let showClock = () => {
-    startClock()
-    timeFormatted();
-    // sleep(500);
-  }
-
-  let clockStarted;
-  let startTime = () => {  
-    clockStarted = setInterval(showClock, 100)
-  }
-
-  let stopTime = () =>{
-    stopClock()
-    clearInterval(clockStarted)
-  }
-
-  const resetTime = () => {
-    timeStarted = 0;
-    timePaused = 0;
-    timePausedSum = 0;
-    stopTime()
-  }
-
-  const values={
-    timeFormatted,
-    startTime,
-    stopTime,
-    resetTime
+  const values = {
+    score,
+    setScore,
+    updateScore,
+    handleClick
   }
 
   return (

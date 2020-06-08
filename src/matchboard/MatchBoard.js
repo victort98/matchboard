@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from 'react'
+import React, {useEffect, useState, useMemo, useContext} from 'react'
 import Scoreboard from '../themes/football/Scoreboard2'
 import Statistics from '../themes/football/Statistics2'
 import Playerslist from '../themes/football/Playerslist2'
@@ -7,9 +7,15 @@ import PointTable from '../themes/football/PointTable'
 import FieldImage from '../images/football.png'
 import {socket} from '../socket/socket'
 import {AnimatePresence} from "framer-motion"
+import {ScoreClockContext} from '../contexts/ScoreClockContextProvider'
 
 const MatchBoard = () => {
   const [screen, setScreen] = useState('')
+  const { handleClick } = useContext(ScoreClockContext);
+
+  console.log("re-rendering")
+
+  //console.log(JSON.stringify(score))
 
     /* CLOCK */
     const [timeDifference, setTimeDifference] = useState(0);
@@ -178,10 +184,12 @@ const MatchBoard = () => {
           setTeamTwoName(data[item].payload)
           break;
         case "SET_TEAM_ONE_SCORE":
-          setTeamOneScore(data[item].payload)
+          handleClick("team1", data[item].payload)
+          // setTeamOneScore(data[item].payload)
           break;
         case "SET_TEAM_TWO_SCORE":
-          setTeamTwoScore(data[item].payload)
+          handleClick("team2", data[item].payload)
+          //setTeamTwoScore(data[item].payload)
           break;
         case "SET_OVERTIME":
           setOvertime(data[item].payload)
@@ -263,6 +271,8 @@ const MatchBoard = () => {
 
           teamOneScore={teamOneScore}
           teamTwoScore={teamTwoScore}
+          teamOneName={teamOneName}
+          teamTwoName={teamTwoName}
 
           team1Yellow={team1Yellow}
           team1Red={team1Red}
@@ -283,6 +293,8 @@ const MatchBoard = () => {
           />):
         (screen==='scoreboard')?
         (<Scoreboard key="scoreboard"
+          teamOneName={teamOneName}
+          teamTwoName={teamTwoName}
           timeDifference={timeDifference}
           seconds={seconds}
           teamOneScore={teamOneScore}
@@ -294,6 +306,8 @@ const MatchBoard = () => {
         (screen==='pointtable')?
         (<PointTable key="pointtable"/>):
         (<Scoreboard
+          teamOneName={teamOneName}
+          teamTwoName={teamTwoName}
           timeDifference={timeDifference}
           seconds={seconds}
           teamOneScore={teamOneScore}

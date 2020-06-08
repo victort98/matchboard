@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 import Clock from "../../controlboard/Clock";
 import { Row, Col } from "reactstrap";
 
@@ -9,80 +8,167 @@ const Basketball = () => {
   const [guestScore, setguestScore] = useState(0);
 
   const [quarter, setquarter] = useState(0);
+
   const [homeFoul, setHomeFoul] = useState(0);
   const [homeTimeOut, setHomeTimeOut] = useState(0);
-
-  const [foul, setfoul] = useState(0);
-  const [timeOut, settimeOut] = useState(0);
-  const [bonus, setBonus] = useState(4);
   const [homeBonus, setHomeBonus] = useState(4);
+
+  const [guestFoul, setGuestFoul] = useState(0);
+  const [guestTimeOut, setGuestTimeOut] = useState(0);
+  const [guestBonus, setGuestBonus] = useState(4);
 
   const [number, setNumber] = useState(0);
   const [points, setPoints] = useState(0);
 
-  const [homeTeam, setHomeTeam] = useState( [
+  const [homeTeam, setHomeTeam] = useState([
     { name: "Ghayssa", number: 4, points: 0 },
     { name: "Maruf", number: 15, points: 0 },
     { name: "Thomas", number: 8, points: 0 },
     { name: "Johan", number: 10, points: 0 },
+    { name: "Pettern", number: 1, points: 0 },
+    { name: "Goran", number: 6, points: 0 },
+  ]);
+
+  const [guestTeam, setGuestTeam] = useState([
+    { name: "Joakim", number: 5, points: 0 },
+    { name: "Viktor", number: 15, points: 0 },
+    { name: "Naim", number: 11, points: 0 },
+    { name: "Hassan", number: 1, points: 0 },
+    { name: "Niklas", number: 4, points: 0 },
+    { name: "Malin", number: 22, points: 0 },
+    { name: "Joakim", number: 3, points: 0 },
   ]);
 
   function decrementHomeFoul() {
     if (homeFoul != 0) {
-      setHomeFoul(homeFoul - 1)
-    } 
-      
+      setHomeFoul(homeFoul - 1);
+    }
+  }
+  function decrementHomeTimeOut() {
+    if (homeTimeOut != 0) {
+      setHomeTimeOut(homeTimeOut - 1);
+    }
   }
 
-  function addPlayerScore() {
-    let tempTeam=[]
-    for (let i = 0; i < homeTeam.length; i++){
+  function decrementHomeBonus() {
+    if (homeBonus != 0) {
+      setHomeBonus(homeBonus - 1);
+    }
+  }
+
+  function increaseHomeBonus() {
+    if (homeBonus != 4) {
+      setHomeBonus(homeBonus + 1);
+    }
+  }
+
+  function decrementGuestfoul() {
+    if (guestFoul != 0) {
+      setGuestFoul(guestFoul - 1);
+    }
+  }
+
+  function decrementGuestTimeOut() {
+    if (guestTimeOut != 0) {
+      setGuestTimeOut(guestTimeOut - 1);
+    }
+  }
+
+  function decrementGuestBonus() {
+    if (guestBonus != 0) {
+      setGuestBonus(guestBonus - 1);
+    }
+  }
+
+  function increaseGuestBonus() {
+    if (guestBonus != 4) {
+      setGuestBonus(guestBonus + 1);
+    }
+  }
+
+  function addHomeOnePlayerScore() {
+    let tempTeam = [];
+    for (let i = 0; i < homeTeam.length; i++) {
       if (number == homeTeam[i].number) {
-        homeTeam[i].points = homeTeam[i].points + 2
-        setPoints(homeTeam[i].points)
+        homeTeam[i].points = homeTeam[i].points + 1;
+        setPoints(homeTeam[i].points);
       }
     }
-    tempTeam = homeTeam
-    setHomeTeam(tempTeam)
-    console.log(homeTeam)
+    tempTeam = homeTeam;
+    setHomeTeam(tempTeam);
+    console.log(homeTeam);
   }
-    
-    
 
+  function addHomeTwoPlayerScore() {
+    let tempTeam = [];
+    for (let i = 0; i < homeTeam.length; i++) {
+      if (number == homeTeam[i].number) {
+        homeTeam[i].points = homeTeam[i].points + 2;
+        setPoints(homeTeam[i].points);
+      }
+    }
+    tempTeam = homeTeam;
+    setHomeTeam(tempTeam);
+    console.log(homeTeam);
+  }
+  function addHomeThreePlayerScore() {
+    let tempTeam = [];
+    for (let i = 0; i < homeTeam.length; i++) {
+      if (number == homeTeam[i].number) {
+        homeTeam[i].points = homeTeam[i].points + 3;
+        setPoints(homeTeam[i].points);
+      }
+    }
+    tempTeam = homeTeam;
+    setHomeTeam(tempTeam);
+    console.log(homeTeam);
+  }
 
-  let guestTeam = [
-    { name: "Joakim", number: 5, points: 0 },
-    { name: "Viktor", number: 15, points: 0 },
-    {
-      name: "Naim",
-      number: 11,
-      points: 0,
-    },
-    { name: "Hassan", number: 8, points: 0 },
-  ];
+  function addGuestOnePlayerScore() {
+    let tempTeam = [];
+    for (let i = 0; i < guestTeam.length; i++) {
+      if (number == guestTeam[i].number) {
+        guestTeam[i].points = guestTeam[i].points + 1;
+        setPoints(guestTeam[i].points);
+      }
+    }
+    tempTeam = guestTeam;
+    setHomeTeam(tempTeam);
+    console.log(guestTeam);
+  }
 
-  function plusOneHomeTeam() {
-    
-    
-  };
+  function addGuestTwoPlayerScore() {
+    let tempTeam = [];
+    for (let i = 0; i < guestTeam.length; i++) {
+      if (number == guestTeam[i].number) {
+        guestTeam[i].points = guestTeam[i].points + 2;
+        setPoints(guestTeam[i].points);
+      }
+    }
+    tempTeam = guestTeam;
+    setHomeTeam(tempTeam);
+    console.log(guestTeam);
+  }
+  function addGuestThreePlayerScore() {
+    let tempTeam = [];
+    for (let i = 0; i < guestTeam.length; i++) {
+      if (number == guestTeam[i].number) {
+        guestTeam[i].points = guestTeam[i].points + 3;
+        setPoints(guestTeam[i].points);
+      }
+    }
+    tempTeam = guestTeam;
+    setHomeTeam(tempTeam);
+    console.log(guestTeam);
+  }
 
-  function SetValueAsNumber() {
-    return
-    
-  };
   function setPointOne() {
-
-    for (let i = 0; i < homeTeam.length; i++){
+    for (let i = 0; i < homeTeam.length; i++) {
       if (homeTeam[i].number === number) {
-        setPoints( homeTeam[i].points++)
-       
+        setPoints(homeTeam[i].points++);
       }
     }
   }
-   
-
-  
-
 
   console.log(homeScore);
   return (
@@ -145,6 +231,7 @@ const Basketball = () => {
           color: "red",
           display: "flex",
           justifyContent: "space-around",
+          background: "green",
         }}
       >
         <Col
@@ -173,7 +260,7 @@ const Basketball = () => {
               height: "auto",
               margin: "auto",
             }}
-            onClick={() =>  setquarter(quarter + 1)}
+            onClick={() => setquarter(quarter + 1)}
             className="p "
           >
             Set the Quarter
@@ -243,9 +330,9 @@ const Basketball = () => {
         </Col>
         <Col>
           <h2>Guest:{guestScore}</h2>
-          <h2>Team Foul:{foul}</h2>
-          <h2>Time Out:{timeOut}</h2>
-          <h2>Bonus:{bonus}</h2>
+          <h2>Team Foul:{guestFoul}</h2>
+          <h2>Time Out:{guestTimeOut}</h2>
+          <h2>Bonus:{guestBonus}</h2>
         </Col>
       </Row>
 
@@ -319,7 +406,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => setHomeTimeOut(homeTimeOut - 1)}
+              onClick={() => decrementHomeTimeOut(homeTimeOut - 1)}
               className="p"
             >
               Count Down
@@ -357,7 +444,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => setHomeBonus(homeBonus + 1)}
+              onClick={() => increaseHomeBonus()}
               className="p"
             >
               Count Up
@@ -369,7 +456,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => setHomeBonus(homeBonus - 1)}
+              onClick={() => decrementHomeBonus()}
               className="p"
             >
               Bonus -
@@ -396,20 +483,32 @@ const Basketball = () => {
           }}
         >
           <row>
-            <select  onChange={(e)=>setNumber(e.target.value)} style={{background:"yellow",color:"red"}}>
-               <option>Number</option>
-            <option value={4} >4</option>
-            <option value={15}>15</option>
-            <option value={8}>8</option>
-            <option value={10}>10</option>
-          </select>
+            <select
+              onChange={(e) => setNumber(e.target.value)}
+              style={{
+                background: "red",
+                color: "white",
+                border: "white 2px solid",
+              }}
+            >
+              <option>Number</option>
+              {homeTeam.map((player) => (
+                <option>{player.number} </option>
+              ))}
+            </select>
             <button
-              style={{ width: "auto", height: "50",margin:"5px" }}
-              onClick={() => setPointOne()}
+              style={{
+                background: "red",
+                color: "white",
+                border: "white 2px solid",
+                margin: "5px",
+              }}
+              onClick={() => addHomeOnePlayerScore()}
             >
               Add points
             </button>
-            <button style={{width:"150px"}}
+            <button
+              style={{ width: "150px" }}
               onClick={() => sethomeScore(homeScore + 1)}
               className="p p1"
             >
@@ -417,18 +516,34 @@ const Basketball = () => {
             </button>
           </row>
           <row>
-             <select  onChange={(e)=>setNumber(e.target.value)} style={{background:"yellow",color:"red"}}>
+            <select
+              onChange={(e) => setNumber(e.target.value)}
+              style={{
+                background: "red",
+                color: "white",
+                border: "white 2px solid",
+              }}
+            >
               <option>Number</option>
-              {homeTeam.map(player => <option>{player.number} </option>)}
-           
-          </select>
+              {homeTeam.map((player) => (
+                <option>{player.number} </option>
+              ))}
+            </select>
             <button
-              style={{ width: "auto", height: "50",margin:"5px" }}
-              onClick={() => addPlayerScore()}
+              style={{
+                width: "auto",
+                height: "50",
+                margin: "5px",
+                background: "red",
+                border: "white 2px solid",
+                color: "white",
+              }}
+              onClick={() => addHomeTwoPlayerScore()}
             >
               Add points
             </button>
-            <button style={{width:"150px"}}
+            <button
+              style={{ width: "150px" }}
               onClick={() => sethomeScore(homeScore + 2)}
               className="p p1"
             >
@@ -436,21 +551,32 @@ const Basketball = () => {
             </button>
           </row>
           <row>
-            <select  onChange={(e)=>setNumber(e.target.value)} style={{background:"yellow",color:"red"}}>
-               <option>Number</option>
-            <option value={4} >4</option>
-            <option value={15}>15</option>
-            <option value={8}>8</option>
-            <option value={10}>10</option>
-          </select>
+            <select
+              onChange={(e) => setNumber(e.target.value)}
+              style={{
+                background: "red",
+                color: "white",
+                border: "white 2px solid",
+              }}
+            >
+              <option>Number</option>
+              {homeTeam.map((player) => (
+                <option>{player.number} </option>
+              ))}
+            </select>
             <button
-              style={{ width: "auto", height: "50", margin: "5px" }}
-              onClick={() => plusOneHomeTeam()}
+              style={{
+                background: "red",
+                color: "white",
+                border: "white 2px solid",
+                margin: "5px",
+              }}
+              onClick={() => addHomeThreePlayerScore()}
             >
               Add points
             </button>
             <button
-              style={{width:"150px"}}
+              style={{ width: "150px" }}
               onClick={() => sethomeScore(homeScore + 3)}
               className="p p1"
             >
@@ -466,35 +592,110 @@ const Basketball = () => {
           }}
         >
           <row>
-          <button style={{width:"150px"}}
-            onClick={() => setguestScore(guestScore + 1)}
-            className="p p1"
-          >
-            1
-          </button>
-          <input
-              style={{ width: "60px", height: "40px",backgroundcolor:"white", color:"red", }}
-               placeholder="number"
-            ></input>
             <button
-              style={{ width: "auto", height: "50",margin:"5px" }}
-              onClick={() => plusOneHomeTeam()}
+              style={{ width: "150px" }}
+              onClick={() => setguestScore(guestScore + 1)}
+              className="p p1"
+            >
+              1
+            </button>
+            <select
+              onChange={(e) => setNumber(e.target.value)}
+              style={{
+                background: "red",
+                color: "white",
+                border: "white 2px solid",
+              }}
+            >
+              <option>Number</option>
+              {guestTeam.map((player) => (
+                <option>{player.number} </option>
+              ))}
+            </select>
+            <button
+              style={{
+                width: "auto",
+                height: "50",
+                margin: "5px",
+                background: "red",
+                border: "white 2px solid",
+                color: "white",
+              }}
+              onClick={() => addGuestOnePlayerScore()}
             >
               Add points
             </button>
-            </row>
-          <button style={{width:"150px"}}
-            onClick={() => setguestScore(guestScore + 2)}
-            className=" p p1"
-          >
-            2
-          </button>
-          <button style={{width:"150px"}}
-            onClick={() => setguestScore(guestScore + 3)}
-            className="p p1"
-          >
-            3
-          </button>
+          </row>
+          <Row>
+            <button
+              style={{ width: "150px" }}
+              onClick={() => setguestScore(guestScore + 2)}
+              className=" p p1"
+            >
+              2
+            </button>
+            <select
+              onChange={(e) => setNumber(e.target.value)}
+              style={{
+                background: "red",
+                color: "white",
+                border: "white 2px solid",
+              }}
+            >
+              <option>Number</option>
+              {guestTeam.map((player) => (
+                <option>{player.number} </option>
+              ))}
+            </select>
+            <button
+              style={{
+                width: "auto",
+                height: "50",
+                margin: "5px",
+                background: "red",
+                border: "white 2px solid",
+                color: "white",
+              }}
+              onClick={() => addGuestTwoPlayerScore()}
+            >
+              Add points
+            </button>
+          </Row>
+          <Row>
+            <button
+              style={{ width: "150px" }}
+              onClick={() => setguestScore(guestScore + 3)}
+              className="p p1"
+            >
+              3
+            </button>
+            <select
+              onChange={(e) => setNumber(e.target.value)}
+              style={{
+                background: "red",
+                color: "white",
+                border: "white 2px solid",
+              }}
+            >
+              <option>Number</option>
+              {guestTeam.map((player) => (
+                <option>{player.number} </option>
+              ))}
+            </select>
+            <button
+              style={{
+                width: "auto",
+                height: "50",
+                margin: "5px",
+                background: "red",
+                border: "white 2px solid",
+                color: "white",
+              }}
+              onClick={() => addGuestThreePlayerScore()}
+            >
+              Add points
+            </button>
+          </Row>
         </Col>
         <Col
           style={{
@@ -511,7 +712,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => setfoul(foul + 1)}
+              onClick={() => setGuestFoul(guestFoul + 1)}
               className="p"
             >
               Team Foul
@@ -523,7 +724,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => setfoul(foul - 1)}
+              onClick={() => decrementGuestfoul()}
               className="p"
             >
               Count Down
@@ -536,7 +737,7 @@ const Basketball = () => {
               height: "auto",
               margin: "auto",
             }}
-            onClick={() => setfoul(foul - foul)}
+            onClick={() => setGuestFoul(guestFoul - guestFoul)}
             className="p"
           >
             Reset
@@ -549,7 +750,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => settimeOut(timeOut + 1)}
+              onClick={() => setGuestTimeOut(guestTimeOut + 1)}
               className="p"
             >
               Time Out
@@ -561,7 +762,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => settimeOut(timeOut - 1)}
+              onClick={() => decrementGuestTimeOut()}
               className="p"
             >
               Count Down
@@ -574,7 +775,7 @@ const Basketball = () => {
               height: "auto",
               margin: "auto",
             }}
-            onClick={() => settimeOut(timeOut - timeOut)}
+            onClick={() => setGuestTimeOut(guestTimeOut - guestTimeOut)}
             className="p "
           >
             Reset
@@ -587,7 +788,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => setBonus(bonus - 1)}
+              onClick={() => decrementGuestBonus()}
               className="p"
             >
               Bonus -
@@ -599,7 +800,7 @@ const Basketball = () => {
                 height: "auto",
                 margin: "5px",
               }}
-              onClick={() => setBonus(bonus + 1)}
+              onClick={() => increaseGuestBonus()}
               className="p"
             >
               Count Up
@@ -612,7 +813,7 @@ const Basketball = () => {
               height: "auto",
               margin: "auto",
             }}
-            onClick={() => setBonus(4)}
+            onClick={() => setGuestBonus(4)}
             className="p"
           >
             Reset

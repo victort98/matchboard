@@ -231,7 +231,7 @@ const BasketScoreBoard = () => {
 
                       justifyContent: "space-around",
                     }}
-                    value="0"
+                    value="00"
                   ></input>
                 </Row>
                 <Row

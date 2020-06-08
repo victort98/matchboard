@@ -1,4 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import "../themes/generalThemes.css"
 import ReactDOM from "react-dom";
 
@@ -18,7 +19,9 @@ const ShowPlayers = () => {
                 </div>
                 <div className="playerInformation">
                     <div className="buttons">
+                    <Link to='/addplayers'>
                     <button className="addPlayers buttonDesign">ADD PLAYERS</button>
+                    </Link>
                     <br />
                     <button className="showPlayers buttonDesign">SHOW PLAYERS</button>
                     <br/>

@@ -97,6 +97,7 @@ const Basketball = () => {
     tempTeam = homeTeam;
     setHomeTeam(tempTeam);
     console.log(homeTeam);
+    sethomeScore(homeScore + 1)
   }
 
   function addHomeTwoPlayerScore() {
@@ -110,6 +111,7 @@ const Basketball = () => {
     tempTeam = homeTeam;
     setHomeTeam(tempTeam);
     console.log(homeTeam);
+    sethomeScore(homeScore +2)
   }
   function addHomeThreePlayerScore() {
     let tempTeam = [];
@@ -122,6 +124,7 @@ const Basketball = () => {
     tempTeam = homeTeam;
     setHomeTeam(tempTeam);
     console.log(homeTeam);
+    sethomeScore(homeScore + 3)
   }
 
   function addGuestOnePlayerScore() {
@@ -135,6 +138,7 @@ const Basketball = () => {
     tempTeam = guestTeam;
     setHomeTeam(tempTeam);
     console.log(guestTeam);
+    setguestScore(guestScore + 1)
   }
 
   function addGuestTwoPlayerScore() {
@@ -148,6 +152,7 @@ const Basketball = () => {
     tempTeam = guestTeam;
     setHomeTeam(tempTeam);
     console.log(guestTeam);
+     setguestScore(guestScore + 2)
   }
   function addGuestThreePlayerScore() {
     let tempTeam = [];
@@ -160,6 +165,7 @@ const Basketball = () => {
     tempTeam = guestTeam;
     setHomeTeam(tempTeam);
     console.log(guestTeam);
+    setguestScore(guestScore + 3);
   }
 
   function setPointOne() {
@@ -322,11 +328,8 @@ const Basketball = () => {
           <h2>Bonus:{homeBonus}</h2>
         </Col>
         <Col>
-          <button type="button" class="btn btn-info">
-            <h1>result</h1>
-          </button>
-          <h2>Number:{number}</h2>
-          <h2>Points:{points}</h2>
+          <h1>Number:{number}</h1>
+          <h1>Points:{points}</h1>
         </Col>
         <Col>
           <h2>Guest:{guestScore}</h2>
@@ -344,6 +347,7 @@ const Basketball = () => {
           backgroundColor: "red",
           height: "300px ",
           justifyContent: "space-around",
+          color: "red",
         }}
       >
         <Col
@@ -485,11 +489,13 @@ const Basketball = () => {
           <row>
             <select
               onChange={(e) => setNumber(e.target.value)}
-              style={{
-                background: "red",
+                style={{
+                background: "yellow",
                 color: "white",
                 border: "white 2px solid",
-              }}
+                color: "red",
+                fontSize: "1.3em",
+               }}
             >
               <option>Number</option>
               {homeTeam.map((player) => (
@@ -497,32 +503,33 @@ const Basketball = () => {
               ))}
             </select>
             <button
-              style={{
-                background: "red",
-                color: "white",
-                border: "white 2px solid",
+             style={{
+                width: "150px",
+                height: "auto",
                 margin: "5px",
+                background: "black",
+                border: "white 2px solid",
+                color: "white",
+                fontSize: "2em",
+                padding: "5px",
+                borderRadius:"35%"
               }}
               onClick={() => addHomeOnePlayerScore()}
             >
-              Add points
-            </button>
-            <button
-              style={{ width: "150px" }}
-              onClick={() => sethomeScore(homeScore + 1)}
-              className="p p1"
-            >
               1
             </button>
+            
           </row>
           <row>
             <select
               onChange={(e) => setNumber(e.target.value)}
-              style={{
-                background: "red",
+                 style={{
+                background: "yellow",
                 color: "white",
                 border: "white 2px solid",
-              }}
+                color: "red",
+                fontSize: "1.3em",
+               }}
             >
               <option>Number</option>
               {homeTeam.map((player) => (
@@ -530,34 +537,33 @@ const Basketball = () => {
               ))}
             </select>
             <button
-              style={{
-                width: "auto",
-                height: "50",
+                style={{
+                width: "150px",
+                height: "auto",
                 margin: "5px",
-                background: "red",
+                background: "black",
                 border: "white 2px solid",
                 color: "white",
+                fontSize: "2em",
+                padding: "5px",
+                borderRadius:"35%"
               }}
               onClick={() => addHomeTwoPlayerScore()}
             >
-              Add points
-            </button>
-            <button
-              style={{ width: "150px" }}
-              onClick={() => sethomeScore(homeScore + 2)}
-              className="p p1"
-            >
               2
             </button>
+           
           </row>
           <row>
             <select
               onChange={(e) => setNumber(e.target.value)}
-              style={{
-                background: "red",
+                 style={{
+                background: "yellow",
                 color: "white",
                 border: "white 2px solid",
-              }}
+                color: "red",
+                fontSize: "1.3em",
+               }}
             >
               <option>Number</option>
               {homeTeam.map((player) => (
@@ -565,23 +571,22 @@ const Basketball = () => {
               ))}
             </select>
             <button
-              style={{
-                background: "red",
-                color: "white",
-                border: "white 2px solid",
+               style={{
+                width: "150px",
+                height: "auto",
                 margin: "5px",
+                background: "black",
+                border: "white 2px solid",
+                color: "white",
+                fontSize: "2em",
+                padding: "5px",
+                borderRadius:"35%"
               }}
               onClick={() => addHomeThreePlayerScore()}
             >
-              Add points
+             3
             </button>
-            <button
-              style={{ width: "150px" }}
-              onClick={() => sethomeScore(homeScore + 3)}
-              className="p p1"
-            >
-              3
-            </button>
+            
           </row>
         </Col>
         <Col
@@ -592,20 +597,16 @@ const Basketball = () => {
           }}
         >
           <row>
-            <button
-              style={{ width: "150px" }}
-              onClick={() => setguestScore(guestScore + 1)}
-              className="p p1"
-            >
-              1
-            </button>
+           
             <select
               onChange={(e) => setNumber(e.target.value)}
-              style={{
-                background: "red",
+               style={{
+                background: "yellow",
                 color: "white",
                 border: "white 2px solid",
-              }}
+                color: "red",
+                fontSize: "1.3em",
+               }}
             >
               <option>Number</option>
               {guestTeam.map((player) => (
@@ -613,33 +614,33 @@ const Basketball = () => {
               ))}
             </select>
             <button
-              style={{
-                width: "auto",
-                height: "50",
+               style={{
+                width: "150px",
+                height: "auto",
                 margin: "5px",
-                background: "red",
+                background: "black",
                 border: "white 2px solid",
                 color: "white",
+                fontSize: "2em",
+                padding: "5px",
+                borderRadius:"35%"
               }}
               onClick={() => addGuestOnePlayerScore()}
             >
-              Add points
+              1
             </button>
           </row>
           <Row>
-            <button
-              style={{ width: "150px" }}
-              onClick={() => setguestScore(guestScore + 2)}
-              className=" p p1"
-            >
-              2
-            </button>
+            
             <select
               onChange={(e) => setNumber(e.target.value)}
               style={{
-                background: "red",
+                background: "yellow",
                 color: "white",
                 border: "white 2px solid",
+                color: "red",
+                fontSize: "1.3em",
+               textAlign:"center",
               }}
             >
               <option>Number</option>
@@ -649,32 +650,30 @@ const Basketball = () => {
             </select>
             <button
               style={{
-                width: "auto",
-                height: "50",
+                width: "150px",
+                height: "auto",
                 margin: "5px",
-                background: "red",
+                background: "black",
                 border: "white 2px solid",
                 color: "white",
+                fontSize: "2em",
+                padding: "5px",
+                borderRadius:"35%"
               }}
               onClick={() => addGuestTwoPlayerScore()}
             >
-              Add points
+              2
             </button>
           </Row>
           <Row>
-            <button
-              style={{ width: "150px" }}
-              onClick={() => setguestScore(guestScore + 3)}
-              className="p p1"
-            >
-              3
-            </button>
             <select
               onChange={(e) => setNumber(e.target.value)}
               style={{
-                background: "red",
+                background: "yellow",
                 color: "white",
                 border: "white 2px solid",
+                color: "red",
+                fontSize:"1.3em"
               }}
             >
               <option>Number</option>
@@ -684,16 +683,19 @@ const Basketball = () => {
             </select>
             <button
               style={{
-                width: "auto",
-                height: "50",
+                width: "150px",
+                height: "auto",
                 margin: "5px",
-                background: "red",
+                background: "black",
                 border: "white 2px solid",
                 color: "white",
+                fontSize: "2em",
+                padding: "5px",
+                borderRadius:"35%"
               }}
               onClick={() => addGuestThreePlayerScore()}
             >
-              Add points
+              3
             </button>
           </Row>
         </Col>

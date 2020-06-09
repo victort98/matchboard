@@ -188,7 +188,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 .bol4{
-    margin-left: 56vw;   
+    margin-left: 57vw;   
     width: 5%;
     border-color: rgb(184, 5, 5);
     font-size: 50px;
@@ -206,7 +206,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 .bol5{
     margin-top: 4.2vw;
     margin-left: 43vw;   
-    width: 13vw;
+    width: 14vw;
     font-size: 40px;
     border-top-right-radius: 0vw;
     border-top-left-radius: 0vw;
@@ -261,16 +261,30 @@ border-top: rgba(0, 0, 0, 0.0);
 
 }
 .col01{
-    margin-left: 5vw;
+    margin-left: 1vw;
     font-size: 20px;
-    width: 10%;
+    width:7%;
+    outline: none;
+
+}
+.col22{
+    margin-left: 7vw;
+    font-size: 20px;
+    width:4%;
+    outline: none;
+
+}
+.col23{
+    margin-left: 8vw;
+    font-size: 20px;
+    width:4%;
     outline: none;
 
 }
 .col02{
-    margin-left: 3vw;
+    margin-left: 2vw;
     font-size: 20px;
-    width: 15%;
+    width: 13%;
 }
 .col03{
     margin-left: 7vw;
@@ -279,14 +293,14 @@ border-top: rgba(0, 0, 0, 0.0);
 border-color: orange;
 }
 .col04{
-    margin-left: 10vw;
+    margin-left: 1vw;
     font-size: 20px;
-    width: 10%;
+    width: 7%;
 }
 .col05{
-    margin-left: 4vw;
+    margin-left: 2vw;
     font-size: 20px;
-    width: 15%;
+    width: 13%;
 }
 .col4{
     margin-left: 32vw;
@@ -304,54 +318,22 @@ border-color: orange;
 }
 .t4{
     color: maroon;
-    margin-left: 2vw;
-    
-}
-.t5{
-    color: maroon;
-    margin-left: 2vw; 
-}
+    margin-left: 2vw;}    .t5{color: maroon; margin-left: 2vw; }
 .t6{
     color: maroon;
-    margin-left: 2vw; 
-}
-.t7{
-    color: maroon;
-    margin-left: 7vw; 
-}
+    margin-left: 2vw; }    .t7{ color: maroon;  margin-left: 12vw; }
 .t8{
     color: maroon;
-    margin-left: 9vw; 
-    
-}
-.t9{
-    color: maroon;
-    margin-left: 12vw; 
-    
-}
+    margin-left: 4vw; }   .t9{ color: maroon; margin-left: 13vw; }
 .t10{
     color: maroon;
-    margin-left: 26vw; 
-    
-}
-.t11{
-    color: maroon;
-    margin-left: 3vw; 
-    
-}
+    margin-left: 26vw; }   .t11{ color: maroon;margin-left: 3vw; }
 .t12{
     color: maroon;
-    margin-left: 3vw; 
-    
-}
-.t13{
-    color: maroon;
-    margin-left: 12vw; 
-   
-}
+    margin-left: 3vw; }    .t13{ color: maroon; margin-left: 13vw; }
 .t14{
     color: maroon;
-    margin-left: 9vw;   
+    margin-left: 6vw;   
 }
 .broadcast1 {
     margin-top: 4.1%;

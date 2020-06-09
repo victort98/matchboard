@@ -1,9 +1,10 @@
-import React, {createContext, useState, useEffect} from 'react'
+import React, {createContext} from 'react'
 import {socket} from '../socket/socket';
 
-export const ScoreClockContext = createContext()
+export const ControlClockContext = createContext()
 
-const ScoreClockContextProvider = (props) => {
+const ControlClockContextProvider = (props) => {
+  const $ = x => document.querySelector(x);
   let timePaused = 0;
   let timeStarted = 0;
   let timePausedSum = 0;
@@ -44,19 +45,19 @@ const ScoreClockContextProvider = (props) => {
     timePaused = Date.now();
   }
 
-  // let sleep = (ms) => {
-  //   return new Promise(res => setTimeout(res, ms));
-  // }
-
   let showClock = () => {
     startClock()
-    timeFormatted();
-    // sleep(500);
+    $('.clock').innerHTML = timeFormatted();
   }
 
   let clockStarted;
   let startTime = () => {  
     clockStarted = setInterval(showClock, 100)
+    let timeInfo = {
+      timeStarted: timeStarted,
+      timeLeft: timeLeft()
+    }
+    socket.emit('timeInfo', timeInfo)
   }
 
   let stopTime = () =>{
@@ -69,20 +70,19 @@ const ScoreClockContextProvider = (props) => {
     timePaused = 0;
     timePausedSum = 0;
     stopTime()
+    $('.clock').innerHTML = '00:00';
   }
 
   const values={
-    timeFormatted,
     startTime,
     stopTime,
     resetTime
   }
-
   return (
-    <ScoreClockContext.Provider value={values}>
+    <ControlClockContext.Provider value={values}>
       {props.children}
-    </ScoreClockContext.Provider>
+    </ControlClockContext.Provider>
   )
 }
 
-export default ScoreClockContextProvider
+export default ControlClockContextProvider

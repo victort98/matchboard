@@ -1,8 +1,9 @@
 import React, {createContext} from 'react'
+import {socket} from '../socket/socket';
 
-export const ClockContext = createContext()
+export const ClockContextH = createContext()
 
-const ClockContextProvider = (props) => {
+const ClockContextProviderH = (props) => {
 
   const now = () => {
     return Date.now()
@@ -48,12 +49,11 @@ const ClockContextProvider = (props) => {
     startClock,
     resetClock
   }
-
   return (
-    <ClockContext.Provider value={values}>
+    <ClockContextH.Provider value={values}>
       {props.children}
-    </ClockContext.Provider>
+    </ClockContextH.Provider>
   )
 }
 
-export default ClockContextProvider
+export default ClockContextProviderH

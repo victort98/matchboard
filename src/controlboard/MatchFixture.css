@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Roboto+Mono&display=swap');
+
+.mf-heading{
+    position: relative;
+    font-size: 30px;
+    margin-top: 100px;
+    text-align: center;
+    color: rgb(104, 147, 190);
+    font-weight: bold;
+}
+
+.mf-flex-container{
+   margin: auto; 
+   display: flex;  
+   padding: 3px;
+   line-height: 1.65;
+   position: relative;
+}
+
+.mf-input-wrapper{
+    display: block;
+}
+
+.mf-left-buttons{
+    margin-left:28%;
+    margin-top:55px;
+}
+
+.mf-left-buttons button{
+    display: block;
+    padding: 10px;
+    margin: 20px;
+    width: 180px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    color: rgb(104, 147, 190);
+}
+
+
+.mf-input-wrapper {
+    margin-top: 10px;
+    margin-left: 42%;
+    position: absolute;
+}
+.mf-input-wrapper div> input[type='text']{
+    padding:10px 25px;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+} 
+.mf-left-buttons button:hover{
+    
+    color: #fff;
+    background: rgb(104, 147, 190);
+    cursor: pointer;
+  
+}
+
+.mf-input-wrapper div> input[type='date']{
+    padding:2px;
+    width: 10em;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    margin-left: 19%;
+}
+.mf-input-wrapper div> input[type='time']{
+    padding:2px;
+    width: 10em;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+}
+
+.mf-submit input[type='submit']{
+    display: block;
+    padding: 15px;
+    margin: 20px;
+    width: 250px;
+    border: none;
+    border-radius: 20px;
+    margin-top: 3%;
+    margin-left: 44%;
+    font-size: 25px;
+    color: green;
+}
+
+.mf-submit input[type='submit']:hover{
+    
+    color: #fff;
+    background: green;
+    cursor: pointer;
+  
+}
+

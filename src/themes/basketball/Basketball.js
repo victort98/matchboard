@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Clock from "../../controlboard/Clock";
+// import Clock from "../../controlboard/Clock";
 import { Row, Col } from "reactstrap";
 
 const Basketball = () => {

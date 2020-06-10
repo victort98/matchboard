@@ -6,7 +6,7 @@ const BasketScoreBoard = () => {
   return (
     <div>
       (
-      <container style={{ display: "flex" }}>
+      <container style={{ display: "flex", height: "auto" }}>
         <Row
           style={{
             display: "flex",
@@ -17,15 +17,15 @@ const BasketScoreBoard = () => {
             justifyContent: "space-around",
           }}
         >
-          <Col style={{ fontSize: "4em", textAlign: "center" }}>
+          <Col style={{ fontSize: "2em", textAlign: "center" }}>
             <Row>
-              <h2> HOME</h2>
+              <h5> HOME</h5>
             </Row>
             <Row>
               <input
                 placeholder
                 style={{
-                  fontSize: "4em",
+                  fontSize: "1.5em",
                   textAlign: "center",
                   color: "red",
                   height: "auto",
@@ -44,10 +44,11 @@ const BasketScoreBoard = () => {
                 alignContent: "center",
               }}
             >
-              <Col>
-                <h2>FOULS</h2>
-                <h2>TOL</h2>
-                <h2>Bonus</h2>
+              <Col style={{ margin: "15px" }}>
+                <h4>FOULS</h4>
+
+                <h4>TOL</h4>
+                <h4>Bonus</h4>
               </Col>
               <Col>
                 <Row
@@ -56,7 +57,7 @@ const BasketScoreBoard = () => {
                   <input
                     placeholder
                     style={{
-                      fontSize: "2em",
+                      fontSize: ".9em",
                       textAlign: "center",
                       color: "yellow",
                       width: "2em",
@@ -72,11 +73,11 @@ const BasketScoreBoard = () => {
                   <input
                     placeholder
                     style={{
-                      fontSize: "2em",
+                      fontSize: ".9em",
                       textAlign: "center",
                       color: "yellow",
                       width: "2em",
-
+                      margin: "10px",
                       justifyContent: "space-around",
                     }}
                     value="0"
@@ -88,7 +89,7 @@ const BasketScoreBoard = () => {
                   <input
                     placeholder
                     style={{
-                      fontSize: "2em",
+                      fontSize: "0.9em",
                       textAlign: "center",
                       color: "yellow",
                       width: "2em",
@@ -185,15 +186,15 @@ const BasketScoreBoard = () => {
               </Row>
             </Row>
           </Col>
-          <Col style={{ fontSize: "4em", textAlign: "center" }}>
+          <Col style={{ fontSize: "2em", textAlign: "center" }}>
             <Row>
-              <h2> GUEST</h2>
+              <h4> GUEST</h4>
             </Row>
             <Row>
               <input
                 placeholder
                 style={{
-                  fontSize: "4em",
+                  fontSize: "2em",
                   textAlign: "center",
                   color: "red",
                   height: "auto",
@@ -212,19 +213,23 @@ const BasketScoreBoard = () => {
                 alignContent: "center",
               }}
             >
-              <Col>
-                <h2>FOULS</h2>
-                <h2>TOL</h2>
-                <h2>Bonus</h2>
+              <Col style={{ margin: "10px" }}>
+                <h4>FOULS</h4>
+                <h4>TOL</h4>
+                <h4>Bonus</h4>
               </Col>
               <Col>
                 <Row
-                  style={{ display: "flex", justifyContent: "space-around" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    height: "auto",
+                  }}
                 >
                   <input
                     placeholder
                     style={{
-                      fontSize: "2em",
+                      fontSize: ".9em",
                       textAlign: "center",
                       color: "yellow",
                       width: "2em",
@@ -240,11 +245,11 @@ const BasketScoreBoard = () => {
                   <input
                     placeholder
                     style={{
-                      fontSize: "2em",
+                      fontSize: ".9em",
                       textAlign: "center",
                       color: "yellow",
                       width: "2em",
-
+                      margin: "5px",
                       justifyContent: "space-around",
                     }}
                     value="0"
@@ -256,10 +261,11 @@ const BasketScoreBoard = () => {
                   <input
                     placeholder
                     style={{
-                      fontSize: "2em",
+                      fontSize: ".9em",
                       textAlign: "center",
-                      color: "Yellow",
+                      color: "yellow",
                       width: "2em",
+
                       justifyContent: "space-around",
                     }}
                     value="4"

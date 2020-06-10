@@ -39,6 +39,8 @@ const Basketball = () => {
     { name: "Joakim", number: 3, points: 0 },
   ]);
 
+ 
+
   function decrementHomeFoul() {
     if (homeFoul != 0) {
       setHomeFoul(homeFoul - 1);
@@ -313,7 +315,7 @@ const Basketball = () => {
         style={{
           display: "flex",
           backgroundColor: "yellow",
-          height: "170px ",
+          height: "180px ",
           textAlign: "center",
           alignContent: "middle",
           justifyContent: "space-around",

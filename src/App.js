@@ -47,6 +47,7 @@ const App = () => {
                   <Route exact path='/leaguetable' component={LeagueTable}/> 
                   <Route exact path='/matchfixture' component={MatchFixture}/>
                   <Route exact path='/basketball' component={Basketball}/>            
+                  <Route exact path='/BasketScoreBoard' component={BasketScoreBoard}/>            
                   <Route exact path='/hockey' component={Hockey}/>            
                   <Route exact path='/footballfixtures' component={FootballFixtures}/>            
                   <Route exact path='/pointtable' component={PointTable}/>

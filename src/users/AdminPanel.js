@@ -11,6 +11,8 @@ const AdminPanel = () => {
   const $ = x => document.querySelector(x);
   const {updateUserStatus} = useContext(UserContext);
   const [showElement, setShowElement] = useState(true)
+  const [socketroom, setSocketRoom] = useState("default")
+  console.log(socketroom)
 
   const logout = async() => {
     await Login.logout();
@@ -35,6 +37,8 @@ const AdminPanel = () => {
     }
   }, [showElement])
 
+  //{"/controlboard/"+ socketroom}
+
   return (
     <div className="container">
       <div className='admin-panel'>
@@ -45,17 +49,21 @@ const AdminPanel = () => {
           <input id='set-users' type='button' value='USER SETTINGS' onClick={()=>setUser()}/>   
           <div className='ctrl-link'>
             <p>CONTROLBOARD LINK</p>
-            <Link to='/controlboard' style={{ textDecoration: 'none' }}>
+            <Link to={"/controlboard/"+ socketroom} style={{ textDecoration: 'none' }}>
               <input type='button' value='FOOTBALL'/> 
-            </Link>    
+            </Link>
+            <Link to={"/basketball"} style={{ textDecoration: 'none' }}>
             <input type='button' value='BASKETBALL'/> 
+            </Link>
+            <Link to={"/hokey"} style={{ textDecoration: 'none' }}>
             <input type='button' value='HOCKEY'/> 
+            </Link>
           </div>   
         </div> 
 
         <div className="right-col">
           {showElement?
-          (<GameSettings/>):
+          (<GameSettings setSocketRoom={setSocketRoom} />):
           (<UserSettings/>)}
         </div>       
       </div>

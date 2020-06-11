@@ -16,7 +16,7 @@ const MatchBoard = ({ match }) => {
 
   const { roomname } = match.params
   //setRoom(roomname)
-  console.log(roomname)
+  //console.log(roomname)
   //console.log(match.params)
 
   //console.log(name)

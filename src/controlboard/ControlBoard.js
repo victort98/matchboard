@@ -367,7 +367,7 @@ const ControlBoard = () => {
               <option value="scoreboard">SCORE BOARD</option>
               <option value="statistics">STATISTICS</option>
               <option value="playerslist">PLAYERS LIST</option>
-              <option value="fixtures">MATCH FISTURES</option>
+              <option value="fixtures">MATCH FIXTURES</option>
               <option value="pointtable">POINT TABLE</option>
             </select>
           </div>

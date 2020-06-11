@@ -21,8 +21,8 @@ const MatchBoard = () => {
     /* CLOCK */
 
     /* GAME DATA */
-    const [teamOneName, setTeamOneName] = useState('')
-    const [teamTwoName, setTeamTwoName] = useState('')
+    const [teamOneName, setTeamOneName] = useState(' ')
+    const [teamTwoName, setTeamTwoName] = useState(' ')
     const [teamOneScore, setTeamOneScore] = useState(0)
     const [teamTwoScore, setTeamTwoScore] = useState(0)
     const [overtime, setOvertime] = useState(0)
@@ -56,25 +56,32 @@ const MatchBoard = () => {
     let localTimeAtRequest = Date.now()
     socket.emit('timesync', localTimeAtRequest)
     socket.on('timesync', (serverTimeStamp)=>{
+        console.log("time sync recieved")
         let localTimeAtResponse = Date.now()
         let lat = localTimeAtResponse - localTimeAtRequest;
         let serverTimeAtRequest = serverTimeStamp - lat;
         let diff = localTimeAtRequest - serverTimeAtRequest;
         setTimeDifference(diff)
+        /*
         console.log("Time since request: " + lat + 'ms at reponse')
         console.log("Timestamp from server: " + serverTimeStamp)
         console.log("Server time at request: " + serverTimeAtRequest)
         console.log("Server time is: " + diff + "ms compared to local")
         console.log("local time is: " + new Date)
         console.log("server time is: " + new Date(Date.now() + diff))
+        */
       })
   },[])
   //getting time
   useEffect(() => {
+    //const { room, origin, datatype, timeAtRequest } = payload;
+    console.log("fetching time")
     setTimeout(() => {
       let localTimeAtRequest = timeNow();
-      socket.emit('getData', "scoreboard", "time", localTimeAtRequest);
+      let payload = {room: room, origin: "matchboard", datatype: "time", timeAtRequest: localTimeAtRequest}
+      socket.emit('getData', payload);
       socket.on('fetchTime', (data) => {
+        console.log("fetching time")
         let localTimeAtResponse = timeNow();
         let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
         console.log("Time from request until response: " + timeSinceRequest +"ms")
@@ -88,13 +95,16 @@ const MatchBoard = () => {
   }, [])
   //getting game data
   useEffect(() => {
+    console.log("fetching game data")
     setTimeout(() => {
       let localTimeAtRequest = timeNow();
       socket.emit('getData', "scoreboard", "gamedata", localTimeAtRequest);
       socket.on('fetchGameData', (data) => {
+        console.log("fetching game data")
         let localTimeAtResponse = timeNow();
         let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;
         console.log("Time from request until response: " + timeSinceRequest +"ms")
+        console.log(data.actions)
         console.log(data.actions)
         setStates(data.actions)
       })   
@@ -289,6 +299,8 @@ const MatchBoard = () => {
           />):
         (screen==='scoreboard')?
         (<Scoreboard key="scoreboard"
+          teamOneName={teamOneName}
+          teamTwoName={teamTwoName}
           timeDifference={timeDifference}
           seconds={seconds}
           teamOneScore={teamOneScore}
@@ -300,6 +312,8 @@ const MatchBoard = () => {
         (screen==='pointtable')?
         (<PointTable key="pointtable"/>):
         (<Scoreboard
+          teamOneName={teamOneName}
+          teamTwoName={teamTwoName}
           timeDifference={timeDifference}
           seconds={seconds}
           teamOneScore={teamOneScore}

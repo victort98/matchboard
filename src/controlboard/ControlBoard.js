@@ -9,8 +9,8 @@ const ControlBoard = () => {
   const [room, setRoom] = useState("default")
 
   /* GAME DATA */
-  const [teamOneName, setTeamOneName] = useState(' ')
-  const [teamTwoName, setTeamTwoName] = useState(' ')
+  const [teamOneName, setTeamOneName] = useState('Malmö FF')
+  const [teamTwoName, setTeamTwoName] = useState('Djurgården')
   const [teamOneScore, setTeamOneScore] = useState(0)
   const [teamTwoScore, setTeamTwoScore] = useState(0)
   const [overtime, setOvertime] = useState(0)
@@ -161,6 +161,9 @@ const ControlBoard = () => {
       
       let gamestatsdata = {timestamp : timeNow(), 
         actions:[
+          //Team names
+        {action: "SET_TEAM_ONE_NAME", payload: teamOneName},
+        {action: "SET_TEAM_TWO_NAME", payload: teamTwoName},
           //Team1 stats
         {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
         {action: "SET_TEAM_ONE_RED", payload: team1Red},
@@ -266,7 +269,7 @@ const ControlBoard = () => {
         <div className="team1">
           <label>SET TEAM 1</label>
             <br />
-            <input className="teamName" placeholder="Name of team 1" type="text"  onChange={e=>setTeamOneName(e.target.value)}/>
+            <input className="teamName" placeholder="Malmö FF" type="text"  onChange={e=>setTeamOneName(e.target.value)}/>
             <br />
             <br />
             <label>SET SCORE</label>
@@ -287,7 +290,7 @@ const ControlBoard = () => {
         <div className="team2">
         <label>SET TEAM 2</label>
           <br />
-          <input className="teamName" placeholder="Name of team 2" type="text"  onChange={e=>setTeamTwoName(e.target.value)}/>
+          <input className="teamName" placeholder="Djurgården" type="text"  onChange={e=>setTeamTwoName(e.target.value)}/>
           <br />
           <br />
           <label>SET SCORE</label>

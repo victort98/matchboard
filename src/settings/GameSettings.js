@@ -17,6 +17,12 @@ const GameSettings = () => {
         <option value="basketball">BASKETBALL</option>
         <option value="hockey">HOCKEY</option>
       </select>
+      <h6 style={{color: 'rgb(0, 142, 207)', margin: '3px', textAlign: 'center'}}>ENTER ROOM NAME</h6> 
+      <input type="text" className="select-game" 
+        style={{padding: '5px 5px', fontSize: '16px', width: '395px', borderRadius: '10px', textAlign: 'left', color: "black", 
+          outline: 'none', margin: '0 auto', display:'flex'}}
+        >
+      </input>
     </div> 
     <hr/>
       {(selectedGame==='football')?

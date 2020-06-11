@@ -15,109 +15,92 @@ const { app } = require('mongoosy')({
 const server = app.listen(PORT, ()=> 
   console.log(`Server is listening on port ${PORT}`))
 
+const socketLog = (room, origin, datatype, timeAtRequest) => {
+  console.log(origin + " called get " + datatype +" at:")
+  console.log("" + new Date(timeAtRequest))
+  console.log("in room: " + room)
+  console.log("current server time:")
+  console.log("" + new Date()) //TODO use Date.now() + 3000 ?
+  let timedifference = Date.now() - timeAtRequest //TODO use Date.now() + 3000 ?
+  console.log("Time since request: " + timedifference + "ms") //under the assumption that clocks are in sync
+  console.log("assuming synchronized clocks")
+
+}
+
 //SOCKET CONNECTION
 const io = socket(server);
+const names = {}
 io.on('connection', (socket)=> {
   console.log('Connected...', socket.id);
- 
+ /*
   socket.on('scoreInfo', (data)=>{
     io.emit('scoreInfo', data)
   })
-
+*/
   socket.on('timeInfo', (data)=>{
-    io.emit('timeInfo', data)
+    //to(data.room).
+    //io.to(data.room).emit('timeInfo', data)
+    socket.to(data.room).broadcast.emit('timeInfo', data)
   })
 
   socket.on('board', (data)=>{
     io.emit('board', data)
   })
 
+  socket.on('join-room', (room, name)=>{
+    socket.join(room);
+    console.log("socket: " + socket.id)
+    console.log("with name: " + name)
+    console.log("has joined room: " + room)
+    names[socket.id] = name
+    //console.log(names)
+  });
 
-  socket.on('getData', (origin, datatype, clientTimestamp)=>{
+  socket.on('disconnect', function () {
 
+    console.log(names[socket.id] + " has disconnected")
+    delete names[socket.id]
+    //console.log(names)
+
+});
+
+
+  socket.on('getData', (payload)=>{
+
+    //console.log("getData called")
     //consider what happens if there are multiple remote controllers
 
-    console.log(origin + " called get " + datatype +" at:")
-    console.log("" + new Date(clientTimestamp))
-    console.log("current server time:")
-    console.log("" + new Date()) //TODO use Date.now() + 3000 ?
-    let timedifference = Date.now() - clientTimestamp //TODO use Date.now() + 3000 ?
-    console.log("Time since request: " + timedifference + "ms") //under the assumption that clocks are in sync
-    console.log("assuming synchronized clocks")
+    const { room, origin, datatype, timeAtRequest } = payload;
+    //socketLog(room, origin, datatype, timeAtRequest)
 
     if(datatype == "time"){
-      console.log("requested game time")
-      socket.broadcast.emit("getTime", origin, clientTimestamp, Date.now())
+      //console.log("requested game time")
+      socket.to(room).broadcast.emit("getTime", origin, timeAtRequest, Date.now())
     } else if (datatype == "gamedata"){
-      console.log("requsted game data")
-      socket.broadcast.emit("getGameData", origin, clientTimestamp, Date.now())
+      //console.log("requsted game data")
+      socket.to(room).broadcast.emit("getGameData", origin, timeAtRequest, Date.now())
     } else if (datatype == "gamestats");{
-      console.log("requested game statistics")
-      socket.broadcast.emit("getGameStats", origin, clientTimestamp, Date.now())
+      //console.log("requested game statistics")
+      socket.to(room).broadcast.emit("getGameStats", origin, timeAtRequest, Date.now())
     }
   })
 
-  socket.on('getTime', (data, clientTimestamp)=>{
-
-    //consider what happens if there are multiple remote controllers
-    console.log(data + " called getTime at:")
-    console.log("" + new Date(clientTimestamp))
-    console.log("current server time:")
-    console.log("" + new Date()) //TODO use Date.now() + 3000 ?
-    let timedifference = Date.now() - clientTimestamp //TODO use Date.now() + 3000 ?
-    console.log("Time since request: " + timedifference + "ms") //under the assumption that clocks are in sync
-    console.log("assuming synchronized clocks")
-    //console.log("getting time called")
-    socket.broadcast.emit("getTime", data, clientTimestamp, Date.now())
-  })
-
-  socket.on('getGameData', (data, clientTimestamp)=>{
-
-    //consider what happens if there are multiple remote controllers
-    console.log(data + " called getGameData at:")
-    console.log("" + new Date(clientTimestamp))
-    console.log("current server time:")
-    console.log("" + new Date()) //TODO use Date.now() + 3000 ?
-    let timedifference = Date.now() - clientTimestamp //TODO use Date.now() + 3000 ?
-    console.log("Time since request: " + timedifference + "ms") //under the assumption that clocks are in sync
-    console.log("assuming synchronized clocks")
-    socket.broadcast.emit("getGameData", data, clientTimestamp, Date.now())
-  })
-
-  socket.on('getGameStats', (data, clientTimestamp)=>{
-
-    //consider what happens if there are multiple remote controllers
-    console.log(data + " called getGameStats at:")
-    console.log("" + new Date(clientTimestamp))
-    console.log("current server time:")
-    console.log("" + new Date()) //TODO use Date.now() + 3000 ?
-    let timedifference = Date.now() - clientTimestamp //TODO use Date.now() + 3000 ?
-    console.log("Time since request: " + timedifference + "ms") //under the assumption that clocks are in sync
-    console.log("assuming synchronized clocks")
-    socket.broadcast.emit("getGameStats", data, clientTimestamp, Date.now())
-  })
-
   socket.on('fetchTime', (data) => {
-    console.log("fetchTime called from: " + socket.id)
-    console.log(data)
+    //console.log("fetchTime called from: " + socket.id)
+    //console.log(data)
     socket.broadcast.emit("fetchTime", data)
   })
 
   socket.on('fetchGameData', (data) => {
-    console.log("fetchGameData called from: " + socket.id)
-    console.log(data)
+    //console.log("fetchGameData called from: " + socket.id)
+    //console.log(data)
     socket.broadcast.emit("fetchGameData", data)
   })
   //fetchGameStats
   socket.on('fetchGameStats', (data) => {
-    console.log("fetchGameStats called from: " + socket.id)
-    console.log(data)
+    //console.log("fetchGameStats called from: " + socket.id)
+    //console.log(data)
     socket.broadcast.emit("fetchGameStats", data)
-  })
-
-  socket.on('confirmation', (data)=>{
-    console.log(data)
-    //io.emit('board', data)
   })
 
   socket.on('timesync', (data)=>{

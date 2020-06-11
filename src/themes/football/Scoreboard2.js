@@ -9,38 +9,7 @@ const Scoreboard2 = (props) => {
   const [teamTwoName, setTeamTwoName] = useState('Djurgården')
 
 
-<<<<<<< HEAD
-  useEffect(()=>{
-    setTeamOneName(scoreData.teamOneName)
-    setTeamTwoName(scoreData.teamTwoName)
-    setTeamOneScore(scoreData.teamOne)
-    setTeamTwoScore(scoreData.teamTwo)
-    setOvertime(scoreData.overtime)
-  }, [scoreData])
-
-  useEffect(() => {
-    socket.on('timeInfo', (data) => {
-      setTimerActive(data)
-    }) 
-  } , [  ])
-
-  useEffect(()=>{
-    let timeStarted;
-    if (timerActive === 'start') {
-      startTime()
-      timeStarted = setInterval(() => {
-        setTime(timeFormatted())
-      }, 100);   
-    } else if(timerActive === 'stop'){
-      stopTime()
-      clearInterval(timeStarted)
-    } else if(timerActive === 'reset'){
-      resetTime()
-    }
-  }, [timerActive, timeFormatted, startTime, stopTime, resetTime])
-=======
   const [overtime, setOvertime] = useState(0)
->>>>>>> e9627cdcb68d5573f4c8dcb0e53fb5af9deee80b
 
   const pageVariants = {
     initial : { opacity: 0, y: '-100vw', scale: 0.7 },

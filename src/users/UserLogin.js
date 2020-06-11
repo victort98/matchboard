@@ -11,6 +11,8 @@ const UserLogin = (props) => {
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
 
+  const [room, setRoom] = useState("default")
+
   const submitLogin = async (e) => {
     e.preventDefault();
     let user = await Login.login({username, password})
@@ -25,13 +27,30 @@ const UserLogin = (props) => {
       props.history.push('/operator')      
     }
   }
+
+  const routeToMatchboard = () => {
+    console.log("dude")
+  }
   
   return (
     <div className="container">
       <motion.div initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ ease: "easeOut", delay: 0.1, duration: 0.5 }}>
-      <div className="user-login">
+        
+
+        <div className="user-login">
+        <div  style={{display: 'flex', flexWrap: 'wrap', placeContent: 'center'}}>
+        <div>
+        <form className="input-form" onSubmit={routeToMatchboard}>
+          <input name="username" type="text" placeholder='Room' required
+            value={room} onChange={(e) => setRoom(e.target.value)} />
+          <div className="submit-buttons">
+            <input type="submit" value='SPECTATE'/>
+          </div>
+        </form>
+        </div>
+        <div>
         <form className="input-form" onSubmit={submitLogin}>
           <input name="username" type="text" placeholder='username' required
             value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -43,7 +62,11 @@ const UserLogin = (props) => {
         </form>
          <p style={{color: 'red'}}>{message}</p>
          <p>If you're not a user... Please <Link to="/register">register</Link> first.</p>
+        </div>
+        
       </div>
+        </div>
+
       </motion.div>
 
       <div className="background">

@@ -6,6 +6,7 @@ import {socket} from '../socket/socket';
 const ControlBoard = () => {
   const $ = x => document.querySelector(x);
   const [screen, setScreen] = useState()
+  const [room, setRoom] = useState("default")
 
   /* GAME DATA */
   const [teamOneName, setTeamOneName] = useState(' ')
@@ -44,7 +45,7 @@ const ControlBoard = () => {
 
   const broadcastData = () => {
     
-    let gamedata = {timestamp : timeNow(), 
+    let gamedata = {room: room, timestamp : timeNow(), 
       actions:[{action: "SET_TEAM_ONE_NAME", payload: teamOneName},
       {action: "SET_TEAM_TWO_NAME", payload: teamTwoName},
       {action: "SET_TEAM_ONE_SCORE", payload: teamOneScore},
@@ -54,7 +55,7 @@ const ControlBoard = () => {
 
     socket.emit('timeInfo', gamedata)
 
-    let gamestatsdata = {timestamp : timeNow(), 
+    let gamestatsdata = {room: room, timestamp : timeNow(), 
       actions:[
         //Team1 stats
       {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
@@ -78,33 +79,6 @@ const ControlBoard = () => {
 
   }
 
-  const sendData = () => {
-    let scoreInfo = {
-      teamOneName: teamOneName, 
-      teamTwoName: teamTwoName, 
-      teamOne: teamOneScore,
-      teamTwo: teamTwoScore,
-      overtime: overtime,
-      //TEAM 1
-      team1Yellow: team1Yellow,
-      team1Red: team1Red,
-      team1Corners: team1Corners,
-      team1Offsides: team1Offsides,
-      team1Shots: team1Shots,
-      team1Fouls: team1Fouls,
-      team1OnTarget: team1OnTarget,
-      //TEAM 2
-      team2Yellow: team2Yellow,
-      team2Red: team2Red,
-      team2Corners: team2Corners,
-      team2Offsides: team2Offsides,
-      team2Shots: team2Shots,
-      team2Fouls: team2Fouls,
-      team2OnTarget: team2OnTarget,
-    }  
-    socket.emit('scoreInfo', scoreInfo)
-  }
-
   useEffect(()=>{
     //syncing time with server
     let localTimeAtRequest = Date.now()
@@ -115,14 +89,21 @@ const ControlBoard = () => {
         let serverTimeAtRequest = serverTimeStamp - lat;
         let diff = localTimeAtRequest - serverTimeAtRequest;
         setTimeDifference(diff)
+        /*
         console.log("Time since request: " + lat + 'ms at reponse')
         console.log("Timestamp from server: " + serverTimeStamp)
         console.log("Server time at request: " + serverTimeAtRequest)
         console.log("Server time is: " + diff + "ms compared to local")
         console.log("local time is: " + new Date)
         console.log("server time is: " + new Date(Date.now() + diff))
+        */
       })
   },[])
+
+  useEffect(()=>{
+    //joining room
+    socket.emit('join-room', room, "controlboard")
+  }, [])
 
   useEffect(()=>{
     socket.on('getTime', (data, clientTimestamp, serverTimestamp)=>{
@@ -169,11 +150,13 @@ const ControlBoard = () => {
 
   useEffect(()=>{
     socket.on('getGameStats', (data, clientTimestamp, serverTimestamp)=>{
+      /*
       console.log("request from: " + data)
       console.log("request made at: " + new Date(clientTimestamp) + " local time")
       console.log("passed from server at: " + new Date(serverTimestamp) + " local time")
       console.log("received at: " + new Date() + " local time")
       console.log("start date at: " + + new Date(startDate))
+      */
       //TODO use timeGet() instead of Date.now()
       
       let gamestatsdata = {timestamp : timeNow(), 
@@ -210,7 +193,7 @@ const ControlBoard = () => {
       console.log("isActive == false")
       setStartDate(timeNow())
       setIsActive(!isActive)
-      socket.emit('timeInfo',{timestamp: timeNow(), 
+      socket.emit('timeInfo',{room: room, timestamp: timeNow(), 
         actions: [{action: "SET_START_DATE", payload: timeNow()}, {action: "SET_IS_ACTIVE", payload: true}]})
     }
   }
@@ -220,7 +203,7 @@ const ControlBoard = () => {
       let elapsed = timeNow() - startDate
       setIsActive(!isActive)
       setTimeElapsed(timeElapsed + elapsed)
-      socket.emit('timeInfo', {timestamp: timeNow(),
+      socket.emit('timeInfo', {room: room, timestamp: timeNow(),
       actions: [{action: "SET_IS_ACTIVE", payload: false},
        {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}, {action: "SET_SECONDS", payload: seconds}]})
     }
@@ -230,7 +213,7 @@ const ControlBoard = () => {
     setIsActive(false);
     setTimeElapsed(0);
     setSeconds("00:00");
-    socket.emit('timeInfo', {timestamp: timeNow(),
+    socket.emit('timeInfo', {room: room, timestamp: timeNow(),
     actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: 0},
     {action: "SET_SECONDS", payload: "00:00"}]})
   }
@@ -374,7 +357,7 @@ const ControlBoard = () => {
             <input className="middleInputStyling" type="number" min="0" placeholder="0"
             onChange={e=>setOvertime(e.target.value)}></input>
           </div>
-          <button className="extraTime" onClick={()=> sendData()}>SET EXTRA TIME</button>
+          <button className="extraTime" onClick={()=> broadcastData()}>SET EXTRA TIME</button>
           <br />
           <br />
           <div className="screen-selection">

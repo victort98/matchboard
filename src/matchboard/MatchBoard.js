@@ -10,6 +10,7 @@ import {AnimatePresence} from "framer-motion"
 
 const MatchBoard = () => {
   const [screen, setScreen] = useState('')
+  const [room, setRoom] = useState("default")
 
     /* CLOCK */
     const [timeDifference, setTimeDifference] = useState(0);
@@ -44,7 +45,12 @@ const MatchBoard = () => {
     const [team2Fouls, setTeam2Fouls] = useState(0)
     const [team2OnTarget, setTeam2OnTarget] = useState(0)
     /* STATISTICS */
-    
+  
+    useEffect(()=>{
+      //joining room
+      socket.emit('join-room', room, "controlboard")
+    }, [])
+  
   //timesync
   useEffect(()=>{
     let localTimeAtRequest = Date.now()

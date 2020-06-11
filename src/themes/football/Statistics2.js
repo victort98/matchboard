@@ -9,7 +9,7 @@ const Statistics2 = (props) => {
   //const [time, setTime] = useState(timeFormatted())
 
 
-  console.log(props)
+  //console.log(props)
 
   //const statisticsList = ['STATISTICS', 'SHOTS', 'SHOTS ON TARGET', 'CORNERS', 'FOULS COMMITTED', 'OFFSIDES', 'YELLOW CARD', 'RED CARD']
 

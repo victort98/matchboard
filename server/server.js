@@ -70,6 +70,8 @@ io.on('connection', (socket)=> {
     //console.log("getData called")
     //consider what happens if there are multiple remote controllers
 
+    console.log(payload)
+
     const { room, origin, datatype, timeAtRequest } = payload;
     //socketLog(room, origin, datatype, timeAtRequest)
 
@@ -104,6 +106,10 @@ io.on('connection', (socket)=> {
   })
 
   socket.on('timesync', (data)=>{
+
+    //console.log("time sync called")
+
+    //console.log(data)
 
     setTimeout(() => {
 

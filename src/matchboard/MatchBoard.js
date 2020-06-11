@@ -98,7 +98,8 @@ const MatchBoard = () => {
     console.log("fetching game data")
     setTimeout(() => {
       let localTimeAtRequest = timeNow();
-      socket.emit('getData', "scoreboard", "gamedata", localTimeAtRequest);
+      let payload = {room: room, origin: "matchboard", datatype: "gamedata", timeAtRequest: localTimeAtRequest}
+      socket.emit('getData', payload);
       socket.on('fetchGameData', (data) => {
         console.log("fetching game data")
         let localTimeAtResponse = timeNow();
@@ -118,7 +119,8 @@ const MatchBoard = () => {
     useEffect(() => {
       setTimeout(() => {
         let localTimeAtRequest = timeNow();
-        socket.emit('getData', "scoreboard", "gamestats", localTimeAtRequest);
+        let payload = {room: room, origin: "matchboard", datatype: "gamestats", timeAtRequest: localTimeAtRequest}
+        socket.emit('getData', payload);
         socket.on('fetchGameStats', (data) => {
           let localTimeAtResponse = timeNow();
           let timeSinceRequest = localTimeAtResponse - localTimeAtRequest;

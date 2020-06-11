@@ -5,8 +5,10 @@ const Scoreboard2 = (props) => {
   // Scoreboard2 = ({ isVisible }) =>
 
 
-  const [teamOneName, setTeamOneName] = useState('Malmö FF')
-  const [teamTwoName, setTeamTwoName] = useState('Djurgården')
+  //const [teamOneName, setTeamOneName] = useState('Malmö FF')
+  //const [teamTwoName, setTeamTwoName] = useState('Djurgården')
+
+  //console.log(props)
 
 
   const [overtime, setOvertime] = useState(0)
@@ -40,8 +42,8 @@ const Scoreboard2 = (props) => {
           transition={{ type: "spring", stiffness: 260, damping: 10, delay: 1, duration: 2}}
             style={{display:'flex', justifyContent:'space-between', fontSize:'42px', 
             color: '#454648', padding: '50px 40px', margin:'9px'}}>
-          <span>{teamOneName}</span>
-          <span>{teamTwoName}</span>
+          <span>{props.teamOneName}</span>
+          <span>{props.teamTwoName}</span>
         </motion.li>
       </motion.div>
       <div style={{width:'170px', height:'132px', backgroundColor: '#454648', zIndex: 1, border: '5px solid rgba(200, 200, 200, 0.5)',

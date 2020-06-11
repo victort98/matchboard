@@ -45,7 +45,7 @@ const UserLogin = (props) => {
         
           <input name="username" type="text" placeholder='Room' required
             value={room} onChange={(e) => setRoom(e.target.value)} />
-          <Link className="submit-buttons">
+          <Link to={"/matchboard/"+ room} className="submit-buttons">
             SPECTATE
           </Link>
         

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from 'react'
+import React, {useEffect, useState, useMemo, useParams} from 'react'
 import Scoreboard from '../themes/football/Scoreboard2'
 import Statistics from '../themes/football/Statistics2'
 import Playerslist from '../themes/football/Playerslist2'
@@ -8,9 +8,18 @@ import FieldImage from '../images/football.png'
 import {socket} from '../socket/socket'
 import {AnimatePresence} from "framer-motion"
 
-const MatchBoard = () => {
+const MatchBoard = ({ match }) => {
   const [screen, setScreen] = useState('')
-  const [room, setRoom] = useState("default")
+  //const [room, setRoom] = useState(match.params)
+  //const [room, setRoom] = useState("default")
+  //const { roomname } = useParams();
+
+  const { roomname } = match.params
+  //setRoom(roomname)
+  console.log(roomname)
+  //console.log(match.params)
+
+  //console.log(name)
 
     /* CLOCK */
     const [timeDifference, setTimeDifference] = useState(0);
@@ -48,7 +57,9 @@ const MatchBoard = () => {
   
     useEffect(()=>{
       //joining room
-      socket.emit('join-room', room, "controlboard")
+      //match.params
+      //socket.emit('join-room', room, "controlboard")
+      socket.emit('join-room', roomname, "controlboard")
     }, [])
   
   //timesync
@@ -78,7 +89,8 @@ const MatchBoard = () => {
     console.log("fetching time")
     setTimeout(() => {
       let localTimeAtRequest = timeNow();
-      let payload = {room: room, origin: "matchboard", datatype: "time", timeAtRequest: localTimeAtRequest}
+      let payload = {room: roomname, origin: "matchboard", datatype: "time", timeAtRequest: localTimeAtRequest}
+      //let payload = {room: room, origin: "matchboard", datatype: "time", timeAtRequest: localTimeAtRequest}
       socket.emit('getData', payload);
       socket.on('fetchTime', (data) => {
         console.log("fetching time")
@@ -98,7 +110,8 @@ const MatchBoard = () => {
     console.log("fetching game data")
     setTimeout(() => {
       let localTimeAtRequest = timeNow();
-      let payload = {room: room, origin: "matchboard", datatype: "gamedata", timeAtRequest: localTimeAtRequest}
+      let payload = {room: roomname, origin: "matchboard", datatype: "gamedata", timeAtRequest: localTimeAtRequest}
+      //let payload = {room: room, origin: "matchboard", datatype: "gamedata", timeAtRequest: localTimeAtRequest}
       socket.emit('getData', payload);
       socket.on('fetchGameData', (data) => {
         console.log("fetching game data")
@@ -119,7 +132,7 @@ const MatchBoard = () => {
     useEffect(() => {
       setTimeout(() => {
         let localTimeAtRequest = timeNow();
-        let payload = {room: room, origin: "matchboard", datatype: "gamestats", timeAtRequest: localTimeAtRequest}
+        let payload = {room: roomname, origin: "matchboard", datatype: "gamestats", timeAtRequest: localTimeAtRequest}
         socket.emit('getData', payload);
         socket.on('fetchGameStats', (data) => {
           let localTimeAtResponse = timeNow();

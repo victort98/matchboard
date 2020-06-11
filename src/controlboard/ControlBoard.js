@@ -3,10 +3,13 @@ import '../themes/football/football.css'
 import {socket} from '../socket/socket';
 
 
-const ControlBoard = () => {
+const ControlBoard = ({ match }) => {
   const $ = x => document.querySelector(x);
   const [screen, setScreen] = useState()
   const [room, setRoom] = useState("default")
+
+  const { roomname } = match.params
+  console.log(roomname)
 
   /* GAME DATA */
   const [teamOneName, setTeamOneName] = useState('Malmö FF')
@@ -45,7 +48,8 @@ const ControlBoard = () => {
 
   const broadcastData = () => {
     
-    let gamedata = {room: room, timestamp : timeNow(), 
+    // let gamedata = {room: room, timestamp : timeNow(),
+    let gamedata = {room: roomname, timestamp : timeNow(), 
       actions:[{action: "SET_TEAM_ONE_NAME", payload: teamOneName},
       {action: "SET_TEAM_TWO_NAME", payload: teamTwoName},
       {action: "SET_TEAM_ONE_SCORE", payload: teamOneScore},
@@ -55,7 +59,8 @@ const ControlBoard = () => {
 
     socket.emit('timeInfo', gamedata)
 
-    let gamestatsdata = {room: room, timestamp : timeNow(), 
+    //let gamestatsdata = {room: room, timestamp : timeNow(),
+    let gamestatsdata = {room: roomname, timestamp : timeNow(), 
       actions:[
         //Team1 stats
       {action: "SET_TEAM_ONE_YELLOW", payload: team1Yellow},
@@ -196,7 +201,8 @@ const ControlBoard = () => {
       console.log("isActive == false")
       setStartDate(timeNow())
       setIsActive(!isActive)
-      socket.emit('timeInfo',{room: room, timestamp: timeNow(), 
+      //socket.emit('timeInfo',{room: room, timestamp: timeNow(),
+      socket.emit('timeInfo',{room: roomname, timestamp: timeNow(), 
         actions: [{action: "SET_START_DATE", payload: timeNow()}, {action: "SET_IS_ACTIVE", payload: true}]})
     }
   }
@@ -206,7 +212,8 @@ const ControlBoard = () => {
       let elapsed = timeNow() - startDate
       setIsActive(!isActive)
       setTimeElapsed(timeElapsed + elapsed)
-      socket.emit('timeInfo', {room: room, timestamp: timeNow(),
+      //socket.emit('timeInfo', {room: room, timestamp: timeNow(),
+      socket.emit('timeInfo', {room: roomname, timestamp: timeNow(),
       actions: [{action: "SET_IS_ACTIVE", payload: false},
        {action: "SET_TIME_ELAPSED", payload: timeElapsed + elapsed}, {action: "SET_SECONDS", payload: seconds}]})
     }
@@ -216,7 +223,8 @@ const ControlBoard = () => {
     setIsActive(false);
     setTimeElapsed(0);
     setSeconds("00:00");
-    socket.emit('timeInfo', {room: room, timestamp: timeNow(),
+    //socket.emit('timeInfo', {room: room, timestamp: timeNow(),
+    socket.emit('timeInfo', {room: roomname, timestamp: timeNow(),
     actions: [{action: "SET_IS_ACTIVE", payload: false}, {action: "SET_TIME_ELAPSED", payload: 0},
     {action: "SET_SECONDS", payload: "00:00"}]})
   }

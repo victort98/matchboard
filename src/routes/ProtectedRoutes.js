@@ -19,10 +19,10 @@ const ProtectedRoutes = (props) => {
         render={()=>(admin?(<AdminPanel/>):(<Redirect to="/"/>))}
       />
       <Route path='/operator'
-        render={()=>(operator?(<OperatorPanel/>):(<Redirect to="/"/>))}
+        render={()=>(operator?(<OperatorPanel />):(<Redirect to="/"/>))}
       />
-      <Route path='/controlboard'
-        render={()=>(admin || operator?(<ControlBoard/>):(<Redirect to="/"/>))}
+      <Route path='/controlboard/:roomname'
+        render={(props)=>(admin || operator?(<ControlBoard {...props}/>):(<Redirect to="/"/>))}
       />
     </>
   )

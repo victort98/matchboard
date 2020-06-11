@@ -39,7 +39,7 @@ const App = () => {
                   <Route exact path='/register' component={Register}/>   
                   {/* <Route exact path='/admin' component={AdminPanel}/>    */}
                   {/* <Route exact path='/operator' component={OperatorPanel}/>    */}
-                  <Route exact path='/matchboard' component={MatchBoard}/>            
+                  <Route path='/matchboard/:roomname' component={MatchBoard}/>            
                   <Route exact path='/playerslist' component={Playerslist}/>            
                   <Route exact path='/statistics' component={Statistics}/>            
                   <Route exact path='/masterclock' component={MasterClock}/> 

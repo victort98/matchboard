@@ -42,13 +42,13 @@ const UserLogin = (props) => {
         <div className="user-login">
         <div  style={{display: 'flex', flexWrap: 'wrap', placeContent: 'center'}}>
         <div>
-        <form className="input-form" onSubmit={routeToMatchboard}>
+        
           <input name="username" type="text" placeholder='Room' required
             value={room} onChange={(e) => setRoom(e.target.value)} />
-          <div className="submit-buttons">
-            <input type="submit" value='SPECTATE'/>
-          </div>
-        </form>
+          <Link className="submit-buttons">
+            SPECTATE
+          </Link>
+        
         </div>
         <div>
         <form className="input-form" onSubmit={submitLogin}>

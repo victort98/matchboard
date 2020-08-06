@@ -42,11 +42,11 @@ const UserLogin = (props) => {
         <div className="user-login">
         <div  style={{display: 'flex', flexWrap: 'wrap', placeContent: 'center'}}>
         <div>
-        
+        <p>JOIN GAME</p>
           <input name="username" type="text" placeholder='Room' required
             value={room} onChange={(e) => setRoom(e.target.value)} />
           <Link to={"/matchboard/"+ room} className="submit-buttons">
-            SPECTATE
+          <input type='button' value='SPECTATE'/>
           </Link>
         
         </div>

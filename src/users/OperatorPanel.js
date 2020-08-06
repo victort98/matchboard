@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContextProvider'
 import mongoosy from 'mongoosy/frontend';
@@ -6,6 +6,7 @@ const { Login } = mongoosy;
 
 const Operator = () => {
   const {updateUserStatus} = useContext(UserContext);
+  const [socketroom, setSocketRoom] = useState("default")
 
   const logout = async() => {
     await Login.logout();
@@ -19,17 +20,28 @@ const Operator = () => {
         <div className='left-col' style={{marginTop: '230px'}}>
           <input type='text' value='OPERATOR' disabled/>
           <input type='button' value='LOG OUT' onClick={()=>logout()}/>  
-          <Link to='/controlboard' style={{ textDecoration: 'none' }}>
-            <input type='button' value='FOOTBALL'/> 
-          </Link>   
+          <Link to={"/controlboard/"+ socketroom} style={{ textDecoration: 'none' }}>
+              <input type='button' value='FOOTBALL'/> 
+            </Link> 
         </div> 
         <div className="right-col">
           <div className='settings'>
             <input type='text' value='FOOTBALL SETTINGS' disabled/> 
           </div>
-          <hr/>          
+          <hr/>
+          <div style={{margin: '5px auto'}}>
+      <h6 style={{color: 'rgb(0, 142, 207)', margin: '3px', textAlign: 'center'}}>ENTER ROOM NAME</h6> 
+      <input type="text" className="select-game" placeholder="default"
+        style={{padding: '5px 5px', fontSize: '16px', width: '395px', borderRadius: '10px', textAlign: 'left', color: "black", 
+          outline: 'none', margin: '0 auto', display:'flex'}}
+          onChange={e=>setSocketRoom(e.target.value)}
+        >
+      </input>
+    </div>          
         </div>  
-      </div>       
+      </div>
+
+
 
       <div className="background">
         <svg className="background" viewBox="0 0 1874 1080.446">
